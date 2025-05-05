@@ -1,0 +1,94 @@
+.promo-wrapper {
+    overflow: hidden;
+    width: 75%;
+    background: transparent;
+    padding: 2rem 0;
+    margin: auto;
+  }
+  
+  .scroll-container {
+    display: flex;
+    gap: 1.5rem;
+    padding-left: 2rem;
+    width: max-content;
+    margin-top: 7rem;
+    cursor: pointer;
+    /* Ensure the container doesn't wrap */
+  }
+  
+  .box {
+    flex-shrink: 0;
+    width: 40rem;
+    padding: 3rem;
+    text-align: center;
+    border: 1px solid #d3ad7f;
+    background-color: transparent;
+    border-radius: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .box:hover {
+    transform: scale(1.05);
+   
+  }
+  
+  .box img {
+    height: 10rem;
+  }
+  
+  .box h3 {
+    color: #fff;
+    font-size: 2rem;
+    padding: 1rem 0;
+  }
+  
+  .box .price {
+    color: #fff;
+    font-size: 2.5rem;
+    padding: 2rem 0;
+  }
+  
+  .box .price span {
+    font-size: 1.5rem;
+    text-decoration: line-through;
+    margin-left: 1rem;
+  }
+  
+  .box .btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background: #d3ad7f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+  }
+  
+  .box .btn:hover {
+    background: #b8935f;
+  }
+  
+  /* Title */
+  h1 {
+    color: #d3ad7f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 6rem;
+    margin-top: 5rem;
+    
+  }
+  
+  @media (max-width: 992px) {
+    .scroll-container {
+      padding-left: 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .scroll-container {
+      padding-left: 0.5rem;
+    }
+  }
+  
