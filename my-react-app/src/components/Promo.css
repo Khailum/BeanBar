@@ -1,9 +1,11 @@
 .promo-wrapper {
     overflow: hidden;
-    width: 75%;
+    width: 86%;
     background: transparent;
     padding: 2rem 0;
     margin: auto;
+    max-height: 200rem;
+    /* max-height: fit-content; */
   }
   
   .scroll-container {
@@ -13,6 +15,7 @@
     width: max-content;
     margin-top: 7rem;
     cursor: pointer;
+    /* max-height: fit-content; */
     /* Ensure the container doesn't wrap */
   }
   
@@ -25,6 +28,7 @@
     background-color: transparent;
     border-radius: none;
     transition: transform 0.3s ease;
+    height: auto;
   }
   
   .box:hover {
@@ -34,6 +38,7 @@
   
   .box img {
     height: 10rem;
+    margin-top: 0rem;
   }
   
   .box h3 {

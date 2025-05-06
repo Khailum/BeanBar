@@ -26,7 +26,7 @@ function Promo() {
           x: {
             repeat: isAnimating ? Infinity : 0,
             repeatType: "loop",
-            duration: 50,
+            duration: 90,
             ease: "linear",
           },
         }}

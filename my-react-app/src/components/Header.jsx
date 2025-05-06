@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
@@ -8,26 +9,25 @@ const Header = () => {
 
   return (
     <header className="header">
-      <a href="/">
+      <Link to="/">
         <img src="/images/Black Round Badge Coffee Cup Logo.png" className="logo" alt="logo" />
-      </a>
+      </Link>
 
       <nav className={`navbar ${menuActive ? "active" : ""}`}>
-        <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Menu</a>
-        <a href="/">Review</a>
-        <a href="/">Contact</a>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/about">About</Link>
+        <Link to="/product">Product</Link>
+        {/* Add other links as needed */}
       </nav>
-      <div className="header-right">
-  <div className="icons">
-    <div className="fas fa-search" onClick={() => setSearchActive(!searchActive)}></div>
-    <div className="fas fa-shopping-cart" onClick={() => setCartActive(!cartActive)}></div>
-    {/* <div className="fas fa-bars" onClick={() => setMenuActive(!menuActive)}></div> */}
-  </div>
-  <a href="/" className="btnn">Login</a>
-</div>
 
+      <div className="header-right">
+        <div className="icons">
+          <div className="fas fa-search" onClick={() => setSearchActive(!searchActive)}></div>
+          <div className="fas fa-shopping-cart" onClick={() => setCartActive(!cartActive)}></div>
+        </div>
+        <Link to="/login" className="btnn">Login</Link>
+      </div>
     </header>
   );
 };
