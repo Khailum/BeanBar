@@ -6,7 +6,8 @@ import Home from './components/Home';
 import Promo from './components/Promo';
 import About from './components/About';
 import Product from './components/Product'
- import Login from  './components/Login';
+import Login from  './components/Login';
+import Register from './components/Register';
 
 import './App.css';
 
@@ -24,6 +25,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/product" element={<Product />} />
          <Route path="/login" element={<Login />} /> 
+         <Route path="/register" element={<Register />} />  
+
       </Routes>
     </BrowserRouter>
   );

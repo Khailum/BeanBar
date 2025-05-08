@@ -11,6 +11,13 @@
   margin-top: 20rem;
   color: #fff;
 }
+.heading{
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: lighter;
+  font-size: 30px;
+   margin-top: 3px;
+}
 
 .login-form {
   display: flex;

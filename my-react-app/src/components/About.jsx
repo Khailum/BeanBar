@@ -26,7 +26,8 @@ function About() {
         <div className="hero">
     
 
-          <img src="/images/pngtree-iced-coffee-glass-with-splash-png-image_12360545-removebg-preview (1).png" alt="Thabo Mokoena" />
+          <img src="/images/Image__1_-removebg-preview.png" alt="Thabo Mokoena" />
+          {/* my-react-app/public/Image__1_-removebg-preview.png */}
           <h3>Thabo Mokoena</h3>
           <p>Head Barista</p>
         </div>
