@@ -26,18 +26,18 @@ function About() {
         <div className="hero">
     
 
-          <img src="/images/Image__1_-removebg-preview.png" alt="Thabo Mokoena" />
+          <img src="/images/Image__1_-removebg-preview.png" className="team" alt="Thabo Mokoena" />
           {/* my-react-app/public/Image__1_-removebg-preview.png */}
           <h3>Thabo Mokoena</h3>
           <p>Head Barista</p>
         </div>
         <div className="hero">
-        <img src="/images/pngtree-iced-coffee-glass-with-splash-png-image_12360545-removebg-preview (1).png" alt="Thabo Mokoena" />
+        <img src="/images/Image__2_-removebg-preview.png" className="team" alt="Thabo Mokoena" />
                   <h3>Lebo Mtomboti</h3>
           <p>Customer Service</p>
         </div>
         <div className="hero">
-        <img src="/images/pngtree-iced-coffee-glass-with-splash-png-image_12360545-removebg-preview (1).png" alt="Thabo Mokoena" />
+        <img src="/images/IMG-20250506-WA0003-removebg-preview.png"className='team' alt="Thabo Mokoena" />
                   <h3>Anele Dlamini</h3>
           <p>Chef & Beverage Expert</p>
         </div>

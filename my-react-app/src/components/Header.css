@@ -76,9 +76,12 @@ section{
 
 .header .navbar a{
     margin: 0.1rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color:#fff;
     margin-right: 2rem;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+
 }
 .header .navbar a:hover{
     color: var(--main-color);
@@ -295,11 +298,14 @@ section{
   
   .btnn {
     padding: 1rem 3rem;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #fff;
     background-color: var(--main-color);
     cursor: pointer;
     transition: background 0.3s;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+
   }
   
   .btnn:hover {

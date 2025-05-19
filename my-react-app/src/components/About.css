@@ -27,6 +27,9 @@
     border-radius: 12px;
     
   }
+  .team{
+    border-radius: 1px solid #fff;
+  }
   
   .subheading {
     font-size: 4rem;

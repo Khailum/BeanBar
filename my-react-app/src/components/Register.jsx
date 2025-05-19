@@ -102,7 +102,8 @@ function Register() {
             value={formValues.idNumber}
             onChange={handleChange}
           />
-          <i className="fas fa-id-card register-icon" />
+        
+          
         </div>
         {isSubmit && <p className="error">{formErrors.idNumber}</p>}
  
