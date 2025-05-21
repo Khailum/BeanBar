@@ -72,12 +72,16 @@ FOREIGN KEY (IDNumber) REFERENCES Customers(IDNumber)
 );
 
 -- TABLES (DINING TABLES) TABLE
-CREATE TABLE Tables (
-TableNum INT PRIMARY KEY NOT NULL,
-Seats INT NOT NULL,
+CREATE TABLE TableReservations (
+TableNum INT PRIMARY KEY,
+ReservationDate DATE NOT NULL,
+ReservationTime TIME NOT NULL,
+PartySize INT NOT NULL,
 IDNumber VARCHAR(13) NOT NULL,
+CustomerName NVARCHAR (90),
 FOREIGN KEY (IDNumber) REFERENCES Customers(IDNumber)
 );
+
 
 Select * From Roles
 Select * From Customers
