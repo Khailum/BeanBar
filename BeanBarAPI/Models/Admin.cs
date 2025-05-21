@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Customer
+public class Admin
 {
     [Key]
-    [StringLength(13)]
-    public string IDNumber { get; set; }
+    public int AdminID { get; set; }
 
     [Required, MaxLength(100)]
     public string FirstName { get; set; }
