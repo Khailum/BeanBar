@@ -119,9 +119,13 @@
   text-decoration: underline;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 560px) {
   .login-page {
     padding: 25px;
+  }
+  .heading{
+    font-size: 3rem;
+    margin-top: 10px;
   }
 
   .login-input-wrapper input {
@@ -130,5 +134,18 @@
 
   .login-icon {
     right: 10px;
+  }
+  .login-submit{
+    width: 60%;
+     margin-left: 45px; 
+  }
+}
+
+
+
+@media screen and (max-width: 850px) {
+  .login-page {
+    width: 70%;
+    
   }
 }

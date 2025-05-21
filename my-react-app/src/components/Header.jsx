@@ -10,23 +10,41 @@ const Header = () => {
   return (
     <header className="header">
       <Link to="/">
-        <img src="/images/Black Round Badge Coffee Cup Logo.png" className="logo" alt="logo" />
+        <img
+          src="/images/Black Round Badge Coffee Cup Logo.png"
+          className="logo"
+          alt="logo"
+        />
       </Link>
 
+      {/* Menu Icon for Mobile */}
+      <div
+        id="menu-btn"
+        className={`fas fa-bars ${menuActive ? "fa-times" : ""}`}
+        onClick={() => setMenuActive(!menuActive)}
+      ></div>
+
       <nav className={`navbar ${menuActive ? "active" : ""}`}>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/product">Product</Link>
-        <Link to="/contact">Contact</Link>
-        {/* Add other links as needed */}
+        <Link to="/" onClick={() => setMenuActive(false)}>Home</Link>
+        <Link to="/about" onClick={() => setMenuActive(false)}>About</Link>
+        <Link to="/product" onClick={() => setMenuActive(false)}>Product</Link>
+        <Link to="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
       </nav>
 
       <div className="header-right">
         <div className="icons">
-          <div className="fas fa-search" onClick={() => setSearchActive(!searchActive)}></div>
-          <div className="fas fa-shopping-cart" onClick={() => setCartActive(!cartActive)}></div>
+          <div
+            className="fas fa-search"
+            onClick={() => setSearchActive(!searchActive)}
+          ></div>
+          <div
+            className="fas fa-shopping-cart"
+            onClick={() => setCartActive(!cartActive)}
+          ></div>
         </div>
-        <Link to="/login" className="btnn">Login</Link>
+        <Link to="/login" className="btnn">
+          Login
+        </Link>
       </div>
     </header>
   );
