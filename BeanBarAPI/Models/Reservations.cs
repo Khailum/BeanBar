@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Reservations
 {
     [Key]
-    public int TableNum { get; set; }
+    public int TableNum { get; set; } 
 
     [Required]
     public DateTime ReservationDate { get; set; }
@@ -18,7 +18,7 @@ public class Reservations
 
     [Required]
     [StringLength(13)]
-    public string IDNumber { get; set; }
+    public string IDNumber { get; set; } = string.Empty;
 
-    public string? CustomerName { get; set; }
+    public string CustomerName { get; set; }
 }
