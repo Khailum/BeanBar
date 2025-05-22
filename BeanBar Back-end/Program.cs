@@ -1,3 +1,6 @@
+using BeanBar_Back_end.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 
 namespace BeanBar_Back_end
 {
@@ -6,6 +9,9 @@ namespace BeanBar_Back_end
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<CoffeeDBcontext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add services to the container.
 
