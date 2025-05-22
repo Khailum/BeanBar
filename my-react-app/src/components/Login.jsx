@@ -100,7 +100,7 @@ function Login() {
           <label>
             <input type='checkbox' /> Remember me
           </label>
-          <a href="#">Forgot?</a>
+         
         </div>
 
         <button 

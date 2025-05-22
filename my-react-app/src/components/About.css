@@ -20,7 +20,7 @@
   }
   
   .intro {
-    font-size: 2rem;
+    font-size: 1.6rem;
     line-height: 1.8;
    color: #fff;
     padding: 20px;
@@ -58,8 +58,10 @@
     background-color: #010103;
     border: 1px solid #d3ad7f;
     padding: 20px;
-    width: 260px;
+    width: 200px;
     transition: transform 0.3s ease;
+    border-radius: 10px;
+    height: 200px;
   }
   
   .hero:hover {
@@ -67,10 +69,16 @@
   }
   
   .hero img {
-    width: 100px;
+    /* width: 100px;
     height: 100px;
     object-fit: contain;
-    margin-bottom: 15px;
+    margin-bottom: 15px; */
+      width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  border: 3px solid #d3ad7f;
   }
   
   .hero h3, h2 {
@@ -80,8 +88,10 @@
   }
   
   .hero p {
-    font-size: 0.95rem;
-    color:#fff;
+    font-size: 1.3rem;
+    color:#d3ad7f;
+    font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
   }
   
   /* Responsive Styling */

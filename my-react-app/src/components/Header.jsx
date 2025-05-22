@@ -27,7 +27,8 @@ const Header = () => {
       <nav className={`navbar ${menuActive ? "active" : ""}`}>
         <Link to="/" onClick={() => setMenuActive(false)}>Home</Link>
         <Link to="/about" onClick={() => setMenuActive(false)}>About</Link>
-        <Link to="/product" onClick={() => setMenuActive(false)}>Product</Link>
+        <Link to="/product" onClick={() => setMenuActive(false)}>Products</Link>
+         <Link to="/Review" onClick={() => setMenuActive(false)}>Review</Link>
         <Link to="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
       </nav>
 

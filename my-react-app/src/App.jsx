@@ -11,6 +11,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Confirmation from './components/Confirmation';
+// import Menu from './components/Menu';
+import Review from './components/Review'
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -29,6 +32,10 @@ function LayoutWrapper() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/confrimation" element={<Confirmation />} />
+             {/* <Route path="/menu" element={<Menu />} /> */}
+               <Route path="/review" element={<Review />} />
+
         </Routes>
       </main>
 
