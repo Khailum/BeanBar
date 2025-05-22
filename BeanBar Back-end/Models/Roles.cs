@@ -18,7 +18,7 @@ namespace BeanBar_Back_end.Models
 
         [Required]
         [MaxLength(50)]
-        public UserRole UserRole { get; set; }
+        public UserRole UserRoles { get; set; }
 
         //Enum in order to make accessing specific roles safer
         public enum UserRole

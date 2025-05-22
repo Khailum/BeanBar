@@ -3,7 +3,7 @@ using System.Data;
 
 namespace BeanBar_Back_end.Models
 {
-    public class Class
+    public class Admin
     {
         [Key]
         public int AdminID { get; set; }
@@ -24,7 +24,7 @@ namespace BeanBar_Back_end.Models
         public string Address { get; set; }
 
         // Navigation property
-        public Role Role { get; set; }
+        public Roles Role { get; set; }
     }
 }
 
