@@ -24,7 +24,7 @@ namespace BeanBar_Back_end.Models
         public DateTime ExpiryDate { get; set; }
 
         public string IDNumber { get; set; }
-        public Customer Customer { get; set; }
+        public Customers Customer { get; set; }
     }
 }
     
