@@ -17,21 +17,23 @@ function LayoutWrapper() {
   const hideHeaderFooter = location.pathname === '/login' || location.pathname === '/register';
 
   return (
-    <>
+    <div className="app-wrapper">
       {!hideHeaderFooter && <Header />}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/promo" element={<Promo />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/promo" element={<Promo />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
 
       {!hideHeaderFooter && <Footer />}
-    </>
+    </div>
   );
 }
 

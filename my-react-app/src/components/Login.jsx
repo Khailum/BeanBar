@@ -66,8 +66,9 @@ function Login() {
             onChange={handleChange}
           />
           <i className="fas fa-user login-icon" />
+              <p className='error'>{formErrors.username}</p>
         </div>
-        <p>{formErrors.username}</p>
+    
 
         <div className='login-input-wrapper'>
           <input
@@ -78,8 +79,9 @@ function Login() {
             onChange={handleChange}
           />
           <i className="fas fa-envelope login-icon" />
+                  <p  className='error'>{formErrors.email}</p>
+
         </div>
-        <p>{formErrors.email}</p>
 
         <div className='login-input-wrapper'>
           <input
@@ -90,8 +92,9 @@ function Login() {
             onChange={handleChange}
           />
           <i className="fas fa-lock login-icon" />
+             <p  className='error'>{formErrors.password}</p>
         </div>
-        <p>{formErrors.password}</p>
+     
 
         <div className="login-remember-forgot">
           <label>

@@ -30,7 +30,10 @@
   margin-bottom: 20px;
   color: #333;
 } */
-
+.error{
+  color: #9c6624;
+  font-size: 1.3rem;
+}
 .login-icon-main {
   display: block;
   font-size: 80px;

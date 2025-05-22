@@ -1,4 +1,17 @@
+/* Make sure the root takes up the full height */
 html, body, #root {
-    height: 100%;
-    margin: 0;
-  }
+  height: 100%;
+  margin: 0;
+}
+
+/* Main wrapper: stacks Header, Main, and Footer */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main section takes all available vertical space between header and footer */
+.main-content {
+  flex: 1;
+}

@@ -103,9 +103,9 @@ function Register() {
             onChange={handleChange}
           />
         
-          
+         {isSubmit && <p className="error">{formErrors.idNumber}</p>} 
         </div>
-        {isSubmit && <p className="error">{formErrors.idNumber}</p>}
+        
  
         <div className="register-input-wrapper">
           <input
@@ -116,8 +116,9 @@ function Register() {
             onChange={handleChange}
           />
           <i className="fas fa-user register-icon" />
+          {isSubmit && <p className="error">{formErrors.firstName}</p>}
         </div>
-        {isSubmit && <p className="error">{formErrors.firstName}</p>}
+        
 
         <div className="register-input-wrapper">
           <input
@@ -128,8 +129,9 @@ function Register() {
             onChange={handleChange}
           />
           <i className="fas fa-user register-icon" />
+                {isSubmit && <p className="error">{formErrors.lastName}</p>}
         </div>
-        {isSubmit && <p className="error">{formErrors.lastName}</p>}
+  
 
         <div className="register-input-wrapper">
           <input
@@ -140,8 +142,9 @@ function Register() {
             onChange={handleChange}
           />
           <i className="fas fa-envelope register-icon" />
+          {isSubmit && <p className="error">{formErrors.email}</p>}
         </div>
-        {isSubmit && <p className="error">{formErrors.email}</p>}
+        
 
         <div className="register-input-wrapper">
           <input
@@ -152,8 +155,9 @@ function Register() {
             onChange={handleChange}
           />
           <i className="fas fa-phone register-icon" />
+          {isSubmit && <p className="error">{formErrors.phoneNumber}</p>}
         </div>
-        {isSubmit && <p className="error">{formErrors.phoneNumber}</p>}
+        
 
         <div className="register-input-wrapper">
           <input
@@ -179,8 +183,9 @@ function Register() {
             />{" "}
             I agree to the terms and conditions
           </label>
+            {isSubmit && <p className="error">{formErrors.terms}</p>}
         </div>
-        {isSubmit && <p className="error">{formErrors.terms}</p>}
+      
 
         <button
           className="register-submit"

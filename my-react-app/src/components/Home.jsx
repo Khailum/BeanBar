@@ -2,6 +2,8 @@ import React from 'react';
 import './Home.css';
 import Promo from './Promo';
 
+
+
 const Home = () => {
   return (
     <section className="home" id="home">
@@ -17,9 +19,12 @@ const Home = () => {
         <a href="#" className="btn">
           Get yours now
         </a>
+           <img src="/images/image.png" alt="coffee" />
       </div>
-      <img src="/images/image.png" alt="coffee" />
+   
       <Promo />
+     
+
     </section>
   );
 };

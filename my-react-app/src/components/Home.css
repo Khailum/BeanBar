@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+  
   }
   html, body {
     height: 100%;
@@ -14,12 +15,13 @@
     font-weight: lighter;
  } 
 
-.home{
-    max-height: 100vh;
-    padding-top: 17rem;
-  
-
-} 
+.home {
+  min-height: 100vh; /* Make sure it fills at least the full screen */
+  padding-top: 17rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
  .home img{
     margin-left: 95rem;
     margin-top: -40rem;
@@ -64,9 +66,7 @@
     padding: 3rem;
     text-align: center;
     border: 1px solid #d3ad7f;
-    /* width: 25rem;
-    height: auto; */
-    /* width: 30rem; */
+   
     
     
 }
@@ -109,14 +109,19 @@ h1 {
 } 
 @media (max-width:991px){
     .home img{
+        display: flex;
         flex-direction: column;
         align-items: center;
     }
     .home .content{
+        display: flex;
         flex-direction: column;
         align-items: center;
-    }
 
+    }
+    h3{
+        font-size: 2rem;
+    }
     .home{
         flex-direction: column;
         align-items: center;
