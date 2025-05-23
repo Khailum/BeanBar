@@ -1,3 +1,4 @@
+<<<<<<< HEAD:BeanBar Back-end/BeanBarAPI/Models/CardDetails.cs
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace BeanBar_Back_end.Models
