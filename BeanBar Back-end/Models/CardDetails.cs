@@ -15,7 +15,7 @@ namespace BeanBar_Back_end.Models
         public string AccountType { get; set; }
 
         [Required, MaxLength(20)]
-        public string CardNumber { get; set; }
+        public string CardNumber { get; set; } = string.Empty;
 
         [Required, MaxLength(4)]
         public string CVV { get; set; }
