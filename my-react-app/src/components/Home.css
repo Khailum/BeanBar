@@ -114,7 +114,7 @@ h1 {
         align-items: center;
     }
     .home .content{
-        display: flex;
+        /* display: flex; */
         flex-direction: column;
         align-items: center;
 
@@ -136,5 +136,11 @@ h1 {
     }
     section{
         padding:2rem;
+    }
+}
+@media (max-width:768px){
+    .content{
+        display: flex;
+        flex-direction: column;
     }
 }

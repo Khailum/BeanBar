@@ -263,6 +263,12 @@ section{
 @media (max-width:768px) {
     #menu-btn {
       display: inline-block;
+      color: #d3ad7f;
+      font-size: 3rem;
+      margin-left: -10em;
+    }
+    .logo{
+        display: none;
     }
   
     .header .navbar {
