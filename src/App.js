@@ -16,7 +16,8 @@ function App() {
           <Link to="/menu">Menu</Link> |{' '}
           <Link to="/orders">Orders</Link> |{' '}
           <Link to="/reservations">Reservations</Link> |{' '}
-          <Link to="/promotions">Promotions</Link>
+          <Link to="/promotions">Promotions</Link> |{' '}
+          <Link to="/userProfile">UserProfile</Link>
         </nav>
         <Routes>
           <Route path="/" element={<Dashboard />} />
@@ -24,6 +25,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/promotions" element={<Promotions />} />
+          <Route path="/userProfile" element={<Promotions />} />
         </Routes>
       </div>
     </Router>
