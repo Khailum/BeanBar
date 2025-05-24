@@ -23,7 +23,7 @@ function CartPage() {
       price: 35,
       sugarLevel: "Low",
       milkType: "Oat Milk",
-      image: "https://via.placeholder.com/100",
+      image: "https://i.ibb.co/0y4GJp59/pngtree-iced-coffee-with-removebg-preview.png",
       quantity: 1,
     },
   ]);
