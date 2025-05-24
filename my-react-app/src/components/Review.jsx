@@ -65,7 +65,7 @@ const reviewData = [
 const review = () => {
   return (
     <section className="review-section" id="reviews">
-       <h3>What Our Clients Say</h3> 
+                 <h2 className="section-header">REVIEW FROM <span>OUR CLIENTS</span> </h2>
       <div className="review-inner">
         <div className="row">
           {reviewData.map(({ name, img, alt, stars, text }, index) => (

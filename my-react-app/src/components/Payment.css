@@ -1,0 +1,96 @@
+.payment-section {
+  width: 100%;
+  padding: 20px 0;
+  margin-top: 5rem;
+  background-color: #000;
+  color: #fff;
+}
+
+.payment-wrapper {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.section-header {
+  text-align: center;
+  margin: 0 auto;
+  padding: 40px 0;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-size: 2rem;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ccc;
+  margin: 20px 0;
+}
+
+.form-horizontal {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  background-color: #000;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font-family: 'Lato', sans-serif;
+}
+
+.delivery-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #d3ad7f;
+  font-weight: bold;
+}
+
+.total-amount {
+  font-size: 18px;
+  margin: 15px 0;
+  color: #d3ad7f;
+}
+
+.send-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #d3ad7f;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.send-button:hover {
+  background-color: #9c6624;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 850px) {
+  .payment-wrapper {
+    padding: 10px;
+  }
+
+  .form-horizontal {
+    width: 100%;
+  }
+}

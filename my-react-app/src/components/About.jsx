@@ -5,7 +5,7 @@ function About() {
   return (
     <div className="about">
       <div className="about-content">
-        <h1 className='head'>About Us</h1>
+       <h2 className="section-header">ABOUT <span>US</span></h2>
         <p className='intro'>
           Welcome to Brew Haven — your neighborhood coffee sanctuary.
           We serve handcrafted beverages made from premium beans,
@@ -20,7 +20,7 @@ function About() {
           Brew Haven is your go-to spot for warmth, aroma, and connection.</p>
       </div>
 
-      <h2 className="subheading">meet our team</h2>
+      <h2 className="section-header"><span>MEET</span> our team</h2>
 
       <div className="hero-container">
         <div className="hero">

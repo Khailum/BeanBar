@@ -26,9 +26,7 @@
   height: 10rem;
   object-fit: contain;
 }
-/* .fas {
-  color: aquamarine;
-} */
+
 .product h3 {
   color: #fff;
   font-size: 2rem;
@@ -70,9 +68,7 @@
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 1rem;
-  
 }
-
 
 .product .input-group label {
   color: #fff;
@@ -126,10 +122,11 @@
   font-family: 'Lato', sans-serif;
 }
 
-.product .input-group select option{
+.product .input-group select option {
   color: #fff;
   background-color: #d3ad7f;
 }
+
 .filter-btn {
   padding: 8px 16px;
   background-color: #010103;
@@ -142,6 +139,8 @@
   margin-left: 40px;
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
+  position: relative;
+  z-index: 10;
 }
 
 .dropdown {
@@ -153,6 +152,7 @@
   padding: 5px;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 20;
 }
 
 .dropdown-item {
@@ -163,11 +163,4 @@
 .dropdown-item:hover,
 .dropdown-item.active {
   background-color: #d3ad7f;
-
 }
- /* h4{
-  margin-top: 100px;
-  color: aqua;
-  text-align: center;
-  font-size: 2rem;
-}  */

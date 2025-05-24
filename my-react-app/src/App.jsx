@@ -13,7 +13,9 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Confirmation from './components/Confirmation';
 // import Menu from './components/Menu';
-import Review from './components/Review'
+import Review from './components/Review';
+import Cart from './components/Cart'
+import Payment from './components/Payment'
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -29,6 +31,10 @@ function LayoutWrapper() {
           <Route path="/promo" element={<Promo />} />
           <Route path="/about" element={<About />} />
           <Route path="/product" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<Payment />} />
+
+          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
