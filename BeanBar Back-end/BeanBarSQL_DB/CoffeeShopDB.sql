@@ -35,9 +35,17 @@ CREATE TABLE Menu (
 ItemID INT IDENTITY(1,1) PRIMARY KEY,
 ItemName VARCHAR(100) NOT NULL,
 ItemType VARCHAR(50) CHECK (ItemType IN ('Hot', 'Cold', 'Snack')) NOT NULL,
+ItemDescription VARCHAR (300),
 Price DECIMAL(10,2) NOT NULL,
 ImageUrl VARCHAR(255)
 );
+
+INSERT INTO Menu VALUES 
+('Mocha', 'Hot','Delicious mocha coffee.', 21.99, 'https://i.ibb.co/B2BBm9gy/mocho-removebg-preview.png' ),
+('Iced Coffee', 'Cold','Chilled iced coffee.', 21.99, 'https://i.ibb.co/0y4GJp59/pngtree-iced-coffee-with-removebg-preview.png' ),
+('Espresso', 'Hot','Strong espresso shot.', 21.99, 'https://i.ibb.co/LzB0thH7/expresso-removebg-preview.png' ),
+('Caramel Latte', 'Hot','Caramel latte with cream.', 21.99, 'https://i.ibb.co/27BcnmbC/a-delicious-caramel-latte-topped-with-whipped-cream-removebg-preview.png' ),
+('Vanilla Iced Delight', 'Cold','Vanilla iced delight.', 21.99, 'https://i.ibb.co/27jX7rTX/360-F-609874629-v2i98jy-RXv-HTf-Wtn-B67-P4-Za-VIVbnsox-T-removebg-preview.png' );
 
 -- STOCK TABLE
 CREATE TABLE Stock (
