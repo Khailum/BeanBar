@@ -2,24 +2,18 @@
 
 namespace BeanBar_Back_end.Models
 {
-    public class Reservations
+    public class TableReservation
     {
-        [Key]
         public int TableNum { get; set; }
-
-        [Required]
         public DateTime ReservationDate { get; set; }
-
-        [Required]
         public TimeSpan ReservationTime { get; set; }
-
-        [Required]
         public int PartySize { get; set; }
-
-        [Required]
-        [StringLength(13)]
-        public string IDNumber { get; set; } = string.Empty;
-
+        public string CustomerID { get; set; }
         public string CustomerName { get; set; }
+        public string TableStatus { get; set; } // "Booked", "Seated", "Cancelled"
+        public string Occasion { get; set; }
+        public string Notes { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
+
 }

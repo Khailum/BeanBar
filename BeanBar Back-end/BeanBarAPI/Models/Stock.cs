@@ -3,21 +3,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BeanBar_Back_end.Models
 {
-    public class Stock
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StockNum { get; set; }  // Primary Key // Auto-increments from 1
+    
+   
+        public class Stock
+        {
+            public int StockNum { get; set; }
+            public int ItemID { get; set; }
+            public int AvailableStock { get; set; }
+            public DateTime ArrivalDate { get; set; }
+            public string StockStatus { get; set; } // "Available", "Low", "Out of Stock"
+            public string Unit { get; set; }
+            public string SupplierName { get; set; }
 
-        [Required]
-        public int ItemID { get; set; }    // Foreign Key
+            public Menu MenuItem { get; set; } // Optional navigation
+        }
 
-        [Required]
-        [Range(0, int.MaxValue, ErrorMessage = "Available stock cannot be negative.")]
-        public int Available_Stock { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime Arrival_Date { get; set; }
-    }
+    
 }

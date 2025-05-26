@@ -3,29 +3,14 @@ using System.Data;
 
 namespace BeanBar_Back_end.Models
 {
-    public class Admin
+    public class Customer
     {
-        [Key]
-        public int AdminID { get; set; }
-
-        [Required, MaxLength(100)]
+        public string CustomerID { get; set; }
         public string FirstName { get; set; }
-
-        [Required, MaxLength(100)]
         public string LastName { get; set; }
-
-        [EmailAddress]
         public string Email { get; set; }
-
-        [Required, MaxLength(20)]
         public string PhoneNumber { get; set; }
-
-        [MaxLength(255)]
         public string Address { get; set; }
-
-        // Navigation property
-        public Roles Role { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
-
-    

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using BeanBar_Back_end.Models;
-using System;
 
 namespace BeanBar_Back_end.Data
 {
@@ -11,13 +10,86 @@ namespace BeanBar_Back_end.Data
         {
         }
 
-        public DbSet<Customers> Customers { get; set; }
-        public DbSet<Admin> Admin { get; set; }
-        public DbSet<Roles> Role { get; set; }
-        public DbSet<CardDetails> CardDetails { get; set; }
-        public DbSet<Orders> Orders { get; set; }
+        // Users & Authentication
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserAuthentication> UserAuth { get; set; }
+
+        // Customers
+        public DbSet<Customer> Customers { get; set; }
+
+        // Menu & Stock
         public DbSet<Menu> Menu { get; set; }
         public DbSet<Stock> Stock { get; set; }
-        public DbSet<Reservations> TableReservations { get; set; }
+
+        // Orders & Payments
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+
+        // Card Details
+        public DbSet<CardDetail> CardDetails { get; set; }
+
+        // Table Reservations
+        public DbSet<TableReservation> TableReservations { get; set; }
+
+        // Reviews
+        public DbSet<Review> Reviews { get; set; }
+
+        // Deliveries
+        public DbSet<Delivery> Deliveries { get; set; }
+
+        // Audit Logs
+        public DbSet<AuditLog> AuditLogs { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Composite Key Configuration or Fluent API goes here if needed
+
+            // Ensure relationships, constraints, etc. match your SQL schema
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Email);
+
+            modelBuilder.Entity<UserAuth>()
+                .HasKey(ua => ua.Email);
+
+            modelBuilder.Entity<Customer>()
+                .HasKey(c => c.CustomerID);
+
+            modelBuilder.Entity<CardDetail>()
+                .HasKey(cd => cd.AccountNumber);
+
+            modelBuilder.Entity<MenuItem>()
+                .Property(m => m.IsAvailable)
+                .HasDefaultValue(true);
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.OrderStatus)
+                .HasDefaultValue("Pending");
+
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.PaymentDate)
+                .HasDefaultValueSql("GETDATE()");
+
+            modelBuilder.Entity<Review>()
+                .Property(r => r.ReviewDate)
+                .HasDefaultValueSql("GETDATE()");
+
+            modelBuilder.Entity<TableReservation>()
+                .Property(r => r.TableStatus)
+                .HasDefaultValue("Booked");
+
+            modelBuilder.Entity<TableReservation>()
+                .Property(r => r.CreatedAt)
+                .HasDefaultValueSql("GETDATE()");
+
+            modelBuilder.Entity<AuditLog>()
+                .Property(a => a.AuditTimestamp)
+                .HasDefaultValueSql("GETDATE()");
+
+            modelBuilder.Entity<Delivery>()
+                .Property(d => d.DeliveryStatus)
+                .HasDefaultValue("Preparing");
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
