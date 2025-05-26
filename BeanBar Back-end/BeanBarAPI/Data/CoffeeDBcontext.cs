@@ -40,6 +40,10 @@ namespace BeanBar_Back_end.Data
         // Audit Logs
         public DbSet<AuditLog> AuditLogs { get; set; }
 
+        //JWTService
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Composite Key Configuration or Fluent API goes here if needed

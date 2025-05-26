@@ -18,7 +18,7 @@ CREATE TABLE UserAuth (
 
 -- CUSTOMERS TABLE
 CREATE TABLE Customers (
-    CustomerID VARCHAR(15) PRIMARY KEY NOT NULL,
+    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
     FirstName VARCHAR(100) NOT NULL,
     LastName VARCHAR(100) NOT NULL,
     Email VARCHAR(255) NOT NULL,
@@ -27,7 +27,6 @@ CREATE TABLE Customers (
     CreatedAt DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (Email) REFERENCES Users(Email)
 );
-
 -- MENU TABLE
 CREATE TABLE Menu (
     ItemID INT IDENTITY(1,1) PRIMARY KEY,
@@ -58,17 +57,17 @@ CREATE TABLE Stock (
 
 -- ORDERS TABLE
 CREATE TABLE Orders (
-OrderNum INT IDENTITY(100,1) PRIMARY KEY,
-ItemID INT NOT NULL,
-CustomerID VARCHAR(15) NOT NULL,
-Address VARCHAR(255) NOT NULL,
-Date DATE NOT NULL,
-OrderType VARCHAR(50) CHECK (OrderType IN ('EatIn', 'Takeout')) NOT NULL,
-Quantity INT NOT NULL,
-OrderStatus VARCHAR(50) CHECK (OrderStatus IN ('Pending', 'Completed', 'Cancelled')) DEFAULT 'Pending',
-TotalPrice DECIMAL(10,2),
-FOREIGN KEY (ItemID) REFERENCES Menu(ItemID),
-FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+    OrderNum INT IDENTITY(100,1) PRIMARY KEY,
+    ItemID INT NOT NULL,
+    CustomerID INT NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    Date DATE NOT NULL,
+    OrderType VARCHAR(50) CHECK (OrderType IN ('EatIn', 'Takeout')) NOT NULL,
+    Quantity INT NOT NULL,
+    OrderStatus VARCHAR(50) CHECK (OrderStatus IN ('Pending', 'Completed', 'Cancelled')) DEFAULT 'Pending',
+    TotalPrice DECIMAL(10,2),
+    FOREIGN KEY (ItemID) REFERENCES Menu(ItemID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
 -- PAYMENTS TABLE
@@ -83,44 +82,41 @@ FOREIGN KEY (OrderNum) REFERENCES Orders(OrderNum)
 
 -- CARD DETAILS TABLE
 CREATE TABLE CardDetails (
-AccountNumber VARCHAR(30) PRIMARY KEY NOT NULL,
-Accountholder VARCHAR(100) NOT NULL,
-AccountType VARCHAR(50) NOT NULL,
-CardNumber VARCHAR(20) NOT NULL, -- ENCRYPT or use dummy
-CVV VARCHAR(4) NOT NULL,         -- ENCRYPT or use dummy
-ExpiryDate DATE NOT NULL,
-IsEncrypted BIT DEFAULT 0,
-CustomerID VARCHAR(15) NOT NULL,
-FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+    AccountNumber VARCHAR(30) PRIMARY KEY NOT NULL,
+    Accountholder VARCHAR(100) NOT NULL,
+    AccountType VARCHAR(50) NOT NULL,
+    CardNumber VARCHAR(20) NOT NULL,
+    CVV VARCHAR(4) NOT NULL,
+    ExpiryDate DATE NOT NULL,
+    IsEncrypted BIT DEFAULT 0,
+    CustomerID INT NOT NULL,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
-
 -- TABLES (DINING TABLES) TABLE
 CREATE TABLE TableReservations (
-TableNum INT PRIMARY KEY,
-ReservationDate DATE NOT NULL,
-ReservationTime TIME NOT NULL,
-PartySize INT NOT NULL,
-CustomerID VARCHAR(15) NOT NULL,
-CustomerName NVARCHAR (80),
-tableStatus VARCHAR(50) CHECK (tableStatus IN ('Booked', 'Seated', 'Cancelled')) DEFAULT 'Booked',
-Occasion VARCHAR(100),
-Notes VARCHAR(255),
-CreatedAt DATETIME DEFAULT GETDATE(),
-FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+    TableNum INT PRIMARY KEY,
+    ReservationDate DATE NOT NULL,
+    ReservationTime TIME NOT NULL,
+    PartySize INT NOT NULL,
+    CustomerID INT NOT NULL,
+    CustomerName NVARCHAR (80),
+    tableStatus VARCHAR(50) CHECK (tableStatus IN ('Booked', 'Seated', 'Cancelled')) DEFAULT 'Booked',
+    Occasion VARCHAR(100),
+    Notes VARCHAR(255),
+    CreatedAt DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
-
 -- REVIEWS TABLE
 CREATE TABLE Reviews (
-ReviewID INT IDENTITY(1,1) PRIMARY KEY,
-CustomerID VARCHAR (15) NOT NULL,
-ItemID INT NOT NULL,
-Rating INT CHECK (Rating BETWEEN 1 AND 5),
-Comment VARCHAR(500),
-ReviewDate DATETIME DEFAULT GETDATE(),
-FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
-FOREIGN KEY (ItemID) REFERENCES Menu(ItemID)
+    ReviewID INT IDENTITY(1,1) PRIMARY KEY,
+    CustomerID INT NOT NULL,
+    ItemID INT NOT NULL,
+    Rating INT CHECK (Rating BETWEEN 1 AND 5),
+    Comment VARCHAR(500),
+    ReviewDate DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (ItemID) REFERENCES Menu(ItemID)
 );
-
 -- DELIVERIES TABLE
 CREATE TABLE Deliveries (
 DeliveryID INT IDENTITY(1,1) PRIMARY KEY,
@@ -139,6 +135,20 @@ ActionPerformed VARCHAR(50),
 PerformedBy VARCHAR(100),
 AuditTimestamp DATETIME DEFAULT GETDATE()
 );
+
+-- JWT SERVICES - REFRESH TOKENS
+CREATE TABLE RefreshTokens
+(
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Token NVARCHAR(500) NOT NULL,
+    CustomerID INT NOT NULL,
+    Expires DATETIME2 NOT NULL,
+    Created DATETIME2 NOT NULL,
+    Revoked DATETIME2 NULL,
+    ReplacedByToken NVARCHAR(500) NULL,
+    CONSTRAINT FK_RefreshTokens_Customers_CustomerID FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
 
 INSERT INTO Menu (ItemName, Category, ItemType, ItemDescription, Price, ImageUrl) VALUES 
 ('Mocha','Coffee', 'Hot','Delicious mocha coffee.', 21.99, 'https://i.ibb.co/B2BBm9gy/mocho-removebg-preview.png' ),
@@ -168,3 +178,5 @@ EXEC sp_MSForEachTable 'DELETE FROM ?';
 EXEC sp_MSForEachTable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL';
 -- Reset all auto-increments
 EXEC sp_MSForEachTable 'DBCC CHECKIDENT(''?'', RESEED, 0)';
+
+DROP DATABASE CoffeeShopDB;
