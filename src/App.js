@@ -25,7 +25,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/promotions" element={<Promotions />} />
-          <Route path="/userProfile" element={<Promotions />} />
+          <Route path="/userProfile" element={<UserProfile />} />
         </Routes>
       </div>
     </Router>
