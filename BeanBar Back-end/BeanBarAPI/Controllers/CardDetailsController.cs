@@ -23,36 +23,36 @@ namespace BeanBar_Back_end.Controllers
 
         // GET: api/CardDetails
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<CardDetails>>> GetCardDetails()
+        public async Task<ActionResult<IEnumerable<CardDetail>>> GetCardDetails()
         {
             return await _context.CardDetails.ToListAsync();
         }
 
         // GET: api/CardDetails/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<CardDetails>> GetCardDetails(string id)
+        public async Task<ActionResult<CardDetail>> GetCardDetail(string id)
         {
-            var cardDetails = await _context.CardDetails.FindAsync(id);
+            var cardDetail = await _context.CardDetails.FindAsync(id);
 
-            if (cardDetails == null)
+            if (cardDetail == null)
             {
                 return NotFound();
             }
 
-            return cardDetails;
+            return cardDetail;
         }
 
         // PUT: api/CardDetails/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCardDetails(string id, CardDetails cardDetails)
+        public async Task<IActionResult> PutCardDetail(string id, CardDetail cardDetail)
         {
-            if (id != cardDetails.AccountNumber)
+            if (id != cardDetail.AccountNumber)
             {
                 return BadRequest();
             }
 
-            _context.Entry(cardDetails).State = EntityState.Modified;
+            _context.Entry(cardDetail).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CardDetailsExists(id))
+                if (!CardDetailExists(id))
                 {
                     return NotFound();
                 }
@@ -76,16 +76,16 @@ namespace BeanBar_Back_end.Controllers
         // POST: api/CardDetails
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<CardDetails>> PostCardDetails(CardDetails cardDetails)
+        public async Task<ActionResult<CardDetail>> PostCardDetail(CardDetail cardDetail)
         {
-            _context.CardDetails.Add(cardDetails);
+            _context.CardDetails.Add(cardDetail);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CardDetailsExists(cardDetails.AccountNumber))
+                if (CardDetailExists(cardDetail.AccountNumber))
                 {
                     return Conflict();
                 }
@@ -95,26 +95,26 @@ namespace BeanBar_Back_end.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCardDetails", new { id = cardDetails.AccountNumber }, cardDetails);
+            return CreatedAtAction("GetCardDetail", new { id = cardDetail.AccountNumber }, cardDetail);
         }
 
         // DELETE: api/CardDetails/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCardDetails(string id)
+        public async Task<IActionResult> DeleteCardDetail(string id)
         {
-            var cardDetails = await _context.CardDetails.FindAsync(id);
-            if (cardDetails == null)
+            var cardDetail = await _context.CardDetails.FindAsync(id);
+            if (cardDetail == null)
             {
                 return NotFound();
             }
 
-            _context.CardDetails.Remove(cardDetails);
+            _context.CardDetails.Remove(cardDetail);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CardDetailsExists(string id)
+        private bool CardDetailExists(string id)
         {
             return _context.CardDetails.Any(e => e.AccountNumber == id);
         }

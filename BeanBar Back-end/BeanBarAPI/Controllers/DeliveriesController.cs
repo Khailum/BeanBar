@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class DeliveriesController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public OrdersController(CoffeeDBcontext context)
+        public DeliveriesController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/Orders
+        // GET: api/Deliveries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<Delivery>>> GetDeliveries()
         {
-            return await _context.Orders.ToListAsync();
+            return await _context.Deliveries.ToListAsync();
         }
 
-        // GET: api/Orders/5
+        // GET: api/Deliveries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Order>> GetOrder(int id)
+        public async Task<ActionResult<Delivery>> GetDelivery(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
+            var delivery = await _context.Deliveries.FindAsync(id);
 
-            if (order == null)
+            if (delivery == null)
             {
                 return NotFound();
             }
 
-            return order;
+            return delivery;
         }
 
-        // PUT: api/Orders/5
+        // PUT: api/Deliveries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrder(int id, Order order)
+        public async Task<IActionResult> PutDelivery(int id, Delivery delivery)
         {
-            if (id != order.OrderNum)
+            if (id != delivery.DeliveryID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(order).State = EntityState.Modified;
+            _context.Entry(delivery).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(id))
+                if (!DeliveryExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/Orders
+        // POST: api/Deliveries
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Delivery>> PostDelivery(Delivery delivery)
         {
-            _context.Orders.Add(order);
+            _context.Deliveries.Add(delivery);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOrder", new { id = order.OrderNum }, order);
+            return CreatedAtAction("GetDelivery", new { id = delivery.DeliveryID }, delivery);
         }
 
-        // DELETE: api/Orders/5
+        // DELETE: api/Deliveries/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteOrder(int id)
+        public async Task<IActionResult> DeleteDelivery(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            if (order == null)
+            var delivery = await _context.Deliveries.FindAsync(id);
+            if (delivery == null)
             {
                 return NotFound();
             }
 
-            _context.Orders.Remove(order);
+            _context.Deliveries.Remove(delivery);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool OrderExists(int id)
+        private bool DeliveryExists(int id)
         {
-            return _context.Orders.Any(e => e.OrderNum == id);
+            return _context.Deliveries.Any(e => e.DeliveryID == id);
         }
     }
 }

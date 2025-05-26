@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public CustomersController(CoffeeDBcontext context)
+        public UsersController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/Customers
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Users.ToListAsync();
         }
 
-        // GET: api/Customers/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(string id)
+        public async Task<ActionResult<User>> GetUser(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
 
-            if (customer == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return customer;
+            return user;
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, Customer customer)
+        public async Task<IActionResult> PutUser(string id, User user)
         {
-            if (id != customer.CustomerID)
+            if (id != user.Email)
             {
                 return BadRequest();
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
+        // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.Customers.Add(customer);
+            _context.Users.Add(user);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (CustomerExists(customer.CustomerID))
+                if (UserExists(user.Email))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace BeanBar_Back_end.Controllers
                 }
             }
 
-            return CreatedAtAction("GetCustomer", new { id = customer.CustomerID }, customer);
+            return CreatedAtAction("GetUser", new { id = user.Email }, user);
         }
 
-        // DELETE: api/Customers/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(string id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.Customers.Remove(customer);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool CustomerExists(string id)
+        private bool UserExists(string id)
         {
-            return _context.Customers.Any(e => e.CustomerID == id);
+            return _context.Users.Any(e => e.Email == id);
         }
     }
 }

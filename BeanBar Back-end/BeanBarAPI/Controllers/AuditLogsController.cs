@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminsController : ControllerBase
+    public class AuditLogsController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public AdminsController(CoffeeDBcontext context)
+        public AuditLogsController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/Admins
+        // GET: api/AuditLogs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Admin>>> GetAdmin()
+        public async Task<ActionResult<IEnumerable<AuditLog>>> GetAuditLogs()
         {
-            return await _context.Admin.ToListAsync();
+            return await _context.AuditLogs.ToListAsync();
         }
 
-        // GET: api/Admins/5
+        // GET: api/AuditLogs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Admin>> GetAdmin(int id)
+        public async Task<ActionResult<AuditLog>> GetAuditLog(int id)
         {
-            var admin = await _context.Admin.FindAsync(id);
+            var auditLog = await _context.AuditLogs.FindAsync(id);
 
-            if (admin == null)
+            if (auditLog == null)
             {
                 return NotFound();
             }
 
-            return admin;
+            return auditLog;
         }
 
-        // PUT: api/Admins/5
+        // PUT: api/AuditLogs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAdmin(int id, Admin admin)
+        public async Task<IActionResult> PutAuditLog(int id, AuditLog auditLog)
         {
-            if (id != admin.AdminID)
+            if (id != auditLog.LogID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(admin).State = EntityState.Modified;
+            _context.Entry(auditLog).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AdminExists(id))
+                if (!AuditLogExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/Admins
+        // POST: api/AuditLogs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Admin>> PostAdmin(Admin admin)
+        public async Task<ActionResult<AuditLog>> PostAuditLog(AuditLog auditLog)
         {
-            _context.Admin.Add(admin);
+            _context.AuditLogs.Add(auditLog);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAdmin", new { id = admin.AdminID }, admin);
+            return CreatedAtAction("GetAuditLog", new { id = auditLog.LogID }, auditLog);
         }
 
-        // DELETE: api/Admins/5
+        // DELETE: api/AuditLogs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAdmin(int id)
+        public async Task<IActionResult> DeleteAuditLog(int id)
         {
-            var admin = await _context.Admin.FindAsync(id);
-            if (admin == null)
+            var auditLog = await _context.AuditLogs.FindAsync(id);
+            if (auditLog == null)
             {
                 return NotFound();
             }
 
-            _context.Admin.Remove(admin);
+            _context.AuditLogs.Remove(auditLog);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AdminExists(int id)
+        private bool AuditLogExists(int id)
         {
-            return _context.Admin.Any(e => e.AdminID == id);
+            return _context.AuditLogs.Any(e => e.LogID == id);
         }
     }
 }

@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class UserAuthenticationsController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public RolesController(CoffeeDBcontext context)
+        public UserAuthenticationsController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/Roles
+        // GET: api/UserAuthentications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Roles>>> GetRole()
+        public async Task<ActionResult<IEnumerable<UserAuthentication>>> GetUserAuth()
         {
-            return await _context.Role.ToListAsync();
+            return await _context.UserAuth.ToListAsync();
         }
 
-        // GET: api/Roles/5
+        // GET: api/UserAuthentications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Roles>> GetRoles(string id)
+        public async Task<ActionResult<UserAuthentication>> GetUserAuthentication(string id)
         {
-            var roles = await _context.Role.FindAsync(id);
+            var userAuthentication = await _context.UserAuth.FindAsync(id);
 
-            if (roles == null)
+            if (userAuthentication == null)
             {
                 return NotFound();
             }
 
-            return roles;
+            return userAuthentication;
         }
 
-        // PUT: api/Roles/5
+        // PUT: api/UserAuthentications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoles(string id, Roles roles)
+        public async Task<IActionResult> PutUserAuthentication(string id, UserAuthentication userAuthentication)
         {
-            if (id != roles.Email)
+            if (id != userAuthentication.Email)
             {
                 return BadRequest();
             }
 
-            _context.Entry(roles).State = EntityState.Modified;
+            _context.Entry(userAuthentication).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RolesExists(id))
+                if (!UserAuthenticationExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/Roles
+        // POST: api/UserAuthentications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Roles>> PostRoles(Roles roles)
+        public async Task<ActionResult<UserAuthentication>> PostUserAuthentication(UserAuthentication userAuthentication)
         {
-            _context.Role.Add(roles);
+            _context.UserAuth.Add(userAuthentication);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (RolesExists(roles.Email))
+                if (UserAuthenticationExists(userAuthentication.Email))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace BeanBar_Back_end.Controllers
                 }
             }
 
-            return CreatedAtAction("GetRoles", new { id = roles.Email }, roles);
+            return CreatedAtAction("GetUserAuthentication", new { id = userAuthentication.Email }, userAuthentication);
         }
 
-        // DELETE: api/Roles/5
+        // DELETE: api/UserAuthentications/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRoles(string id)
+        public async Task<IActionResult> DeleteUserAuthentication(string id)
         {
-            var roles = await _context.Role.FindAsync(id);
-            if (roles == null)
+            var userAuthentication = await _context.UserAuth.FindAsync(id);
+            if (userAuthentication == null)
             {
                 return NotFound();
             }
 
-            _context.Role.Remove(roles);
+            _context.UserAuth.Remove(userAuthentication);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool RolesExists(string id)
+        private bool UserAuthenticationExists(string id)
         {
-            return _context.Role.Any(e => e.Email == id);
+            return _context.UserAuth.Any(e => e.Email == id);
         }
     }
 }

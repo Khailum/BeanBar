@@ -48,7 +48,7 @@ namespace BeanBar_Back_end.Data
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Email);
 
-            modelBuilder.Entity<UserAuth>()
+            modelBuilder.Entity<UserAuthentication>()
                 .HasKey(ua => ua.Email);
 
             modelBuilder.Entity<Customer>()
@@ -57,7 +57,7 @@ namespace BeanBar_Back_end.Data
             modelBuilder.Entity<CardDetail>()
                 .HasKey(cd => cd.AccountNumber);
 
-            modelBuilder.Entity<MenuItem>()
+            modelBuilder.Entity<Menu>()
                 .Property(m => m.IsAvailable)
                 .HasDefaultValue(true);
 
@@ -74,7 +74,7 @@ namespace BeanBar_Back_end.Data
                 .HasDefaultValueSql("GETDATE()");
 
             modelBuilder.Entity<TableReservation>()
-                .Property(r => r.TableStatus)
+                .Property(r => r.tableStatus)
                 .HasDefaultValue("Booked");
 
             modelBuilder.Entity<TableReservation>()
