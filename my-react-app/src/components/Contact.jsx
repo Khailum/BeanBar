@@ -4,7 +4,7 @@ import './Contact.css';
 function Contact() {
   return (
     <div className="contact-section">
-       <h2 className="section-header"><span>LET'S GET</span> IN TOUCH!</h2>
+      <h2 className="section-header"><span>LET'S GET</span> IN TOUCH!</h2>
       {/* <h1 className="section-header">Contact</h1> */}
 
       <div className="contact-wrapper">
@@ -33,8 +33,16 @@ function Contact() {
 
         {/* Contact details */}
         <div className="direct-contact-container">
+          {/* Operation Hours */}
+          <div className="operation-hours">
+            <h3>Operation Hours</h3>
+            <ul>
+              <li>Monday - Friday: 9:00 AM – 6:00 PM</li>
+              <li>Saturday: 10:00 AM – 4:00 PM</li>
+              <li>Sunday: Closed</li>
+            </ul>
+          </div>
           
-
           <ul className="contact-list">
             <li className="list-item">
               <i className="fas fa-map-marker-alt"></i><span className="contact-text place">Woodstock, Cape Town</span>
@@ -46,6 +54,7 @@ function Contact() {
               <i className="fas fa-envelope"></i><span className="contact-text gmail"><a href="mailto:beanBar@gmail.com">beanBar@gmail.com</a></span>
             </li>
           </ul>
+
           
 
           <hr />

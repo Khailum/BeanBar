@@ -142,9 +142,18 @@ function PaymentPage() {
             <input
               className="form-control"
               type="text"
-              placeholder="Name on Card"
+              placeholder="Account Holder"
               required
             />
+            <input
+              className="form-control"
+              type="text"
+              placeholder="Account Number"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              required
+            />
+            {cardError && <p className="error-text">{cardError}</p>}
             <input
               className="form-control"
               type="text"
@@ -154,6 +163,7 @@ function PaymentPage() {
               required
             />
             {cardError && <p className="error-text">{cardError}</p>}
+
 
             <input
               className="form-control"

@@ -15,7 +15,7 @@ const Home = () => {
             culpa alias minus, asperiores itaque saepe ducimus magni accusamus delectus laudantium facere cupiditate!
             Beatae, a est?
           </p>
-          <a href="#" className="btn">
+          <a href="/product" className="btn">
             Get yours now
           </a>
         </div>

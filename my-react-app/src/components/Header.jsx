@@ -31,6 +31,9 @@ const Header = () => {
         <Link to="/payment" onClick={() => setMenuActive(false)}>Checkout</Link>
         <Link to="/review" onClick={() => setMenuActive(false)}>Review</Link>
         <Link to="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
+         <Link to="/userprofile" onClick={() => setMenuActive(false)}>profile</Link>
+         {/* <Link to="/confrimation" onClick={() => setMenuActive(false)}>con</Link> */}
+   
       </nav>
 
       {/* Login Button */}

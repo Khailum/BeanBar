@@ -4,7 +4,7 @@
   gap: 2rem;
   justify-content: center;
   padding: 2rem;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .product {
@@ -21,7 +21,16 @@
 .product:hover {
   transform: scale(1.05);
 }
-
+.Coffee-header{
+  margin-top: 100px;
+  text-align: center;
+   font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+}
+span{
+  color: #fff;
+}
 .product img {
   height: 10rem;
   object-fit: contain;
@@ -56,10 +65,12 @@
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .product .button:hover {
   background: #b8935f;
+  cursor: pointer;
 }
 
 .product .input-group {
@@ -163,4 +174,39 @@
 .dropdown-item:hover,
 .dropdown-item.active {
   background-color: #d3ad7f;
+}
+.filter-btn {
+  padding: 8px 16px;
+  /* background-color: #d3ad7f; */
+  color: #fff;
+  border: 1px solid #d3ad7f;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #010103;
+  border: 1px solid #d3ad7f;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  font-size: 1rem;
+}
+
+.dropdown-item {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+  background-color: #d3ad7f;
+  color: #fff;
+}
+.button.added {
+  background-color: #6f4e37;
+  color: white;
 }

@@ -31,6 +31,30 @@ hr {
     
     
 }
+.operation-hours {
+  margin-top: 10px;
+}
+
+.operation-hours h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #d3ad7f;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+}
+
+.operation-hours ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.operation-hours ul li {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: #ccc;
+  text-transform: uppercase;
+}
+
 
 
 
@@ -70,7 +94,7 @@ textarea {
     padding: 10px;
     background-color: #d3ad7f;
     border: none;
-    color: white;
+    color: #fff;
     text-transform: uppercase;
     font-weight: 700;
     cursor: pointer;
@@ -79,6 +103,7 @@ textarea {
 
 .send-button:hover {
     background-color: #9c6624;
+    color: #fff;
 }
 .contact-icon{
     color: #d3ad7f;
@@ -95,7 +120,7 @@ textarea {
 .direct-contact-container {
     width: 100%;
     max-width: 400px;
-    margin-top: 130px;
+    margin-top: 30px;
     text-align: left;
     /* margin-left: 20px; */
 }

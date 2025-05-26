@@ -60,6 +60,9 @@ hr {
   margin-bottom: 10px;
   color: #d3ad7f;
   font-weight: bold;
+  font-size: 1.5rem;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
 }
 
 .total-amount {

@@ -50,15 +50,16 @@
   .box .price {
     color: #fff;
     font-size: 2.5rem;
-    padding: 2rem 0;
+    padding: -4rem 0;
   }
   
   .box .price span {
     font-size: 1.5rem;
     text-decoration: line-through;
     margin-left: 1rem;
+    color: #b8935f;
   }
-  
+ 
   .box .btn {
     display: inline-block;
     margin-top: 1rem;
@@ -72,6 +73,9 @@
     text-transform: uppercase;
     font-size: 1.5rem;
 
+  }
+  span{
+    color: #b8935f;
   }
   
   .box .btn:hover {
@@ -88,7 +92,14 @@
     margin-top: 5rem;
     
   }
-  
+  .description {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  min-height: 4rem; /* ensures consistent height even if empty */
+  line-height: 1.5;
+}
+
   @media (max-width: 992px) {
     .scroll-container {
       padding-left: 1rem;
