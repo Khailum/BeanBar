@@ -2,7 +2,15 @@ import { useEffect, useState } from 'react';
 
 const Reservations = () => {
 const [reservations, setReservations] = useState([]);
-const [form, setForm] = useState({ name: '', contact: '', time: '', guests: '' });
+const [form, setForm] = useState({
+    reservationDate: '',
+    reservationTime: '',
+    partySize: '',
+    customerID: '',
+    customerName: '',
+    occasion: '',
+    notes: ''
+});
 const [loading, setLoading] = useState(false);
 
 const fetchReservations = async () => {
@@ -12,8 +20,8 @@ const fetchReservations = async () => {
     const text = await res.text();
     const rows = text.trim().split('\n');
     const data = rows.map(row => {
-        const [id, name, contact, time, guests] = row.split(',');
-        return { id, name, contact, time, guests };
+        const [tableNum, reservationDate, reservationTime, partySize, customerID, customerName, tableStatus, occasion, notes] = row.split(',');
+        return { tableNum, reservationDate, reservationTime, partySize, customerID, customerName, tableStatus, occasion, notes };
     });
     setReservations(data);
     } catch (err) {
@@ -33,10 +41,12 @@ const handleChange = (e) => {
 };
 
 const addReservation = async () => {
-    const { name, contact, time, guests } = form;
-    if (!name || !contact || !time || !guests) return alert('Please fill all fields');
+    const { reservationDate, reservationTime, partySize, customerID, customerName, occasion, notes } = form;
+    if (!reservationDate || !reservationTime || !partySize || !customerID || !customerName) {
+    return alert('Please fill all required fields');
+    }
 
-    const body = new URLSearchParams({ name, contact, time, guests });
+    const body = new URLSearchParams({ reservationDate, reservationTime, partySize, customerID, customerName, occasion, notes });
 
     try {
     const res = await fetch('http://localhost:4000/api/reservations', {
@@ -44,75 +54,87 @@ const addReservation = async () => {
         body,
     });
     if (!res.ok) throw new Error('Failed to add reservation');
-    setForm({ name: '', contact: '', time: '', guests: '' });
+    setForm({ reservationDate: '', reservationTime: '', partySize: '', customerID: '', customerName: '', occasion: '', notes: '' });
     fetchReservations();
     } catch (err) {
     alert('Error: ' + err.message);
     }
 };
 
-const deleteReservation = async (id) => {
-    if (!window.confirm('Delete this reservation?')) return;
-    try {
-    await fetch(`http://localhost:4000/api/reservations/${id}`, { method: 'DELETE' });
+const deleteReservation = async (tableNum) => {
+if (!window.confirm('Delete this reservation?')) return;
+try {
+    await fetch(`http://localhost:4000/api/reservations/${tableNum}`, { method: 'DELETE' });
     fetchReservations();
-    } catch (err) {
+} catch (err) {
     alert('Failed to delete: ' + err.message);
-    }
+}
+};
+
+const updateStatus = async (tableNum, status) => {
+const body = new URLSearchParams({ field: 'tableStatus', value: status });
+try {
+    await fetch(`http://localhost:4000/api/reservations/${tableNum}`, {
+    method: 'PATCH',
+    body,
+    });
+    fetchReservations();
+} catch (err) {
+    alert('Failed to update status: ' + err.message);
+}
 };
 
 return (
-    <div>
+<div>
     <h2>Reservation Management</h2>
     <button onClick={fetchReservations} disabled={loading}>
-        {loading ? 'Loading...' : 'Refresh'}
+    {loading ? 'Loading...' : 'Refresh'}
     </button>
 
     <div>
-        <h3>Add New Reservation</h3>
-        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
-        <input name="contact" placeholder="Contact" value={form.contact} onChange={handleChange} />
-        <input name="time" type="datetime-local" value={form.time} onChange={handleChange} />
-        <input name="guests" type="number" placeholder="Guests" value={form.guests} onChange={handleChange} />
-        <button onClick={addReservation}>Add Reservation</button>
+    <h3>Add New Reservation</h3>
+    <input name="reservationDate" type="date" placeholder="Date" value={form.reservationDate} onChange={handleChange} />
+    <input name="reservationTime" type="time" placeholder="Time" value={form.reservationTime} onChange={handleChange} />
+    <input name="partySize" type="number" placeholder="Party Size" value={form.partySize} onChange={handleChange} />
+    <input name="customerID" placeholder="Customer ID" value={form.customerID} onChange={handleChange} />
+    <input name="customerName" placeholder="Customer Name" value={form.customerName} onChange={handleChange} />
+    <input name="occasion" placeholder="Occasion" value={form.occasion} onChange={handleChange} />
+    <input name="notes" placeholder="Notes" value={form.notes} onChange={handleChange} />
+    <button onClick={addReservation}>Add Reservation</button>
     </div>
 
     <table border="1" cellPadding="6">
-        <thead>
+    <thead>
         <tr>
-            <th>ID</th><th>Name</th><th>Contact</th><th>Time</th><th>Guests</th><th>Note</th><th>Actions</th>
+        <th>TableNum</th><th>Date</th><th>Time</th><th>Party Size</th><th>Customer ID</th><th>Name</th><th>Status</th><th>Occasion</th><th>Notes</th><th>Actions</th>
         </tr>
         </thead>
-        <tbody>
+    <tbody>
         {reservations.map((r) => (
-            <tr key={r.id}>
-            <td>{r.id}</td>
-            <td>{r.name}</td>
-            <td>{r.contact}</td>
-            <td>{new Date(r.time).toLocaleString()}</td>
-            <td>{r.guests}</td>
-            <td>{r.note}</td>
+        <tr key={r.tableNum}>
+            <td>{r.tableNum}</td>
+            <td>{r.reservationDate}</td>
+            <td>{r.reservationTime}</td>
+            <td>{r.partySize}</td>
+            <td>{r.customerID}</td>
+            <td>{r.customerName}</td>
             <td>
-                <button onClick={() => deleteReservation(r.id)}>Delete</button>
-            </td>
-            <td>
-            <select
-                value={r.status}
-                onChange={(e) => updateStatus(r.id, e.target.value)}
-                >
+                <select value={r.tableStatus} onChange={(e) => updateStatus(r.tableNum, e.target.value)}>
                 <option value="Booked">Booked</option>
                 <option value="Seated">Seated</option>
                 <option value="Cancelled">Cancelled</option>
-                </select>
+            </select>
             </td>
+            <td>{r.occasion}</td>
+            <td>{r.notes}</td>
             <td>
-                <button onClick={() => deleteReservation(r.id)}>Delete</button>
+            <button onClick={() => deleteReservation(r.tableNum)}>Delete</button>
             </td>
-            </tr>
+        </tr>
         ))}
-        </tbody>
+    </tbody>
     </table>
-    </div>
+</div>
 );
 };
 
