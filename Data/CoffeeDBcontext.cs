@@ -43,6 +43,7 @@ namespace BeanBarAPI.Data
         //JWTService
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
+        public DbSet<PromotionHistory> PromotionHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

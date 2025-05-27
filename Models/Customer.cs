@@ -24,6 +24,9 @@ namespace BeanBarAPI.Models
 
         public string? Address { get; set; }
 
-        public DateTime CreatedAt { get; set; } 
+        public DateTime CreatedAt { get; set; }
+        public string Token { get; set; }  
+        public DateTime LastPromotionDate { get; set; } 
+
     }
 }

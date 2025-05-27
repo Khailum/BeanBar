@@ -9,11 +9,11 @@ namespace BeanBarAPI.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly CoffeeDBContext _context;
+        private readonly CoffeeDBcontext _context;
         private readonly IPasswordService _passwordService;
-        private readonly IDNumberValidator _idValidator;
+        private readonly IDValidationService _idValidator;
 
-        public AuthService(CoffeeDBContext context, IPasswordService passwordService, IDNumberValidator idValidator)
+        public AuthService(CoffeeDBcontext context, IPasswordService passwordService, IDNumberValidator idValidator)
         {
             _context = context;
             _passwordService = passwordService;
@@ -64,8 +64,27 @@ namespace BeanBarAPI.Services
             };
             _context.Customers.Add(customer);
 
+            //Sending Signup Confirmation
+            await _emailService.SendEmailAsync(new EmailDto
+            {
+                ToEmail = user.Email,
+                Subject = "Welcome to BeanBar Coffee!",
+                Body = $"<h2>Hi {user.Username},</h2><p>Thank you for signing up!</p>"
+            });
+
+            //Sending Promotion Email
+            await _emailService.SendEmailAsync(new EmailDto
+            {
+                ToEmail = customer.Email,
+                Subject = "You've Got a New BeanBar Promotion!",
+                Body = "<p>Congrats! You’ve earned a <b>free cappuccino</b> on your next visit.</p>"
+            });
+
+
             await _context.SaveChangesAsync();
             return true;
+
+
         }
 
         public async Task<UserDTO?> LoginAsync(LoginDTO dto)

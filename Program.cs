@@ -23,10 +23,16 @@ namespace BeanBar_Back_end
             // Register your auth & password services **before** building the app
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IPasswordService, PasswordService>();
-            builder.Services.AddScoped<IJWTService, JWTService>();
+            builder.Services.AddScoped<IJwtService, JWTService>();
 
             // Register ID validation service with interface
             builder.Services.AddScoped<IIDValidationService, IDValidationService>();
+
+            //Register EmailService:
+            builder.Services.AddScoped<IEmailService, EmailService>();
+
+            //Register AdminService: 
+            builder.Services.AddScoped<IAdminService, AdminService>();
 
             // Add controllers and swagger
             builder.Services.AddControllers();
