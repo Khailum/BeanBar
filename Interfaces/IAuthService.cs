@@ -1,8 +1,15 @@
-﻿using System;
+﻿using BeanBarAPI.DTOs;
+using BeanBarAPI.Services;
+using BeanBarAPI.Models;
+using BeanBarAPI.Data;
+using BeanBarAPI.Interfaces;
 
-public class Class1
+namespace BeanBarAPI.Interfaces
 {
-	public Class1()
-	{
-	}
+    public interface IAuthService
+    {
+        Task<bool> RegisterAsync(RegisterDTO dto);
+        Task<UserDTO?> LoginAsync(LoginDTO dto);
+    }
+
 }

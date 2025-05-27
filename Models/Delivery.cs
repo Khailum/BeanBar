@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System;
 using System.Data;
-
-namespace BeanBar_Back_end.Models
+using System.ComponentModel.DataAnnotations.Schema;
+namespace BeanBarAPI.Models
 {
     public class Delivery
     {

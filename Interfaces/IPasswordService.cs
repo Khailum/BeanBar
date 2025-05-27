@@ -1,8 +1,13 @@
 ﻿using System;
+using BeanBarAPI.DTOs;
 
-public class Class1
+namespace BeanBarAPI.Interfaces
 {
-	public Class1()
-	{
-	}
+    public interface IPasswordService
+    {
+        string GenerateSalt();
+        string HashPassword(string password, string salt);
+        bool VerifyPassword(string password, string hashedPassword, string salt);
+    }
 }
+

@@ -1,8 +1,16 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
+using System.Data;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Class1
+namespace BeanBarAPI.Models
 {
-	public Class1()
-	{
-	}
+    public class JwtSettings
+    {
+        public string SecretKey { get; set; }
+        public string Issuer { get; set; }
+        public string Audience { get; set; }
+        public int AccessTokenExpirationMinutes { get; set; }
+        public int RefreshTokenExpirationDays { get; set; }
+    }
 }

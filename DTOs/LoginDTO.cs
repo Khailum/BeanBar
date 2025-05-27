@@ -1,8 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-public class Class1
+namespace BeanBarAPI.DTOs
 {
-	public Class1()
-	{
-	}
+    public class LoginDTO
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
 }

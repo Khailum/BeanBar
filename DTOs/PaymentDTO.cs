@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace BeanBar_Back_end.DTOs
+namespace BeanBarAPI.DTOs
 {
     public class PaymentDTO
     {

@@ -1,7 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System;
+using System.Data;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BeanBar_Back_end.Models
+namespace BeanBarAPI.Models
 {
     public class UserAuthentication
     {

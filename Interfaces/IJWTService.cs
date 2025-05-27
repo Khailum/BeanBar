@@ -1,8 +1,15 @@
-﻿using System;
+﻿using BeanBarAPI.DTOs;
+using BeanBarAPI.Services;
+using BeanBarAPI.Models;
+using BeanBarAPI.Data;
+using BeanBarAPI.Interfaces;
 
-public class Class1
+namespace BeanBar_Back_end.Services
 {
-	public Class1()
-	{
-	}
+    public interface IJwtService
+    {
+        string GenerateAccessToken(User user);
+        string GenerateRefreshToken();
+        ClaimsPrincipal? GetPrincipalFromExpiredToken(string token);
+    }
 }

@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+using System;
+using System.Data;
+using System.ComponentModel.DataAnnotations.Schema;
 
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BeanBar_Back_end.Models
+namespace BeanBarAPI.Models
 {
     public class CardDetail
     {
