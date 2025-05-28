@@ -103,12 +103,15 @@
   @media (max-width: 992px) {
     .scroll-container {
       padding-left: 1rem;
+      /* margin-top: 3rem;
+      font-size: small; */
     }
   }
   
   @media (max-width: 576px) {
     .scroll-container {
       padding-left: 0.5rem;
+      margin-top: 3rem;
     }
   }
   

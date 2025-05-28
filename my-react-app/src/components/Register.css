@@ -142,7 +142,8 @@
   
   @media (max-width: 500px) {
     .register-page {
-      padding: 25px;
+      padding: 30   px;
+      width: 70%;
     }
   
     .register-input-wrapper input {

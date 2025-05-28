@@ -13,7 +13,7 @@ function Product() {
   const categories = ['All', 'Hot', 'Cold', 'Snack'];
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/menu') // your C# API endpoint
+    fetch('http://localhost:5000/menu') // your C# API endpoint
       .then(response => {
         if (!response.ok) throw new Error('Failed to fetch');
         return response.json();
@@ -87,10 +87,10 @@ function Product() {
       <div className="product-container">
         {filteredProducts.map((item, index) => (
           <div className="product" key={index}>
-            <img src={item.imageUrl} alt={item.itemName} />
-            <h3>{item.itemName}</h3>
-            <p>{item.description}</p>
-            <div className="price">R {item.price.toFixed(2)}</div>
+            <img src={item.ImageUrl} alt={item.ItemName} />
+            <h3>{item.ItemName}</h3>
+            <p>{item.ItemDescription}</p>
+            <div className="price">R {item.Price.toFixed(2)}</div>
 
             {item.type === 'Hot' && (
               <div className="input-group">
