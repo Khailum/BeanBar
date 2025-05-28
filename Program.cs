@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+
 namespace BeanBar_Back_end
 {
     public class Program
@@ -23,16 +24,23 @@ namespace BeanBar_Back_end
             // Register your auth & password services **before** building the app
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IPasswordService, PasswordService>();
-            builder.Services.AddScoped<IJwtService, JWTService>();
+            builder.Services.AddScoped<IJwtService, JwtService>();
 
             // Register ID validation service with interface
             builder.Services.AddScoped<IIDValidationService, IDValidationService>();
 
             //Register EmailService:
             builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.Configure<EmailSettings>(
+                builder.Configuration.GetSection("EmailSettings"));
+            builder.Services.AddScoped<ScheduledEmailService>();
+
 
             //Register AdminService: 
             builder.Services.AddScoped<IAdminService, AdminService>();
+
+            //Register CustomerService:
+            builder.Services.AddScoped<ICustomerService, CustomerService>();
 
             // Add controllers and swagger
             builder.Services.AddControllers();

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeanBar Back-end")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94c05c26dcfafda76100b152cebb271001843191")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+426dcf5149fe7052c020cdbf720a0e3d2cef1154")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeanBar Back-end")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeanBar Back-end")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

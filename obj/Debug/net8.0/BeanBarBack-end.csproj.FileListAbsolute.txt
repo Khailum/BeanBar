@@ -1,0 +1,8 @@
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.csproj.AssemblyReference.cache
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.AssemblyInfoInputs.cache
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.AssemblyInfo.cs
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.csproj.CoreCompileInputs.cache
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Khailum\source\repos\BeanBar\BeanBar Back-end\BeanBarAPI\obj\Debug\net8.0\BeanBarBack-end.sourcelink.json

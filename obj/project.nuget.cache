@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "amX/ccZ9q78=",
+  "dgSpecHash": "PRhJMYQYdEk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Khailum\\Source\\Repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\BeanBar Back-end.csproj",
+  "projectFilePath": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\BeanBarBack-end.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Khailum\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Khailum\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
@@ -52,6 +52,7 @@
     "C:\\Users\\Khailum\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Khailum\\.nuget\\packages\\mimekit\\4.12.0\\mimekit.4.12.0.nupkg.sha512",
     "C:\\Users\\Khailum\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
+    "C:\\Users\\Khailum\\.nuget\\packages\\netcore.mailkit\\2.1.0\\netcore.mailkit.2.1.0.nupkg.sha512",
     "C:\\Users\\Khailum\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\Khailum\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\Khailum\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",

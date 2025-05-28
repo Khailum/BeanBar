@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\BeanBar Back-end.props" />
-</Project>

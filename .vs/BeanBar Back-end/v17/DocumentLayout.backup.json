@@ -3,28 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\services\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:services\\passwordhasher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\services\\authservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:services\\authservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:services\\adminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\interfaces\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:interfaces\\iadminservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\services\\cardmaskingservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:services\\cardmaskingservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\interfaces\\ijwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:interfaces\\ijwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\controllers\\deliveriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:controllers\\deliveriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\dtos\\carddetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:dtos\\carddetailsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\beanbar back-end.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:beanbar back-end.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\migrations\\coffeedbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:migrations\\coffeedbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\migrations\\20250526145951_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:migrations\\20250526145951_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|c:\\users\\khailum\\source\\repos\\beanbar\\beanbar back-end\\beanbarapi\\services\\userprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{04BAAB07-ACB3-43EA-8F7C-00ED3FF29621}|BeanBar Back-end.csproj|solutionrelative:services\\userprofileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,29 +50,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PasswordHasher.cs",
-              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\PasswordHasher.cs",
-              "RelativeDocumentMoniker": "Services\\PasswordHasher.cs",
-              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\PasswordHasher.cs",
-              "RelativeToolTip": "Services\\PasswordHasher.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T16:25:14.389Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -64,67 +59,139 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CoffeeDBcontextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Migrations\\CoffeeDBcontextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "Migrations\\CoffeeDBcontextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Migrations\\CoffeeDBcontextModelSnapshot.cs",
-              "RelativeToolTip": "Migrations\\CoffeeDBcontextModelSnapshot.cs",
-              "ViewState": "AgIAAH8BAAAAAAAAAAAWwAAAAAAAAAAAAAAAAA==",
+              "Title": "AdminService.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\AdminService.cs",
+              "RelativeDocumentMoniker": "Services\\AdminService.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\AdminService.cs",
+              "RelativeToolTip": "Services\\AdminService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T16:15:37.937Z",
+              "WhenOpened": "2025-05-27T18:04:33.357Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "20250526145951_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Migrations\\20250526145951_InitialCreate.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250526145951_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Migrations\\20250526145951_InitialCreate.cs",
-              "RelativeToolTip": "Migrations\\20250526145951_InitialCreate.cs",
-              "ViewState": "AgIAAOgAAAAAAAAAAAAgwB4AAAAkAAAAAAAAAA==",
+              "Title": "IAdminService.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Interfaces\\IAdminService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IAdminService.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Interfaces\\IAdminService.cs",
+              "RelativeToolTip": "Interfaces\\IAdminService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T16:15:16.856Z",
+              "WhenOpened": "2025-05-27T18:04:44.507Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-26T16:09:56.734Z",
+              "DocumentIndex": 0,
+              "Title": "AuthServices.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\AuthServices.cs",
+              "RelativeDocumentMoniker": "Services\\AuthServices.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\AuthServices.cs",
+              "RelativeToolTip": "Services\\AuthServices.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T18:05:02.703Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Program.cs",
-              "RelativeToolTip": "Program.cs",
+              "Title": "CardMaskingServices.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\CardMaskingServices.cs",
+              "RelativeDocumentMoniker": "Services\\CardMaskingServices.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\CardMaskingServices.cs",
+              "RelativeToolTip": "Services\\CardMaskingServices.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T16:09:42.065Z",
+              "WhenOpened": "2025-05-27T18:05:06.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IJWTService.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Interfaces\\IJWTService.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IJWTService.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Interfaces\\IJWTService.cs",
+              "RelativeToolTip": "Interfaces\\IJWTService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T18:04:57.891Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "CustomersController.cs",
-              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Controllers\\CustomersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CustomersController.cs",
-              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Controllers\\CustomersController.cs",
-              "RelativeToolTip": "Controllers\\CustomersController.cs",
+              "Title": "DeliveriesController.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Controllers\\DeliveriesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DeliveriesController.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Controllers\\DeliveriesController.cs",
+              "RelativeToolTip": "Controllers\\DeliveriesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T18:04:49.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CardDetailsDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\DTOs\\CardDetailsDTO.cs",
+              "RelativeDocumentMoniker": "DTOs\\CardDetailsDTO.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\DTOs\\CardDetailsDTO.cs",
+              "RelativeToolTip": "DTOs\\CardDetailsDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T16:09:33.839Z",
+              "WhenOpened": "2025-05-27T18:04:46.827Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BeanBar Back-end",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\BeanBar Back-end.csproj",
+              "RelativeDocumentMoniker": "BeanBar Back-end.csproj",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\BeanBar Back-end.csproj",
+              "RelativeToolTip": "BeanBar Back-end.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-27T18:04:05.214Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CoffeeDBcontextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Migrations\\CoffeeDBcontextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "Migrations\\CoffeeDBcontextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Migrations\\CoffeeDBcontextModelSnapshot.cs",
+              "RelativeToolTip": "Migrations\\CoffeeDBcontextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T18:03:34.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserProfileService.cs",
+              "DocumentMoniker": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\UserProfileService.cs",
+              "RelativeDocumentMoniker": "Services\\UserProfileService.cs",
+              "ToolTip": "C:\\Users\\Khailum\\source\\repos\\BeanBar\\BeanBar Back-end\\BeanBarAPI\\Services\\UserProfileService.cs",
+              "RelativeToolTip": "Services\\UserProfileService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T17:04:11.388Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             }
           ]
         }
