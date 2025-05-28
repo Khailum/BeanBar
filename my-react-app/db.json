@@ -162,5 +162,50 @@
       "ItemDescription": "Tasty ham sandwich."
     }
   ],
-  "cart":[]
+  "cart": [
+    {
+      "id": "a1de",
+      "ItemName": "Flat White",
+      "ImageUrl": "https://i.ibb.co/LD1tzCmc/flatwhite-removebg-preview.png",
+      "Price": 21.99,
+      "type": "Hot",
+      "ItemDescription": "Smooth flat white.",
+      "sugarLevel": 1,
+      "milkType": "Almond",
+      "quantity": 1
+    },
+    {
+      "id": "dc3a",
+      "ItemName": "Coca-Cola",
+      "ImageUrl": "https://i.ibb.co/Fq0gKQNx/coke-removebg-preview.png",
+      "Price": 21.99,
+      "type": "Cold",
+      "ItemDescription": "Classic Coca-Cola.",
+      "sugarLevel": 0,
+      "milkType": null,
+      "quantity": 2
+    },
+    {
+      "id": "5824",
+      "ItemName": "Chocolate Muffin",
+      "ImageUrl": "https://i.ibb.co/7JpLqW8b/Chocolate-Chip-Muffins-on-a-Plate-removebg-preview.png",
+      "Price": 21.99,
+      "type": "Snack",
+      "ItemDescription": "Chocolate chip muffin.",
+      "sugarLevel": 0,
+      "milkType": null,
+      "quantity": 2
+    },
+    {
+      "id": "3858",
+      "ItemName": "Toast",
+      "ImageUrl": "https://i.ibb.co/MxHC945j/toat-removebg-preview.png",
+      "Price": 21.99,
+      "type": "Snack",
+      "ItemDescription": "Crispy toast.",
+      "sugarLevel": 0,
+      "milkType": null,
+      "quantity": 2
+    }
+  ]
 }

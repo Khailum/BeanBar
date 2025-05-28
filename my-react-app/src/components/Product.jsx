@@ -13,15 +13,15 @@ function Product() {
   const categories = ['All', 'Hot', 'Cold', 'Snack'];
 
   useEffect(() => {
-    fetch('http://localhost:5000/menu') // your C# API endpoint
+    fetch('http://localhost:5000/menu')
       .then(response => {
         if (!response.ok) throw new Error('Failed to fetch');
         return response.json();
       })
       .then(data => {
-        setProducts(data);
-        setSugarLevels(Array(data.length).fill(0));
-        setMilkTypes(Array(data.length).fill('Full Cream'));
+        setProducts(data.menu || data);
+        setSugarLevels(Array((data.menu || data).length).fill(0));
+        setMilkTypes(Array((data.menu || data).length).fill('Full Cream'));
       })
       .catch(err => {
         setError(err.message);
@@ -47,10 +47,58 @@ function Product() {
     setMilkTypes(newMilk);
   };
 
-  const addToCart = (item, index) => {
-    console.log('Added to cart:', item);
-    setAddedIndex(index);
-    setTimeout(() => setAddedIndex(null), 2000);
+  const addToCart = async (item, index) => {
+    const sugarLevel = sugarLevels[index];
+    const milkType = item.type === 'Hot' ? milkTypes[index] : null;
+
+    try {
+      const cartRes = await fetch('http://localhost:5000/cart');
+      const cartItems = await cartRes.json();
+
+      const existingItem = cartItems.find(cartItem =>
+        cartItem.ItemName === item.ItemName &&
+        cartItem.sugarLevel === sugarLevel &&
+        cartItem.milkType === milkType
+      );
+
+      if (existingItem) {
+        // Update quantity
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity + 1,
+        };
+
+        await fetch(`http://localhost:5000/cart/${existingItem.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedItem),
+        });
+
+        console.log('Updated quantity for:', existingItem.ItemName);
+      } else {
+        // Add new item
+        const newItem = {
+          ...item,
+          sugarLevel,
+          milkType,
+          quantity: 1,
+        };
+
+        await fetch('http://localhost:5000/cart', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newItem),
+        });
+
+        console.log('Added new item:', newItem.ItemName);
+      }
+
+      setAddedIndex(index);
+      setTimeout(() => setAddedIndex(null), 2000);
+    } catch (err) {
+      console.error('Error adding to cart:', err);
+      alert('Failed to add item to cart. Please try again.');
+    }
   };
 
   const filteredProducts = products.filter((item) =>

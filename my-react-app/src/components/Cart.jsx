@@ -1,72 +1,90 @@
- import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
 function CartPage() {
   const navigate = useNavigate();
-
-  // Cart stored locally - start empty or load from localStorage
-  const [cartItems, setCartItems] = useState(() => {
-    const saved = localStorage.getItem("cart");
-    return saved ? JSON.parse(saved) : [];
-  });
-
-  // Products data fetched once from mock API
-  const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/menu") // replace with your product API URL
+    // Fetch cart from API
+    fetch("http://localhost:5000/cart")
       .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error(err));
+      .then((data) => setCartItems(data))
+      .catch((err) => console.error("Failed to fetch cart:", err));
   }, []);
 
-  // Save cart to localStorage on change for persistence
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  // Join cart with product details
-  const cartItemsWithDetails = cartItems.map(({ itemId, quantity, sugarLevel, milkType }) => {
-    const product = products.find((p) => p.id === itemId);
-    return {
-      ...product,
-      quantity,
-      sugarLevel,
-      milkType,
-    };
-  });
-
-  const increaseQuantity = (itemId) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.itemId === itemId
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-    );
+  const increaseQuantity = (id) => {
+    const item = cartItems.find((i) => i.id === id);
+    if (item) {
+      const updated = { ...item, quantity: item.quantity + 1 };
+      updateQuantity(id, updated.quantity);
+    }
   };
 
-  const decreaseQuantity = (itemId) => {
-    setCartItems((prev) => {
-      const found = prev.find((item) => item.itemId === itemId);
-      if (!found) return prev;
-      if (found.quantity === 1) return prev.filter((item) => item.itemId !== itemId);
-      return prev.map((item) =>
-        item.itemId === itemId ? { ...item, quantity: item.quantity - 1 } : item
-      );
-    });
+  const decreaseQuantity = (id) => {
+    const item = cartItems.find((i) => i.id === id);
+    if (!item) return;
+
+    if (item.quantity === 1) {
+      handleDelete(id);
+    } else {
+      const updated = { ...item, quantity: item.quantity - 1 };
+      updateQuantity(id, updated.quantity);
+    }
   };
 
-  const handleDelete = (itemId) => {
-    setCartItems((prev) => prev.filter((item) => item.itemId !== itemId));
+  const updateQuantity = (id, quantity) => {
+    fetch(`http://localhost:5000/cart/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ quantity }),
+    })
+      .then(() => {
+        setCartItems((prev) =>
+          prev.map((item) => (item.id === id ? { ...item, quantity } : item))
+        );
+      })
+      .catch((err) => console.error("Error updating quantity:", err));
+  };
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/cart/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        setCartItems((prev) => prev.filter((item) => item.id !== id));
+      })
+      .catch((err) => console.error("Error deleting item:", err));
   };
 
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = cartItemsWithDetails.reduce(
-    (sum, item) => sum + (item?.price || 0) * item.quantity,
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + (item?.Price || 0) * item.quantity,
     0
   );
+
+  const saveCartToApi = async () => {
+    const OrderNum = Math.floor(Math.random() * 1000000);
+    try {
+      const response = await fetch("http://localhost:5000/cart/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          OrderNum,
+          cartItems,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to save cart to server.");
+
+      return OrderNum;
+    } catch (error) {
+      console.error("Error saving cart:", error);
+      alert("Could not complete checkout. Try again.");
+      return null;
+    }
+  };
 
   return (
     <div className="cart-page">
@@ -76,17 +94,21 @@ function CartPage() {
         {cartItems.length === 0 ? (
           <p>No items in the cart.</p>
         ) : (
-          cartItemsWithDetails.map((item) => (
+          cartItems.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} width="100" />
+              <img src={item.ImageUrl} alt={item.ItemName} width="100" />
               <div className="item-details">
-                <h3 className="item-name">{item.name}</h3>
+                <h3 className="item-name">{item.ItemName}</h3>
                 <p className="item-price">
-                  Price: <strong>R{item.price.toFixed(2)}</strong>
+                  Price: <strong>R{item.Price.toFixed(2)}</strong>
                 </p>
-                <p>{item.description}</p>
-                <p><strong>Sugar:</strong> {item.sugarLevel}</p>
-                <p><strong>Milk:</strong> {item.milkType}</p>
+                <p>{item.ItemDescription}</p>
+                {item.type === "Hot" && (
+                  <>
+                    <p><strong>Sugar:</strong> {item.sugarLevel}</p>
+                    <p><strong>Milk:</strong> {item.milkType}</p>
+                  </>
+                )}
               </div>
 
               <div className="cart-actions">
@@ -95,7 +117,6 @@ function CartPage() {
                   <span className="qty-value">{item.quantity}</span>
                   <button className="qty-btn" onClick={() => increaseQuantity(item.id)}>+</button>
                 </div>
-
                 <button className="delete-btn" onClick={() => handleDelete(item.id)}>Remove</button>
               </div>
             </div>
@@ -112,7 +133,14 @@ function CartPage() {
       {cartItems.length > 0 && (
         <button
           className="checkout-btn"
-          onClick={() => navigate("/payment", { state: { totalPrice, cartItems } })}
+          onClick={async () => {
+            const orderNum = await saveCartToApi();
+            if (orderNum) {
+              navigate("/payment", {
+                state: { totalPrice, cartItems, orderNum },
+              });
+            }
+          }}
         >
           Checkout
         </button>
@@ -122,4 +150,3 @@ function CartPage() {
 }
 
 export default CartPage;
- 
