@@ -192,5 +192,14 @@
       "Price": 50,
       "ImageUrl": "https://i.ibb.co/G4Zt2Tvy/c-removebg-preview.png"
     }
+  ],
+  
+  "stock": [
+    { "id": 1, "stockNum": 1, "StockName": "Coffee Beans", "Quantity": 1000, "Unit": "grams" },
+    { "id": 2, "stockNum": 2, "StockName": "Milk", "Quantity": 500, "Unit": "ml" },
+    { "id": 3, "stockNum": 3, "StockName": "Sugar", "Quantity": 2000, "Unit": "grams" },
+    { "id": 4, "stockNum": 4, "StockName": "Paper Cups", "Quantity": 100, "Unit": "units" },
+    { "id": 5, "stockNum": 5, "StockName": "Straws", "Quantity": 500, "Unit": "units" }
   ]
 }
+
