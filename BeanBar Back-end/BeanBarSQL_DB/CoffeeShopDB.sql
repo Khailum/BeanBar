@@ -41,14 +41,11 @@ Price DECIMAL(10,2) NOT NULL,
 IsAvailable BIT DEFAULT 1,
 ImageUrl VARCHAR(255)
 );
- 
-INSERT INTO Menu VALUES 
-('Ice Coffee', 'Cold', 27.00),
-('Cappacino', 'Hot', 20.00);
 
 -- STOCK TABLE
 CREATE TABLE Stock (
 StockNum INT IDENTITY(1,1) PRIMARY KEY,
+StockName VARCHAR(100) NOT NULL,
 Available_Stock INT NOT NULL,
 Arrival_Date DATE NOT NULL,
 StockStatus VARCHAR(50) CHECK (StockStatus IN ('Available', 'Low', 'Out of Stock')),
