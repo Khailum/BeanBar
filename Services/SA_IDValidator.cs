@@ -6,6 +6,7 @@ using BeanBarAPI.Services;
 using BeanBarAPI.Models;
 using BeanBarAPI.Data;
 using BeanBarAPI.Interfaces;
+using System.Text.RegularExpressions;
 
 
 namespace BeanBarAPI.Services
@@ -44,8 +45,10 @@ namespace BeanBarAPI.Services
             {
                 return new IDValidationResult { IsValid = false, ValidationMessage = "ID number failed Luhn check." };
             }
-            if (!Regex.IsMatch(dto.CustomerID, @"^\d{13}$"))
-                return false; // or return BadRequest("Invalid SA ID Number.");
+            if (!Regex.IsMatch(idNumber, @"^\d{13}$"))
+            {
+                return new IDValidationResult { IsValid = false, ValidationMessage = "ID number format is invalid." };
+            }
 
 
             var dob = ExtractDateOfBirth(idNumber);

@@ -19,7 +19,7 @@ namespace BeanBarAPI.Services
 
             foreach (var customer in customers)
             {
-                var lastPromo = await _context.PromotionHistories
+                var lastPromo = await _context.PromotionHistory
                     .Where(p => p.CustomerID == customer.CustomerID)
                     .OrderByDescending(p => p.PromotionDate)
                     .FirstOrDefaultAsync();

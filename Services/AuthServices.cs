@@ -9,11 +9,12 @@ namespace BeanBarAPI.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly CoffeeDBcontext _context;
+        private readonly CoffeeDBContext _context;
         private readonly IPasswordService _passwordService;
-        private readonly IDValidationService _idValidator;
+        private readonly IIDValidationService _idValidator;
 
-        public AuthService(CoffeeDBcontext context, IPasswordService passwordService, IDNumberValidator idValidator)
+
+        public AuthService(CoffeeDBContext context, IPasswordService passwordService, IIDValidationService idValidator)
         {
             _context = context;
             _passwordService = passwordService;
@@ -43,7 +44,7 @@ namespace BeanBarAPI.Services
             var salt = _passwordService.GenerateSalt();
             var hashedPassword = _passwordService.HashPassword(dto.Password, salt);
 
-            var auth = new UserAuth
+            var auth = new UserAuthentication
             {
                 Email = dto.Email,
                 HashedPassword = hashedPassword,
@@ -52,39 +53,25 @@ namespace BeanBarAPI.Services
             _context.UserAuth.Add(auth);
 
             // Add to Customers table
+            var token = Guid.NewGuid().ToString();  // Generate unique token
+
             var customer = new Customer
             {
-                CustomerID = dto.CustomerID,  // SA ID number
+                CustomerID = dto.CustomerID,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
                 Address = dto.Address,
-                CreatedAt = DateTime.Now
+                CreatedAt = DateTime.Now,
+                Token = token,
+                LastPromotionDate = DateTime.Now
             };
+
             _context.Customers.Add(customer);
-
-            //Sending Signup Confirmation
-            await _emailService.SendEmailAsync(new EmailDto
-            {
-                ToEmail = user.Email,
-                Subject = "Welcome to BeanBar Coffee!",
-                Body = $"<h2>Hi {user.Username},</h2><p>Thank you for signing up!</p>"
-            });
-
-            //Sending Promotion Email
-            await _emailService.SendEmailAsync(new EmailDto
-            {
-                ToEmail = customer.Email,
-                Subject = "You've Got a New BeanBar Promotion!",
-                Body = "<p>Congrats! You’ve earned a <b>free cappuccino</b> on your next visit.</p>"
-            });
-
 
             await _context.SaveChangesAsync();
             return true;
-
-
         }
 
         public async Task<UserDTO?> LoginAsync(LoginDTO dto)
@@ -100,9 +87,9 @@ namespace BeanBarAPI.Services
 
             return new UserDTO
             {
-                UserId = user.UserID,
+                Email = user.Email,
                 Username = user.Username,
-                Role = user.UserRole
+                UserRole = user.UserRole
             };
         }
     }

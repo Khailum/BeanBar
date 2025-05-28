@@ -19,10 +19,9 @@ namespace BeanBarAPI.Services
         {
             return await _context.Users
                 .Select(u => new UserDTO
-                {
-                    UserID = u.UserID,
+                { 
                     Username = u.Username,
-                    Role = u.Role,
+                    UserRole = u.UserRole,
                     IsActive = u.IsActive,
                     DateJoined = u.DateJoined
                 }).ToListAsync();
