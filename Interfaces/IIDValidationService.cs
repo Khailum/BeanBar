@@ -8,6 +8,7 @@ namespace BeanBarAPI.Interfaces
 {
     public interface IIDValidationService
     {
-        bool IsValidSouthAfricanID(string idNumber);  
+        bool IsValidSouthAfricanID(string idNumber);
+        IDValidationResult ValidateSouthAfricanID(string idNumber);
     }
 }

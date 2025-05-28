@@ -9,22 +9,25 @@ namespace BeanBarAPI.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly CoffeeDBContext _context;
+        private readonly CoffeeDBcontext _context;
         private readonly IPasswordService _passwordService;
         private readonly IIDValidationService _idValidator;
+        private readonly IEmailService _emailService;
 
-
-        public AuthService(CoffeeDBContext context, IPasswordService passwordService, IIDValidationService idValidator)
+        public AuthService(CoffeeDBcontext context, IPasswordService passwordService, IIDValidationService idValidator, IEmailService emailService)
         {
             _context = context;
             _passwordService = passwordService;
             _idValidator = idValidator;
+            _emailService = emailService;
         }
+
 
         public async Task<bool> RegisterAsync(RegisterDTO dto)
         {
             // Validate ID number
-            if (!_idValidator.IsValidSouthAfricanID(dto.CustomerID))
+            var validationResult = _idValidator.ValidateSouthAfricanID(dto.CustomerID);
+            if (!validationResult.IsValid)
                 return false;
 
             // Check if user already exists by email
@@ -67,11 +70,44 @@ namespace BeanBarAPI.Services
                 Token = token,
                 LastPromotionDate = DateTime.Now
             };
-
             _context.Customers.Add(customer);
 
             await _context.SaveChangesAsync();
+
+            // Send welcome email
+            var emailBody = $@"
+                <h2 style='color: #6f4e37;'>Welcome to BeanBar, {dto.FirstName}!</h2>
+                <p>Thank you for signing up. We’re thrilled to have you in our coffee community.</p>
+                <p>Enjoy exclusive deals, birthday rewards, and fresh brew updates!</p>
+                <hr />
+                <p style='font-size: small; color: gray;'>BeanBar Coffee • Love in every cup</p>";
+
+            await _emailService.SendEmailAsync(new EmailDTO
+            {
+                ToEmail = dto.Email,
+                Subject = "Welcome to BeanBar Coffee!",
+                Body = emailBody
+            });
+
             return true;
+
+            try
+            {
+                var email = new EmailDTO
+                {
+                    ToEmail = dto.Email,
+                    Subject = "Welcome to BeanBar ",
+                    Body = EmailTemplates.WelcomeTemplate(dto.FirstName)
+                };
+
+                await _emailService.SendEmailAsync(email);
+            }
+            catch (Exception ex)
+            {
+                // Log error (if using logging)
+                Console.WriteLine($"Email send failed: {ex.Message}");
+            }
+
         }
 
         public async Task<UserDTO?> LoginAsync(LoginDTO dto)

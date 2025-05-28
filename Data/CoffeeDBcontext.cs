@@ -43,6 +43,9 @@ namespace BeanBarAPI.Data
         //JWTService
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
+        //PromotionHistory
+        public DbSet<PromotionHistory> PromotionHistory { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -92,6 +95,15 @@ namespace BeanBarAPI.Data
             modelBuilder.Entity<Delivery>()
                 .Property(d => d.DeliveryStatus)
                 .HasDefaultValue("Preparing");
+            modelBuilder.Entity<PromotionHistory>()
+                .HasOne(p => p.Customer)
+                .WithMany()
+                .HasForeignKey(p => p.CustomerID);
+
+            modelBuilder.Entity<PromotionHistory>()
+                .HasOne(p => p.RefreshToken)
+                .WithMany()
+                .HasForeignKey(p => p.RefreshTokenID);
 
             base.OnModelCreating(modelBuilder);
         }

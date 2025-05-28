@@ -50,7 +50,7 @@ namespace BeanBarAPI.Services
                     };
                     */
 
-                    _context.PromotionHistories.Add(promotion);
+                    _context.PromotionHistory.Add(promotion);
                 }
             }
 
@@ -60,7 +60,7 @@ namespace BeanBarAPI.Services
         private async Task<int> GetLatestRefreshTokenId(string customerId)
         {
             return await _context.RefreshTokens
-                .Where(t => t.CustomerID == customerId && t.Revoked == null)
+                .Where(t => t.customerID == customerId && t.Revoked == null)
                 .OrderByDescending(t => t.Created)
                 .Select(t => t.Id)
                 .FirstOrDefaultAsync();
@@ -68,7 +68,7 @@ namespace BeanBarAPI.Services
         public async Task<bool> PlaceOrderAsync(Order newOrder)
         {
             // Get applicable promotion for this customer
-            var promotion = await _context.PromotionHistories
+            var promotion = await _context.PromotionHistory
                 .Where(p => p.CustomerID == newOrder.CustomerID && !p.Used)
                 .OrderByDescending(p => p.PromotionDate)
                 .FirstOrDefaultAsync();
@@ -119,7 +119,7 @@ namespace BeanBarAPI.Services
         }
         public async Task<List<PromotionHistory>> GetActivePromotions(string customerId)
         {
-            return await _context.PromotionHistories
+            return await _context.PromotionHistory
                 .Where(p => p.CustomerID == customerId && !p.Used)
                 .ToListAsync();
         }

@@ -20,10 +20,10 @@ namespace BeanBarAPI.Services
             return await _context.Users
                 .Select(u => new UserDTO
                 { 
+                    Email = u.Email,    
                     Username = u.Username,
                     UserRole = u.UserRole,
-                    IsActive = u.IsActive,
-                    DateJoined = u.DateJoined
+
                 }).ToListAsync();
         }
 
@@ -32,7 +32,7 @@ namespace BeanBarAPI.Services
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return false;
 
-            user.Role = newRole;
+            user.UserRole = newRole;
             await _context.SaveChangesAsync();
             return true;
         }
@@ -51,9 +51,9 @@ namespace BeanBarAPI.Services
         {
             var audit = new AuditLog
             {
-                UserID = logEntry.AdminID,
-                Action = logEntry.Action,
-                Timestamp = logEntry.Timestamp
+                LogID = logEntry.AdminID,
+                ActionPerformed = logEntry.Action,
+                AuditTimestamp = logEntry.Timestamp
             };
 
             _context.AuditLogs.Add(audit);
@@ -65,7 +65,7 @@ namespace BeanBarAPI.Services
             var totalUsers = await _context.Users.CountAsync();
             var activeUsers = await _context.Users.CountAsync(u => u.IsActive);
             var totalOrders = await _context.Orders.CountAsync();
-            var totalRevenue = await _context.Orders.SumAsync(o => o.TotalAmount);
+            var totalRevenue = await _context.Orders.SumAsync(o => o.TotalPrice);
 
             return new SystemMetricsDto
             {

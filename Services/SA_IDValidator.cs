@@ -17,13 +17,15 @@ namespace BeanBarAPI.Services
         public DateTime? DateOfBirth { get; set; }
         public string ValidationMessage { get; set; }
     }
-    public interface IIDValidationService
-    {
-        IDValidationResult ValidateSouthAfricanID(string idNumber);
-    }
 
     public class IDValidationService : IIDValidationService
     {
+        public bool IsValidSouthAfricanID(string idNumber)
+        {
+            var result = ValidateSouthAfricanID(idNumber);
+            return result.IsValid;
+        }
+
         /// <summary>
         /// Validates a South African ID number and extracts the date of birth.
         /// </summary>

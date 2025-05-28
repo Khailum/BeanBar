@@ -8,8 +8,9 @@ using BeanBarAPI.Services;
 using BeanBarAPI.Models;
 using BeanBarAPI.Data;
 using BeanBarAPI.Interfaces;
+using System.Security.Cryptography;
 
-namespace BeanBar_Back_end.Services
+namespace BeanBarAPI.Services
 {
     public class JwtService : IJwtService
     {
@@ -27,8 +28,8 @@ namespace BeanBar_Back_end.Services
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Role, user.Role),
+                new Claim(ClaimTypes.NameIdentifier, user.Email.ToString()),
+                new Claim(ClaimTypes.Role, user.UserRole),
                 new Claim(ClaimTypes.Name, user.Username)
             };
 
