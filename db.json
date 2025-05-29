@@ -1,205 +1,53 @@
 {
-  "menu": [
+  "orders": [
     {
-      "ItemName": "Mocha",
-      "ImageUrl": "https://i.ibb.co/B2BBm9gy/mocho-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Delicious mocha coffee.",
-      "id": "e391"
+      "orderNum": "ORD001",
+      "itemID": "ITM001",
+      "customerID": "CUS001",
+      "address": "123 Bean Street",
+      "date": "2025-05-27",
+      "orderType": "Delivery",
+      "quantity": "2",
+      "orderStatus": "Pending",
+      "totalPrice": "60.00"
     },
     {
-      "ItemName": "Macchiato",
-      "ImageUrl": "https://i.ibb.co/BVy3pVGh/latte-macchiato-rezept-zubereitung-glas-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Delicious mocha coffee.",
-      "id": "0e60"
+      "orderNum": "ORD002",
+      "itemID": "ITM002",
+      "customerID": "CUS002",
+      "address": "456 Roast Avenue",
+      "date": "2025-05-28",
+      "orderType": "Takeaway",
+      "quantity": "1",
+      "orderStatus": "Completed",
+      "totalPrice": "35.00"
     },
     {
-      "ItemName": "Espresso",
-      "ImageUrl": "https://i.ibb.co/LzB0thH7/expresso-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Strong espresso shot.",
-      "id": "7d55"
-    },
-    {
-      "ItemName": "Caramel Latte",
-      "ImageUrl": "https://i.ibb.co/27BcnmbC/a-delicious-caramel-latte-topped-with-whipped-cream-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Caramel latte with cream.",
-      "id": "c980"
-    },
-    {
-      "ItemName": "Americano",
-      "ImageUrl": "https://i.ibb.co/JR97Z6WW/americano-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Americano coffee.",
-      "id": "030f"
-    },
-    {
-      "ItemName": "Cappuccino",
-      "ImageUrl": "https://i.ibb.co/W4DWG1Z9/pngtree-delicious-cappuccino-coffee-cup-png-image-14700921-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Rich cappuccino.",
-      "id": "48c7"
-    },
-    {
-      "ItemName": "Flat White",
-      "ImageUrl": "https://i.ibb.co/LD1tzCmc/flatwhite-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Smooth flat white.",
-      "id": "7c91"
-    },
-    {
-      "ItemName": "Rooibos",
-      "ImageUrl": "https://i.ibb.co/Kx3WdSNh/Getty-Images-693893647-588d21e413dd411cb1f2b0a0ea3e02da-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "South African Rooibos tea.",
-      "id": "ed02"
-    },
-    {
-      "ItemName": "Green Tea",
-      "ImageUrl": "https://i.ibb.co/hJp72B11/green-tea-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Hot",
-      "ItemDescription": "Refreshing green tea.",
-      "id": "b94a"
-    },
-    {
-      "ItemName": "Ice Tea",
-      "ImageUrl": "https://i.ibb.co/PswcJJwx/ice-tea-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Cold",
-      "ItemDescription": "Cold brewed ice tea.",
-      "id": "b06e"
-    },
-    {
-      "ItemName": "Coca-Cola",
-      "ImageUrl": "https://i.ibb.co/Fq0gKQNx/coke-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Cold",
-      "ItemDescription": "Classic Coca-Cola.",
-      "id": "2e92"
-    },
-    {
-      "ItemName": "Still Water",
-      "ImageUrl": "https://i.ibb.co/sJygJ9wY/water-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Cold",
-      "ItemDescription": "Pure still water.",
-      "id": "7c73"
-    },
-    {
-      "ItemName": "Vanilla Iced Delight",
-      "ImageUrl": "https://i.ibb.co/27jX7rTX/360-F-609874629-v2i98jy-RXv-HTf-Wtn-B67-P4-Za-VIVbnsox-T-removebg-preview.png",
-      "Price": 30,
-      "type": "Cold",
-      "ItemDescription": "Vanilla iced delight.",
-      "id": "846f"
-    },
-    {
-      "ItemName": "Iced Coffee",
-      "ImageUrl": "https://i.ibb.co/0y4GJp59/pngtree-iced-coffee-with-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Cold",
-      "ItemDescription": "Chilled iced coffee.",
-      "id": "a296"
-    },
-    {
-      "ItemName": "Chocolate Muffin",
-      "ImageUrl": "https://i.ibb.co/7JpLqW8b/Chocolate-Chip-Muffins-on-a-Plate-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Chocolate chip muffin.",
-      "id": "2ccf"
-    },
-    {
-      "ItemName": "Bran Muffin",
-      "ImageUrl": "https://i.ibb.co/816xP8T/chocolate-muffins2-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Bran muffin.",
-      "id": "a7c6"
-    },
-    {
-      "ItemName": "Pancakes",
-      "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Stack of pancakes.",
-      "id": "c5f6"
-    },
-    {
-      "ItemName": "Croissants",
-      "ImageUrl": "https://i.ibb.co/v6MpbPTJ/croissant-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Buttery croissants.",
-      "id": "72b4"
-    },
-    {
-      "ItemName": "Cake",
-      "ImageUrl": "https://i.ibb.co/XZtTw8g1/cake-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Slice of cake.",
-      "id": "6e54"
-    },
-    {
-      "ItemName": "Toast",
-      "ImageUrl": "https://i.ibb.co/MxHC945j/toat-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Crispy toast.",
-      "id": "9495"
-    },
-    {
-      "ItemName": "Ham Sandwich",
-      "ImageUrl": "https://i.ibb.co/JWGRf8c3/Ham-Sandwich-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Tasty ham sandwich.",
-      "id": "464d"
-    },
-    {
-      "ItemName": "Ham Sandwich",
-      "ImageUrl": "https://i.ibb.co/Kx7hnKc8/item-600000000917076702-1642439553-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Tasty ham sandwich.",
-      "id": "d034"
-    },
-    {
-      "id": "46de",
-      "ItemName": "water",
-      "ItemType": "Cold",
-      "ItemDescription": "cold water",
-      "Price": 26,
-      "ImageUrl": "https://i.ibb.co/JR97Z6WW/americano-removebg-preview.png"
-    },
-    {
-      "id": "efd4",
-      "ItemName": "Burger",
-      "ItemType": "Snack",
-      "ItemDescription": "freshly prepared ",
-      "Price": 50,
-      "ImageUrl": "https://i.ibb.co/G4Zt2Tvy/c-removebg-preview.png"
+      "orderNum": "ORD003",
+      "itemID": "ITM003",
+      "customerID": "CUS003",
+      "address": "789 Mocha Blvd",
+      "date": "2025-05-28",
+      "orderType": "Delivery",
+      "quantity": "3",
+      "orderStatus": "Cancelled",
+      "totalPrice": "90.00"
     }
   ],
-  
-  "stock": [
-    { "id": 1, "stockNum": 1, "StockName": "Coffee Beans", "Quantity": 1000, "Unit": "grams" },
-    { "id": 2, "stockNum": 2, "StockName": "Milk", "Quantity": 500, "Unit": "ml" },
-    { "id": 3, "stockNum": 3, "StockName": "Sugar", "Quantity": 2000, "Unit": "grams" },
-    { "id": 4, "stockNum": 4, "StockName": "Paper Cups", "Quantity": 100, "Unit": "units" },
-    { "id": 5, "stockNum": 5, "StockName": "Straws", "Quantity": 500, "Unit": "units" }
+  "deliveries": [
+    {
+      "deliveryID": "DEL001",
+      "orderNum": "ORD001",
+      "address": "123 Bean Street",
+      "deliveryStatus": "Preparing",
+      "time": "09:00 AM"
+    },
+    {
+      "deliveryID": "DEL002",
+      "orderNum": "ORD003",
+      "address": "789 Mocha Blvd",
+      "deliveryStatus": "On the Way",
+      "time": "10:45 AM"
+    }
   ]
 }
-

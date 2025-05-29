@@ -7,6 +7,7 @@ const Stock = () => {
     StockName: '',
     Quantity: '',
     Unit: '',
+    Supplier: '',
   });
   const [editing, setEditing] = useState(null);
   const [editedData, setEditedData] = useState({});
@@ -15,8 +16,8 @@ const Stock = () => {
   const unitOptions = ['grams', 'kilograms', 'ml', 'liters', 'units', 'bags', 'bottles'];
 
   const fetchStock = async () => {
+    setLoading(true);
     try {
-      setLoading(true);
       const res = await fetch('http://localhost:3001/stock');
       const data = await res.json();
       setStockItems(data);
@@ -42,8 +43,8 @@ const Stock = () => {
   };
 
   const addStock = async () => {
-    const { StockName, Quantity, Unit } = stockForm;
-    if (!StockName || !Quantity || !Unit) return alert('Please fill all fields');
+    const { StockName, Quantity, Unit, Supplier } = stockForm;
+    if (!StockName || !Quantity || !Unit || !Supplier) return alert('Please fill all fields');
 
     try {
       await fetch('http://localhost:3001/stock', {
@@ -54,9 +55,10 @@ const Stock = () => {
           StockName,
           Quantity: parseFloat(Quantity),
           Unit,
+          Supplier,
         }),
       });
-      setStockForm({ StockName: '', Quantity: '', Unit: '' });
+      setStockForm({ StockName: '', Quantity: '', Unit: '', Supplier: '' });
       fetchStock();
     } catch (err) {
       alert('Error adding stock: ' + err.message);
@@ -74,13 +76,18 @@ const Stock = () => {
   };
 
   const saveEdit = async (stockNum) => {
+    const { StockName, Quantity, Unit, Supplier } = editedData;
+    if (!StockName || !Quantity || !Unit || !Supplier) return alert('Please fill all fields');
+
     try {
       await fetch(`http://localhost:3001/stock/${stockNum}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...editedData,
-          Quantity: parseFloat(editedData.Quantity),
+          StockName,
+          Quantity: parseFloat(Quantity),
+          Unit,
+          Supplier,
         }),
       });
       setEditing(null);
@@ -107,92 +114,182 @@ const Stock = () => {
     }
   };
 
-  const filteredStock = stockItems.filter(item =>
+  const getStatus = (quantity) => {
+    if (quantity > 50) return 'Available';
+    if (quantity > 20) return 'Low';
+    return 'Out of Stock';
+  };
+
+  const filteredStock = stockItems.filter((item) =>
     item.StockName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Simple spacing styles (inline)
+  const containerStyle = { maxWidth: '900px', margin: 'auto', padding: '20px' };
+  const sectionStyle = { marginBottom: '30px' };
+  const inputStyle = { marginRight: '10px', marginBottom: '10px', padding: '5px' };
+  const selectStyle = { marginRight: '10px', marginBottom: '10px', padding: '5px' };
+  const buttonStyle = { padding: '5px 10px', marginRight: '10px' };
+  const searchInputStyle = { padding: '5px', width: '300px', marginBottom: '20px' };
+
   return (
-    <div>
+    <div style={containerStyle}>
       <h2>Stock Management</h2>
+
+      <div style={sectionStyle}>
+        <h3>Add Stock Item</h3>
+        <input
+          name="StockName"
+          placeholder="Stock Name"
+          value={stockForm.StockName}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        <input
+          name="Quantity"
+          type="number"
+          placeholder="Quantity"
+          value={stockForm.Quantity}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        <select
+          name="Unit"
+          value={stockForm.Unit}
+          onChange={handleChange}
+          style={selectStyle}
+        >
+          <option value="">Select Unit</option>
+          {unitOptions.map((unit) => (
+            <option key={unit} value={unit}>
+              {unit}
+            </option>
+          ))}
+        </select>
+        <input
+          name="Supplier"
+          placeholder="Supplier"
+          value={stockForm.Supplier}
+          onChange={handleChange}
+          style={inputStyle}
+        />
+        <br />
+        <button onClick={addStock} style={buttonStyle}>
+          Add
+        </button>
+      </div>
+
+      <div style={sectionStyle}>
+        <input
+          type="text"
+          placeholder="Search stock..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          style={searchInputStyle}
+        />
+      </div>
 
       {loading ? (
         <p>Loading stock data...</p>
       ) : (
-        <>
-          <div style={{ marginBottom: '20px' }}>
-            <h3>Add Stock Item</h3>
-            <input name="StockName" placeholder="Stock Name" value={stockForm.StockName} onChange={handleChange} />
-            <input name="Quantity" type="number" placeholder="Quantity" value={stockForm.Quantity} onChange={handleChange} />
-            <select name="Unit" value={stockForm.Unit} onChange={handleChange}>
-              <option value="">Select Unit</option>
-              {unitOptions.map((unit) => (
-                <option key={unit} value={unit}>{unit}</option>
-              ))}
-            </select>
-            <button onClick={addStock}>Add</button>
-          </div>
-
-          <h3>Available Stock</h3>
-          <input
-            type="text"
-            placeholder="Search stock..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{ marginBottom: '10px' }}
-          />
-
-          <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid black' }}>
-            <thead>
-              <tr style={{ backgroundColor: '#f0f0f0' }}>
-                <th style={{ border: '1px solid black' }}>StockNum</th>
-                <th style={{ border: '1px solid black' }}>StockName</th>
-                <th style={{ border: '1px solid black' }}>Quantity</th>
-                <th style={{ border: '1px solid black' }}>Unit</th>
-                <th style={{ border: '1px solid black' }}>Actions</th>
+        <table border="1" cellPadding="5" cellSpacing="0" style={{ width: '100%' }}>
+          <thead>
+            <tr>
+              <th>StockNum</th>
+              <th>StockName</th>
+              <th>Quantity</th>
+              <th>Unit</th>
+              <th>Supplier</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredStock.length === 0 ? (
+              <tr>
+                <td colSpan="7" style={{ textAlign: 'center' }}>
+                  No stock items found.
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredStock.map((item) =>
+            ) : (
+              filteredStock.map((item) =>
                 editing === item.stockNum ? (
                   <tr key={item.stockNum}>
-                    <td style={{ border: '1px solid black' }}>{item.stockNum}</td>
-                    <td style={{ border: '1px solid black' }}>
-                      <input name="StockName" value={editedData.StockName} onChange={handleEditChange} />
+                    <td>{item.stockNum}</td>
+                    <td>
+                      <input
+                        name="StockName"
+                        value={editedData.StockName}
+                        onChange={handleEditChange}
+                        style={{ width: '100%' }}
+                      />
                     </td>
-                    <td style={{ border: '1px solid black' }}>
-                      <input name="Quantity" type="number" value={editedData.Quantity} onChange={handleEditChange} />
+                    <td>
+                      <input
+                        name="Quantity"
+                        type="number"
+                        value={editedData.Quantity}
+                        onChange={handleEditChange}
+                        style={{ width: '60px' }}
+                      />
                     </td>
-                    <td style={{ border: '1px solid black' }}>
-                      <select name="Unit" value={editedData.Unit} onChange={handleEditChange}>
+                    <td>
+                      <select
+                        name="Unit"
+                        value={editedData.Unit}
+                        onChange={handleEditChange}
+                      >
                         {unitOptions.map((unit) => (
-                          <option key={unit} value={unit}>{unit}</option>
+                          <option key={unit} value={unit}>
+                            {unit}
+                          </option>
                         ))}
                       </select>
                     </td>
-                    <td style={{ border: '1px solid black' }}>
-                      <button onClick={() => saveEdit(item.stockNum)}>Save</button>
-                      <button onClick={cancelEdit}>Cancel</button>
+                    <td>
+                      <input
+                        name="Supplier"
+                        value={editedData.Supplier}
+                        onChange={handleEditChange}
+                        style={{ width: '100%' }}
+                      />
+                    </td>
+                    <td>{getStatus(parseFloat(editedData.Quantity) || 0)}</td>
+                    <td>
+                      <button onClick={() => saveEdit(item.stockNum)} style={buttonStyle}>
+                        Save
+                      </button>
+                      <button onClick={cancelEdit} style={buttonStyle}>
+                        Cancel
+                      </button>
                     </td>
                   </tr>
                 ) : (
                   <tr key={item.stockNum}>
-                    <td style={{ border: '1px solid black' }}>{item.stockNum}</td>
-                    <td style={{ border: '1px solid black' }}>{item.StockName}</td>
-                    <td style={{ border: '1px solid black' }}>{item.Quantity}</td>
-                    <td style={{ border: '1px solid black' }}>{item.Unit}</td>
-                    <td style={{ border: '1px solid black' }}>
-                      <button onClick={() => startEdit(item)}>Edit</button>
-                      <button onClick={() => deleteStock(item.stockNum)}>Delete</button>
+                    <td>{item.stockNum}</td>
+                    <td>{item.StockName}</td>
+                    <td>{item.Quantity}</td>
+                    <td>{item.Unit}</td>
+                    <td>{item.Supplier}</td>
+                    <td>{getStatus(item.Quantity)}</td>
+                    <td>
+                      <button onClick={() => startEdit(item)} style={buttonStyle}>
+                        Edit
+                      </button>
+                      <button onClick={() => deleteStock(item.stockNum)} style={buttonStyle}>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 )
-              )}
-            </tbody>
-          </table>
-        </>
+              )
+            )}
+          </tbody>
+        </table>
       )}
     </div>
   );
 };
 
 export default Stock;
+
