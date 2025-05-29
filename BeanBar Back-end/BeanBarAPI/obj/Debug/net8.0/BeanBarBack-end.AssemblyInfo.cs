@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("ea19faab-c2b5-4199-a3d8-7830653e50ab")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeanBarBack-end")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94c05c26dcfafda76100b152cebb271001843191")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bd0bc667c97f0da0671200992e138478ca25b0d")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeanBarBack-end")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeanBarBack-end")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
