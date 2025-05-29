@@ -3,6 +3,7 @@ import './Home.css';
 import Promo from './Promo';
 
 const Home = () => {
+  
   return (
     <section className="home" id="home">
       <div className="content-wrapper">

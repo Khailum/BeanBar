@@ -1,98 +1,56 @@
-/* .dashboard-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
-  
-  margin-top: 200px;
-}
-
-.profile-container,
-.cart-container {
-  flex: 1;
-  min-width: 300px;
-  background-color: #333;
-  padding: 1.5rem;
+/* .user-profile-container {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 25px;
+  border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
-.profile-image img,
-.login-icon-main {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 3px solid #ccc;
-  object-fit: cover;
-  margin-bottom: 1rem;
+.user-profile-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
 }
 
-.login-icon-main {
-  font-size: 120px;
-  color: #ccc;
+.profile-info, .cart-section, .order-history-section {
+  margin-bottom: 25px;
 }
 
-.profile-image input {
-  display: block;
-  margin-top: 10px;
+.profile-info p,
+.cart-item span,
+.order-item p {
+  font-size: 16px;
+  margin: 6px 0;
 }
 
-.user-details p {
-  margin: 0.5rem 0;
+.cart-list, .order-list {
+  list-style-type: none;
+  padding: 0;
 }
 
-.cart-item {
+.cart-item, .order-item {
+  background-color: white;
+  padding: 12px 15px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 1rem;
-}
-
-.item-details {
-  flex: 1;
-}
-
-.cart-actions {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 
-.quantity-controls {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.quantity-controls button {
-  padding: 4px 8px;
-  background: #333;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-.delete-btn {
-  background-color: #e74c3c;
-  color: white;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.cart-summary {
-  margin-top: 2rem;
-}
-
-.checkout-btn {
-  background-color: #27ae60;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  margin-top: 10px;
-  border-radius: 6px;
-  cursor: pointer;
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #666;
 } */
+h3, p{
+  color: beige;
+}
+
+.user-profile-container{
+  margin-top: 200px;
+}

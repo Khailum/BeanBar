@@ -5,207 +5,242 @@
       "ImageUrl": "https://i.ibb.co/G4Zt2Tvy/c-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Delicious mocha coffee."
+      "ItemDescription": "Delicious mocha coffee.",
+      "id": "e8d9"
     },
     {
       "ItemName": "Mocha",
       "ImageUrl": "https://i.ibb.co/B2BBm9gy/mocho-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Delicious mocha coffee."
+      "ItemDescription": "Delicious mocha coffee.",
+      "id": "2ce0"
     },
     {
       "ItemName": "Macchiato",
       "ImageUrl": "https://i.ibb.co/BVy3pVGh/latte-macchiato-rezept-zubereitung-glas-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Delicious mocha coffee."
+      "ItemDescription": "Delicious mocha coffee.",
+      "id": "dafe"
     },
     {
       "ItemName": "Espresso",
       "ImageUrl": "https://i.ibb.co/LzB0thH7/expresso-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Strong espresso shot."
+      "ItemDescription": "Strong espresso shot.",
+      "id": "6fae"
     },
     {
       "ItemName": "Caramel Latte",
       "ImageUrl": "https://i.ibb.co/27BcnmbC/a-delicious-caramel-latte-topped-with-whipped-cream-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Caramel latte with cream."
+      "ItemDescription": "Caramel latte with cream.",
+      "id": "6585"
     },
     {
       "ItemName": "Americano",
       "ImageUrl": "https://i.ibb.co/JR97Z6WW/americano-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Americano coffee."
+      "ItemDescription": "Americano coffee.",
+      "id": "f165"
     },
     {
       "ItemName": "Cappuccino",
       "ImageUrl": "https://i.ibb.co/W4DWG1Z9/pngtree-delicious-cappuccino-coffee-cup-png-image-14700921-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Rich cappuccino."
+      "ItemDescription": "Rich cappuccino.",
+      "id": "4c5e"
     },
     {
       "ItemName": "Flat White",
       "ImageUrl": "https://i.ibb.co/LD1tzCmc/flatwhite-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Smooth flat white."
+      "ItemDescription": "Smooth flat white.",
+      "id": "539b"
     },
     {
       "ItemName": "Rooibos",
       "ImageUrl": "https://i.ibb.co/Kx3WdSNh/Getty-Images-693893647-588d21e413dd411cb1f2b0a0ea3e02da-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "South African Rooibos tea."
+      "ItemDescription": "South African Rooibos tea.",
+      "id": "b1db"
     },
     {
       "ItemName": "Green Tea",
       "ImageUrl": "https://i.ibb.co/hJp72B11/green-tea-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Refreshing green tea."
+      "ItemDescription": "Refreshing green tea.",
+      "id": "6751"
     },
     {
       "ItemName": "Ice Tea",
       "ImageUrl": "https://i.ibb.co/PswcJJwx/ice-tea-removebg-preview.png",
       "Price": 21.99,
       "type": "Cold",
-      "ItemDescription": "Cold brewed ice tea."
+      "ItemDescription": "Cold brewed ice tea.",
+      "id": "85c2"
     },
     {
       "ItemName": "Coca-Cola",
       "ImageUrl": "https://i.ibb.co/Fq0gKQNx/coke-removebg-preview.png",
       "Price": 21.99,
       "type": "Cold",
-      "ItemDescription": "Classic Coca-Cola."
+      "ItemDescription": "Classic Coca-Cola.",
+      "id": "2d82"
     },
     {
       "ItemName": "Still Water",
       "ImageUrl": "https://i.ibb.co/sJygJ9wY/water-removebg-preview.png",
       "Price": 21.99,
       "type": "Cold",
-      "ItemDescription": "Pure still water."
+      "ItemDescription": "Pure still water.",
+      "id": "8803"
     },
     {
       "ItemName": "Vanilla Iced Delight",
       "ImageUrl": "https://i.ibb.co/27jX7rTX/360-F-609874629-v2i98jy-RXv-HTf-Wtn-B67-P4-Za-VIVbnsox-T-removebg-preview.png",
       "Price": 21.99,
       "type": "Cold",
-      "ItemDescription": "Vanilla iced delight."
+      "ItemDescription": "Vanilla iced delight.",
+      "id": "6b9d"
     },
     {
       "ItemName": "Iced Coffee",
       "ImageUrl": "https://i.ibb.co/0y4GJp59/pngtree-iced-coffee-with-removebg-preview.png",
       "Price": 21.99,
       "type": "Cold",
-      "ItemDescription": "Chilled iced coffee."
+      "ItemDescription": "Chilled iced coffee.",
+      "id": "fed1"
     },
     {
       "ItemName": "Chocolate Muffin",
       "ImageUrl": "https://i.ibb.co/7JpLqW8b/Chocolate-Chip-Muffins-on-a-Plate-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Chocolate chip muffin."
+      "ItemDescription": "Chocolate chip muffin.",
+      "id": "3cfd"
     },
     {
       "ItemName": "Bran Muffin",
       "ImageUrl": "https://i.ibb.co/816xP8T/chocolate-muffins2-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Bran muffin."
+      "ItemDescription": "Bran muffin.",
+      "id": "1071"
     },
     {
       "ItemName": "Pancakes",
       "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Stack of pancakes."
+      "ItemDescription": "Stack of pancakes.",
+      "id": "91c1"
     },
     {
       "ItemName": "Croissants",
       "ImageUrl": "https://i.ibb.co/v6MpbPTJ/croissant-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Buttery croissants."
+      "ItemDescription": "Buttery croissants.",
+      "id": "78ad"
     },
     {
       "ItemName": "Cake",
       "ImageUrl": "https://i.ibb.co/XZtTw8g1/cake-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Slice of cake."
+      "ItemDescription": "Slice of cake.",
+      "id": "e120"
     },
     {
       "ItemName": "Toast",
       "ImageUrl": "https://i.ibb.co/MxHC945j/toat-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Crispy toast."
+      "ItemDescription": "Crispy toast.",
+      "id": "e767"
     },
     {
       "ItemName": "Ham Sandwich",
       "ImageUrl": "https://i.ibb.co/JWGRf8c3/Ham-Sandwich-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Tasty ham sandwich."
+      "ItemDescription": "Tasty ham sandwich.",
+      "id": "c700"
     },
     {
       "ItemName": "Ham Sandwich",
       "ImageUrl": "https://i.ibb.co/Kx7hnKc8/item-600000000917076702-1642439553-removebg-preview.png",
       "Price": 21.99,
       "type": "Snack",
-      "ItemDescription": "Tasty ham sandwich."
+      "ItemDescription": "Tasty ham sandwich.",
+      "id": "1572"
     }
   ],
   "cart": [
     {
-      "id": "a1de",
-      "ItemName": "Flat White",
-      "ImageUrl": "https://i.ibb.co/LD1tzCmc/flatwhite-removebg-preview.png",
+      "id": "2ce0",
+      "ItemName": "Mocha",
+      "ImageUrl": "https://i.ibb.co/B2BBm9gy/mocho-removebg-preview.png",
       "Price": 21.99,
       "type": "Hot",
-      "ItemDescription": "Smooth flat white.",
+      "ItemDescription": "Delicious mocha coffee.",
+      "sugarLevel": 0,
+      "milkType": "Full Cream",
+      "quantity": 2
+    },
+    {
+      "id": "2ce0",
+      "ItemName": "Mocha",
+      "ImageUrl": "https://i.ibb.co/B2BBm9gy/mocho-removebg-preview.png",
+      "Price": 21.99,
+      "type": "Hot",
+      "ItemDescription": "Delicious mocha coffee.",
       "sugarLevel": 1,
-      "milkType": "Almond",
+      "milkType": "Low Fat",
       "quantity": 1
     },
     {
-      "id": "dc3a",
-      "ItemName": "Coca-Cola",
-      "ImageUrl": "https://i.ibb.co/Fq0gKQNx/coke-removebg-preview.png",
+      "id": "dafe",
+      "ItemName": "Macchiato",
+      "ImageUrl": "https://i.ibb.co/BVy3pVGh/latte-macchiato-rezept-zubereitung-glas-removebg-preview.png",
       "Price": 21.99,
-      "type": "Cold",
-      "ItemDescription": "Classic Coca-Cola.",
+      "type": "Hot",
+      "ItemDescription": "Delicious mocha coffee.",
       "sugarLevel": 0,
-      "milkType": null,
-      "quantity": 2
-    },
-    {
-      "id": "5824",
-      "ItemName": "Chocolate Muffin",
-      "ImageUrl": "https://i.ibb.co/7JpLqW8b/Chocolate-Chip-Muffins-on-a-Plate-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Chocolate chip muffin.",
-      "sugarLevel": 0,
-      "milkType": null,
-      "quantity": 2
-    },
-    {
-      "id": "3858",
-      "ItemName": "Toast",
-      "ImageUrl": "https://i.ibb.co/MxHC945j/toat-removebg-preview.png",
-      "Price": 21.99,
-      "type": "Snack",
-      "ItemDescription": "Crispy toast.",
-      "sugarLevel": 0,
-      "milkType": null,
-      "quantity": 2
+      "milkType": "Full Cream",
+      "quantity": 1
     }
-  ]
+  ],
+  "Users": [
+    {
+      "id": "7074",
+      "customerID": "0102890949839",
+      "fullName": "Rethabile amakotsi",
+      "email": "rethabilemakaotsi17@gmail.com",
+      "phoneNumber": "0624300882",
+      "address": "",
+      "password": "Reetah@2802"
+    }
+  ],
+  "userprofile": [
+    {
+      "id": "7074",
+      "customerID": "0102890949839",
+      "fullName": "Rethabile amakotsi",
+      "email": "rethabilemakaotsi17@gmail.com",
+      "phoneNumber": "0624300882",
+      "address": "",
+      "password": "Reetah@2802"
+    }
+  ],
+  "payment": []
 }

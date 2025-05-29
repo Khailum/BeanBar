@@ -1,113 +1,127 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // ✅ Import Link
+// src/components/Login.js
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
-  const initialValues = { username: "", email: "", password: "" };
-  const [formValues, setFormValues] = useState(initialValues);
+  const navigate = useNavigate();
+  const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setItSubmit] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormErrors(validate(formValues));
-    setItSubmit(true);
-  };
+    const errors = validate(formValues);
+    setFormErrors(errors);
 
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+    if (Object.keys(errors).length === 0) {
+      setLoading(true);
+      try {
+        const res = await fetch(`http://localhost:3000/Users?email=${formValues.email}&password=${formValues.password}`);
+        const data = await res.json();
+
+        if (data.length > 0) {
+          const user = data[0];
+          setLoginSuccess(true);
+
+          // Save to localStorage
+          localStorage.setItem("user", JSON.stringify(user));
+
+          // Check if user exists in userprofile
+          const profileCheck = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
+          const profileExists = await profileCheck.json();
+
+          if (profileExists.length === 0) {
+            // Create user profile
+            await fetch("http://localhost:3000/userprofile", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(user),
+            });
+          }
+
+          setTimeout(() => {
+            navigate('/userprofile', { state: { user } });
+          }, 1000);
+        } else {
+          alert("Invalid email or password.");
+        }
+      } catch (err) {
+        console.error("Login error:", err);
+        alert("Something went wrong during login.");
+      } finally {
+        setLoading(false);
+      }
     }
-  }, [formErrors, isSubmit]);
+  };
 
   const validate = (values) => {
     const errors = {};
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
     if (!values.email) {
       errors.email = "Email is required!";
-    } else if (!regex.test(values.email)) {
-      errors.email = "This is not a valid email format!";
+    } else if (!emailRegex.test(values.email)) {
+      errors.email = "Invalid email format!";
     }
+
     if (!values.password) {
       errors.password = "Password is required!";
     } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters!";
-    } else if (values.password.length > 10) {
-      errors.password = "Password cannot exceed more than 10 characters!";
+      errors.password = "Password must be at least 4 characters.";
+    } else if (values.password.length > 15) {
+      errors.password = "Password must not exceed 15 characters.";
     }
+
     return errors;
   };
 
   return (
-    <div className='login-page'>
-      {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className='ui message success'>Login Successfully</div>
-      ) : null}
+    <div className="login-page">
+      {loginSuccess && <div className="ui message success">Login Successful!</div>}
+      {loading && <div className="loading">Logging in...</div>}
 
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h2 className='heading'>Login</h2>
+      <form className="login-form" onSubmit={handleSubmit} noValidate>
+        <h2 className="heading">Login</h2>
         <i className="fas fa-user-circle login-icon-main"></i>
 
-        <div className='login-input-wrapper'>
+        <div className="login-input-wrapper">
           <input
-            type='text'
-            name='username'
-            placeholder='Username'
-            value={formValues.username}
-            onChange={handleChange}
-          />
-          <i className="fas fa-user login-icon" />
-              <p className='error'>{formErrors.username}</p>
-        </div>
-    
-
-        <div className='login-input-wrapper'>
-          <input
-            type='email'
-            name='email'
-            placeholder='Email'
+            type="email"
+            name="email"
+            placeholder="Email"
             value={formValues.email}
             onChange={handleChange}
+            autoComplete="username"
           />
-          <i className="fas fa-envelope login-icon" />
-                  <p  className='error'>{formErrors.email}</p>
-
+          <p className="error">{formErrors.email}</p>
         </div>
 
-        <div className='login-input-wrapper'>
+        <div className="login-input-wrapper">
           <input
-            type='password'
-            name='password'
-            placeholder='Password'
+            type="password"
+            name="password"
+            placeholder="Password"
             value={formValues.password}
             onChange={handleChange}
+            autoComplete="current-password"
           />
-          <i className="fas fa-lock login-icon" />
-             <p  className='error'>{formErrors.password}</p>
+          <p className="error">{formErrors.password}</p>
         </div>
-     
 
         <div className="login-remember-forgot">
           <label>
-            <input type='checkbox' /> Remember me
+            <input type="checkbox" /> Remember me
           </label>
-         
         </div>
 
-        <button 
-          className="login-submit" 
-          type="submit" 
-          disabled={Object.keys(formErrors).length > 0}
-        >
+        <button className="login-submit" type="submit" disabled={loading}>
           Login
         </button>
 

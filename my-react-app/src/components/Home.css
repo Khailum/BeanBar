@@ -204,3 +204,29 @@ section {
   }
 }
 
+.welcome-alert {
+  position: relative;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 12px 20px;
+  border-radius: 6px;
+  margin: 1rem auto;
+  max-width: 600px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  animation: fadeSlideDown 0.6s ease-out;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: #155724;
+  cursor: pointer;
+}

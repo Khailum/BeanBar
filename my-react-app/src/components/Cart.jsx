@@ -5,10 +5,10 @@ import "./Cart.css";
 function CartPage() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
+  const [deliveryOption, setDeliveryOption] = useState("in-store"); // default
 
   useEffect(() => {
-    // Fetch cart from API
-    fetch("http://localhost:5000/cart")
+    fetch("http://localhost:3000/cart")
       .then((res) => res.json())
       .then((data) => setCartItems(data))
       .catch((err) => console.error("Failed to fetch cart:", err));
@@ -17,25 +17,22 @@ function CartPage() {
   const increaseQuantity = (id) => {
     const item = cartItems.find((i) => i.id === id);
     if (item) {
-      const updated = { ...item, quantity: item.quantity + 1 };
-      updateQuantity(id, updated.quantity);
+      updateQuantity(id, item.quantity + 1);
     }
   };
 
   const decreaseQuantity = (id) => {
     const item = cartItems.find((i) => i.id === id);
     if (!item) return;
-
     if (item.quantity === 1) {
       handleDelete(id);
     } else {
-      const updated = { ...item, quantity: item.quantity - 1 };
-      updateQuantity(id, updated.quantity);
+      updateQuantity(id, item.quantity - 1);
     }
   };
 
   const updateQuantity = (id, quantity) => {
-    fetch(`http://localhost:5000/cart/${id}`, {
+    fetch(`http://localhost:3000/cart/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity }),
@@ -49,7 +46,7 @@ function CartPage() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/cart/${id}`, {
+    fetch(`http://localhost:3000/cart/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -59,19 +56,24 @@ function CartPage() {
   };
 
   const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const totalPrice = cartItems.reduce(
+  const subtotal = cartItems.reduce(
     (sum, item) => sum + (item?.Price || 0) * item.quantity,
     0
   );
+  const deliveryFee = deliveryOption === "delivery" ? 100 : 0;
+  const totalPrice = subtotal + deliveryFee;
 
   const saveCartToApi = async () => {
     const OrderNum = Math.floor(Math.random() * 1000000);
     try {
-      const response = await fetch("http://localhost:5000/cart/checkout", {
+      const response = await fetch("http://localhost:3000/cart/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           OrderNum,
+          deliveryOption,
+          deliveryFee,
+          totalPrice,
           cartItems,
         }),
       });
@@ -124,12 +126,39 @@ function CartPage() {
         )}
       </div>
 
+      {/* Delivery Option */}
+      <div className="delivery-option">
+        <h3>Choose Delivery Option:</h3>
+        <label>
+          <input
+            type="radio"
+            value="in-store"
+            checked={deliveryOption === "in-store"}
+            onChange={() => setDeliveryOption("in-store")}
+          />
+          In-Store Pickup (Free)
+        </label>
+        <label style={{ marginLeft: "1rem" }}>
+          <input
+            type="radio"
+            value="delivery"
+            checked={deliveryOption === "delivery"}
+            onChange={() => setDeliveryOption("delivery")}
+          />
+          Delivery (R100 fee)
+        </label>
+      </div>
+
+      {/* Cart Summary */}
       <div className="cart-summary">
         <h3>Cart Summary</h3>
         <p><strong>Total Items:</strong> {totalQuantity}</p>
+        <p><strong>Subtotal:</strong> R{subtotal.toFixed(2)}</p>
+        <p><strong>Delivery Fee:</strong> R{deliveryFee.toFixed(2)}</p>
         <p><strong>Total Price:</strong> R{totalPrice.toFixed(2)}</p>
       </div>
 
+      {/* Checkout */}
       {cartItems.length > 0 && (
         <button
           className="checkout-btn"
@@ -137,7 +166,7 @@ function CartPage() {
             const orderNum = await saveCartToApi();
             if (orderNum) {
               navigate("/payment", {
-                state: { totalPrice, cartItems, orderNum },
+                state: { totalPrice, cartItems, orderNum, deliveryOption },
               });
             }
           }}

@@ -8,7 +8,7 @@
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    margin-top: 10rem;
+    margin-top:7rem;
     color: #fff;
   }
   
@@ -65,7 +65,10 @@
     transform: translateY(-50%);
     color: #d3ad7f;
   }
-  
+  .register-login-text{
+    font-size: 1.3rem;
+    margin-top: 5px;
+  }
   .register-remember-forgot {
     display: flex;
     justify-content: space-between;
@@ -91,6 +94,7 @@
   .link{
     color: #d3ad7f;
     font-size: 14px;
+    text-transform: uppercase;
   }
   .title{
     text-align: center;
@@ -142,10 +146,13 @@
   
   @media (max-width: 500px) {
     .register-page {
-      padding: 30   px;
-      width: 70%;
+      padding: 40px;
+      width: 80%;
     }
-  
+    .title{
+      font-size: 2.4rem;
+      
+    }
     .register-input-wrapper input {
       padding: 12px 35px 12px 12px;
     }
@@ -154,4 +161,44 @@
       right: 10px;
     }
   }
-  
+  .success-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  background-color: #d4edda;
+  color: #155724;
+  padding: 30px;
+  animation: popupFade 1s ease-in-out;
+  text-align: center;
+  z-index: 9999;
+}
+
+.success-popup .checkmark {
+  font-size: 50px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+@keyframes popupFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -20%);
+  }
+}
+
+.fade-out {
+  animation: fadeOutForm 1s forwards;
+}
+
+@keyframes fadeOutForm {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+}

@@ -13,7 +13,7 @@ function Product() {
   const categories = ['All', 'Hot', 'Cold', 'Snack'];
 
   useEffect(() => {
-    fetch('http://localhost:5000/menu')
+    fetch('http://localhost:3000/menu')
       .then(response => {
         if (!response.ok) throw new Error('Failed to fetch');
         return response.json();
@@ -52,7 +52,7 @@ function Product() {
     const milkType = item.type === 'Hot' ? milkTypes[index] : null;
 
     try {
-      const cartRes = await fetch('http://localhost:5000/cart');
+      const cartRes = await fetch('http://localhost:3000/cart');
       const cartItems = await cartRes.json();
 
       const existingItem = cartItems.find(cartItem =>
@@ -68,7 +68,7 @@ function Product() {
           quantity: existingItem.quantity + 1,
         };
 
-        await fetch(`http://localhost:5000/cart/${existingItem.id}`, {
+        await fetch(`http://localhost:3000/cart/${existingItem.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(updatedItem),
@@ -84,7 +84,7 @@ function Product() {
           quantity: 1,
         };
 
-        await fetch('http://localhost:5000/cart', {
+        await fetch('http://localhost:3000/cart', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newItem),
