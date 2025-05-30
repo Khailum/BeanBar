@@ -5,6 +5,7 @@ use CoffeeShopDB
 CREATE TABLE Users (
 Email VARCHAR(255) PRIMARY KEY,
 Username VARCHAR(100) NOT NULL,
+Password NVACHAR(200) NOT NULL,
 UserRole VARCHAR(50) CHECK (UserRole IN ('Admin', 'Customer')) NOT NULL,
 isActive BIT
 );
@@ -168,6 +169,19 @@ Revoked DATETIME2 NULL,
 ReplacedByToken NVARCHAR(500) NULL,
 CONSTRAINT FK_RefreshTokens_Customers_CustomerID FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
+
+Promotions: CREATE TABLE PromotionHistory (
+PromotionID INT IDENTITY(1,1) PRIMARY KEY,
+CustomerID VARCHAR(13) NOT NULL,
+RefreshTokenID INT NOT NULL,
+PromotionType VARCHAR(100), -- e.g., 'Discount', 'Loyalty Points', etc.
+PromotionValue DECIMAL(10,2), -- e.g., 10.00 for R10 discount
+PromotionDate DATETIME DEFAULT GETDATE(),
+Notes VARCHAR(255),
+ALTER TABLE PromotionHistory ADD Used BIT DEFAULT 0;
+FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+FOREIGN KEY (RefreshTokenID) REFERENCES RefreshTokens(Id)
+);                                                                                                              
  
 -- INSERT MENU ITEMS WITH UPDATED ZAR PRICES & TASTY DESCRIPTIONS
 INSERT INTO Menu (ItemName, ItemType, ItemDescription, Price, ImageUrl) VALUES
