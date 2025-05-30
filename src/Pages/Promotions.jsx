@@ -1,77 +1,70 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Promotions = () => {
-  const [promo, setPromo] = useState('');
-  const [list, setList] = useState([]);
-  const [customerID, setCustomerID] = useState('');
-  const [discount, setDiscount] = useState(0);
+function Promotions() {
+  const [promotions, setPromotions] = useState([]);
 
-  const addPromo = () => {
-    if (!promo) return;
-    setList([...list, promo]);
-    setPromo('');
+  useEffect(() => {
+    fetch('http://localhost:5000/api/promotions')
+      .then(response => response.json())
+      .then(data => setPromotions(data))
+      .catch(error => console.error('Error fetching promotions:', error));
+  }, []);
+
+  const handleDelete = (promotionID) => {
+    fetch(`http://localhost:5000/api/promotions/${promotionID}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+        if (response.ok) {
+          setPromotions(prev => prev.filter(promo => promo.PromotionID !== promotionID));
+        } else {
+          console.error('Failed to delete promotion');
+        }
+      })
+      .catch(error => console.error('Error:', error));
   };
 
-  const calculateDiscount = () => {
-    if (!customerID) return;
-
-    const birthDate = extractBirthdayFromID(customerID);
-    if (!birthDate) return alert('Invalid ID number');
-
-    const today = new Date();
-    const isBirthday =
-      today.getDate() === birthDate.getDate() &&
-      today.getMonth() === birthDate.getMonth();
-
-    if (isBirthday) {
-      setDiscount(15); // 15% birthday discount
-    } else {
-      setDiscount(0);
-    }
-  };
-
-  const extractBirthdayFromID = (id) => {
-    if (!/^\d{13}$/.test(id)) return null;
-
-    const year = parseInt(id.slice(0, 2), 10);
-    const month = parseInt(id.slice(2, 4), 10) - 1;
-    const day = parseInt(id.slice(4, 6), 10);
-
-    const fullYear = year > 20 ? 1900 + year : 2000 + year;
-    return new Date(fullYear, month, day);
-};
-
-return (
-<div>
-    <h2>Promotions</h2>
-
-    <input
-        type="text"
-        placeholder="New promotion"
-        value={promo}
-        onChange={(e) => setPromo(e.target.value)}
-    />
-    <button onClick={addPromo}>Add Promotion</button>
-
-    <ul>
-    {list.map((item, idx) => (
-        <li key={idx}>{item}</li>
-    ))}
-    </ul>
-
-    <hr />
-    <h3>Check Birthday Discount</h3>
-    <input
-        type="text"
-        placeholder="Customer ID Number"
-        value={customerID}
-        onChange={(e) => setCustomerID(e.target.value)}
-    />
-    <button onClick={calculateDiscount}>Check Discount</button>
-    {discount > 0 && <p>🎉 {discount}% Birthday Discount Applied!</p>}
-    {discount === 0 && customerID && <p>No discount today.</p>}
-</div>
-);
-};
+  return (
+    <div>
+      <h2>Promotions</h2>
+      <table border="1" cellPadding="5" cellSpacing="0">
+        <thead>
+          <tr>
+            <th>PromotionID</th>
+            <th>CustomerID</th>
+            <th>RefreshTokenID</th>
+            <th>PromotionType</th>
+            <th>PromotionValue</th>
+            <th>PromotionDate</th>
+            <th>Notes</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {promotions.map(promo => (
+            <tr key={promo.PromotionID}>
+              <td>{promo.PromotionID}</td>
+              <td>{promo.CustomerID}</td>
+              <td>{promo.RefreshTokenID}</td>
+              <td>{promo.PromotionType}</td>
+              <td>{promo.PromotionValue}</td>
+              <td>{promo.PromotionDate}</td>
+              <td>{promo.Notes}</td>
+              <td>
+                <button onClick={() => handleDelete(promo.PromotionID)}>
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export default Promotions;
+
+
+
+

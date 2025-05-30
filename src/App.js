@@ -6,6 +6,7 @@ import Delivery from './Pages/Delivery';
 import Stock from './Pages/Stock';
 import Reservations from './Pages/Reservations';
 import Promotions from './Pages/Promotions';
+import Review from './Pages/Review';
 import UserProfile from './Pages/UserProfile';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Link to="/stock">Stock</Link> |{' '}
           <Link to="/reservations">Reservations</Link> |{' '}
           <Link to="/promotions">Promotions</Link> |{' '}
+          <Link to="/review">Review</Link> |{' '}
           <Link to="/userProfile">UserProfile</Link>
         </nav>
         <Routes>
@@ -31,6 +33,7 @@ function App() {
           <Route path="/stock" element={<Stock />} />
           <Route path="/reservations" element={<Reservations />} />
           <Route path="/promotions" element={<Promotions />} />
+          <Route path="/review" element={<Review />} />
           <Route path="/userProfile" element={<UserProfile />} />
         </Routes>
       </div>

@@ -56,6 +56,7 @@ const Orders = () => {
         <thead>
           <tr>
             <th>Order Num</th>
+            <th>ItemID</th>
             <th>Customer ID</th>
             <th>Date</th>
             <th>Status</th>
@@ -71,9 +72,10 @@ const Orders = () => {
               </td>
             </tr>
           ) : (
-            orders.map(({ orderNum, customerID, date, orderStatus, totalPrice }) => (
+            orders.map(({ orderNum,ItemID, customerID, date, orderStatus, totalPrice }) => (
               <tr key={orderNum}>
                 <td>{orderNum}</td>
+                <td>{ItemID}</td>
                 <td>{customerID}</td>
                 <td>{date}</td>
                 <td>
