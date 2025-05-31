@@ -18,18 +18,20 @@ namespace BeanBarAPI.Services
         public async Task<List<UserDTO>> GetAllUsersAsync()
         {
             return await _context.Users
+                .Include(u => u.Customer) // Join with Customers
                 .Select(u => new UserDTO
                 {
                     Email = u.Email,
                     Username = u.Username,
                     UserRole = u.UserRole,
-
-                }).ToListAsync();
+                    IsActive = u.isActive,
+                    DateJoined = u.Customer.CreatedAt // Fetch from Customers
+                })
+                .ToListAsync();
         }
-
-        public async Task<bool> ChangeUserRoleAsync(int userId, string newRole)
+        public async Task<bool> ChangeUserRoleAsync(string userEmail, string newRole)
         {
-            var user = await _context.Users.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userEmail);
             if (user == null) return false;
 
             user.UserRole = newRole;
@@ -37,9 +39,9 @@ namespace BeanBarAPI.Services
             return true;
         }
 
-        public async Task<bool> DeactivateUserAsync(int userId)
+        public async Task<bool> DeactivateUserAsync(string userEmail)
         {
-            var user = await _context.Users.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userEmail);
             if (user == null) return false;
 
             user.isActive = false;
@@ -63,7 +65,7 @@ namespace BeanBarAPI.Services
         public async Task<SystemMetricsDto> GetSystemMetricsAsync()
         {
             var totalUsers = await _context.Users.CountAsync();
-            var activeUsers = await _context.Users.CountAsync(u => u.IsActive);
+            var activeUsers = await _context.Users.CountAsync(u => u.isActive);
             var totalOrders = await _context.Orders.CountAsync();
             var totalRevenue = await _context.Orders.SumAsync(o => o.TotalPrice);
 

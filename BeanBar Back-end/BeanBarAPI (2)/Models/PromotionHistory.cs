@@ -15,7 +15,7 @@ namespace BeanBarAPI.Models
         public string CustomerID { get; set; }
 
         [Required]
-        public string RefreshTokenID { get; set; }
+        public int? RefreshTokenID { get; set; } // Changed from string to int?
 
         [Required]
         [StringLength(50)]

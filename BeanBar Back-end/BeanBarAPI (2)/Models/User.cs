@@ -12,9 +12,15 @@ namespace BeanBarAPI.Models
 
         [Required, MaxLength(100)]
         public string Username { get; set; }
-        
+
         [Required]
         [RegularExpression("Admin|Customer")]
-        public string UserRole { get; set; } // "Admin" or "Customer"
+        public string UserRole { get; set; }
+
+        public bool isActive { get; set; } = true;
+
+        // Optional navigation property
+        public Customer Customer { get; set; }
     }
+
 }

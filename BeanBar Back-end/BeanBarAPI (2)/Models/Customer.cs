@@ -28,8 +28,13 @@ namespace BeanBarAPI.Models
 
         public DateTime CreatedAt { get; set; }
 
-        public string Token { get; set; }  
-        public DateTime LastPromotionDate { get; set; }
+        public string Token { get; set; }
 
+        // ✅ Add this:
+        public DateTime DateOfBirth { get; set; }
+
+        // ✅ This already exists but update it to nullable:
+        public DateTime? LastPromotionDate { get; set; }
     }
+
 }
