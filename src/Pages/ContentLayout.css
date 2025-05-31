@@ -7,13 +7,13 @@
   padding: 0 1rem;          /* small horizontal padding */
   min-height: 80vh;         /* to fill most of viewport height */
   width: 100vw;             /* full viewport width */
-  background-color: #f9f9f9;
+  background-color: #010103;
   text-align: center;
 }
 
 .centered-layout h1,
 .centered-layout h2,
-.centered-layout h3,
+.centered-layout h3,0
 .centered-layout table {
   margin: 0 auto;           /* center block elements horizontally */
 }

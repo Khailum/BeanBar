@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 h1{
@@ -24,7 +24,7 @@ h1{
   text-align: center;
 }
 
-/* Updated nav styles — horizontally centered, responsive */
+
 nav {
   display: flex;
   flex-wrap: wrap;
@@ -48,7 +48,7 @@ nav a:hover {
   background-color: #f0f0f0;
 }
 
-/* Preserve original animation */
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -58,7 +58,7 @@ nav a:hover {
   }
 }
 
-/* RESPONSIVENESS: Keep your existing mobile support */
+
 @media (max-width: 768px) {
   .App-header {
     font-size: 2rem;
@@ -84,4 +84,6 @@ nav a:hover {
     width: 100%;
     text-align: center;
   }
-}
+} */
+
+

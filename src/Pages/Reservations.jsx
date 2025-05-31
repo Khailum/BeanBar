@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import '../Pages/Reservations.css';
 
 const Reservations = () => {
   const [reservations, setReservations] = useState([]);
@@ -77,17 +78,30 @@ const Reservations = () => {
     : reservations;
 
   return (
-    <div>
+    <div className="admin-page">
       <h2>Reservation Management</h2>
-      <div style={{ marginBottom: '10px' }}>
-        <label>Filter by Date: </label>
-        <input type="date" value={filterDate} onChange={(e) => setFilterDate(e.target.value)} />
-        <button onClick={fetchReservations} disabled={loading} style={{ marginLeft: '10px' }}>
-          {loading ? 'Loading...' : 'Refresh'}
+      
+      <div className="filter-controls">
+        <label htmlFor="date-filter">Filter by Date:</label>
+        <input
+          id="date-filter"
+          type="date"
+          value={filterDate}
+          onChange={(e) => setFilterDate(e.target.value)}
+        />
+        <button onClick={fetchReservations} disabled={loading}>
+          {loading ? (
+            <>
+              <span className="loading-spinner"></span>
+              Loading...
+            </>
+          ) : (
+            'Refresh'
+          )}
         </button>
       </div>
 
-      <table border="1" cellPadding="6" cellSpacing="0" style={{ borderCollapse: 'collapse', width: '100%' }}>
+      <table className="reservations-table">
         <thead>
           <tr>
             <th>Customer ID</th>
@@ -105,7 +119,9 @@ const Reservations = () => {
         <tbody>
           {filteredReservations.length === 0 ? (
             <tr>
-              <td colSpan="10" style={{ textAlign: 'center' }}>No reservations found.</td>
+              <td colSpan="10\" className="empty-state">
+                No reservations found.
+              </td>
             </tr>
           ) : (
             filteredReservations.map(r => (
@@ -129,7 +145,12 @@ const Reservations = () => {
                 </td>
                 <td>{r.cancelReason || '-'}</td>
                 <td>
-                  <button onClick={() => deleteReservation(r.tableNum)}>Delete</button>
+                  <button 
+                    className="action-button"
+                    onClick={() => deleteReservation(r.tableNum)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))

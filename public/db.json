@@ -1,0 +1,155 @@
+{
+  "menu": [
+    {
+      "id": 1,
+      "name": "Cappuccino",
+      "price": 35,
+      "itemType": "Coffee",
+      "imageUrl": "https://source.unsplash.com/400x300/?cappuccino,coffee"
+    },
+    {
+      "id": 2,
+      "name": "Latte",
+      "price": 38,
+      "itemType": "Coffee",
+      "imageUrl": "https://source.unsplash.com/400x300/?latte,coffee"
+    },
+    {
+      "id": 3,
+      "name": "Espresso",
+      "price": 30,
+      "itemType": "Coffee",
+      "imageUrl": "https://source.unsplash.com/400x300/?espresso,coffee"
+    },
+    {
+      "id": 4,
+      "name": "Blueberry Muffin",
+      "price": 25,
+      "itemType": "Bakery",
+      "imageUrl": "https://source.unsplash.com/400x300/?blueberry,muffin"
+    },
+    {
+      "id": 5,
+      "name": "Chocolate Croissant",
+      "price": 28,
+      "itemType": "Bakery",
+      "imageUrl": "https://source.unsplash.com/400x300/?chocolate,croissant"
+    },
+    {
+      "id": 6,
+      "name": "Iced Americano",
+      "price": 32,
+      "itemType": "Cold Drinks",
+      "imageUrl": "https://source.unsplash.com/400x300/?iced,americano"
+    }
+  ],
+  "stock": [
+    {
+      "id": 1,
+      "stockNum": "STK001",
+      "stockName": "Coffee Beans",
+      "quantity": 20,
+      "unit": "kg"
+    },
+    {
+      "id": 2,
+      "stockNum": "STK002",
+      "stockName": "Milk",
+      "quantity": 10,
+      "unit": "litres"
+    },
+    {
+      "id": 3,
+      "stockNum": "STK003",
+      "stockName": "Muffin Mix",
+      "quantity": 5,
+      "unit": "kg"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "customerName": "John Doe",
+      "items": [1, 2],
+      "total": 73,
+      "status": "preparing",
+      "timestamp": "2025-05-31T09:00:00"
+    },
+    {
+      "id": 2,
+      "customerName": "Jane Smith",
+      "items": [4],
+      "total": 25,
+      "status": "completed",
+      "timestamp": "2025-05-30T14:30:00"
+    }
+  ],
+  "delivery": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "address": "123 Main Street",
+      "status": "on the way",
+      "deliveryDate": "2025-05-31T10:00:00"
+    },
+    {
+      "id": 2,
+      "orderId": 2,
+      "address": "456 Oak Avenue",
+      "status": "delivered",
+      "deliveryDate": "2025-05-30T15:00:00"
+    }
+  ],
+  "promotions": [
+    {
+      "id": 1,
+      "title": "Buy 1 Get 1 Free Cappuccino",
+      "description": "Only valid on Mondays!",
+      "startDate": "2025-06-01",
+      "endDate": "2025-06-30"
+    },
+    {
+      "id": 2,
+      "title": "20% Off Muffins",
+      "description": "All muffin items at 20% discount!",
+      "startDate": "2025-06-01",
+      "endDate": "2025-06-15"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "customerName": "Emily White",
+      "rating": 5,
+      "comment": "The cappuccino was amazing!",
+      "date": "2025-05-30"
+    },
+    {
+      "id": 2,
+      "customerName": "Mark Brown",
+      "rating": 3,
+      "comment": "Service was a bit slow but coffee was great.",
+      "date": "2025-05-29"
+    }
+  ],
+  "reservations": [
+    {
+      "id": 1,
+      "customerName": "Alice Green",
+      "date": "2025-06-01",
+      "time": "10:00",
+      "guests": 2,
+      "status": "confirmed",
+      "note": ""
+    },
+    {
+      "id": 2,
+      "customerName": "Bob Gray",
+      "date": "2025-06-01",
+      "time": "12:30",
+      "guests": 4,
+      "status": "cancelled",
+      "note": "No longer available"
+    }
+  ]
+}

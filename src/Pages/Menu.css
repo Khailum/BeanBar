@@ -1,0 +1,104 @@
+body {
+  background-color: #010113;
+  color: white;
+  font-family: sans-serif;
+}
+
+.menu-page {
+  padding: 20px;
+}
+
+.menu-title {
+  color: #d3ad7f;
+  margin-bottom: 20px;
+}
+
+.add-item-form input,
+.add-item-form select {
+  margin: 5px;
+  padding: 6px;
+  background-color: #1a1a2e;
+  color: white;
+  border: 1px solid #d3ad7f;
+}
+
+.add-item-form button {
+  background-color: #3ad7ff;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.add-item-form button:hover {
+  background-color: #9c6624;
+  color: white;
+}
+
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.menu-table th,
+.menu-table td {
+  border: 1px solid #d3ad7f;
+  padding: 8px;
+  text-align: left;
+}
+
+.menu-table th {
+  background-color: #2a2a40;
+}
+
+.menu-table tr:hover {
+  background-color: #9c6624;
+  color: white;
+}
+
+.menu-table input,
+.menu-table select {
+  background-color: #1a1a2e;
+  color: white;
+  border: 1px solid #d3ad7f;
+}
+
+.menu-table button {
+  margin: 2px;
+  background-color: #3ad7ff;
+  color: black;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.menu-table button:hover {
+  background-color: #9c6624;
+  color: white;
+}
+
+.search-refresh {
+  margin: 10px 0;
+}
+
+.search-refresh input {
+  padding: 6px;
+  margin-right: 10px;
+  background-color: #1a1a2e;
+  color: white;
+  border: 1px solid #d3ad7f;
+}
+
+.search-refresh button {
+  background-color: #3ad7ff;
+  color: black;
+  padding: 6px 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.search-refresh button:hover {
+  background-color: #9c6624;
+  color: white;
+}

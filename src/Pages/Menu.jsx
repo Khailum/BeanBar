@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-
-
-
+import './Menu.css';
 
 const Menu = () => {
   const [items, setItems] = useState([]);
@@ -123,10 +121,10 @@ const Menu = () => {
     }, {});
 
   return (
-    <div>
-      <h2>Menu Management</h2>
+    <div className="menu-page">
+      <h2 className="menu-title">Menu Management</h2>
 
-      <div style={{ marginBottom: '20px' }}>
+      <div className="add-item-form">
         <h3>Add New Item</h3>
         <input name="ItemName" placeholder="Name" value={menuForm.ItemName} onChange={handleMenuChange} />
         <select name="ItemType" value={menuForm.ItemType} onChange={handleMenuChange}>
@@ -142,20 +140,21 @@ const Menu = () => {
       </div>
 
       <h3>Menu Items</h3>
-      <input
-        placeholder="Search by name or description..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ marginBottom: '10px' }}
-      />
-      <button onClick={fetchMenu} disabled={loading}>
-        {loading ? 'Refreshing...' : 'Refresh'}
-      </button>
+      <div className="search-refresh">
+        <input
+          placeholder="Search by name or description..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button onClick={fetchMenu} disabled={loading}>
+          {loading ? 'Refreshing...' : 'Refresh'}
+        </button>
+      </div>
 
       {Object.entries(groupedItems).map(([category, group]) => (
         <div key={category}>
           <h4>{category}</h4>
-          <table border="1" cellPadding="6" style={{ borderCollapse: 'collapse', width: '100%' }}>
+          <table className="menu-table">
             <thead>
               <tr>
                 <th>ID</th><th>Name</th><th>Type</th><th>Description</th><th>Price</th><th>Image</th><th>Actions</th>
@@ -206,3 +205,4 @@ const Menu = () => {
 };
 
 export default Menu;
+
