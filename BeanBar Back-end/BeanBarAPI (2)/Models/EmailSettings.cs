@@ -9,6 +9,7 @@ namespace BeanBarAPI.Models
         public string From { get; set; }
         public string SmtpServer { get; set; }
         public int Port { get; set; }
+        [Key]
         public string Username { get; set; }
         public string Password { get; set; }
     }

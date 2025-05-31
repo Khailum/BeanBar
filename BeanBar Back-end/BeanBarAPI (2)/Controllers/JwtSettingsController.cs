@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAuthenticationsController : ControllerBase
+    public class JwtSettingsController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public UserAuthenticationsController(CoffeeDBcontext context)
+        public JwtSettingsController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/UserAuthentications
+        // GET: api/JwtSettings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserAuthentication>>> GetUserAuth()
+        public async Task<ActionResult<IEnumerable<JwtSettings>>> GetJwtSettings()
         {
-            return await _context.UserAuth.ToListAsync();
+            return await _context.JwtSettings.ToListAsync();
         }
 
-        // GET: api/UserAuthentications/5
+        // GET: api/JwtSettings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserAuthentication>> GetUserAuthentication(string id)
+        public async Task<ActionResult<JwtSettings>> GetJwtSettings(string id)
         {
-            var userAuthentication = await _context.UserAuth.FindAsync(id);
+            var jwtSettings = await _context.JwtSettings.FindAsync(id);
 
-            if (userAuthentication == null)
+            if (jwtSettings == null)
             {
                 return NotFound();
             }
 
-            return userAuthentication;
+            return jwtSettings;
         }
 
-        // PUT: api/UserAuthentications/5
+        // PUT: api/JwtSettings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserAuthentication(string id, UserAuthentication userAuthentication)
+        public async Task<IActionResult> PutJwtSettings(string id, JwtSettings jwtSettings)
         {
-            if (id != userAuthentication.Email)
+            if (id != jwtSettings.SecretKey)
             {
                 return BadRequest();
             }
 
-            _context.Entry(userAuthentication).State = EntityState.Modified;
+            _context.Entry(jwtSettings).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserAuthenticationExists(id))
+                if (!JwtSettingsExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/UserAuthentications
+        // POST: api/JwtSettings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserAuthentication>> PostUserAuthentication(UserAuthentication userAuthentication)
+        public async Task<ActionResult<JwtSettings>> PostJwtSettings(JwtSettings jwtSettings)
         {
-            _context.UserAuth.Add(userAuthentication);
+            _context.JwtSettings.Add(jwtSettings);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (UserAuthenticationExists(userAuthentication.Email))
+                if (JwtSettingsExists(jwtSettings.SecretKey))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace BeanBar_Back_end.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUserAuthentication", new { id = userAuthentication.Email }, userAuthentication);
+            return CreatedAtAction("GetJwtSettings", new { id = jwtSettings.SecretKey }, jwtSettings);
         }
 
-        // DELETE: api/UserAuthentications/5
+        // DELETE: api/JwtSettings/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserAuthentication(string id)
+        public async Task<IActionResult> DeleteJwtSettings(string id)
         {
-            var userAuthentication = await _context.UserAuth.FindAsync(id);
-            if (userAuthentication == null)
+            var jwtSettings = await _context.JwtSettings.FindAsync(id);
+            if (jwtSettings == null)
             {
                 return NotFound();
             }
 
-            _context.UserAuth.Remove(userAuthentication);
+            _context.JwtSettings.Remove(jwtSettings);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserAuthenticationExists(string id)
+        private bool JwtSettingsExists(string id)
         {
-            return _context.UserAuth.Any(e => e.Email == id);
+            return _context.JwtSettings.Any(e => e.SecretKey == id);
         }
     }
 }

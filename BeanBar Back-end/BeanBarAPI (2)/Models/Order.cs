@@ -12,8 +12,10 @@ namespace BeanBarAPI.Models
         public int OrderNum { get; set; }
 
         public int ItemID { get; set; }
+        public Menu Menu { get; set; }
 
         public string CustomerID { get; set; } = string.Empty;
+        public Customer Customer { get; set; }
 
         public string Address { get; set; } = string.Empty;
 

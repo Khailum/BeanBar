@@ -61,8 +61,7 @@ namespace BeanBarAPI.Services
             var customer = new Customer
             {
                 CustomerID = dto.CustomerID,
-                FirstName = dto.FirstName,
-                LastName = dto.LastName,
+                FullName = dto.FullName,
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
                 Address = dto.Address,
@@ -76,7 +75,7 @@ namespace BeanBarAPI.Services
 
             // Send welcome email
             var emailBody = $@"
-                <h2 style='color: #6f4e37;'>Welcome to BeanBar, {dto.FirstName}!</h2>
+                <h2 style='color: #6f4e37;'>Welcome to BeanBar, {dto.FullName}!</h2>
                 <p>Thank you for signing up. We’re thrilled to have you in our coffee community.</p>
                 <p>Enjoy exclusive deals, birthday rewards, and fresh brew updates!</p>
                 <hr />
@@ -94,7 +93,7 @@ namespace BeanBarAPI.Services
                 {
                     ToEmail = dto.Email,
                     Subject = "Welcome to BeanBar ",
-                    Body = EmailTemplates.WelcomeTemplate(dto.FirstName)
+                    Body = EmailTemplates.WelcomeTemplate(dto.FullName)
                 };
 
                 await _emailService.SendEmailAsync(email);

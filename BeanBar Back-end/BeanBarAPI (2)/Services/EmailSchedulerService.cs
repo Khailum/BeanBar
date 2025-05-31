@@ -34,7 +34,7 @@ namespace BeanBarAPI.Services
                 {
                     ToEmail = customer.Email,
                     Subject = "🎉 Happy Birthday from BeanBar!",
-                    Body = EmailTemplates.BirthdayTemplate(customer.FirstName)
+                    Body = EmailTemplates.BirthdayTemplate(customer.FullName)
                 };
 
                 await _emailService.SendEmailAsync(email);
@@ -55,7 +55,7 @@ namespace BeanBarAPI.Services
                 {
                     ToEmail = customer.Email,
                     Subject = "☕ Your Monthly Free Drink is Here!",
-                    Body = EmailTemplates.MonthlyPromotionTemplate(customer.FirstName)
+                    Body = EmailTemplates.MonthlyPromotionTemplate(customer.FullName)
                 };
 
                 await _emailService.SendEmailAsync(email);

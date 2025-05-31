@@ -5,13 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using BeanBarAPI.DTOs;
-using BeanBarAPI.Services;
-using BeanBarAPI.Models;
 using BeanBarAPI.Data;
-using BeanBarAPI.Interfaces;
+using BeanBarAPI.Models;
 
-namespace BeanBarAPI.Controllers
+namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

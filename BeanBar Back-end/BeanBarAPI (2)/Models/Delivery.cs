@@ -10,6 +10,7 @@ namespace BeanBarAPI.Models
         public int DeliveryID { get; set; }
 
         public int OrderNum { get; set; }
+        public Order Order { get; set; }
 
         public string? DeliveryAddress { get; set; }
 

@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAuthenticationsController : ControllerBase
+    public class EmailSettingsController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public UserAuthenticationsController(CoffeeDBcontext context)
+        public EmailSettingsController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/UserAuthentications
+        // GET: api/EmailSettings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserAuthentication>>> GetUserAuth()
+        public async Task<ActionResult<IEnumerable<EmailSettings>>> GetEmailSettings()
         {
-            return await _context.UserAuth.ToListAsync();
+            return await _context.EmailSettings.ToListAsync();
         }
 
-        // GET: api/UserAuthentications/5
+        // GET: api/EmailSettings/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserAuthentication>> GetUserAuthentication(string id)
+        public async Task<ActionResult<EmailSettings>> GetEmailSettings(string id)
         {
-            var userAuthentication = await _context.UserAuth.FindAsync(id);
+            var emailSettings = await _context.EmailSettings.FindAsync(id);
 
-            if (userAuthentication == null)
+            if (emailSettings == null)
             {
                 return NotFound();
             }
 
-            return userAuthentication;
+            return emailSettings;
         }
 
-        // PUT: api/UserAuthentications/5
+        // PUT: api/EmailSettings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserAuthentication(string id, UserAuthentication userAuthentication)
+        public async Task<IActionResult> PutEmailSettings(string id, EmailSettings emailSettings)
         {
-            if (id != userAuthentication.Email)
+            if (id != emailSettings.Username)
             {
                 return BadRequest();
             }
 
-            _context.Entry(userAuthentication).State = EntityState.Modified;
+            _context.Entry(emailSettings).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserAuthenticationExists(id))
+                if (!EmailSettingsExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/UserAuthentications
+        // POST: api/EmailSettings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserAuthentication>> PostUserAuthentication(UserAuthentication userAuthentication)
+        public async Task<ActionResult<EmailSettings>> PostEmailSettings(EmailSettings emailSettings)
         {
-            _context.UserAuth.Add(userAuthentication);
+            _context.EmailSettings.Add(emailSettings);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (UserAuthenticationExists(userAuthentication.Email))
+                if (EmailSettingsExists(emailSettings.Username))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace BeanBar_Back_end.Controllers
                 }
             }
 
-            return CreatedAtAction("GetUserAuthentication", new { id = userAuthentication.Email }, userAuthentication);
+            return CreatedAtAction("GetEmailSettings", new { id = emailSettings.Username }, emailSettings);
         }
 
-        // DELETE: api/UserAuthentications/5
+        // DELETE: api/EmailSettings/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserAuthentication(string id)
+        public async Task<IActionResult> DeleteEmailSettings(string id)
         {
-            var userAuthentication = await _context.UserAuth.FindAsync(id);
-            if (userAuthentication == null)
+            var emailSettings = await _context.EmailSettings.FindAsync(id);
+            if (emailSettings == null)
             {
                 return NotFound();
             }
 
-            _context.UserAuth.Remove(userAuthentication);
+            _context.EmailSettings.Remove(emailSettings);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserAuthenticationExists(string id)
+        private bool EmailSettingsExists(string id)
         {
-            return _context.UserAuth.Any(e => e.Email == id);
+            return _context.EmailSettings.Any(e => e.Username == id);
         }
     }
 }

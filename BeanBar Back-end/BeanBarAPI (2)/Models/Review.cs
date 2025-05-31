@@ -11,6 +11,7 @@ namespace BeanBarAPI.Models
         public int ReviewID { get; set; }
 
         public string CustomerID { get; set; } = string.Empty;
+        public Customer Customer { get; set; }
 
         public int ItemID { get; set; }
 

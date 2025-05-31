@@ -28,7 +28,7 @@ namespace BeanBarAPI.Services
                 Username = user.Username,
                 UserRole = user.UserRole,
                 CustomerID = customer?.CustomerID,
-                FullName = customer != null ? $"{customer.FirstName} {customer.LastName}" : null,
+                FullName = customer != null ? $"{customer.FullName}" : null,
                 JoinedDate = customer?.CreatedAt
             };
 

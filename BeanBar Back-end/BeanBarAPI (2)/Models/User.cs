@@ -14,6 +14,9 @@ namespace BeanBarAPI.Models
         public string Username { get; set; }
 
         [Required]
+        public string Password { get; set; }
+
+        [Required]
         [RegularExpression("Admin|Customer")]
         public string UserRole { get; set; }
 

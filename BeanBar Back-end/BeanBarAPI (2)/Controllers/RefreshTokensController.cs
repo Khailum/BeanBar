@@ -12,47 +12,47 @@ namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DeliveriesController : ControllerBase
+    public class RefreshTokensController : ControllerBase
     {
         private readonly CoffeeDBcontext _context;
 
-        public DeliveriesController(CoffeeDBcontext context)
+        public RefreshTokensController(CoffeeDBcontext context)
         {
             _context = context;
         }
 
-        // GET: api/Deliveries
+        // GET: api/RefreshTokens
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Delivery>>> GetDeliveries()
+        public async Task<ActionResult<IEnumerable<RefreshToken>>> GetRefreshTokens()
         {
-            return await _context.Deliveries.ToListAsync();
+            return await _context.RefreshTokens.ToListAsync();
         }
 
-        // GET: api/Deliveries/5
+        // GET: api/RefreshTokens/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Delivery>> GetDelivery(int id)
+        public async Task<ActionResult<RefreshToken>> GetRefreshToken(int id)
         {
-            var delivery = await _context.Deliveries.FindAsync(id);
+            var refreshToken = await _context.RefreshTokens.FindAsync(id);
 
-            if (delivery == null)
+            if (refreshToken == null)
             {
                 return NotFound();
             }
 
-            return delivery;
+            return refreshToken;
         }
 
-        // PUT: api/Deliveries/5
+        // PUT: api/RefreshTokens/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDelivery(int id, Delivery delivery)
+        public async Task<IActionResult> PutRefreshToken(int id, RefreshToken refreshToken)
         {
-            if (id != delivery.DeliveryID)
+            if (id != refreshToken.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(delivery).State = EntityState.Modified;
+            _context.Entry(refreshToken).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace BeanBar_Back_end.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DeliveryExists(id))
+                if (!RefreshTokenExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace BeanBar_Back_end.Controllers
             return NoContent();
         }
 
-        // POST: api/Deliveries
+        // POST: api/RefreshTokens
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Delivery>> PostDelivery(Delivery delivery)
+        public async Task<ActionResult<RefreshToken>> PostRefreshToken(RefreshToken refreshToken)
         {
-            _context.Deliveries.Add(delivery);
+            _context.RefreshTokens.Add(refreshToken);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDelivery", new { id = delivery.DeliveryID }, delivery);
+            return CreatedAtAction("GetRefreshToken", new { id = refreshToken.Id }, refreshToken);
         }
 
-        // DELETE: api/Deliveries/5
+        // DELETE: api/RefreshTokens/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDelivery(int id)
+        public async Task<IActionResult> DeleteRefreshToken(int id)
         {
-            var delivery = await _context.Deliveries.FindAsync(id);
-            if (delivery == null)
+            var refreshToken = await _context.RefreshTokens.FindAsync(id);
+            if (refreshToken == null)
             {
                 return NotFound();
             }
 
-            _context.Deliveries.Remove(delivery);
+            _context.RefreshTokens.Remove(refreshToken);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool DeliveryExists(int id)
+        private bool RefreshTokenExists(int id)
         {
-            return _context.Deliveries.Any(e => e.DeliveryID == id);
+            return _context.RefreshTokens.Any(e => e.Id == id);
         }
     }
 }

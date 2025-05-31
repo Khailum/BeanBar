@@ -107,5 +107,8 @@ namespace BeanBarAPI.Data
 
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<BeanBarAPI.Models.Cart> Cart { get; set; } = default!;
+        public DbSet<BeanBarAPI.Models.EmailSettings> EmailSettings { get; set; } = default!;
+        public DbSet<BeanBarAPI.Models.JwtSettings> JwtSettings { get; set; } = default!;
     }
 }

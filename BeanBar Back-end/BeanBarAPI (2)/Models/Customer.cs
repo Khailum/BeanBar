@@ -8,24 +8,21 @@ namespace BeanBarAPI.Models
     public class Customer
     {
         [Key]
-        [MaxLength(20)]
-        public string CustomerID { get; set; } // South African ID
+        [StringLength(13)]
+        public string CustomerID { get; set; }
 
-        [Required, MaxLength(100)]
-        public string FirstName { get; set; }
+        [Required]
+        public string FullName { get; set; }
 
-        [Required, MaxLength(100)]
-        public string LastName { get; set; }
-
-        [Required, EmailAddress]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
-        [MaxLength(15)]
+        [Required]
+        public string Password { get; set; }
+
         public string PhoneNumber { get; set; }
-
-        [MaxLength(200)]
         public string Address { get; set; }
-
         public DateTime CreatedAt { get; set; }
 
         public string Token { get; set; }

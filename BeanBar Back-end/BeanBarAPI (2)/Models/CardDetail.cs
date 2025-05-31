@@ -23,6 +23,7 @@ namespace BeanBarAPI.Models
         public bool IsEncrypted { get; set; }
 
         public string CustomerID { get; set; } = string.Empty;
+        public Customer Customer { get; set; }
     }
 
 }

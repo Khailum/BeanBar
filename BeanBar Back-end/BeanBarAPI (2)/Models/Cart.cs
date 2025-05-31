@@ -11,6 +11,7 @@ namespace BeanBarAPI.Models
 
         [Required]
         public int OrderNum { get; set; } // FK to Orders table
+        public Order Order { get; set; }
 
         [Required]
         public int ItemID { get; set; } // Optional FK to Menu (can skip FK if you're copying data only)
@@ -37,8 +38,7 @@ namespace BeanBarAPI.Models
 
         public DateTime DateAdded { get; set; } = DateTime.Now;
 
-        // Relationships
-        [ForeignKey("OrderNum")]
-        public Order Order { get; set; }
+        
+        
     }
 }

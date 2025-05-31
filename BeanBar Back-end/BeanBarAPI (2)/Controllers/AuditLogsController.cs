@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BeanBarAPI.Data;
 using BeanBarAPI.Models;
 
-namespace BeanBarAPI.Controllers
+namespace BeanBar_Back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

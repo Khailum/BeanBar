@@ -17,6 +17,7 @@ namespace BeanBarAPI.Models
         public int PartySize { get; set; }
 
         public string CustomerID { get; set; } = string.Empty;
+        public Customer Customer { get; set; }
 
         public string? CustomerName { get; set; }
 

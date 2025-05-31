@@ -11,6 +11,7 @@ namespace BeanBarAPI.Models
         public int PaymentID { get; set; }
 
         public int OrderNum { get; set; }
+        public Order Order { get; set; }
 
         public decimal Amount { get; set; }
 

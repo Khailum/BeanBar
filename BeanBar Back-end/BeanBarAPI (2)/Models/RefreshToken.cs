@@ -10,6 +10,8 @@ namespace BeanBarAPI.Models
         public int Id { get; set; }                  // Primary key
         public string Token { get; set; }            // The actual refresh token string
         public string CustomerID { get; set; }         // Link to user (adjust type if your user id is int)
+        public Customer Customer { get; set; }
+
         public DateTime Expires { get; set; }        // Expiry date
         public DateTime Created { get; set; }        // Creation timestamp
         public DateTime? Revoked { get; set; }       // If revoked, timestamp when revoked
