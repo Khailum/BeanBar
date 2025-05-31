@@ -42,7 +42,7 @@ namespace BeanBarAPI.Services
             var user = await _context.Users.FindAsync(userId);
             if (user == null) return false;
 
-            user.IsActive = false;
+            user.isActive = false;
             await _context.SaveChangesAsync();
             return true;
         }

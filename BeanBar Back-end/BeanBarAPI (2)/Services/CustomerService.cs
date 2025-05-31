@@ -37,7 +37,7 @@ namespace BeanBarAPI.Services
                     {
                         ToEmail = customer.Email,
                         Subject = "🎉 Happy Birthday from BeanBar!",
-                        Body = EmailTemplates.BirthdayEmail(customer.FirstName)
+                        Body = EmailTemplates.BirthdayTemplate(customer.FirstName)
                     });
 
                     _logger.LogInformation($"Birthday email sent to {customer.Email}");
@@ -65,7 +65,7 @@ namespace BeanBarAPI.Services
                     {
                         ToEmail = customer.Email,
                         Subject = "☕ Your Monthly Free Drink Awaits!",
-                        Body = EmailTemplates.MonthlyPromoEmail(customer.FirstName)
+                        Body = EmailTemplates.MonthlyPromotionTemplate(customer.FirstName)
                     });
 
                     // Update LastPromotionDate
