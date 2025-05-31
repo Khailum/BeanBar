@@ -1,7 +1,9 @@
 .App {
   text-align: center;
 }
-
+h1{
+  text-align: center;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -14,25 +16,72 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #2c2c2c;
+  text-align: center;
+}
+
+/* Updated nav styles — horizontally centered, responsive */
+nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
 }
 
-.App-link {
-  color: #61dafb;
+nav a {
+  font-size: 1rem;
+  text-decoration: none;
+  color: #444;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
 }
 
+nav a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Preserve original animation */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* RESPONSIVENESS: Keep your existing mobile support */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+.app-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  nav {
+    flex-direction: column;
+  }
+
+  nav a {
+    width: 100%;
+    text-align: center;
   }
 }

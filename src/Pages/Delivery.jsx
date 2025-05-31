@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Delivery = () => {
+const Deliveries = () => {
   const [deliveries, setDeliveries] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -8,36 +8,36 @@ const Delivery = () => {
     setLoading(true);
     try {
       const res = await fetch('http://localhost:4000/api/deliveries');
-      if (!res.ok) throw new Error('Network response was not ok');
+      if (!res.ok) throw new Error('Failed to fetch deliveries');
       const data = await res.json();
       setDeliveries(data);
     } catch (err) {
-      alert('Failed to load deliveries: ' + err.message);
+      alert(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  const updateStatus = async (deliveryId, status) => {
+  const updateStatus = async (deliveryID, status) => {
     try {
-      await fetch(`http://localhost:4000/api/deliveries/${deliveryId}`, {
+      await fetch(`http://localhost:4000/api/deliveries/${deliveryID}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ deliveryStatus: status }),
       });
       fetchDeliveries();
     } catch (err) {
-      alert('Failed to update status: ' + err.message);
+      alert('Failed to update status');
     }
   };
 
-  const deleteDelivery = async (deliveryId) => {
+  const deleteDelivery = async (deliveryID) => {
     if (!window.confirm('Delete this delivery?')) return;
     try {
-      await fetch(`http://localhost:4000/api/deliveries/${deliveryId}`, { method: 'DELETE' });
+      await fetch(`http://localhost:4000/api/deliveries/${deliveryID}`, { method: 'DELETE' });
       fetchDeliveries();
     } catch (err) {
-      alert('Failed to delete: ' + err.message);
+      alert('Failed to delete delivery');
     }
   };
 
@@ -45,50 +45,68 @@ const Delivery = () => {
     fetchDeliveries();
   }, []);
 
+  // Same style as Orders page for consistency
+  const tableStyle = {
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginTop: 16,
+  };
+
+  const thTdStyle = {
+    border: '1px solid #aaa',
+    padding: '8px',
+    textAlign: 'left',
+  };
+
+  const thStyle = {
+    ...thTdStyle,
+    backgroundColor: '#eee',
+    fontWeight: '600',
+  };
+
   return (
     <div>
-      <h2>Delivery</h2>
+      <h2>Deliveries</h2>
       <button onClick={fetchDeliveries} disabled={loading}>
         {loading ? 'Loading...' : 'Refresh'}
       </button>
-
-      <table border="1" cellPadding="4" cellSpacing="0">
+      <table style={tableStyle}>
         <thead>
           <tr>
-            <th>Delivery ID</th>
-            <th>Order Num</th>
-            <th>Address</th>
-            <th>Status</th>
-            <th>Time</th>
-            <th>Actions</th>
+            <th style={thStyle}>Delivery ID</th>
+            <th style={thStyle}>Order Num</th>
+            <th style={thStyle}>Address</th>
+            <th style={thStyle}>Status</th>
+            <th style={thStyle}>Time</th>
+            <th style={thStyle}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {deliveries.length === 0 ? (
             <tr>
-              <td colSpan="6" style={{ textAlign: 'center' }}>
-                No deliveries found
+              <td style={thTdStyle} colSpan="6" align="center">
+                No deliveries found.
               </td>
             </tr>
           ) : (
-            deliveries.map(({ deliveryId, orderNum, address, deliveryStatus, time }) => (
-              <tr key={deliveryId}>
-                <td>{deliveryId}</td>
-                <td>{orderNum}</td>
-                <td>{address}</td>
-                <td>
+            deliveries.map(({ deliveryID, orderNum, address, deliveryStatus, time }) => (
+              <tr key={deliveryID}>
+                <td style={thTdStyle}>{deliveryID}</td>
+                <td style={thTdStyle}>{orderNum}</td>
+                <td style={thTdStyle}>{address}</td>
+                <td style={thTdStyle}>
                   <select
                     value={deliveryStatus}
-                    onChange={(e) => updateStatus(deliveryId, e.target.value)}
+                    onChange={(e) => updateStatus(deliveryID, e.target.value)}
                   >
                     <option value="Preparing">Preparing</option>
                     <option value="On the Way">On the Way</option>
                     <option value="Delivered">Delivered</option>
                   </select>
                 </td>
-                <td>{time}</td>
-                <td>
-                  <button onClick={() => deleteDelivery(deliveryId)}>Delete</button>
+                <td style={thTdStyle}>{time}</td>
+                <td style={thTdStyle}>
+                  <button onClick={() => deleteDelivery(deliveryID)}>Delete</button>
                 </td>
               </tr>
             ))
@@ -99,8 +117,7 @@ const Delivery = () => {
   );
 };
 
-export default Delivery;
-
+export default Deliveries;
 
 
 
