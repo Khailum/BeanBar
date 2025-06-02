@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './Stock.css';
 
 const Stock = () => {
   const [stockItems, setStockItems] = useState([]);
@@ -18,7 +19,7 @@ const Stock = () => {
   const fetchStock = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/stock');
+      const res = await fetch('http://localhost:3000/stock');
       const data = await res.json();
       setStockItems(data);
     } catch (err) {
@@ -47,7 +48,7 @@ const Stock = () => {
     if (!StockName || !Quantity || !Unit || !Supplier) return alert('Please fill all fields');
 
     try {
-      await fetch('http://localhost:3001/stock', {
+      await fetch('http://localhost:3000/stock', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -80,7 +81,7 @@ const Stock = () => {
     if (!StockName || !Quantity || !Unit || !Supplier) return alert('Please fill all fields');
 
     try {
-      await fetch(`http://localhost:3001/stock/${stockNum}`, {
+      await fetch(`http://localhost:3000/stock/${stockNum}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -105,7 +106,7 @@ const Stock = () => {
   const deleteStock = async (stockNum) => {
     if (!window.confirm('Delete this stock item?')) return;
     try {
-      await fetch(`http://localhost:3001/stock/${stockNum}`, {
+      await fetch(`http://localhost:3000/stock/${stockNum}`, {
         method: 'DELETE',
       });
       fetchStock();
@@ -124,26 +125,18 @@ const Stock = () => {
     item.StockName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Simple spacing styles (inline)
-  const containerStyle = { maxWidth: '900px', margin: 'auto', padding: '20px' };
-  const sectionStyle = { marginBottom: '30px' };
-  const inputStyle = { marginRight: '10px', marginBottom: '10px', padding: '5px' };
-  const selectStyle = { marginRight: '10px', marginBottom: '10px', padding: '5px' };
-  const buttonStyle = { padding: '5px 10px', marginRight: '10px' };
-  const searchInputStyle = { padding: '5px', width: '300px', marginBottom: '20px' };
-
   return (
-    <div style={containerStyle}>
+    <div className="stock-page">
       <h2>Stock Management</h2>
 
-      <div style={sectionStyle}>
+      <div className="stock-section add-stock-section">
         <h3>Add Stock Item</h3>
         <input
           name="StockName"
           placeholder="Stock Name"
           value={stockForm.StockName}
           onChange={handleChange}
-          style={inputStyle}
+          className="stock-input"
         />
         <input
           name="Quantity"
@@ -151,13 +144,13 @@ const Stock = () => {
           placeholder="Quantity"
           value={stockForm.Quantity}
           onChange={handleChange}
-          style={inputStyle}
+          className="stock-input"
         />
         <select
           name="Unit"
           value={stockForm.Unit}
           onChange={handleChange}
-          style={selectStyle}
+          className="stock-select"
         >
           <option value="">Select Unit</option>
           {unitOptions.map((unit) => (
@@ -171,28 +164,28 @@ const Stock = () => {
           placeholder="Supplier"
           value={stockForm.Supplier}
           onChange={handleChange}
-          style={inputStyle}
+          className="stock-input"
         />
         <br />
-        <button onClick={addStock} style={buttonStyle}>
+        <button onClick={addStock} className="stock-button">
           Add
         </button>
       </div>
 
-      <div style={sectionStyle}>
+      <div className="stock-section search-section">
         <input
           type="text"
           placeholder="Search stock..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={searchInputStyle}
+          className="stock-search-input"
         />
       </div>
 
       {loading ? (
         <p>Loading stock data...</p>
       ) : (
-        <table border="1" cellPadding="5" cellSpacing="0" style={{ width: '100%' }}>
+        <table className="stock-table">
           <thead>
             <tr>
               <th>StockNum</th>
@@ -207,7 +200,7 @@ const Stock = () => {
           <tbody>
             {filteredStock.length === 0 ? (
               <tr>
-                <td colSpan="7" style={{ textAlign: 'center' }}>
+                <td colSpan="7" className="no-data">
                   No stock items found.
                 </td>
               </tr>
@@ -221,7 +214,7 @@ const Stock = () => {
                         name="StockName"
                         value={editedData.StockName}
                         onChange={handleEditChange}
-                        style={{ width: '100%' }}
+                        className="stock-edit-input"
                       />
                     </td>
                     <td>
@@ -230,7 +223,7 @@ const Stock = () => {
                         type="number"
                         value={editedData.Quantity}
                         onChange={handleEditChange}
-                        style={{ width: '60px' }}
+                        className="stock-edit-input quantity-input"
                       />
                     </td>
                     <td>
@@ -238,6 +231,7 @@ const Stock = () => {
                         name="Unit"
                         value={editedData.Unit}
                         onChange={handleEditChange}
+                        className="stock-edit-select"
                       >
                         {unitOptions.map((unit) => (
                           <option key={unit} value={unit}>
@@ -251,15 +245,15 @@ const Stock = () => {
                         name="Supplier"
                         value={editedData.Supplier}
                         onChange={handleEditChange}
-                        style={{ width: '100%' }}
+                        className="stock-edit-input"
                       />
                     </td>
                     <td>{getStatus(parseFloat(editedData.Quantity) || 0)}</td>
                     <td>
-                      <button onClick={() => saveEdit(item.stockNum)} style={buttonStyle}>
+                      <button onClick={() => saveEdit(item.stockNum)} className="stock-button">
                         Save
                       </button>
-                      <button onClick={cancelEdit} style={buttonStyle}>
+                      <button onClick={cancelEdit} className="stock-button cancel-button">
                         Cancel
                       </button>
                     </td>
@@ -273,10 +267,10 @@ const Stock = () => {
                     <td>{item.Supplier}</td>
                     <td>{getStatus(item.Quantity)}</td>
                     <td>
-                      <button onClick={() => startEdit(item)} style={buttonStyle}>
+                      <button onClick={() => startEdit(item)} className="stock-button">
                         Edit
                       </button>
-                      <button onClick={() => deleteStock(item.stockNum)} style={buttonStyle}>
+                      <button onClick={() => deleteStock(item.stockNum)} className="stock-button cancel-button">
                         Delete
                       </button>
                     </td>
@@ -292,4 +286,3 @@ const Stock = () => {
 };
 
 export default Stock;
-

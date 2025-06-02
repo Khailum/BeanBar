@@ -8,9 +8,9 @@ import Reservations from './Pages/Reservations';
 import Promotions from './Pages/Promotions';
 import Review from './Pages/Review';
 import UserProfile from './Pages/UserProfile';
-import ContentLayout from './Pages/ContentLayout';
 import './App.css';
 import AdminNav from './AdminNav';
+
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
      <AdminNav />
 
         {/* Wrap your routed pages inside ContentLayout to center the page content */}
-        <ContentLayout>
+        
           
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -34,7 +34,7 @@ function App() {
             <Route path="/review" element={<Review />} />
             <Route path="/userProfile" element={<UserProfile />} />
           </Routes>
-        </ContentLayout>
+        
       
     </Router>
   );

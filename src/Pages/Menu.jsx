@@ -18,7 +18,7 @@ const Menu = () => {
   const fetchMenu = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:3001/menu');
+      const res = await fetch('http://localhost:3000/menu');
       const data = await res.json();
       setItems(data);
     } catch (err) {
@@ -44,7 +44,7 @@ const Menu = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:3001/menu', {
+      const res = await fetch('http://localhost:3000/menu', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,7 +76,7 @@ const Menu = () => {
 
   const saveEdit = async (itemId) => {
     try {
-      await fetch(`http://localhost:3001/menu/${itemId}`, {
+      await fetch(`http://localhost:3000/menu/${itemId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,7 +99,7 @@ const Menu = () => {
   const deleteItem = async (itemId) => {
     if (!window.confirm('Delete this menu item?')) return;
     try {
-      await fetch(`http://localhost:3001/menu/${itemId}`, {
+      await fetch(`http://localhost:3000/menu/${itemId}`, {
         method: 'DELETE',
       });
       fetchMenu();

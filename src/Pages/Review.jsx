@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Review.css';
 
 const Review = () => {
   const [reviews, setReviews] = useState([]);
@@ -6,7 +7,7 @@ const Review = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const API_URL = 'http://localhost:5000/api/reviews';
+  const API_URL = 'http://localhost:3000/reviews';
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -31,35 +32,46 @@ const Review = () => {
     : reviews;
 
   return (
-    <div>
+    <div className="admin-page">
       <h2>Reviews</h2>
-      <label htmlFor="ratingFilter">Filter by Rating:</label>
-      <select
-        id="ratingFilter"
-        value={ratingFilter}
-        onChange={e => setRatingFilter(e.target.value)}
-      >
-        <option value="">All</option>
-        {[5,4,3,2,1].map(n => (
-          <option key={n} value={n}>{n} Stars</option>
-        ))}
-      </select>
+      
+      <div className="filter-section">
+        <label htmlFor="ratingFilter">Filter by Rating:</label>
+        <select
+          id="ratingFilter"
+          value={ratingFilter}
+          onChange={e => setRatingFilter(e.target.value)}
+          className="dropdown"
+        >
+          <option value="">All</option>
+          {[5, 4, 3, 2, 1].map(n => (
+            <option key={n} value={n}>{n} Stars</option>
+          ))}
+        </select>
+      </div>
 
-      {loading && <p>Loading reviews…</p>}
-      {error && <p style={{color:'red'}}>Error: {error}</p>}
+      {loading && <p className="loading-text">Loading reviews…</p>}
+      {error && <p className="error-text">Error: {error}</p>}
 
       {!loading && !error && (
-        <table border="1" cellPadding="8" style={{ width:'100%', marginTop:20 }}>
+        <table className="reviews-table">
           <thead>
             <tr>
-              <th>ReviewID</th><th>CustomerID</th><th>ItemID</th>
-              <th>Rating</th><th>Comment</th><th>ReviewDate</th>
+              <th>ReviewID</th>
+              <th>CustomerID</th>
+              <th>ItemID</th>
+              <th>Rating</th>
+              <th>Comment</th>
+              <th>ReviewDate</th>
             </tr>
           </thead>
           <tbody>
-            {filtered.length === 0
-              ? <tr><td colSpan="6" style={{textAlign:'center'}}>No reviews found.</td></tr>
-              : filtered.map(r => (
+            {filtered.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="no-results">No reviews found.</td>
+              </tr>
+            ) : (
+              filtered.map(r => (
                 <tr key={r.ReviewID}>
                   <td>{r.ReviewID}</td>
                   <td>{r.CustomerID}</td>
@@ -69,7 +81,7 @@ const Review = () => {
                   <td>{new Date(r.ReviewDate).toLocaleDateString()}</td>
                 </tr>
               ))
-            }
+            )}
           </tbody>
         </table>
       )}
@@ -78,3 +90,4 @@ const Review = () => {
 };
 
 export default Review;
+

@@ -1,0 +1,71 @@
+.admin-page {
+  padding: 20px;
+  background-color: #010103;
+  color: #d3ad7f;
+  min-height: 100vh;
+}
+
+.admin-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #121212;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.users-table th,
+.users-table td {
+  padding: 10px 12px;
+  border: 1px solid #d3ad7f;
+  color: #d3ad7f;
+  text-align: left;
+}
+
+.users-table th {
+  background-color: #1f1f1f;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 6px 10px;
+  background-color: #1f1f1f;
+  border: 1px solid #d3ad7f;
+  color: #d3ad7f;
+  border-radius: 4px;
+}
+
+.action-btn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #333;
+  color: #d3ad7f;
+  border: 1px solid #d3ad7f;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.action-btn:hover {
+  background-color: #444;
+}
+
+.action-btn.cancel {
+  color: #999;
+}
+
+.action-btn.delete {
+  color: red;
+}
+
+.no-results {
+  text-align: center;
+  font-style: italic;
+  color: #d3ad7f;
+  margin-top: 20px;
+}

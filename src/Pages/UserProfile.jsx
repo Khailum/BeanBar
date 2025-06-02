@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './UserProfile.css';
 
 const initialUsers = [
   {
@@ -48,92 +49,41 @@ function UserProfile() {
     setUsers((prev) => prev.filter((u) => u.id !== id));
   };
 
-  const tableStyle = {
-    borderCollapse: 'collapse',
-    width: '100%'
-  };
-
-  const cellStyle = {
-    border: '1px solid #000',
-    padding: '4px 8px',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis'
-  };
-
-  const inputStyle = {
-    width: '100%',
-    padding: '2px 4px',
-    boxSizing: 'border-box'
-  };
-
   return (
-    <div>
+    <div className="admin-page">
       <h2>User Management</h2>
 
       {users.length === 0 ? (
-        <p>No users found.</p>
+        <p className="no-results">No users found.</p>
       ) : (
-        <table style={tableStyle}>
+        <table className="users-table">
           <thead>
             <tr>
-              <th style={cellStyle}>Name</th>
-              <th style={cellStyle}>Email</th>
-              <th style={cellStyle}>Phone</th>
-              <th style={cellStyle}>Address</th>
-              <th style={cellStyle}>Actions</th>
+              <th>Name</th><th>Email</th><th>Phone</th><th>Address</th><th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) =>
               editingUser === user.id ? (
                 <tr key={user.id}>
-                  <td style={cellStyle}>
-                    <input
-                      style={inputStyle}
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-                  </td>
-                  <td style={cellStyle}>
-                    <input
-                      style={inputStyle}
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-                  </td>
-                  <td style={cellStyle}>
-                    <input
-                      style={inputStyle}
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                    />
-                  </td>
-                  <td style={cellStyle}>
-                    <input
-                      style={inputStyle}
-                      name="address"
-                      value={formData.address}
-                      onChange={handleChange}
-                    />
-                  </td>
-                  <td style={cellStyle}>
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={() => setEditingUser(null)}>Cancel</button>
+                  <td><input name="name" value={formData.name} onChange={handleChange} className="input-field" /></td>
+                  <td><input name="email" value={formData.email} onChange={handleChange} className="input-field" /></td>
+                  <td><input name="phone" value={formData.phone} onChange={handleChange} className="input-field" /></td>
+                  <td><input name="address" value={formData.address} onChange={handleChange} className="input-field" /></td>
+                  <td>
+                    <button className="action-btn" onClick={handleSave}>Save</button>
+                    <button className="action-btn cancel" onClick={() => setEditingUser(null)}>Cancel</button>
                   </td>
                 </tr>
               ) : (
                 <tr key={user.id}>
-                  <td style={cellStyle}>{user.name}</td>
-                  <td style={cellStyle}>{user.email}</td>
-                  <td style={cellStyle}>{user.phone}</td>
-                  <td style={cellStyle}>{user.address}</td>
-                  <td style={cellStyle}>
-                    <button onClick={() => handleEdit(user)}>Edit</button>
-                    <button onClick={() => handleDelete(user.id)}>Delete</button>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.address}</td>
+                  <td>
+                    <button className="action-btn" onClick={() => handleEdit(user)}>Edit</button>
+                    <button className="action-btn delete" onClick={() => handleDelete(user.id)}>Delete</button>
                   </td>
                 </tr>
               )

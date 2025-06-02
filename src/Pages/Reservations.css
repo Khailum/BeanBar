@@ -1,162 +1,174 @@
 .admin-page {
-  padding: var(--space-4);
-  color: var(--color-cream);
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #010103;
+  color: #d3ad7f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .admin-page h2 {
-  font-family: var(--font-heading);
-  color: var(--color-caramel);
-  font-size: 2.5rem;
-  margin-bottom: var(--space-4);
   text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
 }
 
 .filter-controls {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-4);
-  padding: var(--space-3);
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .filter-controls label {
-  color: var(--color-latte);
-  font-size: 0.9rem;
   font-weight: 500;
 }
 
 .filter-controls input[type="date"] {
-  padding: var(--space-2);
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-md);
-  color: var(--color-cream);
-  font-family: var(--font-body);
+  background-color: #101010;
+  color: #d3ad7f;
+  border: 1px solid #d3ad7f;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 1rem;
 }
 
 .filter-controls button {
-  background-color: var(--color-caramel);
-  color: white;
+  background-color: #d3ad7f;
+  color: #010103;
   border: none;
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-md);
+  padding: 8px 16px;
+  border-radius: 6px;
   font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: background-color 0.3s ease;
 }
 
-.filter-controls button:hover:not(:disabled) {
-  background-color: #A8650D;
+.filter-controls button:hover {
+  background-color: #b8935f;
 }
 
-.filter-controls button:disabled {
-  background-color: var(--color-gray-600);
-  cursor: not-allowed;
+.loading-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #d3ad7f;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  display: inline-block;
+  animation: spin 1s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .reservations-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-lg);
+  border-collapse: collapse;
+  background-color: #121212;
+  border-radius: 8px;
   overflow: hidden;
+}
+
+.reservations-table thead {
+  background-color: #1f1f1f;
 }
 
 .reservations-table th,
 .reservations-table td {
-  padding: var(--space-2);
+  padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #d3ad7f;
+  color: #d3ad7f;
+  font-size: 1rem;
 }
 
 .reservations-table th {
-  background-color: rgba(0, 0, 0, 0.3);
-  color: var(--color-caramel);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-}
-
-.reservations-table tr:last-child td {
-  border-bottom: none;
-}
-
-.reservations-table tr:hover td {
-  background-color: rgba(255, 255, 255, 0.02);
+  font-weight: 700;
 }
 
 .reservations-table select {
-  width: 100%;
-  padding: var(--space-1) var(--space-2);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-md);
-  color: var(--color-cream);
-  cursor: pointer;
-}
-
-.reservations-table select option {
-  background-color: var(--color-gray-800);
+  background-color: #101010;
+  color: #d3ad7f;
+  border: 1px solid #d3ad7f;
+  border-radius: 6px;
+  padding: 6px;
+  font-size: 1rem;
 }
 
 .action-button {
-  background-color: var(--color-error);
-  color: white;
+  background-color: #d3ad7f;
+  color: #010103;
   border: none;
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
 }
 
 .action-button:hover {
-  background-color: var(--color-error-light);
+  background-color: #b8935f;
 }
 
 .empty-state {
   text-align: center;
-  padding: var(--space-4);
-  color: var(--color-gray-400);
   font-style: italic;
+  color: #b8a47c;
+  padding: 20px;
 }
 
-@media (max-width: 1024px) {
+/* Responsive Design */
+@media (max-width: 768px) {
+  .filter-controls {
+    flex-direction: column;
+  }
+
+  .filter-controls input[type="date"],
+  .filter-controls button {
+    width: 100%;
+  }
+
+  .reservations-table th,
+  .reservations-table td {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+
+  .reservations-table select {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
   .reservations-table {
     display: block;
     overflow-x: auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .admin-page h2 {
-    font-size: 2rem;
+    white-space: nowrap;
   }
 
-  .filter-controls {
-    flex-direction: column;
-    align-items: stretch;
+  .reservations-table th,
+  .reservations-table td {
+    min-width: 120px;
   }
-}
 
-/* Loading spinner animation */
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+  .filter-controls input[type="date"],
+  .filter-controls button {
+    font-size: 0.9rem;
+  }
 
-.loading-spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s ease-in-out infinite;
-  margin-right: var(--space-1);
+  .action-button {
+    width: 100%;
+    margin-top: 4px;
+  }
 }

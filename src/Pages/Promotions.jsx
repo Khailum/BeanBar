@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import './Promotions.css';
 
 function Promotions() {
   const [promotions, setPromotions] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/promotions')
+    fetch('http://localhost:3000/promotions')
       .then(response => response.json())
       .then(data => setPromotions(data))
       .catch(error => console.error('Error fetching promotions:', error));
   }, []);
 
   const handleDelete = (promotionID) => {
-    fetch(`http://localhost:5000/api/promotions/${promotionID}`, {
+    fetch(`http://localhost:3000/promotions/${promotionID}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -25,9 +26,9 @@ function Promotions() {
   };
 
   return (
-    <div>
+    <div className="admin-page">
       <h2>Promotions</h2>
-      <table border="1" cellPadding="5" cellSpacing="0">
+      <table className="promotions-table">
         <thead>
           <tr>
             <th>PromotionID</th>
@@ -51,7 +52,7 @@ function Promotions() {
               <td>{promo.PromotionDate}</td>
               <td>{promo.Notes}</td>
               <td>
-                <button onClick={() => handleDelete(promo.PromotionID)}>
+                <button className="action-button" onClick={() => handleDelete(promo.PromotionID)}>
                   Delete
                 </button>
               </td>
@@ -64,7 +65,3 @@ function Promotions() {
 }
 
 export default Promotions;
-
-
-
-

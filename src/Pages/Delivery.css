@@ -1,0 +1,155 @@
+.deliveries-page {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #010103;
+  color: #d3ad7f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.deliveries-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.deliveries-page button {
+  background-color: #d3ad7f;
+  color: #010103;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 120px;
+}
+
+.deliveries-page button:disabled {
+  background-color: #7a6e57;
+  cursor: not-allowed;
+}
+
+.deliveries-page button:hover:not(:disabled) {
+  background-color: #b8935f;
+}
+
+/* Table */
+.deliveries-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #121212;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.deliveries-table thead {
+  background-color: #1f1f1f;
+}
+
+.deliveries-table th,
+.deliveries-table td {
+  border: 1px solid #d3ad7f;
+  padding: 12px 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 1rem;
+  color: #d3ad7f;
+}
+
+.deliveries-table th {
+  font-weight: 700;
+  user-select: none;
+}
+
+.deliveries-table td select {
+  width: 100%;
+  padding: 6px 8px;
+  background-color: #101010;
+  border: 1px solid #d3ad7f;
+  color: #d3ad7f;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.deliveries-table td button {
+  background-color: #d3ad7f;
+  color: #010103;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+}
+
+.deliveries-table td button:hover {
+  background-color: #b8935f;
+}
+
+.deliveries-table td[align='center'] {
+  text-align: center;
+  font-style: italic;
+  color: #b8a47c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .deliveries-table th,
+  .deliveries-table td {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+
+  .deliveries-table td button {
+    padding: 5px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .deliveries-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .deliveries-table thead,
+  .deliveries-table tbody,
+  .deliveries-table tr,
+  .deliveries-table th,
+  .deliveries-table td {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .deliveries-table tr {
+    margin-bottom: 12px;
+  }
+
+  .deliveries-table th {
+    background-color: transparent;
+    font-weight: 600;
+    padding: 6px 4px;
+    border-bottom: none;
+  }
+
+  .deliveries-table td {
+    border: none;
+    padding: 6px 4px;
+    min-width: 120px;
+  }
+
+  .deliveries-table td button {
+    width: 100%;
+  }
+}

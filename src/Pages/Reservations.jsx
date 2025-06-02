@@ -9,7 +9,7 @@ const Reservations = () => {
   const fetchReservations = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/reservations');
+      const res = await fetch('http://localhost:3000/reservations');
       const text = await res.text();
       const rows = text.trim().split('\n');
       const data = rows.map(row => {
@@ -42,7 +42,7 @@ const Reservations = () => {
   const deleteReservation = async (tableNum) => {
     if (!window.confirm('Delete this reservation?')) return;
     try {
-      await fetch(`http://localhost:4000/api/reservations/${tableNum}`, { method: 'DELETE' });
+      await fetch(`http://localhost:3000/reservations/${tableNum}`, { method: 'DELETE' });
       fetchReservations();
     } catch (err) {
       alert('Failed to delete: ' + err.message);
@@ -63,7 +63,7 @@ const Reservations = () => {
     });
 
     try {
-      await fetch(`http://localhost:4000/api/reservations/${tableNum}`, {
+      await fetch(`http://localhost:3000/reservations/${tableNum}`, {
         method: 'PATCH',
         body,
       });
