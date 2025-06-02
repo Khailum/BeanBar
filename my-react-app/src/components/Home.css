@@ -19,6 +19,18 @@ font-size: 62.5%;
  font-family: 'Lato', sans-serif;
   background: #010103;
 }
+.btn-group {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .btn-group {
+    justify-content: center;
+  }
+}
 
 p {
   font-weight: lighter;

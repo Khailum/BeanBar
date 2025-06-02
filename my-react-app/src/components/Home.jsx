@@ -16,9 +16,14 @@ const Home = () => {
             culpa alias minus, asperiores itaque saepe ducimus magni accusamus delectus laudantium facere cupiditate!
             Beatae, a est?
           </p>
-          <a href="/product" className="btn">
-            Get yours now
-          </a>
+         <div className="btn-group">
+  <a href="/product" className="btn">
+    Get yours now
+  </a>
+  <a href="/reservation"  className="btn">
+    Book a Table
+  </a>
+</div>
         </div>
 
         <div className="image-container">

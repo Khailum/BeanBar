@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
+  import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Payment.css';
 import visaLogo from '../assets/Visa_inc._logo.svg';
 import mastercardLogo from '../assets/mastercard-logo.svg';
 
-// Detect card type by prefix
+// Card type detection - UPDATED AND UNCOMMENTED
 const detectCardType = (number) => {
-  const cleaned = number.replace(/\s+/g, '');
-  if (/^5[1-5]/.test(cleaned)) return 'mastercard';
-  if (/^4/.test(cleaned)) return 'visa';
+  if (!number) return '';
+  const digits = number.replace(/\D/g, '');
+
+  if (digits.startsWith('4')) return 'visa';
+
+  const firstTwo = parseInt(digits.slice(0, 2), 10);
+  const firstFour = parseInt(digits.slice(0, 4), 10);
+
+  if ((firstTwo >= 51 && firstTwo <= 55) || (firstFour >= 2221 && firstFour <= 2720)) {
+    return 'mastercard';
+  }
+
   return '';
 };
 
-// Luhn algorithm for card number validation
-const validateLuhn = (number) => {
-  let sum = 0;
-  let shouldDouble = false;
-  for (let i = number.length - 1; i >= 0; i--) {
-    let digit = parseInt(number.charAt(i), 10);
-    if (shouldDouble) {
-      digit *= 2;
-      if (digit > 9) digit -= 9;
-    }
-    sum += digit;
-    shouldDouble = !shouldDouble;
-  }
-  return sum % 10 === 0;
-};
+// Luhn, expiry, CVC validation are still commented out as per your code
 
 const PaymentComponent = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { totalPrice, cartItems, orderNum, deliveryOption } = location.state || {};
+
   const [cardNumber, setCardNumber] = useState('');
   const [cardType, setCardType] = useState('');
   const [accountHolder, setAccountHolder] = useState('');
@@ -37,111 +37,99 @@ const PaymentComponent = () => {
   const [error, setError] = useState('');
 
   const handleCardNumberChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ''); // digits only
-    setCardNumber(value);
-    const type = detectCardType(value);
-    setCardType(type);
+    const raw = e.target.value.replace(/\D/g, '').slice(0, 16);
+    const formatted = raw.replace(/(.{4})/g, '$1 ').trim();
+    setCardNumber(formatted);
+
+    setCardType(detectCardType(raw)); // ENABLED card type detection
+  };
+
+  const handleExpiryChange = (e) => {
+    let value = e.target.value.replace(/\D/g, '').slice(0, 4);
+    if (value.length >= 3) value = `${value.slice(0, 2)}/${value.slice(2)}`;
+    setExpiryDate(value);
   };
 
   const getCardLogo = () => {
-    switch (cardType) {
-      case 'mastercard':
-        return mastercardLogo;
-      case 'visa':
-        return visaLogo;
-      default:
-        return null;
-    }
+    if (cardType === 'visa') return visaLogo;
+    if (cardType === 'mastercard') return mastercardLogo;
+    return null;
   };
 
-  const validateExpiryDate = (date) => {
-    if (!date || !date.includes('/')) return false;
+const handlePayment = async () => {
+  const trimmedCardNumber = cardNumber.replace(/\s/g, '');
+  const trimmedAccountHolder = accountHolder.trim();
+  const trimmedAccountNumber = accountNumber.trim();
+  const trimmedCvc = cvc.trim();
 
-    const [monthStr, yearStr] = date.split('/');
-    if (!monthStr || !yearStr) return false;
+  if (!/^[a-zA-Z\s\-']{2,}$/.test(trimmedAccountHolder)) {
+    setError('Please enter a valid Account Holder name.');
+    return;
+  }
 
-    const month = parseInt(monthStr, 10);
-    if (isNaN(month) || month < 1 || month > 12) return false;
+  if (trimmedAccountNumber.length !== 9) {
+    setError('Account Number must be exactly 9 digits.');
+    return;
+  }
 
-    let year = parseInt(yearStr, 10);
-    if (yearStr.length === 2) {
-      year += 2000; // Convert YY to 20YY
-    }
-    if (isNaN(year)) return false;
+  setError('');
 
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth() + 1;
+  try {
+    const res = await fetch('http://localhost:3000/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        orderNum,
+        totalPrice,
+        deliveryOption,
+        cartItems,
+        paymentDetails: {
+          accountHolder: trimmedAccountHolder,
+          accountNumber: trimmedAccountNumber,
+          cardNumber: trimmedCardNumber,
+          expiryDate,
+          cvc: trimmedCvc,
+          cardType,
+        },
+      }),
+    });
 
-    if (year < currentYear) return false;
-    if (year === currentYear && month < currentMonth) return false;
+    if (!res.ok) throw new Error('Payment failed');
 
-    return true;
-  };
-
-  const validateCvc = (value, cardType) => {
-    // Visa and Mastercard typically 3 digits; some cards (e.g., Amex) 4 digits
-    if (cardType === 'amex') {
-      return /^\d{4}$/.test(value);
-    }
-    return /^\d{3}$/.test(value);
-  };
-
-  const handlePayment = () => {
-    const trimmedAccountHolder = accountHolder.trim();
-    const trimmedAccountNumber = accountNumber.trim();
-    const trimmedCardNumber = cardNumber.trim();
-    const trimmedExpiryDate = expiryDate.trim();
-    const trimmedCvc = cvc.trim();
-
-    // Account Holder: Allow letters, spaces, hyphens, apostrophes
-    if (!/^[a-zA-Z\s\-']{2,}$/.test(trimmedAccountHolder)) {
-      setError('Please Enter Valid Account Holder');
-      return;
-    }
-
-    if (trimmedAccountNumber.length !== 13) {
-      setError('Account Number must be exactly 13 digits.');
-      return;
-    }
-
-    if (trimmedCardNumber.length < 13 || trimmedCardNumber.length > 19) {
-      setError('Card Number must be between 13 and 19 digits.');
-      return;
-    }
-
-    if (!validateLuhn(trimmedCardNumber)) {
-      setError('Invalid card number.');
-      return;
-    }
-
-    if (!validateExpiryDate(trimmedExpiryDate)) {
-      setError('Expiry Date must be valid and not expired.');
-      return;
-    }
-
-    if (!validateCvc(trimmedCvc, cardType)) {
-      setError('CVC must be 3 digits (4 digits for Amex).');
-      return;
-    }
-
-    setError('');
     alert('Payment processed successfully!');
-    // Your real payment logic here
-  };
+
+    if (deliveryOption === 'delivery') {
+      navigate('/track-delivery', { state: { orderNum, cartItems } });
+    } else {
+      navigate('/order-success', { state: { orderNum, totalPrice } });
+    }
+
+  } catch (err) {
+    console.error(err);
+    setError('Payment processing failed. Please try again.');
+  }
+};
 
   return (
     <div className="payment-container">
       <h2>Payment Details</h2>
 
+      {orderNum && (
+        <div className="order-summary">
+          <p><strong>Order Number:</strong> {orderNum}</p>
+          <p><strong>Total Price:</strong> R{totalPrice?.toFixed(2)}</p>
+          <p><strong>Delivery Option:</strong> {deliveryOption}</p>
+          <p><strong>Items:</strong> {cartItems?.length} item(s)</p>
+        </div>
+      )}
+
       <div className="input-wrapper">
         <input
           type="text"
           value={accountHolder}
-          onChange={(e) => {
-            const allowed = e.target.value.replace(/[^a-zA-Z\s\-']/g, '');
-            setAccountHolder(allowed);
-          }}
+          onChange={(e) =>
+            setAccountHolder(e.target.value.replace(/[^a-zA-Z\s\-']/g, ''))
+          }
           placeholder="Account Holder"
         />
       </div>
@@ -151,13 +139,11 @@ const PaymentComponent = () => {
           type="text"
           value={accountNumber}
           onChange={(e) => {
-            const digitsOnly = e.target.value.replace(/\D/g, '');
-            if (digitsOnly.length <= 13) {
-              setAccountNumber(digitsOnly);
-            }
+            const value = e.target.value.replace(/\D/g, '').slice(0, 9);
+            setAccountNumber(value);
           }}
-          placeholder="Account Number (13 digits)"
-          maxLength="13"
+          placeholder="Account Number (9 digits)"
+          maxLength="9"
         />
       </div>
 
@@ -178,7 +164,7 @@ const PaymentComponent = () => {
         <input
           type="text"
           value={expiryDate}
-          onChange={(e) => setExpiryDate(e.target.value)}
+          onChange={handleExpiryChange}
           placeholder="MM/YY"
           maxLength="5"
         />
@@ -186,8 +172,8 @@ const PaymentComponent = () => {
           type="text"
           value={cvc}
           onChange={(e) => {
-            const digitsOnly = e.target.value.replace(/\D/g, '');
-            if (digitsOnly.length <= 4) setCvc(digitsOnly);
+            const value = e.target.value.replace(/\D/g, '').slice(0, 4);
+            setCvc(value);
           }}
           placeholder="CVC"
           maxLength="4"

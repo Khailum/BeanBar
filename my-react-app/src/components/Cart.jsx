@@ -10,7 +10,13 @@ function CartPage() {
   useEffect(() => {
     fetch("http://localhost:3000/cart")
       .then((res) => res.json())
-      .then((data) => setCartItems(data))
+      .then((data) => {
+        const sanitized = data.map((item) => ({
+          ...item,
+          quantity: typeof item.quantity === "number" && item.quantity > 0 ? item.quantity : 1,
+        }));
+        setCartItems(sanitized);
+      })
       .catch((err) => console.error("Failed to fetch cart:", err));
   }, []);
 
@@ -55,18 +61,24 @@ function CartPage() {
       .catch((err) => console.error("Error deleting item:", err));
   };
 
-  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item?.Price || 0) * item.quantity,
-    0
-  );
+  const totalQuantity = cartItems.reduce((sum, item) => {
+    const qty = typeof item.quantity === "number" ? item.quantity : 0;
+    return sum + qty;
+  }, 0);
+
+  const subtotal = cartItems.reduce((sum, item) => {
+    const qty = typeof item.quantity === "number" ? item.quantity : 0;
+    const price = typeof item.Price === "number" ? item.Price : 0;
+    return sum + price * qty;
+  }, 0);
+
   const deliveryFee = deliveryOption === "delivery" ? 100 : 0;
   const totalPrice = subtotal + deliveryFee;
 
   const saveCartToApi = async () => {
     const OrderNum = Math.floor(Math.random() * 1000000);
     try {
-      const response = await fetch("http://localhost:3000/cart/checkout", {
+      const response = await fetch("http://localhost:3000/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

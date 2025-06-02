@@ -1,55 +1,54 @@
+/* Payment.css */
+
 .payment-container {
-  background-color: #010103;
-  padding: 70px 40px;
-  /* border-radius: 15px;
-  border: 1px solid #444; */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
-  margin-top: 20rem;
-  color: #fff;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px 25px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  margin-top: 200px;
 }
 
 .payment-container h2 {
   text-align: center;
-  border-bottom: 2px solid #9c6624;
-  color: #999;
-  font-weight: lighter;
-  font-size: 30px;
-  margin-bottom: 30px;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #222;
 }
 
 .input-wrapper {
-  position: relative;
   margin-bottom: 20px;
+  position: relative;
 }
 
 .input-wrapper input {
   width: 100%;
-  padding: 12px 40px 12px 15px;
-  border: 1px solid #444;
-  border-radius: 4px;
-  background-color: #222;
-  outline: none;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
   transition: border-color 0.3s ease;
-  color: #fff;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
 }
 
 .input-wrapper input:focus {
-  border-color: #d3ad7f;
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
+/* Card input wrapper to position the logo */
 .card-input {
   display: flex;
   align-items: center;
+}
+
+.card-input input {
+  flex-grow: 1;
+  padding-right: 50px;
 }
 
 .card-logo {
@@ -62,106 +61,70 @@
   pointer-events: none;
 }
 
+/* Row inputs: expiry date and CVC side by side */
 .input-row {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 20px;
 }
 
 .input-row input {
   flex: 1;
-  padding: 12px 5px;
-  border: 1px solid #444;
-  border-radius: 4px;
-  background-color: #222;
-  color: #fff;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
 }
 
 .input-row input:focus {
-  border-color: #d3ad7f;
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 .error-message {
-  color: #9c6624;
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.pay-button {
-  width: 60%;
-  padding: 12px;
-  border: 1px solid #d3ad7f;
-  background-color: #010103;
-  color: #fff;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
+  color: #dc3545; /* Bootstrap red */
   font-weight: 600;
+  margin-bottom: 15px;
   text-align: center;
-  margin-left: 50px;
 }
 
+/* Pay button */
+.pay-button {
+  width: 100%;
+  background-color: #007bff;
+  border: none;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  user-select: none;
+}
+.order-summary{
+  font-size: 50px;
+}
 .pay-button:hover {
-  background-color: #9c6624;
+  background-color: #0056b3;
 }
 
-/* Responsive */
+.pay-button:active {
+  background-color: #004494;
+}
 
-@media (max-width: 560px) {
+@media (max-width: 480px) {
   .payment-container {
-    padding: 50px;
-    margin-top: 20rem;
-    margin-left: 30px;
-    width: 350px;
+    padding: 20px 15px;
   }
-  .payment-container h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
+  
   .input-row {
     flex-direction: column;
-    
-    
   }
+  
   .input-row input {
     width: 100%;
   }
-  .pay-button{
-    font-size: 1.5rem;
-  }
 }
-.cart-amount {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-family: 'Lato', sans-serif;
-}
-
-.delivery-options {
-  margin: 10px 0;
-  color: #d3ad7f;
-}
-
-.delivery-options label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.delivery-options input[type="radio"] {
-  margin-right: 8px;
-}
-.cart-details{
-  font-size: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #d3ad7f;
-}
-
-

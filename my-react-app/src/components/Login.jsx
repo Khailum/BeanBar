@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -9,56 +8,11 @@ function Login() {
   const [formErrors, setFormErrors] = useState({});
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const errors = validate(formValues);
-    setFormErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      setLoading(true);
-      try {
-        const res = await fetch(`http://localhost:3000/Users?email=${formValues.email}&password=${formValues.password}`);
-        const data = await res.json();
-
-        if (data.length > 0) {
-          const user = data[0];
-          setLoginSuccess(true);
-
-          // Save to localStorage
-          localStorage.setItem("user", JSON.stringify(user));
-
-          // Check if user exists in userprofile
-          const profileCheck = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
-          const profileExists = await profileCheck.json();
-
-          if (profileExists.length === 0) {
-            // Create user profile
-            await fetch("http://localhost:3000/userprofile", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(user),
-            });
-          }
-
-          setTimeout(() => {
-            navigate('/userprofile', { state: { user } });
-          }, 1000);
-        } else {
-          alert("Invalid email or password.");
-        }
-      } catch (err) {
-        console.error("Login error:", err);
-        alert("Something went wrong during login.");
-      } finally {
-        setLoading(false);
-      }
-    }
   };
 
   const validate = (values) => {
@@ -82,9 +36,85 @@ function Login() {
     return errors;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoginError("");
+    const errors = validate(formValues);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length === 0) {
+      setLoading(true);
+      const emailToSearch = formValues.email.trim().toLowerCase();
+      console.log("Searching user by email:", emailToSearch);
+
+      try {
+        // 1. Attempt direct search
+        const res = await fetch(`http://localhost:3000/customers?email=${encodeURIComponent(emailToSearch)}`);
+        if (!res.ok) throw new Error("Failed to fetch user data");
+        let users = await res.json();
+
+        // 2. Fallback: Fetch all users and manually filter
+        if (users.length === 0) {
+          const allRes = await fetch("http://localhost:3000/customers");
+          if (!allRes.ok) throw new Error("Failed to fetch all users");
+          const allUsers = await allRes.json();
+          users = allUsers.filter((u) =>
+            (u.email || u.Email || "").toLowerCase() === emailToSearch
+          );
+        }
+
+        // 3. If no users found
+        if (users.length === 0) {
+          setLoginError("User not found");
+          setLoading(false);
+          return;
+        }
+
+        const user = users[0];
+        const userPassword = user.password || "";
+
+        // 4. Check password
+        if (userPassword !== formValues.password) {
+          setLoginError("Incorrect password");
+          setLoading(false);
+          return;
+        }
+
+        // 5. Login success
+        setLoginSuccess(true);
+        const { password, ...userWithoutPassword } = user;
+        localStorage.setItem("user", JSON.stringify(userWithoutPassword));
+
+        // 6. Check or create user profile
+        const profileRes = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
+        const profileExists = await profileRes.json();
+
+        if (profileExists.length === 0) {
+          await fetch("http://localhost:3000/userprofile", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userWithoutPassword),
+          });
+        }
+
+        // 7. Redirect after short delay
+        setTimeout(() => {
+          navigate("/", { state: { user: userWithoutPassword } });
+        }, 1000);
+
+      } catch (err) {
+        console.error("Login failed:", err);
+        setLoginError("Something went wrong. Please try again.");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   return (
     <div className="login-page">
       {loginSuccess && <div className="ui message success">Login Successful!</div>}
+      {loginError && <div className="ui message error">{loginError}</div>}
       {loading && <div className="loading">Logging in...</div>}
 
       <form className="login-form" onSubmit={handleSubmit} noValidate>

@@ -43,20 +43,20 @@ function Contact() {
           <ul className="contact-list">
             <li className="list-item">
               <i className="fas fa-map-marker-alt"></i>
-              <span className="contact-text place">Woodstock, Cape Town
+              <span className="contact-text place">Pinelands, Cape Town
                
               </span>
             </li>
             <li className="list-item">
               <i className="fas fa-phone-alt"></i>
               <span className="contact-text phone">
-                <a href="tel:+273452360098">(+27) 345-236-0098</a>
+                <a href="tel:+27624300882">(+27) 64-430-0882</a>
               </span>
             </li>
             <li className="list-item">
               <i className="fas fa-envelope"></i>
               <span className="contact-text gmail">
-                <a href="mailto:beanBar@gmail.com">beanBar@gmail.com</a>
+                <a href="mailto:beanbar.04@gmail.com">beanbar.04@gmail.com</a>
               </span>
             </li>
           </ul>
@@ -65,7 +65,8 @@ function Contact() {
 
           <ul className="social-media-list">
             <li>
-              <a href="#" className="contact-icon" target="_blank"><i className="fab fa-facebook-f"></i></a>
+              <a href="https://www.facebook.com/share/16oqkPReVG/?mibextid=wwXIfr
+" className="contact-icon" target="_blank"><i className="fab fa-facebook-f"></i></a>
             </li>
             <li>
               <a href="https://www.linkedin.com/company/redacademy/posts/?feedView=all" className="contact-icon" target="_blank"><i className="fab fa-linkedin-in"></i></a>
@@ -74,7 +75,7 @@ function Contact() {
               <a href="https://www.youtube.com/@RedAcademyOfficial" className="contact-icon" target="_blank"><i className="fab fa-youtube" ></i></a>
             </li>
             <li>
-              <a href="#" className="contact-icon"><i className="fab fa-instagram"></i></a>
+              <a href="https://www.instagram.com/redacademy.sa?igsh=MTNrd2FqNWtjeW00dg==" className="contact-icon" target="_blank"><i className="fab fa-instagram"></i></a>
             </li>
           </ul>
 

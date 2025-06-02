@@ -1,56 +1,179 @@
-/* .user-profile-container {
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 25px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-}
+/* UserProfile.css */
 
-.user-profile-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #2c3e50;
-}
-
-.profile-info, .cart-section, .order-history-section {
-  margin-bottom: 25px;
-}
-
-.profile-info p,
-.cart-item span,
-.order-item p {
-  font-size: 16px;
-  margin: 6px 0;
-}
-
-.cart-list, .order-list {
-  list-style-type: none;
+/* Set the entire page background */
+body, html, #root {
+  background-color: #010103; /* very dark background */
+  min-height: 100vh;
+  margin: 0;
   padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.cart-item, .order-item {
-  background-color: white;
-  padding: 12px 15px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  box-shadow: 0 0 4px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.loading {
-  text-align: center;
-  font-size: 18px;
-  color: #666;
-} */
-h3, p{
-  color: beige;
-}
-
-.user-profile-container{
+/* Container with white/light background for contrast */
+.user-profile-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px 25px;
+  background-color: #ffff; /* white background */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(211, 173, 127, 0.3);
+  color: #010103; /* dark text */
   margin-top: 200px;
+}
+
+/* Title */
+.user-profile-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #010103;
+}
+
+/* Sections with subtle light gold background */
+.user-profile-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border: 1px solid #d3ad7f;
+  border-radius: 10px;
+  background-color: #fff8f0;
+}
+
+/* Section Titles */
+.user-profile-section-title {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #d3ad7f;
+  border-bottom: 2px solid #d3ad7f;
+  padding-bottom: 5px;
+}
+
+/* Text */
+.user-profile-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 6px 0;
+  color: #010103;
+}
+
+.user-profile-text strong {
+  color: #010103;
+}
+
+/* Logout Button */
+.user-profile-logout-button {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background-color: #d3ad7f;
+  color: #ffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 10px rgba(211, 173, 127, 0.4);
+}
+
+.user-profile-logout-button:hover {
+  background-color: #b58c56;
+}
+
+/* Loading & Error */
+.user-profile-loading,
+.user-profile-error {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 25px 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ffff; /* white text on dark bg */
+  border-radius: 12px;
+  background-color: #010103;
+  box-shadow: 0 6px 16px rgba(211, 173, 127, 0.6);
+}
+
+.user-profile-error button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #d3ad7f;
+  color: #ffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.25s ease;
+  box-shadow: 0 3px 8px rgba(211, 173, 127, 0.5);
+}
+
+.user-profile-error button:hover {
+  background-color: #b58c56;
+}
+
+@media (max-width: 480px) {
+  .user-profile-container {
+    margin: 20px 15px;
+    padding: 20px 15px;
+  }
+
+  .user-profile-section {
+    padding: 15px;
+  }
+}
+.user-profile-input {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  border: 1.5px solid #d3ad7f;
+  border-radius: 8px;
+  color: #010103;
+  background-color: #ffff;
+  transition: border-color 0.3s ease;
+}
+
+.user-profile-input:focus {
+  outline: none;
+  border-color: #b58c56;
+}
+
+.user-profile-save-button {
+  background-color: #d3ad7f;
+  color: #ffff;
+  border: none;
+  padding: 12px 18px;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 4px 10px rgba(211, 173, 127, 0.5);
+  transition: background-color 0.3s ease;
+  margin-top: 8px;
+}
+
+.user-profile-save-button:disabled {
+  background-color: #a78a5c;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.user-profile-save-button:hover:not(:disabled) {
+  background-color: #b58c56;
+}
+
+.user-profile-save-error {
+  margin-top: 12px;
+  color: #ff4444;
+  font-weight: 600;
+}
+
+.user-profile-save-success {
+  margin-top: 12px;
+  color: #2e7d32;
+  font-weight: 600;
 }

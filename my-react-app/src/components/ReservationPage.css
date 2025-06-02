@@ -1,0 +1,85 @@
+.resv-container {
+  max-width: 600px;
+  margin: 100px auto; /* Moves it down from the top */
+  padding: 2rem;
+  background-color: #222;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  font-family: 'Times New Roman', Times, serif;
+  border: 1px solid #b58c5e ;
+}
+
+.resv-form-group {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.reserve-header{
+  font-size: 18px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+}
+.resv-form-group label {
+  display: block;
+  color: #b58c5e;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.resv-form-group input,
+.resv-form-group select,
+.resv-textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #000;
+  background-color: #fff;
+}
+
+.resv-textarea {
+  resize: vertical;
+}
+
+.resv-btn {
+  background-color: #010102;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border: 1px solid #b58c5e;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+
+  
+}
+.resv-btn:hover{
+  background-color: #b58c5e;
+  color: white;
+
+}
+
+.resv-error {
+  border-color: red;
+}
+
+.resv-error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.resv-confirmation {
+  text-align: center;
+  padding: 2rem;
+  color: white;
+  font-size: 20px;
+}
+body {
+
+  padding-top: 80px; 
+  font-family: Arial, sans-serif;
+}

@@ -28,7 +28,7 @@ const Header = () => {
         <Link to="/about" onClick={() => setMenuActive(false)}>About</Link>
         <Link to="/product" onClick={() => setMenuActive(false)}>Products</Link>
         <Link to="/cart" onClick={() => setMenuActive(false)}>Cart</Link>
-        <Link to="/payment" onClick={() => setMenuActive(false)}>Checkout</Link>
+        {/* <Link to="/payment" onClick={() => setMenuActive(false)}>Checkout</Link> */}
         <Link to="/review" onClick={() => setMenuActive(false)}>Review</Link>
         <Link to="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
          <Link to="/userprofile" onClick={() => setMenuActive(false)}>profile</Link>
