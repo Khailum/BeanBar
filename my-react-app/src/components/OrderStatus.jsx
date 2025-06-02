@@ -1,68 +1,71 @@
-import { motion } from 'framer-motion'
-import { statusSteps } from '../data/mockData'
-import './OrderStatus.css'
+import { motion } from 'framer-motion';
+import { statusSteps } from '../data/mockData';
+import './OrderStatus.css';
 
 const OrderStatus = ({ status, updatedAt }) => {
-  const currentIndex = statusSteps.findIndex(step => step.key === status)
+  const currentIndex = statusSteps.findIndex(step => step.key === status);
   
   const formatTime = (dateString) => {
-    const options = { hour: 'numeric', minute: 'numeric', hour12: true }
-    return new Date(dateString).toLocaleTimeString('en-US', options)
-  }
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    return new Date(dateString).toLocaleTimeString('en-US', options);
+  };
 
   return (
-    <div className="order-status">
+    <motion.div 
+      className="order-status"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="status-header">
-        <h3>Current Status</h3>
-        <span className="status-badge" data-status={status}>
-          {statusSteps.find(step => step.key === status)?.label}
-        </span>
+        <h3>Order Status</h3>
+        <div className="last-updated">
+          🕒 Updated {formatTime(updatedAt)}
+        </div>
       </div>
-      
-      <p className="status-updated">
-        Last updated at {formatTime(updatedAt)}
-      </p>
       
       <div className="status-timeline">
         {statusSteps.map((step, index) => {
-          const isCompleted = index <= currentIndex
-          const isCurrent = index === currentIndex
+          const isCompleted = index <= currentIndex;
+          const isCurrent = index === currentIndex;
           
           return (
-            <div 
+            <motion.div 
               key={step.key} 
               className={`timeline-item ${isCompleted ? 'completed' : ''} ${isCurrent ? 'current' : ''}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
             >
-              <div className="timeline-connector">
-                {index > 0 && (
-                  <div className={`connector-line ${index <= currentIndex ? 'active' : ''}`}></div>
-                )}
-                <motion.div 
-                  className="connector-dot"
-                  initial={{ scale: 0.8 }}
-                  animate={{ 
-                    scale: isCurrent ? [0.8, 1.2, 1] : 1,
-                    backgroundColor: isCompleted ? 'var(--status-delivered)' : 'var(--medium-gray)'
-                  }}
-                  transition={{ 
-                    duration: 0.5,
-                    repeat: isCurrent ? Infinity : 0,
-                    repeatType: "reverse",
-                    repeatDelay: 2
-                  }}
-                ></motion.div>
-              </div>
+              {index < statusSteps.length - 1 && (
+                <div className={`timeline-connector ${isCompleted ? 'active' : ''}`} />
+              )}
+              
+              <motion.div 
+                className="timeline-dot"
+                animate={isCurrent ? { 
+                  scale: [1, 1.2, 1],
+                  boxShadow: ['0 0 0 0 rgba(212, 165, 116, 0.7)', '0 0 0 10px rgba(212, 165, 116, 0)', '0 0 0 0 rgba(212, 165, 116, 0)']
+                } : {}}
+                transition={{ 
+                  duration: 2,
+                  repeat: isCurrent ? Infinity : 0,
+                  repeatType: "reverse"
+                }}
+              >
+                {isCompleted ? '✓' : '○'}
+              </motion.div>
               
               <div className="timeline-content">
                 <h4>{step.label}</h4>
                 <p>{step.description}</p>
               </div>
-            </div>
-          )
+            </motion.div>
+          );
         })}
       </div>
-    </div>
-  )
-}
+    </motion.div>
+  );
+};
 
-export default OrderStatus
+export default OrderStatus;

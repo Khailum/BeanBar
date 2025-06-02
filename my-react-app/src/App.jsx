@@ -17,8 +17,9 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Contact from './components/Contact';
 import Review from './components/Review';
-import DeliveryTracking from './components/DeliveryTracking';
+// import DeliveryTracking from "./components/DeliveryTracking";
 import Footer from './components/Footer';
+import Index from "./components/Index"
 
 import NotificationProvider from './context/NotificationContext';
 
@@ -46,7 +47,8 @@ function LayoutWrapper() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/review" element={<Review />} />
           <Route path="/customer-review" element={<CustomerReview />} />
-          <Route path="/deliverytracking" element={<DeliveryTracking />} />
+          {/* <Route path="/deliverytracking" element={<DeliveryTracking />} /> */}
+          <Route path="/tracking" element={<Index />} />
 
         </Routes>
       </main>

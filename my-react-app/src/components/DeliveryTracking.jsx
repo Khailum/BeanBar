@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'  // <-- import this
 import OrderStatus from './OrderStatus'
-import DriverDetails from './DriverDetails'
+import DriverDetails from './DriverInfo'
 import LocationInfo from './LocationInfo'
 import OrderSummary from './OrderSummary'
 import './DeliveryTracker.css'

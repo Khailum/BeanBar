@@ -1561,6 +1561,173 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "id": "f25d",
+      "OrderNum": 402193,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 174,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "fea4",
+      "OrderNum": 600990,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 199,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 2
+        },
+        {
+          "id": "6651",
+          "ItemName": "Pancakes",
+          "ItemDescription": "Stack of pancakes.",
+          "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+          "Price": 25,
+          "type": "Snack",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "8ac9",
+      "OrderNum": 6974,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 226,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 3
+        },
+        {
+          "id": "6651",
+          "ItemName": "Pancakes",
+          "ItemDescription": "Stack of pancakes.",
+          "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+          "Price": 25,
+          "type": "Snack",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "bab4",
+      "OrderNum": 524005,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 226,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 3
+        },
+        {
+          "id": "6651",
+          "ItemName": "Pancakes",
+          "ItemDescription": "Stack of pancakes.",
+          "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+          "Price": 25,
+          "type": "Snack",
+          "quantity": 1
+        }
+      ]
     }
   ],
   "cardDetails": [
@@ -1636,6 +1803,15 @@
       "ImageUrl": "https://example.com/icecoffee.jpg",
       "sugarLevel": 0,
       "milkType": null,
+      "quantity": 3
+    },
+    {
+      "id": "6651",
+      "ItemName": "Pancakes",
+      "ItemDescription": "Stack of pancakes.",
+      "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+      "Price": 25,
+      "type": "Snack",
       "quantity": 1
     }
   ],

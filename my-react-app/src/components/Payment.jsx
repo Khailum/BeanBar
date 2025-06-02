@@ -109,7 +109,7 @@ const handlePayment = async () => {
   try {
     console.log('Processing payment...');
     alert('Payment processed successfully!');
-    navigate("/DeliveryTracking"); 
+    navigate("/tracking"); 
   } catch (err) {
     console.error(err);
     setError('Payment processing failed. Please try again.');
