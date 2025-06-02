@@ -1,70 +1,134 @@
-// DeliveryTracking.jsx
-import React from 'react';
-import DeliveryMap from './DeliveryMap.jsx';
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'  // <-- import this
+import OrderStatus from './OrderStatus'
+import DriverDetails from './DriverDetails'
+import LocationInfo from './LocationInfo'
+import OrderSummary from './OrderSummary'
+import './DeliveryTracker.css'
 
-const DeliveryTracking = () => {
-  // Hardcoded order summary and driver details
-  const orderSummary = {
-    orderId: 'BB123456',
-    items: [
-      { name: 'Latte', quantity: 2, price: 45 },
-      { name: 'Croissant', quantity: 1, price: 25 },
-    ],
-    total: 115,
-    status: 'Out for Delivery',
-    deliveryAddress: '1 Infinite Loop, Cupertino, CA',
-  };
+const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
+  const navigate = useNavigate()  // <-- initialize navigate
+  // Guard clause: show loading state if orderData is not available yet
+  if (!orderData) {
+    return <div>Loading order data...</div>
+  }
 
-  const driverInfo = {
-    name: 'Lebo Mtomboti',
-    phone: '082 123 4567',
-    vehicle: 'Yamaha Delivery Scooter',
-    origin: '1600 Amphitheatre Parkway, Mountain View, CA',
-  };
+  const [activeTab, setActiveTab] = useState('status')
+  
+  const formatDate = (dateString) => {
+    const options = { 
+      month: 'short', 
+      day: 'numeric', 
+      hour: 'numeric', 
+      minute: 'numeric',
+      hour12: true 
+    }
+    return new Date(dateString).toLocaleDateString('en-US', options)
+  }
+
+  // Simulate moving to the next status (demo only)
+  const handleNextStatus = () => {
+    const statusOrder = ['ordered', 'preparing', 'pickup', 'delivering', 'delivered']
+    const currentIndex = statusOrder.indexOf(orderData.status)
+    
+    if (currentIndex < statusOrder.length - 1) {
+      onUpdateStatus(statusOrder[currentIndex + 1])
+    }
+  }
+
+  // Handler to navigate to review page
+  const goToReviewPage = () => {
+    navigate('/review')
+  }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h2>Delivery Tracking</h2>
+    <motion.div 
+      className="delivery-tracker"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="order-header">
+        <div className="order-info">
+          <h2>Order #{orderData.id}</h2>
+          <p className="order-date">Placed on {formatDate(orderData.placedAt)}</p>
+        </div>
+        {orderData.status !== 'delivered' && (
+          <div className="estimated-delivery">
+            <p>Estimated Delivery</p>
+            <p className="delivery-time">{formatDate(orderData.estimatedDeliveryTime)}</p>
+          </div>
+        )}
+      </div>
+      
+      <div className="tracker-tabs">
+        <button 
+          className={`tab-button ${activeTab === 'status' ? 'active' : ''}`}
+          onClick={() => setActiveTab('status')}
+        >
+          Status
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'details' ? 'active' : ''}`}
+          onClick={() => setActiveTab('details')}
+        >
+          Details
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'summary' ? 'active' : ''}`}
+          onClick={() => setActiveTab('summary')}
+        >
+          Order Summary
+        </button>
+      </div>
+      
+      <div className="tracker-content">
+        {activeTab === 'status' && (
+          <OrderStatus 
+            status={orderData.status} 
+            updatedAt={orderData.statusUpdatedAt} 
+          />
+        )}
+        
+        {activeTab === 'details' && (
+          <div className="details-container">
+            <DriverDetails driver={orderData.driver} />
+            <LocationInfo 
+              source={orderData.source} 
+              destination={orderData.destination}
+              status={orderData.status}
+            />
+          </div>
+        )}
+        
+        {activeTab === 'summary' && (
+          <OrderSummary 
+            items={orderData.items} 
+            pricing={orderData.pricing}
+          />
+        )}
+      </div>
+      
+      {/* Demo controls - would be removed in production */}
+      {orderData.status !== 'delivered' && (
+        <div className="demo-controls">
+          <button className="demo-button" onClick={handleNextStatus}>
+            Simulate Next Status (Demo)
+          </button>
+        </div>
+      )}
 
-      {/* Order Summary */}
-      <section style={sectionStyle}>
-        <h3>Order Summary</h3>
-        <p><strong>Order ID:</strong> {orderSummary.orderId}</p>
-        <ul>
-          {orderSummary.items.map((item, i) => (
-            <li key={i}>
-              {item.quantity} x {item.name} - R{item.price * item.quantity}
-            </li>
-          ))}
-        </ul>
-        <p><strong>Total:</strong> R{orderSummary.total}</p>
-        <p><strong>Status:</strong> {orderSummary.status}</p>
-        <p><strong>Delivery Address:</strong> {orderSummary.deliveryAddress}</p>
-      </section>
-
-      {/* Driver Info */}
-      <section style={sectionStyle}>
-        <h3>Driver Details</h3>
-        <p><strong>Name:</strong> {driverInfo.name}</p>
-        <p><strong>Phone:</strong> {driverInfo.phone}</p>
-        <p><strong>Vehicle:</strong> {driverInfo.vehicle}</p>
-        <p><strong>Coming from:</strong> {driverInfo.origin}</p>
-      </section>
-
-      {/* Map */}
-      <DeliveryMap
-        driverAddress={driverInfo.origin}
-        deliveryAddress={orderSummary.deliveryAddress}
-      />
-    </div>
-  );
-};
-
-const sectionStyle = {
-  marginBottom: '2rem',
-  border: '1px solid #ccc',
-  padding: '1rem',
-  borderRadius: '8px',
-};
+      {/* REVIEW BUTTON shown only if order is delivered */}
+      {orderData.status === 'delivered' && (
+        <div className="review-action">
+          <button className="review-button" onClick={goToReviewPage}>
+            Leave a Review
+          </button>
+        </div>
+      )}
+    </motion.div>
+  )
+}
 
 export default DeliveryTracking;

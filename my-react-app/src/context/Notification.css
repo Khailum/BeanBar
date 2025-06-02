@@ -1,0 +1,127 @@
+.notification {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 1000;
+  min-width: 350px;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(16px);
+  animation: slideInRight 0.3s ease-out;
+  border: 1px solid rgba(193, 120, 23, 0.3);
+  overflow: hidden;
+  color: white;
+}
+
+/* Notification background types */
+.notification-success {
+  background: linear-gradient(135deg, #C17817, #A8650D);
+}
+
+.notification-error {
+  background: linear-gradient(135deg, #D32F2F, #B71C1C);
+}
+
+.notification-warning {
+  background: linear-gradient(135deg, #ED6C02, #E65100);
+}
+
+.notification-info {
+  background: linear-gradient(135deg, #C17817, #9B7653);
+}
+
+/* Notification content layout */
+.notification-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px;
+  position: relative;
+}
+
+.notification-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.notification-message {
+  flex: 1;
+  font-size: clamp(20px, 3vw, 28px); /* ✅ responsive large text */
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.notification-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.notification-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.notification-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  animation: progressBar 6s linear;
+  width: 100%;
+}
+
+/* Animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .notification {
+    top: 60px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+    max-width: none;
+  }
+
+  .notification-content {
+    padding: 16px;
+  }
+
+  .notification-message {
+    font-size: clamp(18px, 4vw, 24px); /* ✅ still readable on mobile */
+  }
+}

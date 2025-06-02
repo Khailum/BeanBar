@@ -1,159 +1,126 @@
-/* UserProfile.css */
-
-/* Set the entire page background */
-body, html, #root {
-  background-color: #010103; /* very dark background */
-  min-height: 100vh;
+/* Base Background and Font Setup */
+/* body, html, #root {
+  background-color: #000;
+  color: #f0e6dc;
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+} */
 
-/* Container with white/light background for contrast */
+/* Main Container */
 .user-profile-container {
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 800px;
+  margin: 80px auto;
   padding: 30px 25px;
-  background-color: #ffff; /* white background */
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(211, 173, 127, 0.3);
-  color: #010103; /* dark text */
-  margin-top: 200px;
+  background-color: #0a0a0a;
+  border-radius: 14px;
 }
 
-/* Title */
+/* Main Title */
 .user-profile-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
   text-align: center;
-  font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #010103;
+  margin-bottom: 40px;
 }
 
-/* Sections with subtle light gold background */
-.user-profile-section {
+/* Profile Picture Section */
+.user-profile-picture-section {
+  text-align: center;
   margin-bottom: 30px;
+}
+
+.user-profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #d3ad7f;
+  background-color: #1c1c1c;
+  margin-bottom: 12px;
+}
+
+.user-profile-img.placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #d3ad7f;
+  background-color: #1a1a1a;
+}
+
+.user-profile-file {
+  margin-top: 8px;
+  color: #d3ad7f;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: transparent;
+  border: none;
+}
+
+/* Section Container */
+.user-profile-section {
+  margin-bottom: 35px;
   padding: 20px;
   border: 1px solid #d3ad7f;
-  border-radius: 10px;
-  background-color: #fff8f0;
+  border-radius: 12px;
+  background-color: #111;
 }
 
-/* Section Titles */
+/* Section Heading */
 .user-profile-section-title {
-  margin-bottom: 15px;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: #d3ad7f;
+  margin-bottom: 15px;
   border-bottom: 2px solid #d3ad7f;
-  padding-bottom: 5px;
+  padding-bottom: 6px;
 }
 
-/* Text */
+/* Labels & Inputs */
 .user-profile-text {
+  display: block;
+  margin-bottom: 18px;
   font-size: 1rem;
-  line-height: 1.5;
-  margin: 6px 0;
-  color: #010103;
+  color: #f0e6dc;
 }
 
 .user-profile-text strong {
-  color: #010103;
+  color: #d3ad7f;
 }
 
-/* Logout Button */
-.user-profile-logout-button {
-  display: block;
-  width: 100%;
-  padding: 14px 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  background-color: #d3ad7f;
-  color: #ffff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  margin-top: 10px;
-  box-shadow: 0 4px 10px rgba(211, 173, 127, 0.4);
-}
-
-.user-profile-logout-button:hover {
-  background-color: #b58c56;
-}
-
-/* Loading & Error */
-.user-profile-loading,
-.user-profile-error {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 25px 20px;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #ffff; /* white text on dark bg */
-  border-radius: 12px;
-  background-color: #010103;
-  box-shadow: 0 6px 16px rgba(211, 173, 127, 0.6);
-}
-
-.user-profile-error button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #d3ad7f;
-  color: #ffff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.25s ease;
-  box-shadow: 0 3px 8px rgba(211, 173, 127, 0.5);
-}
-
-.user-profile-error button:hover {
-  background-color: #b58c56;
-}
-
-@media (max-width: 480px) {
-  .user-profile-container {
-    margin: 20px 15px;
-    padding: 20px 15px;
-  }
-
-  .user-profile-section {
-    padding: 15px;
-  }
-}
 .user-profile-input {
   width: 100%;
-  padding: 8px 12px;
+  padding: 12px 15px;
   margin-top: 6px;
-  margin-bottom: 12px;
   font-size: 1rem;
-  border: 1.5px solid #d3ad7f;
+  border: 2px solid #333;
   border-radius: 8px;
-  color: #010103;
-  background-color: #ffff;
+  color: #fff;
+  background-color: #1a1a1a;
   transition: border-color 0.3s ease;
 }
 
 .user-profile-input:focus {
   outline: none;
-  border-color: #b58c56;
+  border-color: #d3ad7f;
 }
 
+/* Save Button */
 .user-profile-save-button {
   background-color: #d3ad7f;
-  color: #ffff;
+  color: #000;
   border: none;
-  padding: 12px 18px;
-  font-weight: 700;
+  padding: 12px 20px;
   font-size: 1rem;
+  font-weight: 700;
   border-radius: 10px;
   cursor: pointer;
-  user-select: none;
-  box-shadow: 0 4px 10px rgba(211, 173, 127, 0.5);
   transition: background-color 0.3s ease;
-  margin-top: 8px;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .user-profile-save-button:disabled {
@@ -163,17 +130,101 @@ body, html, #root {
 }
 
 .user-profile-save-button:hover:not(:disabled) {
-  background-color: #b58c56;
+  background-color: #b58c5e;
+}
+
+/* Success & Error */
+.user-profile-save-success {
+  margin-top: 12px;
+  color: #4caf50;
+  font-weight: 600;
 }
 
 .user-profile-save-error {
   margin-top: 12px;
-  color: #ff4444;
+  color: #ff4c4c;
   font-weight: 600;
 }
 
-.user-profile-save-success {
-  margin-top: 12px;
-  color: #2e7d32;
+/* Logout Button */
+.user-profile-logout-button {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background-color: #d3ad7f;
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-logout-button:hover {
+  background-color: #b58c5e;
+}
+
+/* Loading & Error Box */
+.user-profile-loading,
+.user-profile-error {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 25px;
+  text-align: center;
+  font-size: 1.2rem;
+  background-color: #111;
+  border: 1px solid #d3ad7f;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(211, 173, 127, 0.5);
+}
+
+.user-profile-error button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #d3ad7f;
+  color: #000;
+  border: none;
+  border-radius: 8px;
   font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-error button:hover {
+  background-color: #b58c5e;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .user-profile-container {
+    margin: 40px 16px;
+    padding: 20px;
+  }
+
+  .user-profile-title {
+    font-size: 1.8rem;
+  }
+
+  .user-profile-section-title {
+    font-size: 1.2rem;
+  }
+
+  .user-profile-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-profile-input,
+  .user-profile-save-button,
+  .user-profile-logout-button {
+    font-size: 0.95rem;
+    padding: 10px 14px;
+  }
+
+  .user-profile-title {
+    font-size: 1.6rem;
+  }
 }

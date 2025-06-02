@@ -41,7 +41,7 @@ function Register() {
       const registerUser = async () => {
         setIsSubmitting(true);
         try {
-          const res = await fetch('http://localhost:3000/customers');
+          const res = await fetch('http://localhost:3000/Users');
           if (!res.ok) throw new Error('Failed to fetch users');
           const users = await res.json();
 
@@ -63,7 +63,8 @@ function Register() {
             return;
           }
 
-          const response = await fetch('http://localhost:3000/customers', {
+          // Register user in Users endpoint
+          const response = await fetch('http://localhost:3000/Users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -79,10 +80,27 @@ function Register() {
           if (!response.ok) throw new Error('Registration failed');
 
           await response.json();
+
+          // Send data to User Profile API endpoint
+          const profileRes = await fetch('http://localhost:3000/UserProfiles', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              customerID: formValues.idNumber,
+              fullName: formValues.fullName,
+              email: formValues.email,
+              phoneNumber: formValues.phoneNumber,
+              address: formValues.address,
+              createdAt: new Date().toISOString(),
+            }),
+          });
+
+          if (!profileRes.ok) throw new Error('Failed to create user profile');
+
           setIsSuccess(true);
           setFormValues(initialValues);
           setAgreed(false);
-          setTimeout(() => navigate('/login'), 3000);
+          setTimeout(() => navigate('/'), 3000); // Redirect to home page after 3 seconds
         } catch (err) {
           console.error('Error:', err);
           alert('Something went wrong during registration.');
@@ -129,7 +147,11 @@ function Register() {
         </div>
       )}
 
-      <form className={`register-form ${isSuccess ? 'fade-out' : ''}`} onSubmit={handleSubmit} noValidate>
+      <form
+        className={`register-form ${isSuccess ? 'fade-out' : ''}`}
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <h2 className="title">Create Account</h2>
 
         {duplicateError && <p className="error duplicate-error">{duplicateError}</p>}
@@ -142,7 +164,9 @@ function Register() {
             value={formValues.fullName}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.fullName && <p className="error">{formErrors.fullName}</p>}
+          {isSubmit && formErrors.fullName && (
+            <p className="error">{formErrors.fullName}</p>
+          )}
         </div>
 
         <div className="register-input-wrapper">
@@ -153,7 +177,9 @@ function Register() {
             value={formValues.idNumber}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.idNumber && <p className="error">{formErrors.idNumber}</p>}
+          {isSubmit && formErrors.idNumber && (
+            <p className="error">{formErrors.idNumber}</p>
+          )}
         </div>
 
         <div className="register-input-wrapper">
@@ -175,7 +201,9 @@ function Register() {
             value={formValues.phoneNumber}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.phoneNumber && <p className="error">{formErrors.phoneNumber}</p>}
+          {isSubmit && formErrors.phoneNumber && (
+            <p className="error">{formErrors.phoneNumber}</p>
+          )}
         </div>
 
         <div className="register-input-wrapper">
@@ -196,7 +224,9 @@ function Register() {
             value={formValues.password}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.password && <p className="error">{formErrors.password}</p>}
+          {isSubmit && formErrors.password && (
+            <p className="error">{formErrors.password}</p>
+          )}
         </div>
 
         <div className="register-input-wrapper">
@@ -207,12 +237,18 @@ function Register() {
             value={formValues.confirmPassword}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.confirmPassword && <p className="error">{formErrors.confirmPassword}</p>}
+          {isSubmit && formErrors.confirmPassword && (
+            <p className="error">{formErrors.confirmPassword}</p>
+          )}
         </div>
 
         <div className="register-terms">
           <label>
-            <input type="checkbox" checked={agreed} onChange={() => setAgreed(!agreed)} />
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={() => setAgreed(!agreed)}
+            />
             I agree to the terms and conditions
           </label>
           {isSubmit && formErrors.terms && <p className="error">{formErrors.terms}</p>}

@@ -9,7 +9,7 @@ function UserProfile() {
   const [user, setUser] = useState(location.state?.user || null);
   const [loading, setLoading] = useState(true);
   const [profileData, setProfileData] = useState(null);
-  const [editData, setEditData] = useState(null); // form state for editing
+  const [editData, setEditData] = useState(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -22,25 +22,46 @@ function UserProfile() {
   }, [user]);
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    const fetchOrCreateProfile = async () => {
       if (!user?.customerID) {
         setLoading(false);
         return;
       }
       try {
         const res = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
+        if (!res.ok) throw new Error("Failed to fetch user profile");
         const data = await res.json();
+
         if (data.length > 0) {
           setProfileData(data[0]);
-          setEditData(data[0]); // initialize form data
+          setEditData(data[0]);
+        } else {
+          const createRes = await fetch(`http://localhost:3000/userprofile`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              customerID: user.customerID,
+              fullName: user.fullName || "",
+              email: user.email || "",
+              phoneNumber: user.phoneNumber || "",
+              address: "",
+            }),
+          });
+
+          if (!createRes.ok) throw new Error("Failed to create user profile");
+          const newProfile = await createRes.json();
+
+          setProfileData(newProfile);
+          setEditData(newProfile);
         }
       } catch (error) {
-        console.error("Error fetching user profile:", error);
+        console.error("Error fetching or creating user profile:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchProfile();
+
+    fetchOrCreateProfile();
   }, [user]);
 
   const handleLogout = () => {
@@ -48,7 +69,6 @@ function UserProfile() {
     navigate("/login");
   };
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditData((prev) => ({
@@ -59,7 +79,6 @@ function UserProfile() {
     setSaveSuccess(false);
   };
 
-  // Submit updated data to backend
   const handleSave = async () => {
     if (!editData) return;
     setSaving(true);
@@ -67,7 +86,6 @@ function UserProfile() {
     setSaveSuccess(false);
 
     try {
-      // Replace with your actual update endpoint & method
       const res = await fetch(`http://localhost:3000/userprofile/${editData.customerID}`, {
         method: "PUT",
         headers: {
@@ -107,7 +125,7 @@ function UserProfile() {
 
       <section className="user-profile-section">
         <h3 className="user-profile-section-title">Customer Information</h3>
-        
+
         <label className="user-profile-text" htmlFor="fullName">
           <strong>Name:</strong>
           <input

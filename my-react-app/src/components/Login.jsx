@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Login.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -45,25 +45,25 @@ function Login() {
     if (Object.keys(errors).length === 0) {
       setLoading(true);
       const emailToSearch = formValues.email.trim().toLowerCase();
-      console.log("Searching user by email:", emailToSearch);
 
       try {
-        // 1. Attempt direct search
-        const res = await fetch(`http://localhost:3000/customers?email=${encodeURIComponent(emailToSearch)}`);
+        const res = await fetch(
+          `http://localhost:3000/Users?email=${encodeURIComponent(emailToSearch)}`
+        );
         if (!res.ok) throw new Error("Failed to fetch user data");
         let users = await res.json();
 
-        // 2. Fallback: Fetch all users and manually filter
+        // fallback filter if no results from API query param
         if (users.length === 0) {
-          const allRes = await fetch("http://localhost:3000/customers");
+          const allRes = await fetch("http://localhost:3000/Users");
           if (!allRes.ok) throw new Error("Failed to fetch all users");
           const allUsers = await allRes.json();
-          users = allUsers.filter((u) =>
-            (u.email || u.Email || "").toLowerCase() === emailToSearch
+
+          users = allUsers.filter(
+            (u) => (u.email || "").toLowerCase() === emailToSearch
           );
         }
 
-        // 3. If no users found
         if (users.length === 0) {
           setLoginError("User not found");
           setLoading(false);
@@ -73,35 +73,54 @@ function Login() {
         const user = users[0];
         const userPassword = user.password || "";
 
-        // 4. Check password
         if (userPassword !== formValues.password) {
           setLoginError("Incorrect password");
           setLoading(false);
           return;
         }
 
-        // 5. Login success
         setLoginSuccess(true);
+
+        // Remove password before saving
         const { password, ...userWithoutPassword } = user;
-        localStorage.setItem("user", JSON.stringify(userWithoutPassword));
 
-        // 6. Check or create user profile
-        const profileRes = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
-        const profileExists = await profileRes.json();
+        // Check if user profile exists
+        const profileRes = await fetch(
+          `http://localhost:3000/userprofile?customerID=${user.customerID}`
+        );
+        if (!profileRes.ok) throw new Error("Failed to fetch user profile");
+        const profiles = await profileRes.json();
 
-        if (profileExists.length === 0) {
-          await fetch("http://localhost:3000/userprofile", {
+        let profile;
+
+        if (profiles.length === 0) {
+          // No profile found, create new profile with default data
+          const createRes = await fetch(`http://localhost:3000/userprofile`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(userWithoutPassword),
+            body: JSON.stringify({
+              customerID: user.customerID,
+              fullName: user.fullName,
+              email: user.email,
+              phoneNumber: user.phoneNumber || "",
+              address: "",
+              // Add other default fields if needed
+            }),
           });
+
+          if (!createRes.ok) throw new Error("Failed to create user profile");
+          profile = await createRes.json();
+        } else {
+          profile = profiles[0];
         }
 
-        // 7. Redirect after short delay
-        setTimeout(() => {
-          navigate("/", { state: { user: userWithoutPassword } });
-        }, 1000);
+        localStorage.setItem("user", JSON.stringify(userWithoutPassword));
+        localStorage.setItem("profile", JSON.stringify(profile));
 
+        setTimeout(() => {
+          // Pass both user and profile on navigation
+          navigate("/", { state: { user: userWithoutPassword, profile } });
+        }, 1000);
       } catch (err) {
         console.error("Login failed:", err);
         setLoginError("Something went wrong. Please try again.");
@@ -113,7 +132,9 @@ function Login() {
 
   return (
     <div className="login-page">
-      {loginSuccess && <div className="ui message success">Login Successful!</div>}
+      {loginSuccess && (
+        <div className="ui message success">Login Successful!</div>
+      )}
       {loginError && <div className="ui message error">{loginError}</div>}
       {loading && <div className="loading">Logging in...</div>}
 
@@ -156,7 +177,9 @@ function Login() {
         </button>
 
         <div className="login-register">
-          <p>Don't have an account? <Link to="/register">Register</Link></p>
+          <p>
+            Don't have an account? <Link to="/register">Register</Link>
+          </p>
         </div>
       </form>
     </div>

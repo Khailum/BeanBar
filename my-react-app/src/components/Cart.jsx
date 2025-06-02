@@ -78,7 +78,7 @@ function CartPage() {
   const saveCartToApi = async () => {
     const OrderNum = Math.floor(Math.random() * 1000000);
     try {
-      const response = await fetch("http://localhost:3000/checkout", {
+      const response = await fetch("http://localhost:3000/payments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,32 +1,25 @@
-  import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './Payment.css';
 import visaLogo from '../assets/Visa_inc._logo.svg';
 import mastercardLogo from '../assets/mastercard-logo.svg';
+import OrderSummary from './OrderSummary';
 
-// Card type detection - UPDATED AND UNCOMMENTED
 const detectCardType = (number) => {
-  if (!number) return '';
-  const digits = number.replace(/\D/g, '');
-
-  if (digits.startsWith('4')) return 'visa';
-
-  const firstTwo = parseInt(digits.slice(0, 2), 10);
-  const firstFour = parseInt(digits.slice(0, 4), 10);
-
+  const digits = number?.replace(/\D/g, '');
+  if (digits?.startsWith('4')) return 'visa';
+  const firstTwo = parseInt(digits?.slice(0, 2), 10);
+  const firstFour = parseInt(digits?.slice(0, 4), 10);
   if ((firstTwo >= 51 && firstTwo <= 55) || (firstFour >= 2221 && firstFour <= 2720)) {
     return 'mastercard';
   }
-
   return '';
 };
-
-// Luhn, expiry, CVC validation are still commented out as per your code
 
 const PaymentComponent = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { totalPrice, cartItems, orderNum, deliveryOption } = location.state || {};
+  const { totalPrice, cartItems = [], orderNum, deliveryOption, pricing } = location.state || {};
 
   const [cardNumber, setCardNumber] = useState('');
   const [cardType, setCardType] = useState('');
@@ -35,158 +28,256 @@ const PaymentComponent = () => {
   const [expiryDate, setExpiryDate] = useState('');
   const [cvc, setCvc] = useState('');
   const [error, setError] = useState('');
+  const [showReview, setShowReview] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [reviewText, setReviewText] = useState('');
+  const [reviewSubmitting, setReviewSubmitting] = useState(false);
 
-  const handleCardNumberChange = (e) => {
-    const raw = e.target.value.replace(/\D/g, '').slice(0, 16);
-    const formatted = raw.replace(/(.{4})/g, '$1 ').trim();
-    setCardNumber(formatted);
-
-    setCardType(detectCardType(raw)); // ENABLED card type detection
-  };
-
-  const handleExpiryChange = (e) => {
-    let value = e.target.value.replace(/\D/g, '').slice(0, 4);
-    if (value.length >= 3) value = `${value.slice(0, 2)}/${value.slice(2)}`;
-    setExpiryDate(value);
-  };
-
+  // 🔧 Utility to get card logo
   const getCardLogo = () => {
     if (cardType === 'visa') return visaLogo;
     if (cardType === 'mastercard') return mastercardLogo;
     return null;
   };
 
-const handlePayment = async () => {
-  const trimmedCardNumber = cardNumber.replace(/\s/g, '');
-  const trimmedAccountHolder = accountHolder.trim();
-  const trimmedAccountNumber = accountNumber.trim();
-  const trimmedCvc = cvc.trim();
+  // 🔧 Format card input and detect card type
+  const handleCardNumberChange = (e) => {
+    let input = e.target.value.replace(/\D/g, '').slice(0, 16);
+    const formatted = input.replace(/(.{4})/g, '$1 ').trim();
+    setCardNumber(formatted);
+    setCardType(detectCardType(input));
+  };
 
-  if (!/^[a-zA-Z\s\-']{2,}$/.test(trimmedAccountHolder)) {
-    setError('Please enter a valid Account Holder name.');
-    return;
-  }
+  // 🔧 Expiry input auto-format
+  const handleExpiryChange = (e) => {
+    let input = e.target.value.replace(/\D/g, '').slice(0, 4);
+    if (input.length >= 3) {
+      input = input.slice(0, 2) + '/' + input.slice(2);
+    }
+    setExpiryDate(input);
+  };
 
-  if (trimmedAccountNumber.length !== 9) {
-    setError('Account Number must be exactly 9 digits.');
-    return;
-  }
+  const validatePaymentDetails = () => {
+    const trimmedCardNumber = cardNumber.replace(/\s/g, '');
+    const trimmedAccountHolder = accountHolder.trim();
+    const trimmedAccountNumber = accountNumber.trim();
+    const trimmedCvc = cvc.trim();
 
-  setError('');
-
-  try {
-    const res = await fetch('http://localhost:3000/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        orderNum,
-        totalPrice,
-        deliveryOption,
-        cartItems,
-        paymentDetails: {
-          accountHolder: trimmedAccountHolder,
-          accountNumber: trimmedAccountNumber,
-          cardNumber: trimmedCardNumber,
-          expiryDate,
-          cvc: trimmedCvc,
-          cardType,
-        },
-      }),
-    });
-
-    if (!res.ok) throw new Error('Payment failed');
-
-    alert('Payment processed successfully!');
-
-    if (deliveryOption === 'delivery') {
-      navigate('/track-delivery', { state: { orderNum, cartItems } });
-    } else {
-      navigate('/order-success', { state: { orderNum, totalPrice } });
+    if (!/^[a-zA-Z\s\-']{2,}$/.test(trimmedAccountHolder)) {
+      setError('Please enter a valid Account Holder name.');
+      return false;
     }
 
+    if (trimmedAccountNumber.length !== 9) {
+      setError('Account Number must be exactly 9 digits.');
+      return false;
+    }
+
+    if (trimmedCardNumber.length !== 16) {
+      setError('Card Number must be 16 digits.');
+      return false;
+    }
+
+    if (!expiryDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
+      setError('Expiry Date must be in MM/YY format.');
+      return false;
+    }
+
+    const [month, year] = expiryDate.split('/').map(Number);
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear() % 100;
+    const currentMonth = currentDate.getMonth() + 1;
+
+    if (year < currentYear || (year === currentYear && month < currentMonth)) {
+      setError('Card has expired. Please use a valid card.');
+      return false;
+    }
+
+    if (trimmedCvc.length < 3 || trimmedCvc.length > 4) {
+      setError('CVC must be 3 or 4 digits.');
+      return false;
+    }
+
+    setError('');
+    return true;
+  };
+
+const handlePayment = async () => {
+  if (!validatePaymentDetails()) return;
+
+  try {
+    console.log('Processing payment...');
+    alert('Payment processed successfully!');
+    navigate("/DeliveryTracking"); 
   } catch (err) {
     console.error(err);
     setError('Payment processing failed. Please try again.');
   }
 };
 
+
+
+  const submitReview = async () => {
+    if (rating === 0) {
+      alert('Please select a rating before submitting.');
+      return;
+    }
+
+    setReviewSubmitting(true);
+    try {
+      console.log('Review submitted:', { rating, reviewText });
+      setTimeout(() => {
+        setReviewSubmitting(false);
+        navigate('/');
+      }, 1000);
+    } catch (err) {
+      console.error('Review submission failed', err);
+      setReviewSubmitting(false);
+    }
+  };
+
+  const skipReview = () => navigate('/');
+
+  const calculatedPricing = pricing || {
+    subtotal: totalPrice * 0.8,
+    tax: totalPrice * 0.05,
+    deliveryFee: deliveryOption === 'delivery' ? 100 : 0,
+    tip: 0,
+    total: totalPrice,
+  };
+
   return (
     <div className="payment-container">
       <h2>Payment Details</h2>
 
-      {orderNum && (
-        <div className="order-summary">
-          <p><strong>Order Number:</strong> {orderNum}</p>
-          <p><strong>Total Price:</strong> R{totalPrice?.toFixed(2)}</p>
-          <p><strong>Delivery Option:</strong> {deliveryOption}</p>
-          <p><strong>Items:</strong> {cartItems?.length} item(s)</p>
-        </div>
+      <OrderSummary items={cartItems} pricing={calculatedPricing} />
+
+      {!showReview && (
+        <>
+          <div className="input-wrapper">
+            <input
+              type="text"
+              value={accountHolder}
+              onChange={(e) =>
+                setAccountHolder(e.target.value.replace(/[^a-zA-Z\s\-']/g, ''))
+              }
+              placeholder="Account Holder"
+              autoComplete="name"
+            />
+          </div>
+
+          <div className="input-wrapper">
+            <input
+              type="text"
+              value={accountNumber}
+              onChange={(e) =>
+                setAccountNumber(e.target.value.replace(/\D/g, '').slice(0, 9))
+              }
+              placeholder="Account Number (9 digits)"
+              maxLength={9}
+              autoComplete="off"
+            />
+          </div>
+
+          <div className="input-wrapper card-input">
+            <input
+              type="text"
+              value={cardNumber}
+              onChange={handleCardNumberChange}
+              placeholder="Card Number"
+              maxLength={19}
+              autoComplete="cc-number"
+            />
+            {getCardLogo() && (
+              <img src={getCardLogo()} alt="Card Logo" className="card-logo" />
+            )}
+          </div>
+
+          <div className="input-row">
+            <input
+              type="text"
+              value={expiryDate}
+              onChange={handleExpiryChange}
+              placeholder="MM/YY"
+              maxLength={5}
+              autoComplete="cc-exp"
+            />
+            <input
+              type="text"
+              value={cvc}
+              onChange={(e) =>
+                setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))
+              }
+              placeholder="CVC"
+              maxLength={4}
+              autoComplete="cc-csc"
+            />
+          </div>
+
+          {error && <p className="error-message">{error}</p>}
+
+          <button className="checkout-btn" onClick={handlePayment}>
+            Pay Now
+          </button>
+        </>
       )}
 
-      <div className="input-wrapper">
-        <input
-          type="text"
-          value={accountHolder}
-          onChange={(e) =>
-            setAccountHolder(e.target.value.replace(/[^a-zA-Z\s\-']/g, ''))
-          }
-          placeholder="Account Holder"
-        />
-      </div>
+      {showReview && (
+        <div className="review-section">
+          <h3>Rate Your Experience</h3>
+          <p className="review-subtitle">How was your experience with us?</p>
 
-      <div className="input-wrapper">
-        <input
-          type="text"
-          value={accountNumber}
-          onChange={(e) => {
-            const value = e.target.value.replace(/\D/g, '').slice(0, 9);
-            setAccountNumber(value);
-          }}
-          placeholder="Account Number (9 digits)"
-          maxLength="9"
-        />
-      </div>
+          <div className="rating-container">
+            <div className="rating-stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star ${star <= (hoverRating || rating) ? 'filled' : ''}`}
+                  onClick={() => setRating(star)}
+                  onMouseEnter={() => setHoverRating(star)}
+                  onMouseLeave={() => setHoverRating(0)}
+                >
+                  ★
+                </span>
+              ))}
+            </div>
+            {(hoverRating || rating) > 0 && (
+              <div className="rating-text">
+                <span className="rating-label">{hoverRating || rating} out of 5 stars</span>
+              </div>
+            )}
+          </div>
 
-      <div className="input-wrapper card-input">
-        <input
-          type="text"
-          value={cardNumber}
-          onChange={handleCardNumberChange}
-          placeholder="Card Number"
-          maxLength="19"
-        />
-        {getCardLogo() && (
-          <img src={getCardLogo()} alt="Card Logo" className="card-logo" />
-        )}
-      </div>
+          <textarea
+            className="review-textarea"
+            placeholder="Tell us about your experience... (optional)"
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            rows={4}
+          ></textarea>
 
-      <div className="input-row">
-        <input
-          type="text"
-          value={expiryDate}
-          onChange={handleExpiryChange}
-          placeholder="MM/YY"
-          maxLength="5"
-        />
-        <input
-          type="text"
-          value={cvc}
-          onChange={(e) => {
-            const value = e.target.value.replace(/\D/g, '').slice(0, 4);
-            setCvc(value);
-          }}
-          placeholder="CVC"
-          maxLength="4"
-        />
-      </div>
-
-      {error && <p className="error-message">{error}</p>}
-
-      <button className="pay-button" onClick={handlePayment}>
-        Pay Now
-      </button>
+          <div className="review-buttons">
+            <button
+              className="submit-review-btn"
+              onClick={submitReview}
+              disabled={reviewSubmitting || rating === 0}
+            >
+              {reviewSubmitting ? 'Submitting...' : 'Submit Review'}
+            </button>
+            <button
+              className="skip-review-btn"
+              onClick={skipReview}
+              disabled={reviewSubmitting}
+            >
+              Skip Review
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default PaymentComponent;
+ 

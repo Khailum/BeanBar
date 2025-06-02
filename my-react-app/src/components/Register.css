@@ -46,7 +46,7 @@
     transition: 0.3s;
     background-color: #222;
     font-family: 'Lato', sans-serif;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     
   }
   /* .error{
@@ -121,7 +121,7 @@
     cursor: pointer;
     transition: 0.3s;
     font-family: 'Lato', sans-serif;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 
   }
   

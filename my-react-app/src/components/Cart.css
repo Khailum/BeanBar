@@ -133,6 +133,34 @@ h2 {
   transition: background-color 0.3s ease;
   width: 100%; /* full width for nice button */
 }
+.delivery-option {
+  margin-top: 30px;
+  padding: 15px 20px;
+  /* border: 1px solid #d3ad7f;
+  border-radius: 8px; */
+  /* background-color: #1a1a1a; */
+  color: #fff;
+  font-size: 13px;
+}
+
+.delivery-option h3 {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #d3ad7f;
+}
+
+.delivery-option label {
+  display: inline-block;
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.delivery-option input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #d3ad7f;
+}
+
 
 .checkout-btn:hover {
   background-color: #d3ad7f;

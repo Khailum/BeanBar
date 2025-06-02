@@ -1,0 +1,134 @@
+.driver-details {
+  background-color: rgba(30, 21, 17, 0.5);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.driver-card {
+  display: flex;
+  align-items: center;
+  margin: var(--space-2) 0 var(--space-3);
+  background-color: rgba(60, 42, 33, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
+.driver-photo-container {
+  position: relative;
+  margin-right: var(--space-2);
+}
+
+.driver-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--coffee-light);
+}
+
+.driver-rating {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: var(--coffee-dark);
+  color: var(--cream-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: var(--font-bold);
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--coffee-light);
+}
+
+.star {
+  color: var(--status-pending);
+  margin-right: 4px;
+}
+
+.driver-info {
+  flex: 1;
+}
+
+.driver-info h4 {
+  margin: 0 0 var(--space-1);
+  color: var(--cream-light);
+}
+
+.driver-id {
+  font-size: 0.8rem;
+  color: var(--cream-dark);
+  margin: 0 0 var(--space-1);
+}
+
+.driver-contact {
+  margin-top: var(--space-2);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-1);
+  color: var(--cream-medium);
+  font-size: 0.9rem;
+}
+
+.contact-item svg {
+  margin-right: var(--space-1);
+}
+
+.contact-item a, .contact-item span {
+  color: var(--cream-medium);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--cream-light);
+}
+
+.vehicle-info {
+  background-color: rgba(60, 42, 33, 0.3);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
+.vehicle-info h4 {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+}
+
+.vehicle-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vehicle-type, .license-plate {
+  display: flex;
+  align-items: center;
+  color: var(--cream-medium);
+  font-size: 0.9rem;
+}
+
+.vehicle-type svg, .license-plate svg {
+  margin-right: var(--space-1);
+}
+
+@media (max-width: 768px) {
+  .driver-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .driver-photo-container {
+    margin-right: 0;
+    margin-bottom: var(--space-2);
+    align-self: center;
+  }
+  
+  .vehicle-details {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+}

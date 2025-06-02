@@ -3,25 +3,29 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 
+import CustomerReview from './components/CustomerReview';
 import Header from './components/Header';
 import Home from './components/Home';
 import Promo from './components/Promo';
 import About from './components/About';
 import Product from './components/Product';
+import Cart from './components/Cart';
+import Payment from './components/Payment';
+import UserProfile from './components/UserProfile';
+import ReservationPage from './components/ReservationPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
-import UserProfile from './components/UserProfile';
 import Review from './components/Review';
-import Cart from './components/Cart';
-import Payment from './components/Payment';
-import ReservationPage from './components/ReservationPage';
-import DeliveryTracking from './components/DeliveryTracking'; // Added
+import DeliveryTracking from './components/DeliveryTracking';
+import Footer from './components/Footer';
+
+import NotificationProvider from './context/NotificationContext';
 
 function LayoutWrapper() {
   const location = useLocation();
-  const hideHeaderFooter = location.pathname === '/login' || location.pathname === '/register';
+
+  const hideHeaderFooter = ['/login', '/register'].includes(location.pathname);
 
   return (
     <div className="app-wrapper">
@@ -41,7 +45,9 @@ function LayoutWrapper() {
           <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/review" element={<Review />} />
-          <Route path="/track-delivery" element={<DeliveryTracking />} /> {/* ✅ New Route */}
+          <Route path="/customer-review" element={<CustomerReview />} />
+          <Route path="/deliverytracking" element={<DeliveryTracking />} />
+
         </Routes>
       </main>
 
@@ -52,9 +58,11 @@ function LayoutWrapper() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <LayoutWrapper />
-    </BrowserRouter>
+    <NotificationProvider>
+      <BrowserRouter>
+        <LayoutWrapper />
+      </BrowserRouter>
+    </NotificationProvider>
   );
 }
 
