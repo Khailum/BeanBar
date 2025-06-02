@@ -28,6 +28,8 @@ Password NVARCHAR (200) NOT NULL,
 PhoneNumber VARCHAR(20) NOT NULL,
 Address VARCHAR(255),
 CreatedAt DATETIME DEFAULT GETDATE(),
+DateOfBirth DATETIME,
+LastPromotionDate DATETIME,
 FOREIGN KEY (Email) REFERENCES Users(Email),
 CONSTRAINT CK_Customers_IDNumber_Length CHECK (
 LEN(CustomerID) = 13 AND CustomerID NOT LIKE '%[^0-9]%')
@@ -43,10 +45,6 @@ Price DECIMAL(10,2) NOT NULL,
 IsAvailable BIT DEFAULT 1,
 ImageUrl VARCHAR(255)
 );
- 
-INSERT INTO Menu VALUES 
-('Ice Coffee', 'Cold', 27.00),
-('Cappacino', 'Hot', 20.00);
 
 -- STOCK TABLE
 CREATE TABLE Stock (
@@ -75,7 +73,6 @@ FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID) -- Updated FK
 );
  
 -- PAYMENTS TABLE
-
 CREATE TABLE Payments (
 PaymentID INT IDENTITY(1,1) PRIMARY KEY,
 OrderNum INT NOT NULL,
@@ -181,7 +178,7 @@ Notes VARCHAR(255),
 Used BIT DEFAULT 0,
 FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
 FOREIGN KEY (RefreshTokenID) REFERENCES RefreshTokens(Id)
-);                                                                                                                
+);                                                                                                              
  
 -- INSERT MENU ITEMS WITH UPDATED ZAR PRICES & TASTY DESCRIPTIONS
 INSERT INTO Menu (ItemName, ItemType, ItemDescription, Price, ImageUrl) VALUES
@@ -252,7 +249,7 @@ SELECT * FROM Users
 SELECT * FROM UserAuth
 SELECT * FROM Customers
 SELECT * FROM Menu
-SELECT * FROM Stockl
+SELECT * FROM Stock
 SELECT * FROM Orders
 SELECT * FROM Payments
 SELECT * FROM CardDetails
