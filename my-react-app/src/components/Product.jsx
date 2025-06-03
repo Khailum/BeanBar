@@ -12,39 +12,45 @@ function Product() {
 
   const categories = ['All', 'Hot', 'Cold', 'Snack'];
 
+  // Fetch menu items
   useEffect(() => {
     fetch('http://localhost:3000/menu')
       .then(response => {
-        if (!response.ok) throw new Error('Failed to fetch');
+        if (!response.ok) throw new Error('Failed to fetch menu');
         return response.json();
       })
       .then(data => {
-        setProducts(data.menu || data);
-        setSugarLevels(Array((data.menu || data).length).fill(0));
-        setMilkTypes(Array((data.menu || data).length).fill('Full Cream'));
+        const menu = data.menu || data;
+        setProducts(menu);
+        setSugarLevels(Array(menu.length).fill(0));
+        setMilkTypes(Array(menu.length).fill('Full Cream'));
       })
       .catch(err => {
         setError(err.message);
-        console.error(err);
+        console.error('Fetch error:', err);
       });
   }, []);
 
   const increaseSugar = (index) => {
-    const levels = [...sugarLevels];
-    if (levels[index] < 3) levels[index] += 1;
-    setSugarLevels(levels);
+    setSugarLevels(prev => {
+      const updated = [...prev];
+      if (updated[index] < 3) updated[index] += 1;
+      return updated;
+    });
   };
 
   const decreaseSugar = (index) => {
-    const levels = [...sugarLevels];
-    if (levels[index] > 0) levels[index] -= 1;
-    setSugarLevels(levels);
+    setSugarLevels(prev => {
+      const updated = [...prev];
+      if (updated[index] > 0) updated[index] -= 1;
+      return updated;
+    });
   };
 
   const handleMilkChange = (index, value) => {
-    const newMilk = [...milkTypes];
-    newMilk[index] = value;
-    setMilkTypes(newMilk);
+    const updated = [...milkTypes];
+    updated[index] = value;
+    setMilkTypes(updated);
   };
 
   const addToCart = async (item, index) => {
@@ -52,8 +58,10 @@ function Product() {
     const milkType = item.type === 'Hot' ? milkTypes[index] : null;
 
     try {
-      const cartRes = await fetch('http://localhost:3000/cart');
-      const cartItems = await cartRes.json();
+      const res = await fetch('http://localhost:3000/cart');
+      if (!res.ok) throw new Error('Failed to fetch cart');
+
+      const cartItems = await res.json();
 
       const existingItem = cartItems.find(cartItem =>
         cartItem.ItemName === item.ItemName &&
@@ -62,7 +70,6 @@ function Product() {
       );
 
       if (existingItem) {
-        // Update quantity
         const updatedItem = {
           ...existingItem,
           quantity: existingItem.quantity + 1,
@@ -74,9 +81,8 @@ function Product() {
           body: JSON.stringify(updatedItem),
         });
 
-        console.log('Updated quantity for:', existingItem.ItemName);
+        console.log(`Updated quantity: ${updatedItem.ItemName}`);
       } else {
-        // Add new item
         const newItem = {
           ...item,
           sugarLevel,
@@ -90,19 +96,19 @@ function Product() {
           body: JSON.stringify(newItem),
         });
 
-        console.log('Added new item:', newItem.ItemName);
+        console.log(`Added new item: ${newItem.ItemName}`);
       }
 
       setAddedIndex(index);
       setTimeout(() => setAddedIndex(null), 2000);
-    } catch (err) {
-      console.error('Error adding to cart:', err);
-      alert('Failed to add item to cart. Please try again.');
+    } catch (error) {
+      console.error('Add to cart error:', error);
+      alert('Unable to add item. Please try again later.');
     }
   };
 
-  const filteredProducts = products.filter((item) =>
-    selectedCategory === 'All' || item.type === selectedCategory
+  const filteredProducts = products.filter(
+    item => selectedCategory === 'All' || item.type === selectedCategory
   );
 
   return (
@@ -130,7 +136,7 @@ function Product() {
         )}
       </section>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className="error-message">⚠ {error}</p>}
 
       <div className="product-container">
         {filteredProducts.map((item, index) => (

@@ -63,7 +63,7 @@ function Register() {
             return;
           }
 
-          // Register user in Users endpoint
+          // Register user
           const response = await fetch('http://localhost:3000/Users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -74,14 +74,15 @@ function Register() {
               phoneNumber: formValues.phoneNumber,
               address: formValues.address,
               password: formValues.password,
+              userRole: 'Customer',
+              isActive: 1
             }),
           });
 
           if (!response.ok) throw new Error('Registration failed');
-
           await response.json();
 
-          // Send data to User Profile API endpoint
+          // Create user profile
           const profileRes = await fetch('http://localhost:3000/UserProfiles', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -100,7 +101,7 @@ function Register() {
           setIsSuccess(true);
           setFormValues(initialValues);
           setAgreed(false);
-          setTimeout(() => navigate('/'), 3000); // Redirect to home page after 3 seconds
+          setTimeout(() => navigate('/'), 3000);
         } catch (err) {
           console.error('Error:', err);
           alert('Something went wrong during registration.');

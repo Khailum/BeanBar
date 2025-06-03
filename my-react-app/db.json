@@ -8,6 +8,17 @@
       "phoneNumber": "0624300882",
       "address": "",
       "password": "Reetah@1212"
+    },
+    {
+      "id": "9e8e",
+      "customerID": "1234567890101",
+      "fullName": "Xola",
+      "email": "xola@gmail.com",
+      "phoneNumber": "7887980231",
+      "address": "",
+      "password": "Retha123#",
+      "userRole": "Customer",
+      "isActive": 1
     }
   ],
   "menu": [
@@ -56,6 +67,34 @@
       "OrderStatus": "Pending",
       "TotalPrice": 54,
       "id": "d3b0"
+    },
+    {
+      "id": "e082",
+      "OrderNum": 327324,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 253
+    },
+    {
+      "id": "175e",
+      "OrderNum": 586470,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 286
+    },
+    {
+      "id": "af76",
+      "OrderNum": 471490,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 693.99
+    },
+    {
+      "id": "6baa",
+      "OrderNum": 861162,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 1287.98
     }
   ],
   "payments": [
@@ -1728,6 +1767,138 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "id": "7939",
+      "OrderNum": 548959,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 253,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 4
+        },
+        {
+          "id": "6651",
+          "ItemName": "Pancakes",
+          "ItemDescription": "Stack of pancakes.",
+          "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+          "Price": 25,
+          "type": "Snack",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "4f05",
+      "OrderNum": 935910,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 253,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 4
+        },
+        {
+          "id": "6651",
+          "ItemName": "Pancakes",
+          "ItemDescription": "Stack of pancakes.",
+          "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+          "Price": 25,
+          "type": "Snack",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "807f",
+      "OrderNum": 27747,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 153,
+      "cartItems": [
+        {
+          "id": "1204",
+          "ItemID": 2,
+          "ItemName": "Cappuccino",
+          "ItemType": "Hot",
+          "ItemDescription": "Hot espresso with steamed milk",
+          "Price": 20,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/cappuccino.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "fd51",
+          "ItemID": 1,
+          "ItemName": "Ice Coffee",
+          "ItemType": "Cold",
+          "ItemDescription": "Chilled espresso with milk",
+          "Price": 27,
+          "IsAvailable": true,
+          "ImageUrl": "https://example.com/icecoffee.jpg",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 4
+        },
+        {
+          "id": "6651",
+          "ItemName": "Pancakes",
+          "ItemDescription": "Stack of pancakes.",
+          "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
+          "Price": 25,
+          "type": "Snack",
+          "quantity": 1
+        }
+      ]
     }
   ],
   "cardDetails": [
@@ -1780,19 +1951,6 @@
   ],
   "cart": [
     {
-      "id": "1204",
-      "ItemID": 2,
-      "ItemName": "Cappuccino",
-      "ItemType": "Hot",
-      "ItemDescription": "Hot espresso with steamed milk",
-      "Price": 20,
-      "IsAvailable": true,
-      "ImageUrl": "https://example.com/cappuccino.jpg",
-      "sugarLevel": 0,
-      "milkType": null,
-      "quantity": 1
-    },
-    {
       "id": "fd51",
       "ItemID": 1,
       "ItemName": "Ice Coffee",
@@ -1806,13 +1964,17 @@
       "quantity": 3
     },
     {
-      "id": "6651",
-      "ItemName": "Pancakes",
-      "ItemDescription": "Stack of pancakes.",
-      "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
-      "Price": 25,
-      "type": "Snack",
-      "quantity": 1
+      "id": "1204",
+      "ItemID": 2,
+      "ItemName": "Cappuccino",
+      "ItemType": "Hot",
+      "ItemDescription": "Hot espresso with steamed milk",
+      "Price": 20,
+      "IsAvailable": true,
+      "ImageUrl": "https://example.com/cappuccino.jpg",
+      "sugarLevel": 0,
+      "milkType": null,
+      "quantity": 2
     }
   ],
   "userprofile": [
@@ -1822,6 +1984,14 @@
       "fullName": "rethabile makaotsi",
       "email": "rethabilemakaotsi17@gmail.com",
       "phoneNumber": "0624300882",
+      "address": ""
+    },
+    {
+      "id": "b112",
+      "customerID": "1234567890101",
+      "fullName": "Xola",
+      "email": "xola@gmail.com",
+      "phoneNumber": "7887980231",
       "address": ""
     }
   ]

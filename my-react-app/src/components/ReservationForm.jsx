@@ -56,7 +56,6 @@ const ReservationForm = () => {
     console.log('Sending confirmation email to:', reservationData.email);
     console.log('Reservation details:', reservationData);
     
-    // Simulate email sending API call
     try {
       const emailData = {
         to: reservationData.email,
@@ -72,10 +71,8 @@ const ReservationForm = () => {
         }
       };
       
-      // This would be your actual API call
       console.log('Email payload:', emailData);
       
-      // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 500));
       
       console.log('✅ Confirmation email sent successfully');
@@ -91,7 +88,6 @@ const ReservationForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Send confirmation email
       const emailSent = await sendConfirmationEmail(formData);
       
       setTimeout(() => {
@@ -125,15 +121,15 @@ const ReservationForm = () => {
   };
 
   const filterTime = (time) => {
-    const day = new Date(time).getDay(); // 0 (Sunday) to 6 (Saturday)
+    const day = new Date(time).getDay();
     const hours = new Date(time).getHours();
 
-    if (day === 0) { // Sunday
-      return false; // Closed on Sundays
-    } else if (day >= 1 && day <= 5) { // Monday to Friday
-      return hours >= 9 && hours < 18; // 9 AM to 6 PM
-    } else if (day === 6) { // Saturday
-      return hours >= 10 && hours < 14; // 10 AM to 2 PM
+    if (day === 0) {
+      return false; // Closed Sundays
+    } else if (day >= 1 && day <= 5) {
+      return hours >= 9 && hours < 18; // Mon-Fri 9 AM - 6 PM
+    } else if (day === 6) {
+      return hours >= 10 && hours < 14; // Sat 10 AM - 2 PM
     }
     return false;
   };
@@ -148,23 +144,47 @@ const ReservationForm = () => {
 
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit} className="reservation-form">
+      <form onSubmit={handleSubmit} className="reservation-form" noValidate>
         <h3>Table Reservation</h3>
 
         <motion.div className="form-group" custom={0} initial="hidden" animate="visible" variants={formVariants}>
           <label htmlFor="name">Full Name</label>
-          <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            autoComplete="name"
+          />
         </motion.div>
 
         <div className="form-row">
           <motion.div className="form-group" custom={1} initial="hidden" animate="visible" variants={formVariants}>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              autoComplete="email"
+            />
           </motion.div>
 
           <motion.div className="form-group" custom={2} initial="hidden" animate="visible" variants={formVariants}>
             <label htmlFor="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} required />
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              autoComplete="tel"
+            />
           </motion.div>
         </div>
 
@@ -182,25 +202,43 @@ const ReservationForm = () => {
             required
           />
           <div className="business-hours-info">
-            <small>
-              📍 Business Hours: Mon-Fri 9AM-6PM, Sat 10AM-2PM, Closed Sundays
-            </small>
+            <small>📍 Business Hours: Mon-Fri 9AM-6PM, Sat 10AM-2PM, Closed Sundays</small>
           </div>
         </motion.div>
 
         <motion.div className="form-group" custom={4} initial="hidden" animate="visible" variants={formVariants}>
           <label>Number of Guests (Max 8)</label>
           <div className="guest-counter">
-            <button type="button" onClick={() => handleGuestChange(-1)} disabled={formData.guests <= 1} className="counter-btn">-</button>
+            <button
+              type="button"
+              onClick={() => handleGuestChange(-1)}
+              disabled={formData.guests <= 1}
+              className="counter-btn"
+            >
+              -
+            </button>
             <span className="guest-count">{formData.guests}</span>
-            <button type="button" onClick={() => handleGuestChange(1)} disabled={formData.guests >= 8} className="counter-btn">+</button>
+            <button
+              type="button"
+              onClick={() => handleGuestChange(1)}
+              disabled={formData.guests >= 8}
+              className="counter-btn"
+            >
+              +
+            </button>
           </div>
         </motion.div>
 
         <motion.div className="form-group" custom={5} initial="hidden" animate="visible" variants={formVariants}>
           <label htmlFor="occasion">Occasion</label>
-          <select id="occasion" name="occasion" value={formData.occasion} onChange={handleChange} required>
-            {OCCASIONS.map((option) => (
+          <select
+            id="occasion"
+            name="occasion"
+            value={formData.occasion}
+            onChange={handleChange}
+            required
+          >
+            {OCCASIONS.map(option => (
               <option key={option} value={option}>{option}</option>
             ))}
           </select>

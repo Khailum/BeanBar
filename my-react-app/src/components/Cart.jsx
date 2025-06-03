@@ -5,7 +5,7 @@ import "./Cart.css";
 function CartPage() {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
-  const [deliveryOption, setDeliveryOption] = useState("in-store"); // default
+  const [deliveryOption, setDeliveryOption] = useState("in-store");
 
   useEffect(() => {
     fetch("http://localhost:3000/cart")
@@ -20,21 +20,28 @@ function CartPage() {
       .catch((err) => console.error("Failed to fetch cart:", err));
   }, []);
 
+// fetch("http://localhost:3000/cart")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const userCartItems = data.filter((item) => item.CustomerID === CustomerID);
+//         const sanitized = userCartItems.map((item) => ({
+//           ...item,
+//           quantity: typeof item.quantity === "number" && item.quantity > 0 ? item.quantity : 1,
+//         }));
+//         setCartItems(sanitized);
+//       })
+//       .catch((err) => console.error("Failed to fetch cart:", err));
+//   }, []);
+
   const increaseQuantity = (id) => {
     const item = cartItems.find((i) => i.id === id);
-    if (item) {
-      updateQuantity(id, item.quantity + 1);
-    }
+    if (item) updateQuantity(id, item.quantity + 1);
   };
 
   const decreaseQuantity = (id) => {
     const item = cartItems.find((i) => i.id === id);
     if (!item) return;
-    if (item.quantity === 1) {
-      handleDelete(id);
-    } else {
-      updateQuantity(id, item.quantity - 1);
-    }
+    item.quantity === 1 ? handleDelete(id) : updateQuantity(id, item.quantity - 1);
   };
 
   const updateQuantity = (id, quantity) => {
@@ -61,24 +68,16 @@ function CartPage() {
       .catch((err) => console.error("Error deleting item:", err));
   };
 
-  const totalQuantity = cartItems.reduce((sum, item) => {
-    const qty = typeof item.quantity === "number" ? item.quantity : 0;
-    return sum + qty;
-  }, 0);
-
-  const subtotal = cartItems.reduce((sum, item) => {
-    const qty = typeof item.quantity === "number" ? item.quantity : 0;
-    const price = typeof item.Price === "number" ? item.Price : 0;
-    return sum + price * qty;
-  }, 0);
-
+  const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
+  const subtotal = cartItems.reduce((sum, item) => sum + ((item.Price || 0) * (item.quantity || 0)), 0);
   const deliveryFee = deliveryOption === "delivery" ? 100 : 0;
   const totalPrice = subtotal + deliveryFee;
 
   const saveCartToApi = async () => {
     const OrderNum = Math.floor(Math.random() * 1000000);
     try {
-      const response = await fetch("http://localhost:3000/payments", {
+      // 1. Save order summary (if needed)
+      await fetch("http://localhost:3000/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -86,11 +85,28 @@ function CartPage() {
           deliveryOption,
           deliveryFee,
           totalPrice,
-          cartItems,
         }),
       });
 
-      if (!response.ok) throw new Error("Failed to save cart to server.");
+      // 2. Save each cart item into Cart table
+      for (const item of cartItems) {
+        await fetch("http://localhost:3000/cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            OrderNum,
+            ItemID: item.ItemID || item.id,
+            ItemName: item.ItemName,
+            Category: item.Category || "",
+            ItemType: item.type,
+            ItemDescription: item.ItemDescription,
+            Price: item.Price,
+            IsAvailable: item.IsAvailable !== undefined ? item.IsAvailable : 1,
+            ImageUrl: item.ImageUrl,
+            quantity: item.quantity,
+          }),
+        });
+      }
 
       return OrderNum;
     } catch (error) {
@@ -113,9 +129,7 @@ function CartPage() {
               <img src={item.ImageUrl} alt={item.ItemName} width="100" />
               <div className="item-details">
                 <h3 className="item-name">{item.ItemName}</h3>
-                <p className="item-price">
-                  Price: <strong>R{item.Price.toFixed(2)}</strong>
-                </p>
+                <p className="item-price">Price: <strong>R{item.Price.toFixed(2)}</strong></p>
                 <p>{item.ItemDescription}</p>
                 {item.type === "Hot" && (
                   <>
@@ -124,7 +138,6 @@ function CartPage() {
                   </>
                 )}
               </div>
-
               <div className="cart-actions">
                 <div className="quantity-controls">
                   <button className="qty-btn" onClick={() => decreaseQuantity(item.id)}>−</button>

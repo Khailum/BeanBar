@@ -4,7 +4,7 @@ import './OrderStatus.css';
 
 const OrderStatus = ({ status, updatedAt }) => {
   const currentIndex = statusSteps.findIndex(step => step.key === status);
-  
+
   const formatTime = (dateString) => {
     const options = { hour: 'numeric', minute: 'numeric', hour12: true };
     return new Date(dateString).toLocaleTimeString('en-US', options);

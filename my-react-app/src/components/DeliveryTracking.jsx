@@ -1,21 +1,21 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'  // <-- import this
-import OrderStatus from './OrderStatus'
-import DriverDetails from './DriverInfo'
-import LocationInfo from './LocationInfo'
-import OrderSummary from './OrderSummary'
-import './DeliveryTracker.css'
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import OrderStatus from './OrderStatus';
+import DriverDetails from './DriverInfo';
+import LocationInfo from './LocationInfo';
+import OrderSummary from './OrderSummary';
+import './DeliveryTracker.css';
 
 const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
-  const navigate = useNavigate()  // <-- initialize navigate
-  // Guard clause: show loading state if orderData is not available yet
+  const navigate = useNavigate();
+
   if (!orderData) {
-    return <div>Loading order data...</div>
+    return <div>Loading order data...</div>;
   }
 
-  const [activeTab, setActiveTab] = useState('status')
-  
+  const [activeTab, setActiveTab] = useState('status');
+
   const formatDate = (dateString) => {
     const options = { 
       month: 'short', 
@@ -23,24 +23,24 @@ const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
       hour: 'numeric', 
       minute: 'numeric',
       hour12: true 
-    }
-    return new Date(dateString).toLocaleDateString('en-US', options)
-  }
+    };
+    return new Date(dateString).toLocaleDateString('en-US', options);
+  };
 
-  // Simulate moving to the next status (demo only)
+  // Match DB-friendly status order
+  const statusOrder = ['Preparing', 'On the Way', 'Delivered'];
+
   const handleNextStatus = () => {
-    const statusOrder = ['ordered', 'preparing', 'pickup', 'delivering', 'delivered']
-    const currentIndex = statusOrder.indexOf(orderData.status)
-    
+    const currentIndex = statusOrder.indexOf(orderData.status);
     if (currentIndex < statusOrder.length - 1) {
-      onUpdateStatus(statusOrder[currentIndex + 1])
+      const nextStatus = statusOrder[currentIndex + 1];
+      onUpdateStatus(nextStatus); // trigger status update (e.g., via backend)
     }
-  }
+  };
 
-  // Handler to navigate to review page
   const goToReviewPage = () => {
-    navigate('/review')
-  }
+    navigate('/review');
+  };
 
   return (
     <motion.div 
@@ -54,7 +54,7 @@ const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
           <h2>Order #{orderData.id}</h2>
           <p className="order-date">Placed on {formatDate(orderData.placedAt)}</p>
         </div>
-        {orderData.status !== 'delivered' && (
+        {orderData.status !== 'Delivered' && (
           <div className="estimated-delivery">
             <p>Estimated Delivery</p>
             <p className="delivery-time">{formatDate(orderData.estimatedDeliveryTime)}</p>
@@ -110,8 +110,7 @@ const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
         )}
       </div>
       
-      {/* Demo controls - would be removed in production */}
-      {orderData.status !== 'delivered' && (
+      {orderData.status !== 'Delivered' && (
         <div className="demo-controls">
           <button className="demo-button" onClick={handleNextStatus}>
             Simulate Next Status (Demo)
@@ -119,8 +118,7 @@ const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
         </div>
       )}
 
-      {/* REVIEW BUTTON shown only if order is delivered */}
-      {orderData.status === 'delivered' && (
+      {orderData.status === 'Delivered' && (
         <div className="review-action">
           <button className="review-button" onClick={goToReviewPage}>
             Leave a Review
@@ -128,7 +126,7 @@ const DeliveryTracking = ({ orderData, onUpdateStatus }) => {
         </div>
       )}
     </motion.div>
-  )
-}
+  );
+};
 
 export default DeliveryTracking;

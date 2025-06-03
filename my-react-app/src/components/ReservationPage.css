@@ -38,7 +38,7 @@
   margin: 0 auto;
   margin-top: 100px;
   padding: 0 var(--space-3);
-  color: bisque;
+  color: #fff;
 }
 
 .reservation-header {
@@ -47,17 +47,22 @@
 }
 
 .reservation-header h2 {
-  color: var(--color-caramel);
-  font-size: 2.5rem;
-  margin-bottom: var(--space-2);
+  color: #d3ad7f;
+  font-size: 2.6rem;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+   font-family: 'Lato', sans-serif;
+
+  
 }
 
 .reservation-header p {
   max-width: 800px;
   margin: 0 auto;
-  color: var(--color-gray-300);
-  font-size: 1.1rem;
+  color: #fff;
+  font-size: 1.5rem;
   line-height: 1.6;
+  font-family: 'Lato', sans-serif;
 }
 
 .reservation-container {
@@ -65,6 +70,8 @@
   grid-template-columns: 1fr;
   gap: var(--space-4);
   align-items: start;
+  background-color: #2222;
+
 }
 
 .reservation-image {
@@ -128,13 +135,14 @@
 }
 
 .reservation-form-container {
-  background: linear-gradient(135deg, rgba(44, 30, 18, 0.9), rgba(61, 44, 26, 0.8));
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(193, 120, 23, 0.2);
+  background-color: #2222227c;
+  border-radius: 6px;
+  border: 1px solid #d3ad7f9d;
   padding: var(--space-4);
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(10px);
   position: relative;
+  margin-bottom: 40px;
 }
 
 .reservation-form-container::before {

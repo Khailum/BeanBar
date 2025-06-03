@@ -26,7 +26,7 @@ const ReservationPage = () => {
         >
           <div className="image-container">
             <img
-              src="https://images.pexels.com/photos/6207297/pexels-photo-6207297.jpeg?auto=compress&cs=tinysrgb&w=800"
+              src="https://i.ibb.co/G35YwtDk/reservation.jpg"
               alt="BeanBar coffee shop interior"
             />
           </div>

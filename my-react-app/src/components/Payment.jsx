@@ -19,12 +19,12 @@ const detectCardType = (number) => {
 const PaymentComponent = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { totalPrice, cartItems = [], orderNum, deliveryOption, pricing } = location.state || {};
+  const { totalPrice = 0, cartItems = [], orderNum, deliveryOption, pricing } = location.state || {};
 
-  const [cardNumber, setCardNumber] = useState('');
-  const [cardType, setCardType] = useState('');
   const [accountHolder, setAccountHolder] = useState('');
   const [accountNumber, setAccountNumber] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [cardType, setCardType] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvc, setCvc] = useState('');
   const [error, setError] = useState('');
@@ -34,22 +34,19 @@ const PaymentComponent = () => {
   const [reviewText, setReviewText] = useState('');
   const [reviewSubmitting, setReviewSubmitting] = useState(false);
 
-  // 🔧 Utility to get card logo
   const getCardLogo = () => {
     if (cardType === 'visa') return visaLogo;
     if (cardType === 'mastercard') return mastercardLogo;
     return null;
   };
 
-  // 🔧 Format card input and detect card type
   const handleCardNumberChange = (e) => {
-    let input = e.target.value.replace(/\D/g, '').slice(0, 16);
+    const input = e.target.value.replace(/\D/g, '').slice(0, 16);
     const formatted = input.replace(/(.{4})/g, '$1 ').trim();
     setCardNumber(formatted);
     setCardType(detectCardType(input));
   };
 
-  // 🔧 Expiry input auto-format
   const handleExpiryChange = (e) => {
     let input = e.target.value.replace(/\D/g, '').slice(0, 4);
     if (input.length >= 3) {
@@ -103,20 +100,17 @@ const PaymentComponent = () => {
     return true;
   };
 
-const handlePayment = async () => {
-  if (!validatePaymentDetails()) return;
+  const handlePayment = async () => {
+    if (!validatePaymentDetails()) return;
 
-  try {
-    console.log('Processing payment...');
-    alert('Payment processed successfully!');
-    navigate("/tracking"); 
-  } catch (err) {
-    console.error(err);
-    setError('Payment processing failed. Please try again.');
-  }
-};
-
-
+    try {
+      alert('Payment processed successfully!');
+      setShowReview(true); // Show review after successful payment
+    } catch (err) {
+      console.error(err);
+      setError('Payment processing failed. Please try again.');
+    }
+  };
 
   const submitReview = async () => {
     if (rating === 0) {
@@ -149,19 +143,17 @@ const handlePayment = async () => {
 
   return (
     <div className="payment-container">
-      <h2>Payment Details</h2>
+      <h2>{showReview ? 'Review Your Experience' : 'Payment Details'}</h2>
 
-      <OrderSummary items={cartItems} pricing={calculatedPricing} />
+      {!showReview && <OrderSummary items={cartItems} pricing={calculatedPricing} />}
 
-      {!showReview && (
+      {!showReview ? (
         <>
           <div className="input-wrapper">
             <input
               type="text"
               value={accountHolder}
-              onChange={(e) =>
-                setAccountHolder(e.target.value.replace(/[^a-zA-Z\s\-']/g, ''))
-              }
+              onChange={(e) => setAccountHolder(e.target.value.replace(/[^a-zA-Z\s\-']/g, ''))}
               placeholder="Account Holder"
               autoComplete="name"
             />
@@ -171,9 +163,7 @@ const handlePayment = async () => {
             <input
               type="text"
               value={accountNumber}
-              onChange={(e) =>
-                setAccountNumber(e.target.value.replace(/\D/g, '').slice(0, 9))
-              }
+              onChange={(e) => setAccountNumber(e.target.value.replace(/\D/g, '').slice(0, 9))}
               placeholder="Account Number (9 digits)"
               maxLength={9}
               autoComplete="off"
@@ -206,9 +196,7 @@ const handlePayment = async () => {
             <input
               type="text"
               value={cvc}
-              onChange={(e) =>
-                setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))
-              }
+              onChange={(e) => setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))}
               placeholder="CVC"
               maxLength={4}
               autoComplete="cc-csc"
@@ -221,33 +209,30 @@ const handlePayment = async () => {
             Pay Now
           </button>
         </>
-      )}
-
-      {showReview && (
+      ) : (
         <div className="review-section">
           <h3>Rate Your Experience</h3>
           <p className="review-subtitle">How was your experience with us?</p>
 
           <div className="rating-container">
-            <div className="rating-stars">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <span
-                  key={star}
-                  className={`star ${star <= (hoverRating || rating) ? 'filled' : ''}`}
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                >
-                  ★
-                </span>
-              ))}
-            </div>
-            {(hoverRating || rating) > 0 && (
-              <div className="rating-text">
-                <span className="rating-label">{hoverRating || rating} out of 5 stars</span>
-              </div>
-            )}
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={`star ${star <= (hoverRating || rating) ? 'filled' : ''}`}
+                onClick={() => setRating(star)}
+                onMouseEnter={() => setHoverRating(star)}
+                onMouseLeave={() => setHoverRating(0)}
+              >
+                ★
+              </span>
+            ))}
           </div>
+
+          {(hoverRating || rating) > 0 && (
+            <div className="rating-text">
+              <span>{hoverRating || rating} out of 5 stars</span>
+            </div>
+          )}
 
           <textarea
             className="review-textarea"
@@ -265,11 +250,7 @@ const handlePayment = async () => {
             >
               {reviewSubmitting ? 'Submitting...' : 'Submit Review'}
             </button>
-            <button
-              className="skip-review-btn"
-              onClick={skipReview}
-              disabled={reviewSubmitting}
-            >
+            <button className="skip-review-btn" onClick={skipReview} disabled={reviewSubmitting}>
               Skip Review
             </button>
           </div>
@@ -280,4 +261,3 @@ const handlePayment = async () => {
 };
 
 export default PaymentComponent;
- 

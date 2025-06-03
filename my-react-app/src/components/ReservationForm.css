@@ -62,12 +62,18 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  
+  
 }
 
 .reservation-form h3 {
-  color: var(--color-caramel);
+  color: #d3ad7f;
   margin-bottom: var(--space-2);
   font-size: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+     font-family: 'Lato', sans-serif;
+  
 }
  
 .form-group {
@@ -83,9 +89,9 @@
 }
  
 label {
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   font-weight: 500;
-  color: var(--color-latte);
+  color: #fff;
 }
  
 input, select, textarea, .date-picker {
@@ -114,18 +120,18 @@ select {
 }
 
 select option {
-  background-color: var(--color-espresso);
+  background-color: #222;
   color: var(--color-cream);
   padding: 8px;
 }
 
 select:hover {
-  border-color: var(--color-caramel);
+  border-color: #d3ad7f;
 }
  
 input:focus, select:focus, textarea:focus, .date-picker:focus {
   outline: none;
-  border-color: var(--color-caramel);
+  border-color: #d3ad7f;
   box-shadow: 0 0 0 2px rgba(193, 120, 23, 0.2);
 }
  
@@ -138,8 +144,9 @@ input:focus, select:focus, textarea:focus, .date-picker:focus {
 }
 
 .business-hours-info small {
-  color: var(--color-cappuccino);
-  font-style: italic;
+  color: #d3ad7f;
+
+  font-size: 1.6rem;
   display: block;
   padding: var(--space-1);
   background-color: rgba(193, 120, 23, 0.1);
@@ -247,9 +254,9 @@ input:focus, select:focus, textarea:focus, .date-picker:focus {
 .submit-button {
   width: 100%;
   padding: var(--space-2);
-  background-color: var(--color-caramel);
-  color: white;
-  border: none;
+  background-color: #01010356;
+  color: #ffff;
+  border: 1px solid #d3ad7fad;
   border-radius: var(--radius-md);
   font-size: 1rem;
   font-weight: 600;
@@ -262,13 +269,13 @@ input:focus, select:focus, textarea:focus, .date-picker:focus {
 }
  
 .submit-button:hover:not(:disabled) {
-  background-color: #A8650D;
+  background-color: #d3ad7f;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(193, 120, 23, 0.3);
 }
  
 .submit-button:disabled {
-  background-color: var(--color-gray-600);
+  background-color: #d3ad7f;
   cursor: not-allowed;
 }
  

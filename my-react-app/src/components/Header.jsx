@@ -1,9 +1,28 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in by checking localStorage
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      setUser(null);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("profile");
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
     <header className="header">
@@ -28,17 +47,22 @@ const Header = () => {
         <Link to="/about" onClick={() => setMenuActive(false)}>About</Link>
         <Link to="/product" onClick={() => setMenuActive(false)}>Products</Link>
         <Link to="/cart" onClick={() => setMenuActive(false)}>Cart</Link>
-        {/* <Link to="/payment" onClick={() => setMenuActive(false)}>Checkout</Link> */}
         <Link to="/review" onClick={() => setMenuActive(false)}>Review</Link>
         <Link to="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
-         <Link to="/userprofile" onClick={() => setMenuActive(false)}>profile</Link>
-         {/* <Link to="/confrimation" onClick={() => setMenuActive(false)}>con</Link> */}
-   
+        <Link to="/userprofile" onClick={() => setMenuActive(false)}>Profile</Link>
       </nav>
 
-      {/* Login Button */}
+      {/* Login / Logout Button */}
       <div className="header-right">
-        <Link to="/login" className="btnn">Login</Link>
+        {user ? (
+          <button onClick={handleLogout} className="btnn">
+            Logout
+          </button>
+        ) : (
+          <Link to="/login" className="btnn">
+            Login
+          </Link>
+        )}
       </div>
     </header>
   );
