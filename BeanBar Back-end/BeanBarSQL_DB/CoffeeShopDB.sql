@@ -1,23 +1,13 @@
 CREATE DATABASE CoffeeShopDB
 use CoffeeShopDB
-
-DROP DATABASE CoffeeShopDB;
-
+ 
 -- USERS TABLE (renamed from Roles)
 CREATE TABLE Users (
-Email VARCHAR(255) PRIMARY KEY, -- Unique login/identifierr
-FullName VARCHAR(100),
-Password NVARCHAR(200) NOT NULL,
+Email VARCHAR(255) PRIMARY KEY,
+Username VARCHAR(100) NOT NULL,
+Password NVACHAR(200) NOT NULL,
 UserRole VARCHAR(50) CHECK (UserRole IN ('Admin', 'Customer')) NOT NULL,
-IsActive BIT DEFAULT 1,
-CustomerID VARCHAR(13) UNIQUE, -- Still acts as FK in other tables
-PhoneNumber VARCHAR(20),
-Address VARCHAR(255),
-CreatedAt DATETIME DEFAULT GETDATE(),
-Token NVARCHAR(500),
-DateOfBirth DATETIME,
-LastPromotionDate DATETIME,
-CONSTRAINT CK_Users_CustomerID_Length CHECK (CustomerID IS NULL OR (LEN(CustomerID) = 13 AND CustomerID NOT LIKE '%[^0-9]%'))
+isActive BIT
 );
  
 -- AUTHENTICATION DETAILS (separated for security)
@@ -27,6 +17,20 @@ Email VARCHAR(255),
 HashedPassword VARCHAR(255) NOT NULL,
 Salt VARCHAR(255) NOT NULL,
 FOREIGN KEY (Email) REFERENCES Users(Email)
+);
+ 
+-- CUSTOMERS TABLE
+CREATE TABLE Customers (
+CustomerID VARCHAR(13) PRIMARY KEY, -- Changed from INT to VARCHAR(13)
+FullName VARCHAR(100) NOT NULL,
+Email VARCHAR(255) NOT NULL,
+Password NVARCHAR (200) NOT NULL,
+PhoneNumber VARCHAR(20) NOT NULL,
+Address VARCHAR(255),
+CreatedAt DATETIME DEFAULT GETDATE(),
+FOREIGN KEY (Email) REFERENCES Users(Email),
+CONSTRAINT CK_Customers_IDNumber_Length CHECK (
+LEN(CustomerID) = 13 AND CustomerID NOT LIKE '%[^0-9]%')
 );
  
 -- MENU TABLE
@@ -39,6 +43,10 @@ Price DECIMAL(10,2) NOT NULL,
 IsAvailable BIT DEFAULT 1,
 ImageUrl VARCHAR(255)
 );
+ 
+INSERT INTO Menu VALUES 
+('Ice Coffee', 'Cold', 27.00),
+('Cappacino', 'Hot', 20.00);
 
 -- STOCK TABLE
 CREATE TABLE Stock (
@@ -63,10 +71,11 @@ Quantity INT NOT NULL,
 OrderStatus VARCHAR(50) CHECK (OrderStatus IN ('Pending', 'Completed', 'Cancelled')) DEFAULT 'Pending',
 TotalPrice DECIMAL(10,2),
 FOREIGN KEY (ItemID) REFERENCES Menu(ItemID),
-FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID) -- Updated FK
+FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID) -- Updated FK
 );
  
 -- PAYMENTS TABLE
+
 CREATE TABLE Payments (
 PaymentID INT IDENTITY(1,1) PRIMARY KEY,
 OrderNum INT NOT NULL,
@@ -86,7 +95,7 @@ CVV VARCHAR(4) NOT NULL,
 ExpiryDate DATE NOT NULL,
 IsEncrypted BIT DEFAULT 0,
 CustomerID VARCHAR(13) NOT NULL, -- Changed
-FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID)
+FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
 -- TABLES (DINING TABLES) TABLE
@@ -101,7 +110,7 @@ tableStatus VARCHAR(50) CHECK (tableStatus IN ('Booked', 'Seated', 'Cancelled'))
  Occasion VARCHAR(100),
 Notes VARCHAR(255),
 CreatedAt DATETIME DEFAULT GETDATE(),
-FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID)
+FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
  
 -- REVIEWS TABLE
@@ -111,7 +120,7 @@ CustomerID VARCHAR(13) NOT NULL, -- Changed
 Rating INT CHECK (Rating BETWEEN 1 AND 5),
 Comment VARCHAR(500),
 ReviewDate DATETIME DEFAULT GETDATE(),
-FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID)
+FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
  
 -- DELIVERIES TABLE
@@ -158,10 +167,10 @@ Expires DATETIME2 NOT NULL,
 Created DATETIME2 NOT NULL,
 Revoked DATETIME2 NULL,
 ReplacedByToken NVARCHAR(500) NULL,
-CONSTRAINT FK_RefreshTokens_Customers_CustomerID FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID)
+CONSTRAINT FK_RefreshTokens_Customers_CustomerID FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
-CREATE TABLE PromotionHistory (
+Promotions: CREATE TABLE PromotionHistory (
 PromotionID INT IDENTITY(1,1) PRIMARY KEY,
 CustomerID VARCHAR(13) NOT NULL,
 RefreshTokenID INT NOT NULL,
@@ -169,10 +178,10 @@ PromotionType VARCHAR(100), -- e.g., 'Discount', 'Loyalty Points', etc.
 PromotionValue DECIMAL(10,2), -- e.g., 10.00 for R10 discount
 PromotionDate DATETIME DEFAULT GETDATE(),
 Notes VARCHAR(255),
-Used BIT DEFAULT 0,
-FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID),
+ALTER TABLE PromotionHistory ADD Used BIT DEFAULT 0;
+FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
 FOREIGN KEY (RefreshTokenID) REFERENCES RefreshTokens(Id)
-);                                                                                                              
+);                                                                                                                 
 
 --INSERT MOCK USER DATA INTO USERs TABLE: 
 INSERT INTO Users (Email, FullName, Password, UserRole, CustomerID, PhoneNumber, Address, Token, DateOfBirth, LastPromotionDate)
