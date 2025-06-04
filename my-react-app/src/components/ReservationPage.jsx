@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import ReservationForm from './ReservationForm';
 import './ReservationPage.css';
@@ -31,7 +32,7 @@ const ReservationPage = () => {
             />
           </div>
           <div className="reservation-highlights">
-            {/* Your SVG highlights */}
+            {/* You can add your SVG highlights here */}
           </div>
         </motion.div>
 

@@ -14,19 +14,22 @@ function UserProfile() {
   const [saveError, setSaveError] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
+  // Load user from localStorage once if not in location state
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (!user && savedUser) {
-      setUser(JSON.parse(savedUser));
+    if (!user) {
+      const savedUser = localStorage.getItem("user");
+      if (savedUser) setUser(JSON.parse(savedUser));
     }
   }, [user]);
 
+  // Fetch or create user profile whenever user changes
   useEffect(() => {
+    if (!user?.customerID) {
+      setLoading(false);
+      return;
+    }
+
     const fetchOrCreateProfile = async () => {
-      if (!user?.customerID) {
-        setLoading(false);
-        return;
-      }
       try {
         const res = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
         if (!res.ok) throw new Error("Failed to fetch user profile");
@@ -36,6 +39,7 @@ function UserProfile() {
           setProfileData(data[0]);
           setEditData(data[0]);
         } else {
+          // Create profile if none exists
           const createRes = await fetch(`http://localhost:3000/userprofile`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -64,11 +68,7 @@ function UserProfile() {
     fetchOrCreateProfile();
   }, [user]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
-
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditData((prev) => ({
@@ -79,8 +79,34 @@ function UserProfile() {
     setSaveSuccess(false);
   };
 
+  // Check if editData differs from profileData (to disable Save if no changes)
+  const hasChanges = () => {
+    if (!editData || !profileData) return false;
+    return (
+      editData.fullName !== profileData.fullName ||
+      editData.email !== profileData.email ||
+      editData.phoneNumber !== profileData.phoneNumber ||
+      editData.address !== profileData.address
+    );
+  };
+
+  // Simple form validation for email and phone (you can enhance)
+  const isValid = () => {
+    if (!editData) return false;
+    if (!editData.fullName.trim()) return false;
+    if (!editData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return false;
+    if (!editData.phoneNumber.trim()) return false;
+    return true;
+  };
+
+  // Save updated profile
   const handleSave = async () => {
     if (!editData) return;
+    if (!isValid()) {
+      setSaveError("Please enter valid name, email, and phone number.");
+      return;
+    }
+
     setSaving(true);
     setSaveError(null);
     setSaveSuccess(false);
@@ -108,7 +134,30 @@ function UserProfile() {
     }
   };
 
-  if (loading) return <div className="user-profile-loading">Loading user profile...</div>;
+  // Confirm logout to prevent accidental clicks
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      localStorage.removeItem("user");
+      navigate("/login");
+    }
+  };
+
+  // Destructure for cleaner JSX
+  const {
+    fullName = "",
+    email = "",
+    phoneNumber = "",
+    address = "",
+  } = editData || {};
+
+  if (loading) {
+    return (
+      <div className="user-profile-loading">
+        <div className="spinner" /> {/* You can add spinner CSS */}
+        Loading user profile...
+      </div>
+    );
+  }
 
   if (!user || !profileData) {
     return (
@@ -132,7 +181,7 @@ function UserProfile() {
             type="text"
             id="fullName"
             name="fullName"
-            value={editData?.fullName || ""}
+            value={fullName}
             onChange={handleChange}
             className="user-profile-input"
           />
@@ -144,7 +193,7 @@ function UserProfile() {
             type="email"
             id="email"
             name="email"
-            value={editData?.email || ""}
+            value={email}
             onChange={handleChange}
             className="user-profile-input"
           />
@@ -156,7 +205,7 @@ function UserProfile() {
             type="tel"
             id="phoneNumber"
             name="phoneNumber"
-            value={editData?.phoneNumber || ""}
+            value={phoneNumber}
             onChange={handleChange}
             className="user-profile-input"
           />
@@ -168,7 +217,7 @@ function UserProfile() {
             type="text"
             id="address"
             name="address"
-            value={editData?.address || ""}
+            value={address}
             onChange={handleChange}
             className="user-profile-input"
           />
@@ -181,7 +230,16 @@ function UserProfile() {
         <button
           className="user-profile-save-button"
           onClick={handleSave}
-          disabled={saving}
+          disabled={saving || !hasChanges() || !isValid()}
+          title={
+            saving
+              ? "Saving..."
+              : !hasChanges()
+              ? "No changes to save"
+              : !isValid()
+              ? "Please fill in all required fields correctly"
+              : "Save Changes"
+          }
         >
           {saving ? "Saving..." : "Save Changes"}
         </button>

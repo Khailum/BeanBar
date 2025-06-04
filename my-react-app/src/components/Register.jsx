@@ -40,16 +40,22 @@ function Register() {
     if (isSubmit && Object.keys(formErrors).length === 0) {
       const registerUser = async () => {
         setIsSubmitting(true);
-        try {
-          const res = await fetch('http://localhost:3000/Users');
-          if (!res.ok) throw new Error('Failed to fetch users');
-          const users = await res.json();
 
-          const emailExists = users.some(
-            (user) => user.email === formValues.email
+        try {
+          // Fetch existing users from backend API
+          const response = await fetch('http://localhost:3000/users');
+          if (!response.ok) throw new Error('Failed to fetch users from server');
+          const fetchedUsers = await response.json();
+
+          const emailToCheck = formValues.email.trim().toLowerCase();
+          const idToCheck = formValues.idNumber.trim();
+
+          // Check duplicates in backend users only
+          const emailExists = fetchedUsers.some(
+            (user) => user.email.toLowerCase() === emailToCheck
           );
-          const idExists = users.some(
-            (user) => user.customerID === formValues.idNumber
+          const idExists = fetchedUsers.some(
+            (user) => user.customerID === idToCheck
           );
 
           if (emailExists) {
@@ -63,50 +69,37 @@ function Register() {
             return;
           }
 
-          // Register user
-          const response = await fetch('http://localhost:3000/Users', {
+          const newUser = {
+            customerID: idToCheck,
+            fullName: formValues.fullName.trim(),
+            email: emailToCheck,
+            phoneNumber: formValues.phoneNumber.trim(),
+            address: formValues.address.trim(),
+            password: formValues.password, // Ideally hash the password in real app
+            userRole: 'Customer',
+            isActive: 1,
+            createdAt: new Date().toISOString(),
+          };
+
+          // POST new user to backend API
+          const postResponse = await fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              customerID: formValues.idNumber,
-              fullName: formValues.fullName,
-              email: formValues.email,
-              phoneNumber: formValues.phoneNumber,
-              address: formValues.address,
-              password: formValues.password,
-              userRole: 'Customer',
-              isActive: 1
-            }),
+            body: JSON.stringify(newUser),
           });
 
-          if (!response.ok) throw new Error('Registration failed');
-          await response.json();
-
-          // Create user profile
-          const profileRes = await fetch('http://localhost:3000/UserProfiles', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              customerID: formValues.idNumber,
-              fullName: formValues.fullName,
-              email: formValues.email,
-              phoneNumber: formValues.phoneNumber,
-              address: formValues.address,
-              createdAt: new Date().toISOString(),
-            }),
-          });
-
-          if (!profileRes.ok) throw new Error('Failed to create user profile');
+          if (!postResponse.ok) throw new Error('Failed to save user');
 
           setIsSuccess(true);
           setFormValues(initialValues);
           setAgreed(false);
-          setTimeout(() => navigate('/'), 3000);
-        } catch (err) {
-          console.error('Error:', err);
-          alert('Something went wrong during registration.');
-          setIsSuccess(false);
-        } finally {
+          setIsSubmitting(false);
+
+          // Redirect after 3 seconds
+          setTimeout(() => navigate('/dashboard'), 3000);
+        } catch (error) {
+          console.error('Registration failed:', error);
+          setDuplicateError('Failed to fetch users or register. Try again later.');
           setIsSubmitting(false);
         }
       };
@@ -123,15 +116,11 @@ function Register() {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
     if (!values.fullName.trim()) errors.fullName = 'Full name is required.';
-    if (!values.idNumber || !idRegex.test(values.idNumber))
-      errors.idNumber = 'ID must be 13 digits.';
-    if (!values.email || !emailRegex.test(values.email))
-      errors.email = 'Invalid email format.';
-    if (!values.phoneNumber || !phoneRegex.test(values.phoneNumber))
-      errors.phoneNumber = 'Phone number must be 10 digits.';
+    if (!values.idNumber || !idRegex.test(values.idNumber)) errors.idNumber = 'ID must be 13 digits.';
+    if (!values.email || !emailRegex.test(values.email)) errors.email = 'Invalid email format.';
+    if (!values.phoneNumber || !phoneRegex.test(values.phoneNumber)) errors.phoneNumber = 'Phone number must be 10 digits.';
     if (!values.password || !passwordRegex.test(values.password))
-      errors.password =
-        'Password must have uppercase, lowercase, number, special character, and be 8+ characters.';
+      errors.password = 'Password must have uppercase, lowercase, number, special character, and be 8+ characters.';
     if (!values.confirmPassword || values.confirmPassword !== values.password)
       errors.confirmPassword = 'Passwords do not match.';
     if (!agreed) errors.terms = 'You must agree to the terms.';
@@ -165,9 +154,7 @@ function Register() {
             value={formValues.fullName}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.fullName && (
-            <p className="error">{formErrors.fullName}</p>
-          )}
+          {isSubmit && formErrors.fullName && <p className="error">{formErrors.fullName}</p>}
         </div>
 
         <div className="register-input-wrapper">
@@ -178,9 +165,7 @@ function Register() {
             value={formValues.idNumber}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.idNumber && (
-            <p className="error">{formErrors.idNumber}</p>
-          )}
+          {isSubmit && formErrors.idNumber && <p className="error">{formErrors.idNumber}</p>}
         </div>
 
         <div className="register-input-wrapper">
@@ -202,9 +187,7 @@ function Register() {
             value={formValues.phoneNumber}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.phoneNumber && (
-            <p className="error">{formErrors.phoneNumber}</p>
-          )}
+          {isSubmit && formErrors.phoneNumber && <p className="error">{formErrors.phoneNumber}</p>}
         </div>
 
         <div className="register-input-wrapper">
@@ -225,9 +208,7 @@ function Register() {
             value={formValues.password}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.password && (
-            <p className="error">{formErrors.password}</p>
-          )}
+          {isSubmit && formErrors.password && <p className="error">{formErrors.password}</p>}
         </div>
 
         <div className="register-input-wrapper">
@@ -238,9 +219,7 @@ function Register() {
             value={formValues.confirmPassword}
             onChange={handleChange}
           />
-          {isSubmit && formErrors.confirmPassword && (
-            <p className="error">{formErrors.confirmPassword}</p>
-          )}
+          {isSubmit && formErrors.confirmPassword && <p className="error">{formErrors.confirmPassword}</p>}
         </div>
 
         <div className="register-terms">

@@ -30,37 +30,12 @@ const OrderSummary = ({ items, pricing, orderId }) => {
         <div className="order-id">#{orderId}</div>
       </div>
       
-      <div className="items-list">
-        {items.map((item, index) => (
-          <motion.div 
-            key={item.id}
-            className="item"
-            custom={index}
-            initial="hidden"
-            animate="visible"
-            variants={itemVariants}
-          >
-            <div className="item-info">
-              <div className="item-quantity">{item.quantity}</div>
-              {/* <div className="item-details">
-                <h4>{item.name}</h4>
-                {item.notes && <p className="item-notes">{item.notes}</p>}
-              </div> */}
-            </div>
-            <div className="item-price">{formatPrice(item.price * item.quantity)}</div>
-          </motion.div>
-        ))}
-      </div>
+      
       
       <div className="order-totals">
         <div className="total-row">
           <span>Subtotal</span>
           <span>{formatPrice(pricing.subtotal)}</span>
-        </div>
-        
-        <div className="total-row">
-          <span>Tax</span>
-          <span>{formatPrice(pricing.tax)}</span>
         </div>
         
         <div className="total-row">
@@ -79,13 +54,7 @@ const OrderSummary = ({ items, pricing, orderId }) => {
         </div>
       </div>
       
-      <motion.button
-        className="receipt-button"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        📄 Download Receipt
-      </motion.button>
+   
     </motion.div>
   )
 }

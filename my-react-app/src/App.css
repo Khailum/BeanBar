@@ -17,3 +17,6 @@ html, body, #root {
 .main-content {
   flex: 1;
 }
+body{
+  background-color: #010103;
+}

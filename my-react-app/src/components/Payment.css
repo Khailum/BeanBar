@@ -16,7 +16,8 @@
   margin-bottom: 30px;
   font-weight: 900;
   font-size: 2.4rem;
-  color: #C17817;
+  color: #d3ad7f;
+  text-transform: uppercase;
 }
 
 /* === Order Summary Heading === */
@@ -96,26 +97,26 @@
 }
 
 /* === Pay Button === */
-.checkout-btn {
+.checkout {
   width: 100%;
-  background-color: #C17817;
+  background-color: #d3ad7f;
   border: none;
   padding: 16px 0;
   font-size: 1.2rem;
   font-weight: 700;
   color: #000;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 20px;
 }
 
-.checkout-btn:hover {
+.checkout:hover {
   background-color: #9B7653;
   transform: translateY(-2px);
 }
 
-.checkout-btn:active {
+.checkout:active {
   background-color: #634832;
   transform: translateY(0);
 }

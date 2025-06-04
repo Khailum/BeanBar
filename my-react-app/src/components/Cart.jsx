@@ -98,7 +98,7 @@ function CartPage() {
             ItemID: item.ItemID || item.id,
             ItemName: item.ItemName,
             Category: item.Category || "",
-            ItemType: item.type,
+            ItemType: item.ItemType,
             ItemDescription: item.ItemDescription,
             Price: item.Price,
             IsAvailable: item.IsAvailable !== undefined ? item.IsAvailable : 1,

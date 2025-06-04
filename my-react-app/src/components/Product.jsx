@@ -55,7 +55,7 @@ function Product() {
 
   const addToCart = async (item, index) => {
     const sugarLevel = sugarLevels[index];
-    const milkType = item.type === 'Hot' ? milkTypes[index] : null;
+    const milkType = item.ItemType === 'Hot' ? milkTypes[index] : null;
 
     try {
       const res = await fetch('http://localhost:3000/cart');
@@ -108,7 +108,7 @@ function Product() {
   };
 
   const filteredProducts = products.filter(
-    item => selectedCategory === 'All' || item.type === selectedCategory
+    item => selectedCategory === 'All' || item.ItemType === selectedCategory
   );
 
   return (
@@ -146,7 +146,7 @@ function Product() {
             <p>{item.ItemDescription}</p>
             <div className="price">R {item.Price.toFixed(2)}</div>
 
-            {item.type === 'Hot' && (
+            {item.ItemType === 'Hot' && (
               <div className="input-group">
                 <label>Sugar:</label>
                 <div className="quantity-controls">

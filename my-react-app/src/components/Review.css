@@ -13,7 +13,9 @@
   margin: 0 auto;
   padding: 0 20px;
 }
-
+#reviews{
+  background-color: #010103;
+}
 .review-head {
   color: #d3ad7f;
   text-align: center;

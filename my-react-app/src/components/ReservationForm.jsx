@@ -20,11 +20,12 @@ const ReservationForm = () => {
   const { showNotification } = useNotification();
   const tomorrow = addDays(new Date(), 1);
 
+  // Form state, initialized with sensible defaults
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    date: setHours(setMinutes(tomorrow, 0), 12),
+    date: setHours(setMinutes(tomorrow, 0), 12), // Tomorrow at 12:00 PM
     guests: 2,
     occasion: OCCASIONS[0],
     notes: "",
@@ -33,15 +34,18 @@ const ReservationForm = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Generic input change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  // DatePicker change handler
   const handleDateChange = (date) => {
     setFormData(prev => ({ ...prev, date }));
   };
 
+  // Increase/decrease guest count, constrained 1-8
   const handleGuestChange = (change) => {
     setFormData(prev => {
       const newCount = prev.guests + change;
@@ -52,10 +56,11 @@ const ReservationForm = () => {
     });
   };
 
+  // Simulate sending confirmation email (replace with real API call)
   const sendConfirmationEmail = async (reservationData) => {
     console.log('Sending confirmation email to:', reservationData.email);
     console.log('Reservation details:', reservationData);
-    
+
     try {
       const emailData = {
         to: reservationData.email,
@@ -70,11 +75,12 @@ const ReservationForm = () => {
           notes: reservationData.notes
         }
       };
-      
+
       console.log('Email payload:', emailData);
-      
+
+      // Simulate network delay
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       console.log('✅ Confirmation email sent successfully');
       return true;
     } catch (error) {
@@ -83,14 +89,16 @@ const ReservationForm = () => {
     }
   };
 
+  // Form submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
       const emailSent = await sendConfirmationEmail(formData);
-      
+
       setTimeout(() => {
+        // Compose success message including occasion fallback
         const occasion =
           formData.occasion === "Other" && formData.otherOccasion
             ? formData.otherOccasion
@@ -100,8 +108,8 @@ const ReservationForm = () => {
 
         showNotification(successMessage, 'success');
         setIsSubmitting(false);
-        
-        // Reset form
+
+        // Reset form to initial state
         setFormData({
           name: "",
           email: "",
@@ -120,6 +128,7 @@ const ReservationForm = () => {
     }
   };
 
+  // Filter allowed times for DatePicker based on business hours
   const filterTime = (time) => {
     const day = new Date(time).getDay();
     const hours = new Date(time).getHours();
@@ -134,6 +143,7 @@ const ReservationForm = () => {
     return false;
   };
 
+  // Animation variants for staggered fade-in
   const formVariants = {
     hidden: { opacity: 0 },
     visible: (i) => ({
@@ -147,6 +157,7 @@ const ReservationForm = () => {
       <form onSubmit={handleSubmit} className="reservation-form" noValidate>
         <h3>Table Reservation</h3>
 
+        {/* Full Name */}
         <motion.div className="form-group" custom={0} initial="hidden" animate="visible" variants={formVariants}>
           <label htmlFor="name">Full Name</label>
           <input
@@ -160,6 +171,7 @@ const ReservationForm = () => {
           />
         </motion.div>
 
+        {/* Email and Phone Row */}
         <div className="form-row">
           <motion.div className="form-group" custom={1} initial="hidden" animate="visible" variants={formVariants}>
             <label htmlFor="email">Email</label>
@@ -188,6 +200,7 @@ const ReservationForm = () => {
           </motion.div>
         </div>
 
+        {/* Date & Time */}
         <motion.div className="form-group" custom={3} initial="hidden" animate="visible" variants={formVariants}>
           <label>Reservation Date & Time</label>
           <DatePicker
@@ -206,6 +219,7 @@ const ReservationForm = () => {
           </div>
         </motion.div>
 
+        {/* Guests Counter */}
         <motion.div className="form-group" custom={4} initial="hidden" animate="visible" variants={formVariants}>
           <label>Number of Guests (Max 8)</label>
           <div className="guest-counter">
@@ -229,6 +243,7 @@ const ReservationForm = () => {
           </div>
         </motion.div>
 
+        {/* Occasion */}
         <motion.div className="form-group" custom={5} initial="hidden" animate="visible" variants={formVariants}>
           <label htmlFor="occasion">Occasion</label>
           <select
@@ -256,21 +271,23 @@ const ReservationForm = () => {
           )}
         </motion.div>
 
+        {/* Special Requests */}
         <motion.div className="form-group" custom={6} initial="hidden" animate="visible" variants={formVariants}>
-          <label htmlFor="notes">Special Requests</label>
+          <label htmlFor="notes">Special Requests (Optional)</label>
           <textarea
             id="notes"
             name="notes"
+            rows="3"
             value={formData.notes}
             onChange={handleChange}
-            rows={3}
-            placeholder="Any special requests or dietary requirements?"
+            placeholder="Any additional information"
           />
         </motion.div>
 
-        <motion.div className="form-submit" custom={7} initial="hidden" animate="visible" variants={formVariants}>
-          <button type="submit" className="submit-button" disabled={isSubmitting}>
-            {isSubmitting ? <span className="loading-spinner" /> : "Complete Reservation"}
+        {/* Submit Button */}
+        <motion.div className="form-group" custom={7} initial="hidden" animate="visible" variants={formVariants}>
+          <button type="submit" disabled={isSubmitting} className="submit-btn">
+            {isSubmitting ? 'Submitting...' : 'Reserve Table'}
           </button>
         </motion.div>
       </form>

@@ -33,6 +33,7 @@ const PaymentComponent = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const [reviewSubmitting, setReviewSubmitting] = useState(false);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
 
   const getCardLogo = () => {
     if (cardType === 'visa') return visaLogo;
@@ -103,12 +104,38 @@ const PaymentComponent = () => {
   const handlePayment = async () => {
     if (!validatePaymentDetails()) return;
 
+    setPaymentProcessing(true);
+    setError('');
     try {
-      alert('Payment processed successfully!');
-      setShowReview(true); // Show review after successful payment
+      // Simulate payment API call
+      const paymentResponse = await fetch('http://localhost:3000/payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          accountHolder,
+          accountNumber,
+          cardNumber: cardNumber.replace(/\s/g, ''),
+          expiryDate,
+          cvc,
+          orderNum,
+          totalPrice,
+          cartItems,
+          deliveryOption,
+        }),
+      });
+
+      if (!paymentResponse.ok) {
+        throw new Error('Payment failed');
+      }
+
+      const data = await paymentResponse.json();
+      // If successful, show review
+      setShowReview(true);
     } catch (err) {
-      console.error(err);
       setError('Payment processing failed. Please try again.');
+      console.error(err);
+    } finally {
+      setPaymentProcessing(false);
     }
   };
 
@@ -120,13 +147,27 @@ const PaymentComponent = () => {
 
     setReviewSubmitting(true);
     try {
-      console.log('Review submitted:', { rating, reviewText });
-      setTimeout(() => {
-        setReviewSubmitting(false);
-        navigate('/');
-      }, 1000);
+      // Simulate review submission API call
+      const reviewResponse = await fetch('http://localhost:3000/reviews', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderNum,
+          rating,
+          reviewText,
+        }),
+      });
+
+      if (!reviewResponse.ok) {
+        throw new Error('Failed to submit review');
+      }
+
+      // After successful submission, navigate home
+      navigate('/');
     } catch (err) {
       console.error('Review submission failed', err);
+      alert('Failed to submit review. Please try again later.');
+    } finally {
       setReviewSubmitting(false);
     }
   };
@@ -205,8 +246,8 @@ const PaymentComponent = () => {
 
           {error && <p className="error-message">{error}</p>}
 
-          <button className="checkout-btn" onClick={handlePayment}>
-            Pay Now
+          <button className="checkout" onClick={handlePayment} disabled={paymentProcessing}>
+            {paymentProcessing ? 'Processing...' : 'Pay Now'}
           </button>
         </>
       ) : (

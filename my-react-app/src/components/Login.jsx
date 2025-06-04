@@ -4,15 +4,17 @@ import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({ email: "", password: "" });
   const [formErrors, setFormErrors] = useState({});
-  const [loginSuccess, setLoginSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const [loginError, setLoginError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+    setLoginError("");
   };
 
   const validate = (values) => {
@@ -38,31 +40,27 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setLoginError("");
+    setLoginSuccess(false);
+
     const errors = validate(formValues);
     setFormErrors(errors);
 
     if (Object.keys(errors).length === 0) {
       setLoading(true);
+
       const emailToSearch = formValues.email.trim().toLowerCase();
+      const enteredPassword = formValues.password.trim();
 
       try {
         const res = await fetch(
-          `http://localhost:3000/Users?email=${encodeURIComponent(emailToSearch)}`
+          `http://localhost:3000/users?email=${encodeURIComponent(emailToSearch)}`
         );
+
         if (!res.ok) throw new Error("Failed to fetch user data");
-        let users = await res.json();
 
-        // fallback filter if no results from API query param
-        if (users.length === 0) {
-          const allRes = await fetch("http://localhost:3000/Users");
-          if (!allRes.ok) throw new Error("Failed to fetch all users");
-          const allUsers = await allRes.json();
-
-          users = allUsers.filter(
-            (u) => (u.email || "").toLowerCase() === emailToSearch
-          );
-        }
+        const users = await res.json();
 
         if (users.length === 0) {
           setLoginError("User not found");
@@ -71,9 +69,8 @@ function Login() {
         }
 
         const user = users[0];
-        const userPassword = user.password || "";
 
-        if (userPassword !== formValues.password) {
+        if (user.password !== enteredPassword) {
           setLoginError("Incorrect password");
           setLoading(false);
           return;
@@ -83,46 +80,13 @@ function Login() {
 
         // Remove password before saving
         const { password, ...userWithoutPassword } = user;
-
-        // Check if user profile exists
-        const profileRes = await fetch(
-          `http://localhost:3000/userprofile?customerID=${user.customerID}`
-        );
-        if (!profileRes.ok) throw new Error("Failed to fetch user profile");
-        const profiles = await profileRes.json();
-
-        let profile;
-
-        if (profiles.length === 0) {
-          // No profile found, create new profile with default data
-          const createRes = await fetch(`http://localhost:3000/userprofile`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              customerID: user.customerID,
-              fullName: user.fullName,
-              email: user.email,
-              phoneNumber: user.phoneNumber || "",
-              address: "",
-              // Add other default fields if needed
-            }),
-          });
-
-          if (!createRes.ok) throw new Error("Failed to create user profile");
-          profile = await createRes.json();
-        } else {
-          profile = profiles[0];
-        }
-
-        localStorage.setItem("user", JSON.stringify(userWithoutPassword));
-        localStorage.setItem("profile", JSON.stringify(profile));
+        sessionStorage.setItem("user", JSON.stringify(userWithoutPassword));
 
         setTimeout(() => {
-          // Pass both user and profile on navigation
-          navigate("/", { state: { user: userWithoutPassword, profile } });
+          navigate("/", { state: { user: userWithoutPassword } });
         }, 1000);
-      } catch (err) {
-        console.error("Login failed:", err);
+      } catch (error) {
+        console.error("Login failed:", error);
         setLoginError("Something went wrong. Please try again.");
       } finally {
         setLoading(false);
@@ -150,8 +114,9 @@ function Login() {
             value={formValues.email}
             onChange={handleChange}
             autoComplete="username"
+            required
           />
-          <p className="error">{formErrors.email}</p>
+          {formErrors.email && <p className="error">{formErrors.email}</p>}
         </div>
 
         <div className="login-input-wrapper">
@@ -162,8 +127,9 @@ function Login() {
             value={formValues.password}
             onChange={handleChange}
             autoComplete="current-password"
+            required
           />
-          <p className="error">{formErrors.password}</p>
+          {formErrors.password && <p className="error">{formErrors.password}</p>}
         </div>
 
         <div className="login-remember-forgot">
@@ -173,7 +139,7 @@ function Login() {
         </div>
 
         <button className="login-submit" type="submit" disabled={loading}>
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <div className="login-register">
