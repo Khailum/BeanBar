@@ -170,36 +170,8 @@ Notes VARCHAR(255),
 Used BIT DEFAULT 0,
 FOREIGN KEY (CustomerID) REFERENCES Users(CustomerID),
 FOREIGN KEY (RefreshTokenID) REFERENCES RefreshTokens(Id)
-);                                                                                                                 
-
---INSERT MOCK USER DATA INTO USERs TABLE: 
-INSERT INTO Users (Email, FullName, Password, UserRole, CustomerID, PhoneNumber, Address, Token, DateOfBirth, LastPromotionDate)
-VALUES
-('maria.smith@example.com', 'Maria Smith', 'hashed_password1', 'Customer', '9001014800086', '0821234567', '12 Palm Street, Cape Town', 'token12345', CONVERT(DATETIME, '01/01/1990', 103), CONVERT(DATETIME, '01/06/2024', 103)),
-('john.doe@example.com', 'John Doe', 'hashed_password2', 'Customer', '8503035277084', '0839876543', '45 Ocean View, Durban', 'token67890', CONVERT(DATETIME, '03/03/1985', 103), CONVERT(DATETIME, '15/04/2024', 103)),
-('lindiwe.m@example.com', 'Lindiwe Mokoena', 'hashed_password3', 'Customer', '9508120764080', '0796543210', '7 Rose Ave, Pretoria', 'tokenabcd', CONVERT(DATETIME, '12/08/1995', 103), CONVERT(DATETIME, '20/03/2024', 103)),
-('kevin.naidoo@example.com', 'Kevin Naidoo', 'hashed_password4', 'Customer', '9212255023087', '0728885555', '18 Sunridge, Port Elizabeth', 'tokendefg', CONVERT(DATETIME, '25/12/1992', 103), CONVERT(DATETIME, '30/11/2023', 103)),
-('thabo.k@example.com', 'Thabo Khumalo', 'hashed_password5', 'Customer', '8807065809084', '0762233445', '23 Lotus Lane, Bloemfontein', 'tokenhijk', CONVERT(DATETIME, '06/07/1988', 103), CONVERT(DATETIME, '05/02/2024', 103)),
-('candice.v@example.com', 'Candice van Wyk', 'hashed_password6', 'Customer', '9104090860082', '0847778888', '77 Bay Drive, George', 'tokenlmno', CONVERT(DATETIME, '09/04/1991', 103), CONVERT(DATETIME, '01/06/2024', 103)),
-('sipho.n@example.com', 'Sipho Ndlovu', 'hashed_password7', 'Customer', '9709235115089', '0734561230', '10 Kings Rd, Nelspruit', 'tokenpqrs', CONVERT(DATETIME, '23/09/1997', 103), CONVERT(DATETIME, '25/04/2024', 103)),
-('zanele.m@example.com', 'Zanele Mahlangu', 'hashed_password8', 'Customer', '9305180662085', '0743217890', '3 Riverbank, East London', 'tokentuvw', CONVERT(DATETIME, '18/05/1993', 103), CONVERT(DATETIME, '20/05/2024', 103)),
-('michael.j@example.com', 'Michael Jacobs', 'hashed_password9', 'Customer', '8601025804082', '0617894561', '34 Highland Rd, Kimberley', 'tokenxyza', CONVERT(DATETIME, '02/01/1986', 103), CONVERT(DATETIME, '10/03/2024', 103)),
-('anele.d@example.com', 'Anele Dlamini', 'hashed_password10', 'Customer', '9406300244083', '0825559999', '21 Oak Street, Polokwane', 'tokenbcde', CONVERT(DATETIME, '30/06/1994', 103), CONVERT(DATETIME, '18/04/2024', 103));
-
---MOCK DATA FOR THE USERAUTH TABLE:
-INSERT INTO UserAuth (UsersID, Email, HashedPassword, Salt)
-VALUES
-(1, 'maria.smith@example.com', 'hashed_password1', 'salt123'),
-(2, 'john.doe@example.com', 'hashed_password2', 'salt234'),
-(3, 'lindiwe.m@example.com', 'hashed_password3', 'salt345'),
-(4, 'kevin.naidoo@example.com', 'hashed_password4', 'salt456'),
-(5, 'thabo.k@example.com', 'hashed_password5', 'salt567'),
-(6, 'candice.v@example.com', 'hashed_password6', 'salt678'),
-(7, 'sipho.n@example.com', 'hashed_password7', 'salt789'),
-(8, 'zanele.m@example.com', 'hashed_password8', 'salt890'),
-(9, 'michael.j@example.com', 'hashed_password9', 'salt901'),
-(10, 'anele.d@example.com', 'hashed_password10', 'salt012');
-
+);                                                                                                              
+ 
 -- INSERT MENU ITEMS WITH UPDATED ZAR PRICES & TASTY DESCRIPTIONS
 INSERT INTO Menu (ItemName, ItemType, ItemDescription, Price, ImageUrl) VALUES
 ('Cortado', 'Hot', 'A bold espresso gently mellowed with a splash of warm milk — small but mighty.', 27.99, 'https://i.ibb.co/Hf0DV8fW/992807cc-7e36-4a99-9df2-d227c46b1e1d-removalai-preview.png'),
@@ -264,6 +236,21 @@ INSERT INTO Stock (StockName, Available_Stock, Arrival_Date, StockStatus, Unit, 
 ('Fresh Fruits (Mixed)', 10, '2025-05-26', 'Available', 'Kg', 'FruitWorks Distributors'),
 ('Quiche Filling Mix', 5, '2025-05-21', 'Low', 'Kg', 'DeliPro Meats');
 
+-- Mock data for Users table based on CustomerIDs used in Orders
+INSERT INTO Users (Email, FullName, Password, UserRole, CustomerID, PhoneNumber, Address, DateOfBirth)
+VALUES
+('john.doe@email.com', 'John Doe', 'hashedpassword1', 'Customer', '9406300244083', '0712345678', '123 Example Street', '1994-06-30'),
+('jane.smith@email.com', 'Jane Smith', 'hashedpassword2', 'Customer', '9104090860082', '0723456789', '456 Sample Road', '1991-04-09'),
+('michael.brown@email.com', 'Michael Brown', 'hashedpassword3', 'Customer', '8503035277084', '0734567890', '789 Demo Blvd', '1985-03-03'),
+('susan.clark@email.com', 'Susan Clark', 'hashedpassword4', 'Customer', '9212255023087', '0745678901', '321 Mock Ave', '1992-12-25'),
+('david.lee@email.com', 'David Lee', 'hashedpassword5', 'Customer', '9508120764080', '0756789012', '654 Test Lane', '1995-08-12'),
+('laura.miller@email.com', 'Laura Miller', 'hashedpassword6', 'Customer', '9001014800086', '0767890123', '987 Trial St', '1990-01-01'),
+('peter.wilson@email.com', 'Peter Wilson', 'hashedpassword7', 'Customer', '8601025804082', '0778901234', '135 Alpha Rd', '1986-01-02'),
+('chloe.adams@email.com', 'Chloe Adams', 'hashedpassword8', 'Customer', '9709235115089', '0789012345', '246 Beta Dr', '1997-09-23'),
+('daniel.evans@email.com', 'Daniel Evans', 'hashedpassword9', 'Customer', '8807065809084', '0790123456', '369 Gamma Pkwy', '1988-07-06'),
+('amy.johnson@email.com', 'Amy Johnson', 'hashedpassword10', 'Customer', '9305180662085', '0801234567', '159 Omega Ct', '1993-05-18');
+
+
 --MOCK DATA FOR ORDERs TABLE: 
 INSERT INTO Orders (ItemID, CustomerID, Address, Date, OrderType, Quantity, OrderStatus, TotalPrice)
 VALUES
@@ -281,16 +268,16 @@ VALUES
 --INSERT MOCK DATA FOR PAYMENT TABLE: 
 INSERT INTO Payments (OrderNum, Amount, PaymentMethod)
 VALUES
-(104, 100.00, 'Card'),
-(105, 50.00, 'Cash'),
-(106, 150.00, 'EFT'),
-(107, 75.00, 'Card'),
-(108, 90.00, 'Cash'),
-(109, 120.00, 'EFT'),
-(110, 200.00, 'Card'),
-(111, 60.00, 'Cash'),
-(112, 135.00, 'EFT'),
-(113, 110.00, 'Card');
+(101, 100.00, 'Card'),
+(102, 50.00, 'Cash'),
+(103, 150.00, 'EFT'),
+(104, 75.00, 'Card'),
+(105, 90.00, 'Cash'),
+(106, 120.00, 'EFT'),
+(107, 200.00, 'Card'),
+(108, 60.00, 'Cash'),
+(109, 135.00, 'EFT'),
+(110, 110.00, 'Card');
 
 --INSERT MOCK DATA INTO CARDDETAILS:
 INSERT INTO CardDetails (
@@ -309,9 +296,7 @@ VALUES
 ('ACC0123456789', 'Boitumelo Radebe', 'Savings', '2223000048400011', '444', '2030-06-30', 0, '9305180662085');
 
 --INSERT MOCK DATA INTO TABLERESERVATIONS:
-INSERT INTO TableReservations (
-    TableNum, ReservationDate, ReservationTime, PartySize, CustomerID, CustomerName, tableStatus, Occasion, Notes
-)
+INSERT INTO TableReservations (TableNum, ReservationDate, ReservationTime, PartySize, CustomerID, CustomerName, tableStatus, Occasion, Notes)
 VALUES
 (1, '2025-06-05', '18:30', 4, '9406300244083', 'Thabo Mokoena', 'Booked', 'Birthday', 'Prefers window seat'),
 (2, '2025-06-06', '19:00', 2, '9104090860082', 'Zanele Khumalo', 'Seated', 'Anniversary', 'Allergic to nuts'),
@@ -341,19 +326,16 @@ VALUES
 --INSERT MOCK DETAILS INTO DELIVERIES:
 INSERT INTO Deliveries (OrderNum, DeliveryAddress, DeliveryStatus, EstimatedTime)
 VALUES
-(104, '12 Rosewood Street, Cape Town', 'Delivered', '12:30:00'),
-(105, '45 Main Road, Johannesburg', 'On the Way', '13:15:00'),
-(106, '89 Sunset Blvd, Durban', 'Preparing', '14:00:00'),
-(107, '23 Ocean View Drive, Port Elizabeth', 'Delivered', '11:45:00'),
-(108, '7 Long Street, Pretoria', 'On the Way', '13:45:00'),
-(109, '17 Kingfisher Ave, Bloemfontein', 'Preparing', '15:00:00'),
-(110, '36 Riverside Road, Cape Town', 'Delivered', '12:00:00'),
-(111, '52 Garden Lane, East London', 'On the Way', '14:30:00'),
-(112, '11 Bluebell Crescent, George', 'Preparing', '15:45:00'),
-(113, '29 Forest Hill Drive, Polokwane', 'Delivered', '13:00:00');
-
-
-
+(101, '12 Rosewood Street, Cape Town', 'Delivered', '12:30:00'),
+(102, '45 Main Road, Johannesburg', 'On the Way', '13:15:00'),
+(103, '89 Sunset Blvd, Durban', 'Preparing', '14:00:00'),
+(104, '23 Ocean View Drive, Port Elizabeth', 'Delivered', '11:45:00'),
+(105, '7 Long Street, Pretoria', 'On the Way', '13:45:00'),
+(106, '17 Kingfisher Ave, Bloemfontein', 'Preparing', '15:00:00'),
+(107, '36 Riverside Road, Cape Town', 'Delivered', '12:00:00'),
+(108, '52 Garden Lane, East London', 'On the Way', '14:30:00'),
+(109, '11 Bluebell Crescent, George', 'Preparing', '15:45:00'),
+(110, '29 Forest Hill Drive, Polokwane', 'Delivered', '13:00:00');
 
 SELECT * FROM Users
 SELECT * FROM UserAuth
@@ -366,8 +348,6 @@ SELECT * FROM TableReservations
 SELECT * FROM Reviews
 SELECT * FROM Deliveries
 SELECT * FROM AuditLogs
-
-
 Drop database CoffeeShopDB
 
 -- Disable foreign key constraints
