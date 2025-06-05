@@ -83,88 +83,6 @@
       "itemType": "Hot",
       "imageUrl": "",
       "isAvailable": 1
-    },
-    {
-      "id": "0eb3",
-      "ItemName": "Pancakes",
-      "ItemDescription": "Stack of pancakes.",
-      "ImageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
-      "Price": 25,
-      "type": "Snack",
-      "quantity": 6
-    },
-    {
-      "id": "2085",
-      "ItemName": "Ice Tea",
-      "ItemDescription": "Refreshing iced tea.",
-      "ImageUrl": "https://i.ibb.co/PswcJJwx/ice-tea-removebg-preview.png",
-      "Price": 19.99,
-      "type": "Cold",
-      "quantity": 1
-    },
-    {
-      "id": "5e38",
-      "itemName": "Pancakes",
-      "itemDescription": "Stack of pancakes.",
-      "imageUrl": "https://i.ibb.co/xtxnGd7p/pancake-removebg-preview.png",
-      "price": 25,
-      "type": "Snack",
-      "quantity": 2
-    },
-    {
-      "id": "e7e5",
-      "itemName": "Mocha",
-      "itemType": "hot",
-      "itemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
-      "price": 32.5,
-      "imageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
-      "sugarLevel": 2,
-      "milkType": "Almond",
-      "quantity": 1
-    },
-    {
-      "id": "e7e5",
-      "itemName": "Mocha",
-      "itemType": "hot",
-      "itemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
-      "price": 32.5,
-      "imageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
-      "sugarLevel": 1,
-      "milkType": "Low Fat",
-      "quantity": 1
-    },
-    {
-      "id": "e7e5",
-      "itemName": "Mocha",
-      "itemType": "hot",
-      "itemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
-      "price": 32.5,
-      "imageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
-      "sugarLevel": 1,
-      "milkType": "Almond",
-      "quantity": 1
-    },
-    {
-      "id": "e7e5",
-      "itemName": "Mocha",
-      "itemType": "hot",
-      "itemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
-      "price": 32.5,
-      "imageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
-      "sugarLevel": 3,
-      "milkType": "Almond",
-      "quantity": 1
-    },
-    {
-      "id": "e7e5",
-      "itemName": "Mocha",
-      "itemType": "hot",
-      "itemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
-      "price": 32.5,
-      "imageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
-      "sugarLevel": 0,
-      "milkType": "Full Cream",
-      "quantity": 1
     }
   ],
   "orders": [
@@ -211,6 +129,14 @@
       "deliveryOption": "in-store",
       "deliveryFee": 0,
       "totalPrice": 169.46,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "acf0",
+      "orderNum": 736645,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 230.48,
       "orderStatus": "Pending"
     }
   ],

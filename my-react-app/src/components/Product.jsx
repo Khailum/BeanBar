@@ -179,7 +179,7 @@ function Product() {
 
               {item.itemType === 'hot' && (
                 <div className="input-group">
-                  <label htmlFor={`sugar-${id}`}>Sugar:</label>
+                  <label htmlFor={`sugar-${id}`} value={SugarType}>Sugar:</label>
                   <div className="quantity-controls">
                     <button
                       className="qty-btn"

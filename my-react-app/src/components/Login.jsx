@@ -11,7 +11,6 @@ function Login() {
   const [loginError, setLoginError]   = useState("");
   const [rememberMe, setRememberMe]   = useState(false);
 
-  /* ---------- helpers ---------- */
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
   const validate = ({ email, password }) => {
@@ -27,7 +26,6 @@ function Login() {
     return errors;
   };
 
-  /* ---------- handlers ---------- */
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") setRememberMe(checked);
@@ -53,48 +51,34 @@ function Login() {
     setLoading(true);
 
     try {
-      const emailQ = encodeURIComponent(trimmedValues.email);
-      const resp = await fetch(`http://localhost:3000/users?email=${emailQ}`);
-
-      if (!resp.ok) throw new Error("Network error");
-
-      const users = await resp.json();
-      if (!users.length) throw new Error("User not found");
-
-      const user = users[0];
-      if (user.password !== trimmedValues.password)
-        throw new Error("Incorrect password");
-
-      /* 🙈 never store password */
-      const { password, ...safeUser } = user;
-
-      /* 🛰️ POST user info to /userprofile */
-      const postResp = await fetch("http://localhost:3000/userprofile", {
+      const resp = await fetch("http://localhost:3000/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(safeUser),
+        body: JSON.stringify(trimmedValues),
       });
 
-      if (!postResp.ok) {
-        console.warn("Failed to post user profile:", postResp.statusText);
-        // Optionally, you can set an error or notify user here
+      if (!resp.ok) {
+        // Extract server error message if available
+        const errorData = await resp.json().catch(() => null);
+        throw new Error(errorData?.error || "Login failed");
       }
 
-      /* 🗄️ save to sessionStorage or localStorage */
-      const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem("user", JSON.stringify(safeUser));
+      const data = await resp.json();
 
-      /* ⏩ navigate home */
-      navigate("/", { state: { user: safeUser } });
+      // Save JWT token & user info
+      const storage = rememberMe ? localStorage : sessionStorage;
+      storage.setItem("token", data.token);
+      storage.setItem("user", JSON.stringify(data.user));
+
+      // Navigate home with user info
+      navigate("/", { state: { user: data.user } });
     } catch (err) {
-      console.error(err);
       setLoginError(err.message || "Login failed. Try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  /* ---------- UI ---------- */
   return (
     <div className="login-page">
       {loginError && <div className="ui message error">{loginError}</div>}
