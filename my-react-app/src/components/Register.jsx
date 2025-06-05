@@ -42,21 +42,16 @@ function Register() {
         setIsSubmitting(true);
 
         try {
-          // Fetch existing users from backend API
+          // Fetch existing users to check for duplicates
           const response = await fetch('http://localhost:3000/users');
-          if (!response.ok) throw new Error('Failed to fetch users from server');
-          const fetchedUsers = await response.json();
+          if (!response.ok) throw new Error('Failed to fetch users');
+          const users = await response.json();
 
           const emailToCheck = formValues.email.trim().toLowerCase();
           const idToCheck = formValues.idNumber.trim();
 
-          // Check duplicates in backend users only
-          const emailExists = fetchedUsers.some(
-            (user) => user.email.toLowerCase() === emailToCheck
-          );
-          const idExists = fetchedUsers.some(
-            (user) => user.customerID === idToCheck
-          );
+          const emailExists = users.some(user => user.email.toLowerCase() === emailToCheck);
+          const idExists = users.some(user => user.customerId === idToCheck);
 
           if (emailExists) {
             setDuplicateError('An account with this email already exists.');
@@ -69,19 +64,20 @@ function Register() {
             return;
           }
 
+          // Prepare new user object
           const newUser = {
-            customerID: idToCheck,
+            customerId: idToCheck,
             fullName: formValues.fullName.trim(),
             email: emailToCheck,
             phoneNumber: formValues.phoneNumber.trim(),
             address: formValues.address.trim(),
-            password: formValues.password, // Ideally hash the password in real app
+            password: formValues.password,
             userRole: 'Customer',
             isActive: 1,
             createdAt: new Date().toISOString(),
           };
 
-          // POST new user to backend API
+          // POST to /users
           const postResponse = await fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -90,16 +86,41 @@ function Register() {
 
           if (!postResponse.ok) throw new Error('Failed to save user');
 
+          const savedUser = await postResponse.json();
+
+          // Save user info without password to sessionStorage
+          const { password, ...userWithoutPassword } = savedUser;
+          sessionStorage.setItem('registeredUser', JSON.stringify(userWithoutPassword));
+          sessionStorage.setItem('CustomerId', savedUser.customerId);
+
+          // Now POST user profile to /userprofile
+          const userProfileData = {
+            customerId: savedUser.customerId, // Link to the user by ID
+            fullName: savedUser.fullName,
+            email: savedUser.email,
+            phoneNumber: savedUser.phoneNumber,
+            address: savedUser.address,
+            createdAt: savedUser.createdAt,
+            // Add any additional profile fields if needed
+          };
+
+          const profileResponse = await fetch('http://localhost:3000/userprofile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userProfileData),
+          });
+
+          if (!profileResponse.ok) throw new Error('Failed to save user profile');
+
           setIsSuccess(true);
           setFormValues(initialValues);
           setAgreed(false);
           setIsSubmitting(false);
 
-          // Redirect after 3 seconds
-          setTimeout(() => navigate('/dashboard'), 3000);
+          setTimeout(() => navigate('/'), 3000);
         } catch (error) {
-          console.error('Registration failed:', error);
-          setDuplicateError('Failed to fetch users or register. Try again later.');
+          console.error('Registration error:', error);
+          setDuplicateError('Something went wrong. Please try again later.');
           setIsSubmitting(false);
         }
       };
@@ -120,7 +141,7 @@ function Register() {
     if (!values.email || !emailRegex.test(values.email)) errors.email = 'Invalid email format.';
     if (!values.phoneNumber || !phoneRegex.test(values.phoneNumber)) errors.phoneNumber = 'Phone number must be 10 digits.';
     if (!values.password || !passwordRegex.test(values.password))
-      errors.password = 'Password must have uppercase, lowercase, number, special character, and be 8+ characters.';
+      errors.password = 'Password must be at least 8 characters with uppercase, lowercase, number, and special character.';
     if (!values.confirmPassword || values.confirmPassword !== values.password)
       errors.confirmPassword = 'Passwords do not match.';
     if (!agreed) errors.terms = 'You must agree to the terms.';
@@ -137,11 +158,7 @@ function Register() {
         </div>
       )}
 
-      <form
-        className={`register-form ${isSuccess ? 'fade-out' : ''}`}
-        onSubmit={handleSubmit}
-        noValidate
-      >
+      <form className={`register-form ${isSuccess ? 'fade-out' : ''}`} onSubmit={handleSubmit} noValidate>
         <h2 className="title">Create Account</h2>
 
         {duplicateError && <p className="error duplicate-error">{duplicateError}</p>}

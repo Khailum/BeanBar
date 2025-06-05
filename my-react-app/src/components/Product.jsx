@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Product.css';
 
 function Product() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
-  const [sugarLevels, setSugarLevels] = useState([]);
-  const [milkTypes, setMilkTypes] = useState([]);
+  const [sugarLevels, setSugarLevels] = useState({});
+  const [milkTypes, setMilkTypes] = useState({});
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showOptions, setShowOptions] = useState(false);
   const [addedIndex, setAddedIndex] = useState(null);
 
   const categories = ['All', 'Hot', 'Cold', 'Snack'];
 
-  // Fetch menu items
   useEffect(() => {
     fetch('http://localhost:3000/menu')
       .then(response => {
@@ -21,9 +21,22 @@ function Product() {
       })
       .then(data => {
         const menu = data.menu || data;
-        setProducts(menu);
-        setSugarLevels(Array(menu.length).fill(0));
-        setMilkTypes(Array(menu.length).fill('Full Cream'));
+        const normalizedMenu = menu.map(item => ({
+          ...item,
+          itemType: (item.ItemType || item.itemType || '').toLowerCase(),
+        }));
+
+        setProducts(normalizedMenu);
+
+        const sugarInit = {};
+        const milkInit = {};
+        normalizedMenu.forEach(item => {
+          const id = item.id || item.itemName;
+          sugarInit[id] = 0;
+          milkInit[id] = 'Full Cream';
+        });
+        setSugarLevels(sugarInit);
+        setMilkTypes(milkInit);
       })
       .catch(err => {
         setError(err.message);
@@ -31,31 +44,31 @@ function Product() {
       });
   }, []);
 
-  const increaseSugar = (index) => {
-    setSugarLevels(prev => {
-      const updated = [...prev];
-      if (updated[index] < 3) updated[index] += 1;
-      return updated;
-    });
+  const increaseSugar = (id) => {
+    setSugarLevels(prev => ({
+      ...prev,
+      [id]: Math.min((prev[id] || 0) + 1, 3),
+    }));
   };
 
-  const decreaseSugar = (index) => {
-    setSugarLevels(prev => {
-      const updated = [...prev];
-      if (updated[index] > 0) updated[index] -= 1;
-      return updated;
-    });
+  const decreaseSugar = (id) => {
+    setSugarLevels(prev => ({
+      ...prev,
+      [id]: Math.max((prev[id] || 0) - 1, 0),
+    }));
   };
 
-  const handleMilkChange = (index, value) => {
-    const updated = [...milkTypes];
-    updated[index] = value;
-    setMilkTypes(updated);
+  const handleMilkChange = (id, value) => {
+    setMilkTypes(prev => ({
+      ...prev,
+      [id]: value,
+    }));
   };
 
-  const addToCart = async (item, index) => {
-    const sugarLevel = sugarLevels[index];
-    const milkType = item.ItemType === 'Hot' ? milkTypes[index] : null;
+  const addToCart = async (item) => {
+    const id = item.id || item.itemName;
+    const sugarLevel = sugarLevels[id];
+    const milkType = item.itemType === 'hot' ? milkTypes[id] : null;
 
     try {
       const res = await fetch('http://localhost:3000/cart');
@@ -64,7 +77,7 @@ function Product() {
       const cartItems = await res.json();
 
       const existingItem = cartItems.find(cartItem =>
-        cartItem.ItemName === item.ItemName &&
+        cartItem.itemName === item.itemName &&
         cartItem.sugarLevel === sugarLevel &&
         cartItem.milkType === milkType
       );
@@ -80,8 +93,6 @@ function Product() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(updatedItem),
         });
-
-        console.log(`Updated quantity: ${updatedItem.ItemName}`);
       } else {
         const newItem = {
           ...item,
@@ -95,11 +106,9 @@ function Product() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newItem),
         });
-
-        console.log(`Added new item: ${newItem.ItemName}`);
       }
 
-      setAddedIndex(index);
+      setAddedIndex(id);
       setTimeout(() => setAddedIndex(null), 2000);
     } catch (error) {
       console.error('Add to cart error:', error);
@@ -108,25 +117,45 @@ function Product() {
   };
 
   const filteredProducts = products.filter(
-    item => selectedCategory === 'All' || item.ItemType === selectedCategory
+    item => selectedCategory.toLowerCase() === 'all' || item.itemType === selectedCategory.toLowerCase()
   );
 
   return (
     <div>
+      <nav>
+        <Link to="/cart" className="cart-link">Go to Cart</Link>
+      </nav>
+
       <section className="coffee-categories">
         <h2 className="Coffee-header"><span>OUR</span> MENU</h2>
-        <button className="filter-btn" onClick={() => setShowOptions(!showOptions)}>
+        <button
+          className="filter-btn"
+          onClick={() => setShowOptions(!showOptions)}
+          aria-haspopup="listbox"
+          aria-expanded={showOptions}
+          aria-label="Filter products by category"
+          type="button"
+        >
           Filter: {selectedCategory}
         </button>
         {showOptions && (
-          <div className="dropdown">
+          <div className="dropdown" role="listbox" tabIndex={-1}>
             {categories.map(category => (
               <div
                 key={category}
                 className={`dropdown-item ${selectedCategory === category ? 'active' : ''}`}
+                role="option"
+                aria-selected={selectedCategory === category}
+                tabIndex={0}
                 onClick={() => {
                   setSelectedCategory(category);
                   setShowOptions(false);
+                }}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedCategory(category);
+                    setShowOptions(false);
+                  }
                 }}
               >
                 {category}
@@ -139,45 +168,72 @@ function Product() {
       {error && <p className="error-message">⚠ {error}</p>}
 
       <div className="product-container">
-        {filteredProducts.map((item, index) => (
-          <div className="product" key={index}>
-            <img src={item.ImageUrl} alt={item.ItemName} />
-            <h3>{item.ItemName}</h3>
-            <p>{item.ItemDescription}</p>
-            <div className="price">R {item.Price.toFixed(2)}</div>
+        {filteredProducts.map((item) => {
+          const id = item.id || item.itemName;
+          return (
+            <div className="product" key={id}>
+              <img src={item.imageUrl} alt={item.itemName} />
+              <h3>{item.itemName}</h3>
+              <p>{item.itemDescription}</p>
+              <div className="price">R {item.price.toFixed(2)}</div>
 
-            {item.ItemType === 'Hot' && (
-              <div className="input-group">
-                <label>Sugar:</label>
-                <div className="quantity-controls">
-                  <button className="qty-btn" onClick={() => decreaseSugar(index)}>−</button>
-                  <input type="number" className="number" value={sugarLevels[index]} readOnly />
-                  <button className="qty-btn" onClick={() => increaseSugar(index)}>+</button>
+              {item.itemType === 'hot' && (
+                <div className="input-group">
+                  <label htmlFor={`sugar-${id}`}>Sugar:</label>
+                  <div className="quantity-controls">
+                    <button
+                      className="qty-btn"
+                      aria-label={`Decrease sugar for ${item.itemName}`}
+                      onClick={() => decreaseSugar(id)}
+                      type="button"
+                    >
+                      −
+                    </button>
+                    <input
+                      id={`sugar-${id}`}
+                      type="number"
+                      className="number"
+                      value={sugarLevels[id] || 0}
+                      readOnly
+                      aria-live="polite"
+                    />
+                    <button
+                      className="qty-btn"
+                      aria-label={`Increase sugar for ${item.itemName}`}
+                      onClick={() => increaseSugar(id)}
+                      type="button"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <label htmlFor={`milk-${id}`}>Milk Type:</label>
+                  <select
+                    id={`milk-${id}`}
+                    value={milkTypes[id] || 'Full Cream'}
+                    onChange={(e) => handleMilkChange(id, e.target.value)}
+                    aria-label={`Select milk type for ${item.itemName}`}
+                  >
+                    <option value="Full Cream">Full Cream</option>
+                    <option value="Low Fat">Low Fat</option>
+                    <option value="Almond">Almond</option>
+                    <option value="Soy">Soy</option>
+                    <option value="Oat">Oat</option>
+                  </select>
                 </div>
+              )}
 
-                <label htmlFor={`milk-${index}`}>Milk Type:</label>
-                <select
-                  id={`milk-${index}`}
-                  value={milkTypes[index]}
-                  onChange={(e) => handleMilkChange(index, e.target.value)}
-                >
-                  <option value="Full Cream">Full Cream</option>
-                  <option value="Low Fat">Low Fat</option>
-                  <option value="Almond">Almond</option>
-                  <option value="Soy">Soy</option>
-                  <option value="Oat">Oat</option>
-                </select>
-              </div>
-            )}
-
-            <button
-              className={`button ${addedIndex === index ? 'added' : ''}`}
-              onClick={() => addToCart(item, index)}
-            >
-              {addedIndex === index ? '✔ Added' : 'Add To Cart'}
-            </button>
-          </div>
-        ))}
+              <button
+                className={`button ${addedIndex === id ? 'added' : ''}`}
+                onClick={() => addToCart(item)}
+                type="button"
+                aria-live="polite"
+              >
+                {addedIndex === id ? '✔ Added' : 'Add To Cart'}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

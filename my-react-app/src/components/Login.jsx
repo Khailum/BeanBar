@@ -6,101 +6,99 @@ function Login() {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({ email: "", password: "" });
-  const [formErrors, setFormErrors] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
-  const [loginError, setLoginError] = useState("");
+  const [formErrors, setFormErrors]   = useState({});
+  const [loading, setLoading]         = useState(false);
+  const [loginError, setLoginError]   = useState("");
+  const [rememberMe, setRememberMe]   = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
-    setLoginError("");
+  /* ---------- helpers ---------- */
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+
+  const validate = ({ email, password }) => {
+    const errors = {};
+    if (!email)               errors.email    = "Email is required!";
+    else if (!emailRegex.test(email))
+                               errors.email    = "Invalid email format!";
+    if (!password)            errors.password = "Password is required!";
+    else if (password.length < 4)
+                               errors.password = "Password must be ≥ 4 chars";
+    else if (password.length > 15)
+                               errors.password = "Password must be ≤ 15 chars";
+    return errors;
   };
 
-  const validate = (values) => {
-    const errors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-    if (!values.email) {
-      errors.email = "Email is required!";
-    } else if (!emailRegex.test(values.email)) {
-      errors.email = "Invalid email format!";
+  /* ---------- handlers ---------- */
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") setRememberMe(checked);
+    else {
+      setFormValues((prev) => ({ ...prev, [name]: value }));
+      setLoginError("");
     }
-
-    if (!values.password) {
-      errors.password = "Password is required!";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be at least 4 characters.";
-    } else if (values.password.length > 15) {
-      errors.password = "Password must not exceed 15 characters.";
-    }
-
-    return errors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoginError("");
-    setLoginSuccess(false);
 
-    const errors = validate(formValues);
+    const trimmedValues = {
+      email: formValues.email.trim().toLowerCase(),
+      password: formValues.password.trim(),
+    };
+
+    const errors = validate(trimmedValues);
     setFormErrors(errors);
+    if (Object.keys(errors).length) return;
 
-    if (Object.keys(errors).length === 0) {
-      setLoading(true);
+    setLoading(true);
 
-      const emailToSearch = formValues.email.trim().toLowerCase();
-      const enteredPassword = formValues.password.trim();
+    try {
+      const emailQ = encodeURIComponent(trimmedValues.email);
+      const resp = await fetch(`http://localhost:3000/users?email=${emailQ}`);
 
-      try {
-        const res = await fetch(
-          `http://localhost:3000/users?email=${encodeURIComponent(emailToSearch)}`
-        );
+      if (!resp.ok) throw new Error("Network error");
 
-        if (!res.ok) throw new Error("Failed to fetch user data");
+      const users = await resp.json();
+      if (!users.length) throw new Error("User not found");
 
-        const users = await res.json();
+      const user = users[0];
+      if (user.password !== trimmedValues.password)
+        throw new Error("Incorrect password");
 
-        if (users.length === 0) {
-          setLoginError("User not found");
-          setLoading(false);
-          return;
-        }
+      /* 🙈 never store password */
+      const { password, ...safeUser } = user;
 
-        const user = users[0];
+      /* 🛰️ POST user info to /userprofile */
+      const postResp = await fetch("http://localhost:3000/userprofile", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(safeUser),
+      });
 
-        if (user.password !== enteredPassword) {
-          setLoginError("Incorrect password");
-          setLoading(false);
-          return;
-        }
-
-        setLoginSuccess(true);
-
-        // Remove password before saving
-        const { password, ...userWithoutPassword } = user;
-        sessionStorage.setItem("user", JSON.stringify(userWithoutPassword));
-
-        setTimeout(() => {
-          navigate("/", { state: { user: userWithoutPassword } });
-        }, 1000);
-      } catch (error) {
-        console.error("Login failed:", error);
-        setLoginError("Something went wrong. Please try again.");
-      } finally {
-        setLoading(false);
+      if (!postResp.ok) {
+        console.warn("Failed to post user profile:", postResp.statusText);
+        // Optionally, you can set an error or notify user here
       }
+
+      /* 🗄️ save to sessionStorage or localStorage */
+      const storage = rememberMe ? localStorage : sessionStorage;
+      storage.setItem("user", JSON.stringify(safeUser));
+
+      /* ⏩ navigate home */
+      navigate("/", { state: { user: safeUser } });
+    } catch (err) {
+      console.error(err);
+      setLoginError(err.message || "Login failed. Try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
+  /* ---------- UI ---------- */
   return (
     <div className="login-page">
-      {loginSuccess && (
-        <div className="ui message success">Login Successful!</div>
-      )}
       {loginError && <div className="ui message error">{loginError}</div>}
-      {loading && <div className="loading">Logging in...</div>}
+      {loading && <div className="loading">Logging in…</div>}
 
       <form className="login-form" onSubmit={handleSubmit} noValidate>
         <h2 className="heading">Login</h2>
@@ -134,17 +132,22 @@ function Login() {
 
         <div className="login-remember-forgot">
           <label>
-            <input type="checkbox" /> Remember me
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={handleChange}
+            />{" "}
+            Remember me
           </label>
         </div>
 
         <button className="login-submit" type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Logging in…" : "Login"}
         </button>
 
         <div className="login-register">
           <p>
-            Don't have an account? <Link to="/register">Register</Link>
+            Don’t have an account? <Link to="/register">Register</Link>
           </p>
         </div>
       </form>

@@ -129,8 +129,13 @@ const PaymentComponent = () => {
       }
 
       const data = await paymentResponse.json();
-      // If successful, show review
-      setShowReview(true);
+
+      // Redirect to delivery page if delivery is selected
+      if (deliveryOption === 'delivery') {
+        navigate('/tracking', { state: { orderNum, totalPrice, cartItems, pricing } });
+      } else {
+        setShowReview(true);
+      }
     } catch (err) {
       setError('Payment processing failed. Please try again.');
       console.error(err);
@@ -147,7 +152,6 @@ const PaymentComponent = () => {
 
     setReviewSubmitting(true);
     try {
-      // Simulate review submission API call
       const reviewResponse = await fetch('http://localhost:3000/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -162,7 +166,6 @@ const PaymentComponent = () => {
         throw new Error('Failed to submit review');
       }
 
-      // After successful submission, navigate home
       navigate('/');
     } catch (err) {
       console.error('Review submission failed', err);
