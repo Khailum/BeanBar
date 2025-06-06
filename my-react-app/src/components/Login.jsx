@@ -6,23 +6,22 @@ function Login() {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState({ email: "", password: "" });
-  const [formErrors, setFormErrors]   = useState({});
-  const [loading, setLoading]         = useState(false);
-  const [loginError, setLoginError]   = useState("");
-  const [rememberMe, setRememberMe]   = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [loginError, setLoginError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
   const validate = ({ email, password }) => {
     const errors = {};
-    if (!email)               errors.email    = "Email is required!";
-    else if (!emailRegex.test(email))
-                               errors.email    = "Invalid email format!";
-    if (!password)            errors.password = "Password is required!";
+    if (!email) errors.email = "Email is required!";
+    else if (!emailRegex.test(email)) errors.email = "Invalid email format!";
+    if (!password) errors.password = "Password is required!";
     else if (password.length < 4)
-                               errors.password = "Password must be ≥ 4 chars";
+      errors.password = "Password must be ≥ 4 chars";
     else if (password.length > 15)
-                               errors.password = "Password must be ≤ 15 chars";
+      errors.password = "Password must be ≤ 15 chars";
     return errors;
   };
 
@@ -51,27 +50,33 @@ function Login() {
     setLoading(true);
 
     try {
-      const resp = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(trimmedValues),
-      });
+      // Query the Users endpoint by Email and Password
+      const resp = await fetch(
+        `http://localhost:3000/Users?Email=${encodeURIComponent(
+          trimmedValues.email
+        )}&Password=${encodeURIComponent(trimmedValues.password)}`
+      );
 
-      if (!resp.ok) {
-        // Extract server error message if available
-        const errorData = await resp.json().catch(() => null);
-        throw new Error(errorData?.error || "Login failed");
+      if (!resp.ok) throw new Error("Failed to connect to server.");
+
+      const users = await resp.json();
+
+      if (users.length === 0) {
+        throw new Error("Invalid email or password.");
       }
 
-      const data = await resp.json();
+      const user = users[0];
 
-      // Save JWT token & user info
+      // Simulate a JWT token (for demo)
+      const fakeToken = `fake-jwt-token-${user.id}`;
+
+      // Save token and user info
       const storage = rememberMe ? localStorage : sessionStorage;
-      storage.setItem("token", data.token);
-      storage.setItem("user", JSON.stringify(data.user));
+      storage.setItem("token", fakeToken);
+      storage.setItem("user", JSON.stringify(user));
 
-      // Navigate home with user info
-      navigate("/", { state: { user: data.user } });
+      // Navigate to home page passing user state
+      navigate("/", { state: { user } });
     } catch (err) {
       setLoginError(err.message || "Login failed. Try again.");
     } finally {
@@ -111,7 +116,9 @@ function Login() {
             autoComplete="current-password"
             required
           />
-          {formErrors.password && <p className="error">{formErrors.password}</p>}
+          {formErrors.password && (
+            <p className="error">{formErrors.password}</p>
+          )}
         </div>
 
         <div className="login-remember-forgot">

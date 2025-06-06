@@ -14,32 +14,33 @@ function UserProfile() {
   const [saveError, setSaveError] = useState(null);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
-  // Load user from localStorage once if not in location state
+  // If no user was passed via navigation, redirect to login
   useEffect(() => {
-    if (!user) {
-      const savedUser = localStorage.getItem("user");
-      if (savedUser) setUser(JSON.parse(savedUser));
+    if (!location.state?.user) {
+      navigate("/login");
+    } else {
+      setUser(location.state.user);
     }
-  }, [user]);
+  }, [location.state, navigate]);
 
-  // Fetch or create user profile whenever user changes
+  // Fetch user profile from backend
   useEffect(() => {
     if (!user?.customerID) {
       setLoading(false);
       return;
     }
 
-    const fetchOrCreateProfile = async () => {
+    const fetchProfile = async () => {
       try {
         const res = await fetch(`http://localhost:3000/userprofile?customerID=${user.customerID}`);
         if (!res.ok) throw new Error("Failed to fetch user profile");
-        const data = await res.json();
 
+        const data = await res.json();
         if (data.length > 0) {
           setProfileData(data[0]);
           setEditData(data[0]);
         } else {
-          // Create profile if none exists
+          // Create profile if it does not exist
           const createRes = await fetch(`http://localhost:3000/userprofile`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -52,23 +53,22 @@ function UserProfile() {
             }),
           });
 
-          if (!createRes.ok) throw new Error("Failed to create user profile");
+          if (!createRes.ok) throw new Error("Failed to create profile");
           const newProfile = await createRes.json();
 
           setProfileData(newProfile);
           setEditData(newProfile);
         }
       } catch (error) {
-        console.error("Error fetching or creating user profile:", error);
+        console.error("Profile fetch error:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchOrCreateProfile();
+    fetchProfile();
   }, [user]);
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditData((prev) => ({
@@ -79,7 +79,6 @@ function UserProfile() {
     setSaveSuccess(false);
   };
 
-  // Check if editData differs from profileData (to disable Save if no changes)
   const hasChanges = () => {
     if (!editData || !profileData) return false;
     return (
@@ -90,7 +89,6 @@ function UserProfile() {
     );
   };
 
-  // Simple form validation for email and phone (you can enhance)
   const isValid = () => {
     if (!editData) return false;
     if (!editData.fullName.trim()) return false;
@@ -99,11 +97,9 @@ function UserProfile() {
     return true;
   };
 
-  // Save updated profile
   const handleSave = async () => {
-    if (!editData) return;
-    if (!isValid()) {
-      setSaveError("Please enter valid name, email, and phone number.");
+    if (!editData || !isValid()) {
+      setSaveError("Please enter valid details.");
       return;
     }
 
@@ -114,56 +110,41 @@ function UserProfile() {
     try {
       const res = await fetch(`http://localhost:3000/userprofile/${editData.customerID}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(editData),
       });
 
-      if (!res.ok) throw new Error(`Server error: ${res.status}`);
+      if (!res.ok) throw new Error("Failed to save profile");
 
-      const updatedProfile = await res.json();
-      setProfileData(updatedProfile);
-      setEditData(updatedProfile);
+      const updated = await res.json();
+      setProfileData(updated);
+      setEditData(updated);
       setSaveSuccess(true);
     } catch (error) {
-      setSaveError("Failed to save profile. Please try again.");
       console.error("Save error:", error);
+      setSaveError("Failed to save. Please try again.");
     } finally {
       setSaving(false);
     }
   };
 
-  // Confirm logout to prevent accidental clicks
   const handleLogout = () => {
     if (window.confirm("Are you sure you want to log out?")) {
-      localStorage.removeItem("user");
       navigate("/login");
     }
   };
 
-  // Destructure for cleaner JSX
-  const {
-    fullName = "",
-    email = "",
-    phoneNumber = "",
-    address = "",
-  } = editData || {};
+  const { fullName = "", email = "", phoneNumber = "", address = "" } = editData || {};
 
   if (loading) {
-    return (
-      <div className="user-profile-loading">
-        <div className="spinner" /> {/* You can add spinner CSS */}
-        Loading user profile...
-      </div>
-    );
+    return <div className="user-profile-loading">Loading profile...</div>;
   }
 
   if (!user || !profileData) {
     return (
       <div className="user-profile-error">
-        No user data found. <br />
-        <button onClick={() => navigate("/login")}>Go to Login</button>
+        Profile not found. <br />
+        <button onClick={() => navigate("/login")}>Back to Login</button>
       </div>
     );
   }
@@ -173,94 +154,37 @@ function UserProfile() {
       <h2 className="user-profile-title">User Profile</h2>
 
       <section className="user-profile-section">
-        <h3 className="user-profile-section-title">Customer Information</h3>
-
-        <label className="user-profile-text" htmlFor="fullName">
+        <label className="user-profile-text">
           <strong>Name:</strong>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={fullName}
-            onChange={handleChange}
-            className="user-profile-input"
-          />
+          <input name="fullName" value={fullName} onChange={handleChange} />
         </label>
-
-        <label className="user-profile-text" htmlFor="email">
+        <label className="user-profile-text">
           <strong>Email:</strong>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            className="user-profile-input"
-          />
+          <input name="email" value={email} onChange={handleChange} />
         </label>
-
-        <label className="user-profile-text" htmlFor="phoneNumber">
+        <label className="user-profile-text">
           <strong>Phone:</strong>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={phoneNumber}
-            onChange={handleChange}
-            className="user-profile-input"
-          />
+          <input name="phoneNumber" value={phoneNumber} onChange={handleChange} />
         </label>
-
-        <label className="user-profile-text" htmlFor="address">
+        <label className="user-profile-text">
           <strong>Address:</strong>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={address}
-            onChange={handleChange}
-            className="user-profile-input"
-          />
+          <input name="address" value={address} onChange={handleChange} />
         </label>
 
-        <p className="user-profile-text">
-          <strong>Customer ID:</strong> {profileData.customerID}
-        </p>
+        <p><strong>Customer ID:</strong> {profileData.customerID}</p>
 
         <button
-          className="user-profile-save-button"
           onClick={handleSave}
-          disabled={saving || !hasChanges() || !isValid()}
-          title={
-            saving
-              ? "Saving..."
-              : !hasChanges()
-              ? "No changes to save"
-              : !isValid()
-              ? "Please fill in all required fields correctly"
-              : "Save Changes"
-          }
+          disabled={!hasChanges() || !isValid() || saving}
         >
           {saving ? "Saving..." : "Save Changes"}
         </button>
 
-        {saveError && <p className="user-profile-save-error">{saveError}</p>}
-        {saveSuccess && <p className="user-profile-save-success">Profile updated successfully!</p>}
+        {saveError && <p className="error">{saveError}</p>}
+        {saveSuccess && <p className="success">Profile updated!</p>}
       </section>
 
-      <section className="user-profile-section">
-        <h3 className="user-profile-section-title">Current Cart</h3>
-        <p className="user-profile-text">Your cart is currently empty.</p>
-      </section>
-
-      <section className="user-profile-section">
-        <h3 className="user-profile-section-title">Order History</h3>
-        <p className="user-profile-text">You have no past orders.</p>
-      </section>
-
-      <button className="user-profile-logout-button" onClick={handleLogout}>
-        Log Out
-      </button>
+      <button onClick={handleLogout}>Log Out</button>
     </div>
   );
 }

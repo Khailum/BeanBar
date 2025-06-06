@@ -31,7 +31,7 @@ function Product() {
         const sugarInit = {};
         const milkInit = {};
         normalizedMenu.forEach(item => {
-          const id = item.id || item.itemName;
+          const id = item.id || item.ItemName;
           sugarInit[id] = 0;
           milkInit[id] = 'Full Cream';
         });
@@ -66,9 +66,9 @@ function Product() {
   };
 
   const addToCart = async (item) => {
-    const id = item.id || item.itemName;
+    const id = item.id || item.ItemName;
     const sugarLevel = sugarLevels[id];
-    const milkType = item.itemType === 'hot' ? milkTypes[id] : null;
+    const milkType = item.ItemType === 'hot' ? milkTypes[id] : null;
 
     try {
       const res = await fetch('http://localhost:3000/cart');
@@ -77,7 +77,7 @@ function Product() {
       const cartItems = await res.json();
 
       const existingItem = cartItems.find(cartItem =>
-        cartItem.itemName === item.itemName &&
+        cartItem.ItemName === item.ItemName &&
         cartItem.sugarLevel === sugarLevel &&
         cartItem.milkType === milkType
       );
@@ -117,7 +117,7 @@ function Product() {
   };
 
   const filteredProducts = products.filter(
-    item => selectedCategory.toLowerCase() === 'all' || item.itemType === selectedCategory.toLowerCase()
+    item => selectedCategory.toLowerCase() === 'all' || item.ItemType === selectedCategory.toLowerCase()
   );
 
   return (
@@ -169,21 +169,21 @@ function Product() {
 
       <div className="product-container">
         {filteredProducts.map((item) => {
-          const id = item.id || item.itemName;
+          const id = item.id || item.ItemName;
           return (
             <div className="product" key={id}>
-              <img src={item.imageUrl} alt={item.itemName} />
-              <h3>{item.itemName}</h3>
-              <p>{item.itemDescription}</p>
-              <div className="price">R {item.price.toFixed(2)}</div>
+              <img src={item.ImageUrl} alt={item.ItemName} />
+              <h3>{item.ItemName}</h3>
+              <p>{item.ItemDescription}</p>
+              <div className="price">R {item.Price.toFixed(2)}</div>
 
-              {item.itemType === 'hot' && (
+              {item.ItemType === 'hot' && (
                 <div className="input-group">
                   <label htmlFor={`sugar-${id}`} value={SugarType}>Sugar:</label>
                   <div className="quantity-controls">
                     <button
                       className="qty-btn"
-                      aria-label={`Decrease sugar for ${item.itemName}`}
+                      aria-label={`Decrease sugar for ${item.ItemName}`}
                       onClick={() => decreaseSugar(id)}
                       type="button"
                     >
@@ -199,7 +199,7 @@ function Product() {
                     />
                     <button
                       className="qty-btn"
-                      aria-label={`Increase sugar for ${item.itemName}`}
+                      aria-label={`Increase sugar for ${item.ItemName}`}
                       onClick={() => increaseSugar(id)}
                       type="button"
                     >
@@ -212,7 +212,7 @@ function Product() {
                     id={`milk-${id}`}
                     value={milkTypes[id] || 'Full Cream'}
                     onChange={(e) => handleMilkChange(id, e.target.value)}
-                    aria-label={`Select milk type for ${item.itemName}`}
+                    aria-label={`Select milk type for ${item.ItemName}`}
                   >
                     <option value="Full Cream">Full Cream</option>
                     <option value="Low Fat">Low Fat</option>

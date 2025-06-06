@@ -8,17 +8,21 @@ function CartPage() {
   const [deliveryOption, setDeliveryOption] = useState("in-store");
   const [isSaving, setIsSaving] = useState(false);
 
-  // Fetch cart items
+  // Fetch cart items when component mounts
   useEffect(() => {
     fetch("http://localhost:3000/cart")
       .then((res) => res.json())
       .then((data) => {
-        const items = Array.isArray(data) ? data : [];
-        const sanitized = items.map((item) => ({
-          ...item,
-          quantity: typeof item.quantity === "number" && item.quantity > 0 ? item.quantity : 1,
-        }));
-        setCartItems(sanitized);
+        if (Array.isArray(data)) {
+          // Ensure quantity is valid and default to 1
+          const sanitized = data.map((item) => ({
+            ...item,
+            quantity: typeof item.quantity === "number" && item.quantity > 0 ? item.quantity : 1,
+          }));
+          setCartItems(sanitized);
+        } else {
+          setCartItems([]);
+        }
       })
       .catch((err) => {
         console.error("Failed to fetch cart:", err);
@@ -26,6 +30,7 @@ function CartPage() {
       });
   }, []);
 
+  // Update quantity locally and in backend
   const updateQuantity = (id, quantity) => {
     if (quantity < 1) return;
 
@@ -40,13 +45,14 @@ function CartPage() {
     }).catch((err) => console.error("Error updating quantity:", err));
   };
 
-  const handleQuantityChange = (id, type) => {
+  // Handle increasing or decreasing quantity
+  const handleQuantityChange = (id, action) => {
     const item = cartItems.find((i) => i.id === id);
     if (!item) return;
 
-    if (type === "increase") {
+    if (action === "increase") {
       updateQuantity(id, item.quantity + 1);
-    } else if (type === "decrease") {
+    } else if (action === "decrease") {
       if (item.quantity === 1) {
         handleDelete(id);
       } else {
@@ -55,6 +61,7 @@ function CartPage() {
     }
   };
 
+  // Remove item from cart
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to remove this item?")) return;
 
@@ -67,18 +74,21 @@ function CartPage() {
       .catch((err) => console.error("Error deleting item:", err));
   };
 
+  // Calculate totals
   const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item.price || 0) * (item.quantity || 0),
+    (sum, item) => sum + (item.Price || 0) * (item.quantity || 0),
     0
   );
   const deliveryFee = deliveryOption === "delivery" ? 100 : 0;
   const totalPrice = subtotal + deliveryFee;
 
+  // Save the cart as an order
   const saveCartToApi = async () => {
     const orderNum = Math.floor(Math.random() * 1000000);
 
     try {
+      // Create order
       await fetch("http://localhost:3000/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -91,25 +101,27 @@ function CartPage() {
         }),
       });
 
+      // Create order items
       for (const item of cartItems) {
         await fetch("http://localhost:3000/orderItems", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             orderNum,
-            itemName: item.itemName,
+            itemName: item.ItemName,
             quantity: item.quantity,
-            price: item.price,
-            itemDescription: item.itemDescription || "",
-            itemType: item.itemType || "",
+            price: item.Price,
+            itemDescription: item.ItemDescription || "",
+            itemType: item.ItemType || "",
             sugarType: item.sugarType || "",
             milkType: item.milkType || "",
-            imageUrl: item.imageUrl || "",
+            imageUrl: item.ImageUrl || "",
             isAvailable: item.isAvailable !== undefined ? item.isAvailable : 1,
           }),
         });
       }
 
+      // Clear cart on backend
       await Promise.all(
         cartItems.map((item) =>
           fetch(`http://localhost:3000/cart/${item.id}`, {
@@ -133,18 +145,26 @@ function CartPage() {
       <h2>Your Cart</h2>
 
       <div className="cart-section">
-        {Array.isArray(cartItems) && cartItems.length > 0 ? (
+        {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={item.imageUrl} alt={item.itemName} width="100" />
+              <img src={item.ImageUrl} alt={item.ItemName} width="100" />
               <div className="item-details">
-                <h3>{item.itemName}</h3>
+                <h3>{item.ItemName}</h3>
                 <p>
-                  Price: <strong>R{(item.price ?? 0).toFixed(2)}</strong>
+                  Price: <strong>R{(item.Price ?? 0).toFixed(2)}</strong>
                 </p>
-                <p>{item.itemDescription}</p>
-                {item.sugarType && <p><strong>Sugar:</strong> {item.sugarType}</p>}
-                {item.milkType && <p><strong>Milk:</strong> {item.milkType}</p>}
+                <p>{item.ItemDescription}</p>
+                {item.sugarType && (
+                  <p>
+                    <strong>Sugar:</strong> {item.sugarType}
+                  </p>
+                )}
+                {item.milkType && (
+                  <p>
+                    <strong>Milk:</strong> {item.milkType}
+                  </p>
+                )}
               </div>
               <div className="cart-actions">
                 <div className="quantity-controls">
@@ -152,7 +172,9 @@ function CartPage() {
                   <span>{item.quantity}</span>
                   <button onClick={() => handleQuantityChange(item.id, "increase")}>+</button>
                 </div>
-                <button className="delete-btn" onClick={() => handleDelete(item.id)}>Remove</button>
+                <button className="delete-btn" onClick={() => handleDelete(item.id)}>
+                  Remove
+                </button>
               </div>
             </div>
           ))
@@ -185,10 +207,18 @@ function CartPage() {
 
       <div className="cart-summary">
         <h3>Cart Summary</h3>
-        <p><strong>Total Items:</strong> {totalQuantity}</p>
-        <p><strong>Subtotal:</strong> R{subtotal.toFixed(2)}</p>
-        <p><strong>Delivery Fee:</strong> R{deliveryFee.toFixed(2)}</p>
-        <p><strong>Total Price:</strong> R{totalPrice.toFixed(2)}</p>
+        <p>
+          <strong>Total Items:</strong> {totalQuantity}
+        </p>
+        <p>
+          <strong>Subtotal:</strong> R{subtotal.toFixed(2)}
+        </p>
+        <p>
+          <strong>Delivery Fee:</strong> R{deliveryFee.toFixed(2)}
+        </p>
+        <p>
+          <strong>Total Price:</strong> R{totalPrice.toFixed(2)}
+        </p>
       </div>
 
       {cartItems.length > 0 && (

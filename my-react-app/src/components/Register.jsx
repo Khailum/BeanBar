@@ -29,7 +29,6 @@ function Register() {
     setDuplicateError('');
   };
 
-  // Minimal frontend validation just for UX
   const validate = (values) => {
     const errors = {};
     if (!values.fullName.trim()) errors.fullName = 'Full name is required.';
@@ -56,25 +55,26 @@ function Register() {
     setIsSubmitting(true);
 
     try {
-      // Send registration data to server endpoint
-      const response = await fetch('http://localhost:3000/register', {
+      const payload = {
+        FullName: formValues.fullName.trim(),
+        CustomerID: formValues.idNumber.trim(),
+        Email: formValues.email.trim().toLowerCase(),
+        PhoneNumber: formValues.phoneNumber.trim(),
+        Address: formValues.address.trim(),
+        Password: formValues.password,
+        UserRole: "Customer",
+        DateOfBirth: getDOBFromID(formValues.idNumber.trim())
+      };
+
+      const response = await fetch('http://localhost:3000/Users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          fullName: formValues.fullName.trim(),
-          idNumber: formValues.idNumber.trim(),
-          email: formValues.email.trim().toLowerCase(),
-          phoneNumber: formValues.phoneNumber.trim(),
-          address: formValues.address.trim(),
-          password: formValues.password,
-          agreedToTerms: agreed,
-        }),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        // Backend validation error or duplicate error
         if (data.errors) {
           setFormErrors(data.errors);
         } else if (data.message) {
@@ -86,16 +86,14 @@ function Register() {
         return;
       }
 
-      // Success
       setIsSuccess(true);
       setFormValues(initialValues);
       setAgreed(false);
       setIsSubmitting(false);
 
-      // Optionally save user info if sent back (except password)
       if (data.user) {
         sessionStorage.setItem('registeredUser', JSON.stringify(data.user));
-        sessionStorage.setItem('CustomerId', data.user.customerId);
+        sessionStorage.setItem('CustomerId', data.user.CustomerID);
       }
 
       setTimeout(() => {
@@ -106,6 +104,13 @@ function Register() {
       setDuplicateError('Something went wrong. Please try again later.');
       setIsSubmitting(false);
     }
+  };
+
+  // Extract DOB from South African ID number (YYMMDD)
+  const getDOBFromID = (id) => {
+    if (!/^\d{13}$/.test(id)) return '';
+    const yearPrefix = parseInt(id.slice(0, 2), 10) < 25 ? '20' : '19'; // Assumes people born before 2000 are older than 25
+    return `${yearPrefix}${id.slice(0, 2)}-${id.slice(2, 4)}-${id.slice(4, 6)}`;
   };
 
   return (
@@ -119,6 +124,7 @@ function Register() {
 
       <form className={`register-form ${isSuccess ? 'fade-out' : ''}`} onSubmit={handleSubmit} noValidate>
         <h2 className="title">Create Account</h2>
+        <i className="fas fa-user-circle login-icon-main"></i>
 
         {duplicateError && <p className="error duplicate-error">{duplicateError}</p>}
 
