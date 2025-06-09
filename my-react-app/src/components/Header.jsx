@@ -49,7 +49,7 @@ const Header = () => {
         <Link to="/cart" onClick={() => setMenuActive(false)}>Cart</Link>
         <Link to="/review" onClick={() => setMenuActive(false)}>Review</Link>
         <Link to="/contact" onClick={() => setMenuActive(false)}>Contact</Link>
-        <Link to="/userprofile" onClick={() => setMenuActive(false)}>Profile</Link>
+        {/* <Link to="/userprofile" onClick={() => setMenuActive(false)}>Profile</Link> */}
       </nav>
 
       {/* Login / Logout Button */}

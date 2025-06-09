@@ -124,7 +124,7 @@ function Login() {
         <div className="login-remember-forgot">
           <label>
             <input
-              type="checkbox"
+              type="checkbox" className="checkbox"
               checked={rememberMe}
               onChange={handleChange}
             />{" "}

@@ -168,9 +168,9 @@ function CartPage() {
               </div>
               <div className="cart-actions">
                 <div className="quantity-controls">
-                  <button onClick={() => handleQuantityChange(item.id, "decrease")}>−</button>
+                  <button onClick={() => handleQuantityChange(item.id, "decrease")} className="qty-btn">−</button>
                   <span>{item.quantity}</span>
-                  <button onClick={() => handleQuantityChange(item.id, "increase")}>+</button>
+                  <button onClick={() => handleQuantityChange(item.id, "increase")}className="qty-btn">+</button>
                 </div>
                 <button className="delete-btn" onClick={() => handleDelete(item.id)}>
                   Remove

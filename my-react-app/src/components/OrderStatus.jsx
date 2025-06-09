@@ -1,12 +1,29 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { statusSteps } from '../data/mockData';
 import './OrderStatus.css';
 
-const OrderStatus = ({ status, updatedAt }) => {
-  const currentIndex = statusSteps.findIndex(step => step.key === status);
+const OrderStatus = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState(new Date().toISOString());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => {
+        // Stop at the final step
+        if (prev < statusSteps.length - 1) {
+          setLastUpdated(new Date().toISOString());
+          return prev + 1;
+        }
+        return prev;
+      });
+    }, 10000); // ✅ Every 10 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   const formatTime = (dateString) => {
-    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
     return new Date(dateString).toLocaleTimeString('en-US', options);
   };
 
@@ -20,7 +37,7 @@ const OrderStatus = ({ status, updatedAt }) => {
       <div className="status-header">
         <h3>Order Status</h3>
         <div className="last-updated">
-          🕒 Updated {formatTime(updatedAt)}
+          🕒 Updated {formatTime(lastUpdated)}
         </div>
       </div>
       
@@ -28,7 +45,7 @@ const OrderStatus = ({ status, updatedAt }) => {
         {statusSteps.map((step, index) => {
           const isCompleted = index <= currentIndex;
           const isCurrent = index === currentIndex;
-          
+
           return (
             <motion.div 
               key={step.key} 

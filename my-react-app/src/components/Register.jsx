@@ -207,7 +207,7 @@ function Register() {
         <div className="register-terms">
           <label>
             <input
-              type="checkbox"
+              type="checkbox" className="checkbox"
               checked={agreed}
               onChange={() => setAgreed(!agreed)}
             />

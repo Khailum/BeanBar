@@ -35,7 +35,7 @@ function Contact() {
             <h3>Operation Hours</h3>
             <ul>
               <li>Monday - Friday: 9:00 AM – 6:00 PM</li>
-              <li>Saturday: 10:00 AM – 4:00 PM</li>
+              <li>Saturday: 10:00 AM – 2:00 PM</li>
               <li>Sunday: Closed</li>
             </ul>
           </div>
@@ -43,7 +43,10 @@ function Contact() {
           <ul className="contact-list">
             <li className="list-item">
               <i className="fas fa-map-marker-alt"></i>
-              <span className="contact-text place">Pinelands, Cape Town
+              <span className="contact-text place">
+                Raapenberg Rd,
+                        Mowbray, 7700
+
                
               </span>
             </li>
@@ -81,8 +84,8 @@ function Contact() {
 
           <hr />
         </div>
-      </div>
-    </div>
+      </div></div>
+    
   );
 }
 

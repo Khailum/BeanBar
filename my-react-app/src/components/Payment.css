@@ -237,7 +237,7 @@
 
 .star {
   font-size: 3rem;
-  color: #444;
+  color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
   user-select: none;
@@ -248,8 +248,8 @@
 }
 
 .star.filled {
-  color: #C17817;
-  text-shadow: 0 0 10px rgba(193, 120, 23, 0.5);
+  color: yellow;
+  text-shadow: 0 0 10px rgba(83, 83, 82, 0.5);
 }
 
 .rating-text {
@@ -257,6 +257,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.6rem;
 }
 
 .rating-label {

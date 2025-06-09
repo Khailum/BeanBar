@@ -24,11 +24,13 @@ function Promo() {
 
   const addToCart = async (product, index) => {
     const newItem = {
-      itemName: product.name,
-      itemDescription: product.description,
-      imageUrl: product.image,
-      price: product.price,
-      type: product.type,
+      ItemName: product.name,
+      ItemType: product.type,
+      ItemDescription: product.description,
+      ImageUrl: product.image,
+      Price: product.price,
+      sugarLevel: 0,     // Default sugar level, change if you add UI for it
+      milkType: null,    // Default milk type, change if you add UI for it
       quantity: 1,
     };
 
@@ -36,7 +38,7 @@ function Promo() {
       const res = await fetch('http://localhost:3000/cart');
       const cart = await res.json();
 
-      const existingItem = cart.find(item => item.itemName === newItem.itemName);
+      const existingItem = cart.find(item => item.ItemName === newItem.ItemName);
 
       if (existingItem) {
         await fetch(`http://localhost:3000/cart/${existingItem.id}`, {

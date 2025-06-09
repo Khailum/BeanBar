@@ -286,7 +286,7 @@ const ReservationForm = () => {
 
         {/* Submit Button */}
         <motion.div className="form-group" custom={7} initial="hidden" animate="visible" variants={formVariants}>
-          <button type="submit" disabled={isSubmitting} className="submit-btn">
+          <button type="submit" disabled={isSubmitting} className="submit-button">
             {isSubmitting ? 'Submitting...' : 'Reserve Table'}
           </button>
         </motion.div>

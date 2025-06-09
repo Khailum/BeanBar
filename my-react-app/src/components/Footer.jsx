@@ -35,10 +35,10 @@ const Footer = () => {
         </div>
         <div className="footer-section">
           <h4>Contact</h4>
-          <p>123 Coffee Street</p>
-          <p>Bean Town, BN 12345</p>
-          <p>info@beanbar.com</p>
-          <p>(555) 123-4567</p>
+          <p>Golf Park, Raapenberg Rd</p>
+          <p>Mowbray, 7700</p>
+          <p>beanbar.04@gmail.com</p>
+          <p>(+27) 85-904-5670</p>
         </div>
       </div>
       <div className="footer-bottom">
