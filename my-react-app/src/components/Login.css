@@ -150,3 +150,24 @@
     
   }
 }
+.login-success-message {
+
+  color: #155724;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  animation: fadeInOut 2s forwards;
+  font-size: 1.8rem;
+}
+
+.login-success-message i {
+  margin-right: 0.5rem;
+  color: #28a745;
+}
+
+@keyframes fadeInOut {
+  0% {opacity: 0;}
+  10% {opacity: 1;}
+  90% {opacity: 1;}
+  100% {opacity: 0;}
+}

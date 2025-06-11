@@ -107,3 +107,16 @@
 .timeline-item:not(.completed) .timeline-content p {
   color: #666;
 }
+.timeline-item.delivered {
+  border-left: 4px solid green;
+  background-color: #e6ffe6; /* light green background */
+}
+
+.timeline-item.delivered .timeline-dot {
+  background-color: green;
+  color: white;
+}
+
+.timeline-item.delivered .timeline-connector.active {
+  background-color: green;
+}

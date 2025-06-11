@@ -8,8 +8,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in by checking localStorage
-    const storedUser = localStorage.getItem("user");
+    // Check localStorage first
+    let storedUser = localStorage.getItem("user");
+
+    // If not found in localStorage, check sessionStorage
+    if (!storedUser) {
+      storedUser = sessionStorage.getItem("user");
+    }
+
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     } else {
@@ -19,7 +25,9 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    sessionStorage.removeItem("user"); // Also clear sessionStorage on logout
     localStorage.removeItem("profile");
+    sessionStorage.removeItem("profile");
     setUser(null);
     navigate("/login");
   };

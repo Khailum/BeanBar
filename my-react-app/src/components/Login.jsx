@@ -9,6 +9,7 @@ function Login() {
   const [formErrors, setFormErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false); // <-- New success state
   const [rememberMe, setRememberMe] = useState(false);
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -18,10 +19,8 @@ function Login() {
     if (!email) errors.email = "Email is required!";
     else if (!emailRegex.test(email)) errors.email = "Invalid email format!";
     if (!password) errors.password = "Password is required!";
-    else if (password.length < 4)
-      errors.password = "Password must be ≥ 4 chars";
-    else if (password.length > 15)
-      errors.password = "Password must be ≤ 15 chars";
+    else if (password.length < 4) errors.password = "Password must be ≥ 4 chars";
+    else if (password.length > 15) errors.password = "Password must be ≤ 15 chars";
     return errors;
   };
 
@@ -37,6 +36,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoginError("");
+    setLoginSuccess(false); // Reset success on new submit
 
     const trimmedValues = {
       email: formValues.email.trim().toLowerCase(),
@@ -50,7 +50,6 @@ function Login() {
     setLoading(true);
 
     try {
-      // Query the Users endpoint by Email and Password
       const resp = await fetch(
         `http://localhost:3000/Users?Email=${encodeURIComponent(
           trimmedValues.email
@@ -66,17 +65,17 @@ function Login() {
       }
 
       const user = users[0];
-
-      // Simulate a JWT token (for demo)
       const fakeToken = `fake-jwt-token-${user.id}`;
-
-      // Save token and user info
       const storage = rememberMe ? localStorage : sessionStorage;
       storage.setItem("token", fakeToken);
       storage.setItem("user", JSON.stringify(user));
 
-      // Navigate to home page passing user state
-      navigate("/", { state: { user } });
+      setLoginSuccess(true); // Show success message
+
+      // Navigate after 1.5 seconds delay
+      setTimeout(() => {
+        navigate("/", { state: { user } });
+      }, 1500);
     } catch (err) {
       setLoginError(err.message || "Login failed. Try again.");
     } finally {
@@ -87,6 +86,11 @@ function Login() {
   return (
     <div className="login-page">
       {loginError && <div className="ui message error">{loginError}</div>}
+      {loginSuccess && (
+        <div className="login-success-message">
+           Login Successful!
+        </div>
+      )}
       {loading && <div className="loading">Logging in…</div>}
 
       <form className="login-form" onSubmit={handleSubmit} noValidate>
@@ -124,7 +128,8 @@ function Login() {
         <div className="login-remember-forgot">
           <label>
             <input
-              type="checkbox" className="checkbox"
+              type="checkbox"
+              className="checkbox"
               checked={rememberMe}
               onChange={handleChange}
             />{" "}

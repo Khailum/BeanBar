@@ -17,7 +17,7 @@ function UserProfile() {
   // If no user was passed via navigation, redirect to login
   useEffect(() => {
     if (!location.state?.user) {
-      navigate("/login");
+      navigate("/");
     } else {
       setUser(location.state.user);
     }

@@ -23,7 +23,7 @@ function Product() {
         const menu = data.menu || data;
         const normalizedMenu = menu.map(item => ({
           ...item,
-          itemType: (item.ItemType || item.itemType || '').toLowerCase(),
+          itemType: (item.category || '').toLowerCase(),
         }));
 
         setProducts(normalizedMenu);
@@ -68,7 +68,7 @@ function Product() {
   const addToCart = async (item) => {
     const id = item.id || item.ItemName;
     const sugarLevel = sugarLevels[id];
-    const milkType = item.ItemType === 'hot' ? milkTypes[id] : null;
+    const milkType = item.itemType === 'hot' ? milkTypes[id] : null;
 
     try {
       const res = await fetch('http://localhost:3000/cart');
@@ -117,7 +117,7 @@ function Product() {
   };
 
   const filteredProducts = products.filter(
-    item => selectedCategory.toLowerCase() === 'all' || item.ItemType === selectedCategory.toLowerCase()
+    item => selectedCategory.toLowerCase() === 'all' || item.itemType === selectedCategory.toLowerCase()
   );
 
   return (
@@ -177,9 +177,9 @@ function Product() {
               <p>{item.ItemDescription}</p>
               <div className="price">R {item.Price.toFixed(2)}</div>
 
-              {item.ItemType === 'hot' && (
+              {item.itemType === 'hot' && (
                 <div className="input-group">
-                  <label htmlFor={`sugar-${id}`} value={SugarType}>Sugar:</label>
+                  <label htmlFor={`sugar-${id}`}>Sugar:</label>
                   <div className="quantity-controls">
                     <button
                       className="qty-btn"
@@ -239,4 +239,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default Product; 

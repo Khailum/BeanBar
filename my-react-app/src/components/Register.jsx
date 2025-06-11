@@ -114,6 +114,9 @@ function Register() {
   };
 
   return (
+    <>
+    
+    
     <div className="register-page">
       {isSuccess && (
         <div className="success-popup">
@@ -219,12 +222,17 @@ function Register() {
         <button type="submit" className="register-submit" disabled={isSubmitting}>
           {isSubmitting ? 'Registering...' : 'Register'}
         </button>
-
+           {/* <button>&#8594;</button> */}
         <p className="register-login-text">
-          Already have an account? <Link to="/login">Login</Link>
+          Already have an account? <Link to="/login" className='login'>Login</Link>
         </p>
       </form>
+      
     </div>
+    
+    <button className='arrow' ><a href='/' className='arrow'>&#8592;</a></button>
+    </>
+    
   );
 }
 

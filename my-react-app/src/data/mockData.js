@@ -36,35 +36,8 @@ export const mockOrder = {
   status: 'on_the_way',
   updatedAt: new Date().toISOString(),
   estimatedDelivery: '2:45 PM',
-  items: [
-    {
-      id: 1,
-      name: 'Signature Espresso',
-      quantity: 2,
-      price: 45.00,
-      notes: 'Extra shot, oat milk'
-    },
-    {
-      id: 2,
-      name: 'Cappuccino',
-      quantity: 1,
-      price: 38.00,
-      notes: 'Regular milk, extra foam'
-    },
-    {
-      id: 3,
-      name: 'Chocolate Croissant',
-      quantity: 2,
-      price: 25.00
-    }
-  ],
-  pricing: {
-    subtotal: 178.00,
-    tax: 26.70,
-    deliveryFee: 15.00,
-    tip: 25.00,
-    total: 244.70
-  },
+  
+
   driver: {
     name: 'Marcus Johnson',
     rating: 4.9,
