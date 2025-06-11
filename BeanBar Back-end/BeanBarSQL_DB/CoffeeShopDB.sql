@@ -199,13 +199,13 @@ INSERT INTO Menu (ItemName, ItemType, ItemDescription, Price, ImageUrl) VALUES
 ('Ham Sandwich', 'Snack', 'Classic ham sandwich layered with cheese and crisp lettuce on fresh bread.', 25.00, 'https://i.ibb.co/Xk4R1pYV/4460586d-acc1-41da-b4fc-ecdbc6ba0dbb-removalai-preview.png'),
 ('Strawberry Frappe', 'Cold', 'Creamy strawberry blended drink with whipped cream on top — sweet and icy.', 35.00, 'https://i.ibb.co/GQ4q34Cp/73fe2ba7-dd62-401b-a5a7-edad7b037624-removalai-preview.png'),
 ('Cold Brew Coffee', 'Cold', 'Slow-steeped coffee served cold — smooth, strong, and slightly sweet.', 30.00, 'https://i.ibb.co/ynz3bVTY/42546a4c-625b-4073-b07d-0f0746857408-removalai-preview.png'),
-('Sparkling Water', 'Cold', 'Lightly carbonated and ultra-refreshing — simple and sophisticated.', 20.00, 'https://i.ibb.co/ZzVL0Cw/sparkling-water.png'),
+('Sparkling Water', 'Cold', 'Lightly carbonated and ultra-refreshing — simple and sophisticated.', 20.00, 'https://i.ibb.co/VWC9RLNb/43ec9b11-3272-4e99-a91f-b70db94f808a-removalai-preview.png'),
 ('Mango Smoothie', 'Cold', 'Fresh mango blended with yoghurt and ice — tropical and refreshing.', 38.00, 'https://i.ibb.co/5hNL00Rt/5519fec3-49db-4fda-95d3-f2ae876d0f35-removalai-preview.png'),
 ('Iced Chai Latte', 'Cold', 'Spiced chai tea with milk served over ice — creamy, sweet, and aromatic.', 33.00, 'https://i.ibb.co/wFTMCv8F/cbcd52fd-4964-400e-b2e9-ba859216bcfb-removalai-preview.png'),
 ('Blueberry Muffin', 'Snack', 'Bursting with blueberries and a soft, fluffy centre — a fruity favourite.', 22.00, 'https://i.ibb.co/yFjCWpzJ/8cb1686a-ec09-42ad-a5b9-7d6eebf84302-removalai-preview.png'),
 ('Cheese Toastie', 'Snack', 'Golden grilled toast filled with melted cheese — gooey and comforting.', 24.00, 'https://i.ibb.co/RkyhL2ft/a9baae43-d6c6-435f-8fd3-d4f9ba88973e-removalai-preview.png'),
 ('Mini Quiche', 'Snack', 'Buttery crust with a savoury egg and cheese filling — perfect on the go.', 25.00, 'https://i.ibb.co/7JB4PDJ2/da79095d-0890-4339-a727-47b4cb454fd2-removalai-preview.png'),
-('Chocolate Brownie', 'Snack', 'Rich and fudgy chocolate brownie — dense, moist, and indulgent.', 24.99, 'https://i.ibb.co/3zYZGGN/chocolate-brownie.png'),
+('Chocolate Brownie', 'Snack', 'Rich and fudgy chocolate brownie — dense, moist, and indulgent.', 24.99, https://i.ibb.co/zTWC9Xzb/f0e288ef-0a8c-44d8-94db-c9cbd6283768-removalai-preview.png'),
 ('Fruit Cup', 'Snack', 'A medley of fresh seasonal fruits — light, juicy, and refreshing.', 20.00, 'https://i.ibb.co/jkVYWBYn/3772f8f4-e92d-4b7f-b9da-3c90d6db5013-removalai-preview.png');
 
 -- POPULATE STOCK TABLE
@@ -237,106 +237,6 @@ INSERT INTO Stock (StockName, Available_Stock, Arrival_Date, StockStatus, Unit, 
 ('Fresh Fruits (Mixed)', 10, '2025-05-26', 'Available', 'Kg', 'FruitWorks Distributors'),
 ('Quiche Filling Mix', 5, '2025-05-21', 'Low', 'Kg', 'DeliPro Meats');
 
--- Mock data for Users table based on CustomerIDs used in Orders
-INSERT INTO Users (Email, FullName, Password, UserRole, CustomerID, PhoneNumber, Address, DateOfBirth)
-VALUES
-('john.doe@email.com', 'John Doe', 'hashedpassword1', 'Customer', '9406300244083', '0712345678', '123 Example Street', '1994-06-30'),
-('jane.smith@email.com', 'Jane Smith', 'hashedpassword2', 'Customer', '9104090860082', '0723456789', '456 Sample Road', '1991-04-09'),
-('michael.brown@email.com', 'Michael Brown', 'hashedpassword3', 'Customer', '8503035277084', '0734567890', '789 Demo Blvd', '1985-03-03'),
-('susan.clark@email.com', 'Susan Clark', 'hashedpassword4', 'Customer', '9212255023087', '0745678901', '321 Mock Ave', '1992-12-25'),
-('david.lee@email.com', 'David Lee', 'hashedpassword5', 'Customer', '9508120764080', '0756789012', '654 Test Lane', '1995-08-12'),
-('laura.miller@email.com', 'Laura Miller', 'hashedpassword6', 'Customer', '9001014800086', '0767890123', '987 Trial St', '1990-01-01'),
-('peter.wilson@email.com', 'Peter Wilson', 'hashedpassword7', 'Customer', '8601025804082', '0778901234', '135 Alpha Rd', '1986-01-02'),
-('chloe.adams@email.com', 'Chloe Adams', 'hashedpassword8', 'Customer', '9709235115089', '0789012345', '246 Beta Dr', '1997-09-23'),
-('daniel.evans@email.com', 'Daniel Evans', 'hashedpassword9', 'Customer', '8807065809084', '0790123456', '369 Gamma Pkwy', '1988-07-06'),
-('amy.johnson@email.com', 'Amy Johnson', 'hashedpassword10', 'Customer', '9305180662085', '0801234567', '159 Omega Ct', '1993-05-18');
-
-
---MOCK DATA FOR ORDERs TABLE: 
-INSERT INTO Orders (ItemID, CustomerID, Address, Date, OrderType, Quantity, OrderStatus, TotalPrice)
-VALUES
-(1, '9406300244083', '123 Example Street', '2025-06-01', 'Takeout', 2, 'Completed', 100.00),
-(2, '9104090860082', '456 Sample Road', '2025-06-01', 'EatIn', 1, 'Completed', 50.00),
-(3, '8503035277084', '789 Demo Blvd', '2025-06-02', 'Takeout', 3, 'Pending', 150.00),
-(4, '9212255023087', '321 Mock Ave', '2025-06-02', 'EatIn', 1, 'Completed', 75.00),
-(5, '9508120764080', '654 Test Lane', '2025-06-03', 'Takeout', 2, 'Cancelled', 90.00),
-(6, '9001014800086', '987 Trial St', '2025-06-03', 'EatIn', 2, 'Completed', 120.00),
-(7, '8601025804082', '135 Alpha Rd', '2025-06-03', 'Takeout', 4, 'Pending', 200.00),
-(8, '9709235115089', '246 Beta Dr', '2025-06-03', 'EatIn', 1, 'Completed', 60.00),
-(9, '8807065809084', '369 Gamma Pkwy', '2025-06-03', 'Takeout', 3, 'Completed', 135.00),
-(10, '9305180662085', '159 Omega Ct', '2025-06-03', 'EatIn', 2, 'Completed', 110.00);
-
---INSERT MOCK DATA FOR PAYMENT TABLE: 
-INSERT INTO Payments (OrderNum, Amount, PaymentMethod)
-VALUES
-(101, 100.00, 'Card'),
-(102, 50.00, 'Cash'),
-(103, 150.00, 'EFT'),
-(104, 75.00, 'Card'),
-(105, 90.00, 'Cash'),
-(106, 120.00, 'EFT'),
-(107, 200.00, 'Card'),
-(108, 60.00, 'Cash'),
-(109, 135.00, 'EFT'),
-(110, 110.00, 'Card');
-
---INSERT MOCK DATA INTO CARDDETAILS:
-INSERT INTO CardDetails (
-    AccountNumber, Accountholder, AccountType, CardNumber, CVV, ExpiryDate, IsEncrypted, CustomerID
-)
-VALUES
-('ACC1234567890', 'Thabo Mokoena', 'Savings', '4111111111111111', '123', '2027-05-31', 0, '9406300244083'),
-('ACC2345678901', 'Zanele Khumalo', 'Current', '5500000000000004', '456', '2026-11-30', 0, '9104090860082'),
-('ACC3456789012', 'Mpho Dlamini', 'Savings', '340000000000009', '789', '2028-03-31', 0, '8503035277084'),
-('ACC4567890123', 'Lerato Sibanda', 'Savings', '30000000000004', '321', '2029-07-31', 0, '9212255023087'),
-('ACC5678901234', 'Tshepo Molefe', 'Current', '6011000000000004', '654', '2027-01-31', 0, '9508120764080'),
-('ACC6789012345', 'Nomvula Ngcobo', 'Savings', '3530111333300000', '987', '2026-09-30', 0, '9001014800086'),
-('ACC7890123456', 'Kabelo Ndlovu', 'Current', '6304000000000000', '111', '2027-12-31', 0, '8601025804082'),
-('ACC8901234567', 'Sipho Mahlangu', 'Savings', '4035500000000000', '222', '2028-08-31', 0, '9709235115089'),
-('ACC9012345678', 'Ayanda Zulu', 'Current', '5333333333333333', '333', '2029-02-28', 0, '8807065809084'),
-('ACC0123456789', 'Boitumelo Radebe', 'Savings', '2223000048400011', '444', '2030-06-30', 0, '9305180662085');
-
---INSERT MOCK DATA INTO TABLERESERVATIONS:
-INSERT INTO TableReservations (TableNum, ReservationDate, ReservationTime, PartySize, CustomerID, CustomerName, tableStatus, Occasion, Notes)
-VALUES
-(1, '2025-06-05', '18:30', 4, '9406300244083', 'Thabo Mokoena', 'Booked', 'Birthday', 'Prefers window seat'),
-(2, '2025-06-06', '19:00', 2, '9104090860082', 'Zanele Khumalo', 'Seated', 'Anniversary', 'Allergic to nuts'),
-(3, '2025-06-07', '12:00', 6, '8503035277084', 'Mpho Dlamini', 'Cancelled', 'Graduation', 'Cancelled due to rain'),
-(4, '2025-06-08', '14:30', 3, '9212255023087', 'Lerato Sibanda', 'Booked', 'Family Lunch', 'Has a baby chair request'),
-(5, '2025-06-09', '20:00', 5, '9508120764080', 'Tshepo Molefe', 'Booked', 'Reunion', 'Wants a quiet corner'),
-(6, '2025-06-10', '13:00', 2, '9001014800086', 'Nomvula Ngcobo', 'Seated', 'Business Lunch', 'Requires power outlet'),
-(7, '2025-06-11', '17:00', 8, '8601025804082', 'Kabelo Ndlovu', 'Booked', 'Wedding Rehearsal', 'Will bring decorations'),
-(8, '2025-06-12', '11:30', 4, '9709235115089', 'Sipho Mahlangu', 'Booked', 'Brunch', 'Vegetarian options requested'),
-(9, '2025-06-13', '19:30', 3, '8807065809084', 'Ayanda Zulu', 'Cancelled', 'Catch-up', 'Cancelled last minute'),
-(10, '2025-06-14', '18:00', 6, '9305180662085', 'Boitumelo Radebe', 'Seated', 'Promotion', 'Surprise event');
-
---INSERT MOCK DETAILS INTO REVIEWS: 
-INSERT INTO Reviews (CustomerID, Rating, Comment)
-VALUES
-('9406300244083', 5, 'Excellent service and delicious food! Will definitely come again.'),
-('9104090860082', 4, 'The food was great, but the wait time was a bit long.'),
-('8503035277084', 3, 'Average experience. The place was clean but the service could improve.'),
-('9212255023087', 5, 'Loved the ambiance and the staff was super friendly!'),
-('9508120764080', 2, 'Food was cold and the server forgot our drinks.'),
-('9001014800086', 4, 'Good value for money. The specials were a nice surprise.'),
-('8601025804082', 5, 'One of the best meals I’ve had in a while. Highly recommend!'),
-('9709235115089', 3, 'It was okay. Not bad, but not great either.'),
-('8807065809084', 1, 'Terrible experience. Wrong order and poor customer service.'),
-('9305180662085', 4, 'Tasty food and great location. Just a bit noisy during lunch hour.');
-
---INSERT MOCK DETAILS INTO DELIVERIES:
-INSERT INTO Deliveries (OrderNum, DeliveryAddress, DeliveryStatus, EstimatedTime)
-VALUES
-(101, '12 Rosewood Street, Cape Town', 'Delivered', '12:30:00'),
-(102, '45 Main Road, Johannesburg', 'On the Way', '13:15:00'),
-(103, '89 Sunset Blvd, Durban', 'Preparing', '14:00:00'),
-(104, '23 Ocean View Drive, Port Elizabeth', 'Delivered', '11:45:00'),
-(105, '7 Long Street, Pretoria', 'On the Way', '13:45:00'),
-(106, '17 Kingfisher Ave, Bloemfontein', 'Preparing', '15:00:00'),
-(107, '36 Riverside Road, Cape Town', 'Delivered', '12:00:00'),
-(108, '52 Garden Lane, East London', 'On the Way', '14:30:00'),
-(109, '11 Bluebell Crescent, George', 'Preparing', '15:45:00'),
-(110, '29 Forest Hill Drive, Polokwane', 'Delivered', '13:00:00');
 
 SELECT * FROM Users
 SELECT * FROM UserAuth
