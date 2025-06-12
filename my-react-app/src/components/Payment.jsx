@@ -34,6 +34,15 @@ const PaymentComponent = () => {
   const [reviewText, setReviewText] = useState('');
   const [reviewSubmitting, setReviewSubmitting] = useState(false);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+
+  // Helper to show thank you message then navigate
+  const handleThankYouThenNavigate = (path, state = {}) => {
+    setShowThankYou(true);
+    setTimeout(() => {
+      navigate(path, { state });
+    }, 2500);
+  };
 
   const getCardLogo = () => {
     if (cardType === 'visa') return visaLogo;
@@ -106,8 +115,8 @@ const PaymentComponent = () => {
 
     setPaymentProcessing(true);
     setError('');
+
     try {
-      // Simulate payment API call
       const paymentResponse = await fetch('http://localhost:3000/payments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -130,10 +139,11 @@ const PaymentComponent = () => {
 
       const data = await paymentResponse.json();
 
-      // Redirect to delivery page if delivery is selected
       if (deliveryOption === 'delivery') {
-        navigate('/tracking', { state: { orderNum, totalPrice, cartItems, pricing } });
+        // Show thank you then navigate to tracking
+        handleThankYouThenNavigate('/tracking', { orderNum, totalPrice, cartItems, pricing });
       } else {
+        // For pickup, show review form
         setShowReview(true);
       }
     } catch (err) {
@@ -166,7 +176,8 @@ const PaymentComponent = () => {
         throw new Error('Failed to submit review');
       }
 
-      navigate('/');
+      // Show thank you then navigate home
+      handleThankYouThenNavigate('/');
     } catch (err) {
       console.error('Review submission failed', err);
       alert('Failed to submit review. Please try again later.');
@@ -175,7 +186,10 @@ const PaymentComponent = () => {
     }
   };
 
-  const skipReview = () => navigate('/');
+  const skipReview = () => {
+    // Show thank you then navigate home
+    handleThankYouThenNavigate('/');
+  };
 
   const calculatedPricing = pricing || {
     subtotal: totalPrice * 0.8,
@@ -189,9 +203,15 @@ const PaymentComponent = () => {
     <div className="payment-container">
       <h2>{showReview ? 'Review Your Experience' : 'Payment Details'}</h2>
 
-      {!showReview && <OrderSummary items={cartItems} pricing={calculatedPricing} />}
+      {showThankYou && (
+        <div className="thank-you-popup">
+          <p> Thank you for shopping at Bean Bar! <i class="fas fa-coffee"></i></p>
+        </div>
+      )}
 
-      {!showReview ? (
+      {!showReview && !showThankYou && <OrderSummary items={cartItems} pricing={calculatedPricing} />}
+
+      {!showReview && !showThankYou ? (
         <>
           <div className="input-wrapper">
             <input
@@ -253,7 +273,9 @@ const PaymentComponent = () => {
             {paymentProcessing ? 'Processing...' : 'Pay Now'}
           </button>
         </>
-      ) : (
+      ) : null}
+
+      {showReview && !showThankYou && (
         <div className="review-section">
           <h3>Rate Your Experience</h3>
           <p className="review-subtitle">How was your experience with us?</p>

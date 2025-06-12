@@ -27,7 +27,7 @@ const ReservationPage = () => {
         >
           <div className="image-container">
             <img
-              src="https://i.ibb.co/G35YwtDk/reservation.jpg"
+              src="/images/reservation.jpg"
               alt="BeanBar coffee shop interior"
             />
           </div>

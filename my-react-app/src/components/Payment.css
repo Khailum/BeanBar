@@ -381,3 +381,22 @@
     font-size: 1.6rem;
   }
 }
+.thank-you-popup {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 90px;
+  border: 2px solid #d3ad7f;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  color: #d3ad7f;
+  margin: 20px 0;
+  font-size: 2rem;
+  animation: fadeIn 0.5s ease-in;
+  margin-top: 200px;
+  /* height: 100%; */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
