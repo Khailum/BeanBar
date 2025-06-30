@@ -1,0 +1,92 @@
+/* === Review Section Styling === */
+.review-section {
+  background-color: rgba(26, 26, 26, 0.8);
+  padding: 30px;
+  border-radius: 12px;
+  margin: 80px auto;
+  max-width: 700px;
+  text-align: center;
+  border: 1px solid #333;
+  color: #f5f5f5;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.review-section h3 {
+  color: #C17817;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.review-subtitle {
+  color: #ccc;
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.rating-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.star {
+  font-size: 3rem;
+  color: #444;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.star:hover {
+  transform: scale(1.1);
+}
+
+.star.filled {
+  color: #C17817;
+  text-shadow: 0 0 10px rgba(193, 120, 23, 0.5);
+}
+
+.review-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 15px;
+  font-size: 1rem;
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+  border: 2px solid #333;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.review-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.submit-review-btn,
+.skip-review-btn {
+  padding: 12px 25px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+}
+
+.submit-review-btn {
+  background-color: #C17817;
+  color: #000;
+}
+
+.submit-review-btn:hover {
+  background-color: #9B7653;
+}
+
+.skip-review-btn {
+  background-color: #333;
+  color: #f5f5f5;
+}
+
+.skip-review-btn:hover {
+  background-color: #444;
+}

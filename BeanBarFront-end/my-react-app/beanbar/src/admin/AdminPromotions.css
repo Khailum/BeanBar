@@ -1,0 +1,89 @@
+.promotions-page {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #010103;
+  color: #d3ad7f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.promotions-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.promotions-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #121212;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.promotions-table thead {
+  background-color: #1f1f1f;
+}
+
+.promotions-table th,
+.promotions-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #d3ad7f;
+  color: #d3ad7f;
+  font-size: 1rem;
+}
+
+.promotions-table th {
+  font-weight: 700;
+}
+
+.promotions-table td {
+  vertical-align: top;
+}
+
+.action-button {
+  background-color: #d3ad7f;
+  color: #010103;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #b8935f;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .promotions-table th,
+  .promotions-table td {
+    font-size: 0.9rem;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .promotions-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .promotions-table th,
+  .promotions-table td {
+    min-width: 120px;
+  }
+
+  .action-button {
+    width: 100%;
+    margin-top: 4px;
+  }
+}

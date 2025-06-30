@@ -1,0 +1,122 @@
+.admin-page {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 2rem;
+  font-family: sans-serif;
+  color: white;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.admin-page h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #d3ad7f;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.filter-section label {
+  font-weight: 600;
+  color: #d3ad7f;
+}
+
+.dropdown {
+  padding: 0.5rem 1rem;
+  background-color: #1e1e1e;
+  color: #d3ad7f;
+  border: 1px solid #d3ad7f;
+  font-size: 0.95rem;
+  border-radius: 0;
+}
+
+.reviews-table-container {
+  width: 100%;
+  overflow-x: auto;
+  background-color: rgba(30, 30, 30, 0.5);
+  border: 1px solid rgba(203, 160, 82, 0.3);
+  border-radius: 6px;
+  margin: 0 auto 3rem auto;
+}
+
+.reviews-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  table-layout: auto;
+}
+
+.reviews-table th,
+.reviews-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(203, 160, 82, 0.2);
+  color: white;
+  vertical-align: middle;
+}
+
+.reviews-table th {
+  background-color: rgba(203, 160, 82, 0.2);
+  color: #CBA052;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* Empty & Loading States */
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #b8a47c;
+  background-color: rgba(30, 30, 30, 0.5);
+  border: 1px solid rgba(203, 160, 82, 0.3);
+  margin-bottom: 3rem;
+}
+
+.loading-text {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #d3ad7f;
+}
+
+.error-text {
+  color: #ff4d4f;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reviews-table th,
+  .reviews-table td {
+    font-size: 0.85rem;
+    padding: 0.75rem;
+  }
+
+  .dropdown {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .reviews-table th,
+  .reviews-table td {
+    min-width: 120px;
+  }
+}

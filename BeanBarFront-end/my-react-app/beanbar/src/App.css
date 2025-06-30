@@ -1,0 +1,52 @@
+@import 'leaflet/dist/leaflet.css';
+
+/* Make sure the root takes up the full height */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  
+}
+
+/* Main wrapper: stacks Header, Main, and Footer */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main section takes all available vertical space between header and footer */
+.main-content {
+  flex: 1;
+}
+body{
+  background-color: #010103;
+}
+
+/* Layout container ensures full height */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #010103;
+}
+
+/* Main admin content area */
+.content {
+  flex: 1;/* Top padding accounts for fixed header */
+  box-sizing: border-box;
+  padding-top: 80px; /* space for fixed header height */
+  padding-left: 2rem;
+  padding-right: 2rem;
+  background-color: var(--bg);
+  overflow-y: auto;
+}
+
+/* Stick the footer to the bottom */
+.admin-footer {
+  margin-top: auto;
+  background-color: #111;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #333;
+}

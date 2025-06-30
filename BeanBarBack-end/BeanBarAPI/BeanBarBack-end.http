@@ -1,0 +1,6 @@
+@BeanBar_Back_end_HostAddress = http://localhost:5290
+
+GET {{BeanBar_Back_end_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

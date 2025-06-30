@@ -1,0 +1,174 @@
+
+ 
+.stock-page {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #010103;
+  color: #d3ad7f;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+ 
+.stock-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #d3ad7f;
+}
+ 
+.stock-section {
+  background-color: #121212;
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+ 
+.stock-section h3 {
+  margin-bottom: 10px;
+  color: #d3ad7f;
+}
+ 
+.stock-input,
+.stock-select,
+.stock-edit-input,
+.stock-edit-select,
+.stock-search-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #101010;
+  color: #d3ad7f;
+  border: 1px solid #d3ad7f;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+ 
+.quantity-input {
+  max-width: 100px;
+}
+ 
+.stock-button {
+  background-color: #d3ad7f;
+  color: #010103;
+  border: none;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-top: 8px;
+  transition: background-color 0.3s ease;
+}
+ 
+.stock-button:hover {
+  background-color: #b8935f;
+}
+ 
+.cancel-button {
+  background-color: #8b0000;
+  color: white;
+}
+ 
+.cancel-button:hover {
+  background-color: #5a4d3f;
+}
+ 
+/* Refactor table into card-like list layout */
+.stock-table {
+  width: 100%;
+  border-spacing: 0 12px;
+  border-collapse: separate;
+  background-color: transparent;
+}
+ 
+.stock-table thead {
+  display: none;
+}
+ 
+.stock-table tbody tr {
+  background-color: #1c1c1e;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+ 
+.stock-table td {
+  border: none;
+  padding: 0;
+  margin: 0 10px;
+  font-size: 1.25rem;
+  color: #d3ad7f;
+  display: flex;
+  align-items: center;
+}
+ 
+.stock-status {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  gap: 6px;
+}
+ 
+.stock-status::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: #aaa;
+}
+ 
+.stock-status.available::before {
+  background-color: green;
+}
+ 
+.stock-status.low::before {
+  background-color: orange;
+}
+ 
+.stock-status.out::before {
+  background-color: red;
+}
+ 
+.stock-actions {
+  display: flex;
+  gap: 8px;
+}
+ 
+.no-data {
+  text-align: center;
+  font-style: italic;
+  color: #b8a47c;
+  padding: 20px;
+}
+ 
+@media (max-width: 768px) {
+  .stock-table tbody tr {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+ 
+  .stock-table td {
+    margin-bottom: 10px;
+  }
+ 
+  .stock-actions {
+    align-self: flex-end;
+  }
+}
+ 
+@media (max-width: 480px) {
+  .stock-button {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+ 
+ 

@@ -1,0 +1,1568 @@
+{
+  "Users": [
+    {
+      "id": "1",
+      "Email": "john.doe@email.com",
+      "FullName": "John Doe",
+      "Password": "hashedpassword1",
+      "UserRole": "Customer",
+      "CustomerID": "9406300244083",
+      "PhoneNumber": "0712345678",
+      "Address": "123 Example Street",
+      "DateOfBirth": "1994-06-30"
+    },
+    {
+      "id": "2",
+      "Email": "jane.smith@email.com",
+      "FullName": "Jane Smith",
+      "Password": "hashedpassword2",
+      "UserRole": "Customer",
+      "CustomerID": "9104090860082",
+      "PhoneNumber": "0723456789",
+      "Address": "456 Sample Road",
+      "DateOfBirth": "1991-04-09"
+    },
+    {
+      "id": "3",
+      "Email": "michael.brown@email.com",
+      "FullName": "Michael Brown",
+      "Password": "hashedpassword3",
+      "UserRole": "Customer",
+      "CustomerID": "8503035277084",
+      "PhoneNumber": "0734567890",
+      "Address": "789 Demo Blvd",
+      "DateOfBirth": "1985-03-03"
+    },
+    {
+      "id": "4",
+      "Email": "susan.clark@email.com",
+      "FullName": "Susan Clark",
+      "Password": "hashedpassword4",
+      "UserRole": "Customer",
+      "CustomerID": "9212255023087",
+      "PhoneNumber": "0745678901",
+      "Address": "321 Mock Ave",
+      "DateOfBirth": "1992-12-25"
+    },
+    {
+      "id": "5",
+      "Email": "david.lee@email.com",
+      "FullName": "David Lee",
+      "Password": "hashedpassword5",
+      "UserRole": "Customer",
+      "CustomerID": "9508120764080",
+      "PhoneNumber": "0756789012",
+      "Address": "654 Test Lane",
+      "DateOfBirth": "1995-08-12"
+    },
+    {
+      "id": "6",
+      "Email": "laura.miller@email.com",
+      "FullName": "Laura Miller",
+      "Password": "hashedpassword6",
+      "UserRole": "Customer",
+      "CustomerID": "9001014800086",
+      "PhoneNumber": "0767890123",
+      "Address": "987 Trial St",
+      "DateOfBirth": "1990-01-01"
+    },
+    {
+      "id": "7",
+      "Email": "peter.wilson@email.com",
+      "FullName": "Peter Wilson",
+      "Password": "hashedpassword7",
+      "UserRole": "Customer",
+      "CustomerID": "8601025804082",
+      "PhoneNumber": "0778901234",
+      "Address": "135 Alpha Rd",
+      "DateOfBirth": "1986-01-02"
+    },
+    {
+      "id": "8",
+      "Email": "chloe.adams@email.com",
+      "FullName": "Chloe Adams",
+      "Password": "hashedpassword8",
+      "UserRole": "Customer",
+      "CustomerID": "9709235115089",
+      "PhoneNumber": "0789012345",
+      "Address": "246 Beta Dr",
+      "DateOfBirth": "1997-09-23"
+    },
+    {
+      "id": "9",
+      "Email": "daniel.evans@email.com",
+      "FullName": "Daniel Evans",
+      "Password": "hashedpassword9",
+      "UserRole": "Customer",
+      "CustomerID": "8807065809084",
+      "PhoneNumber": "0790123456",
+      "Address": "369 Gamma Pkwy",
+      "DateOfBirth": "1988-07-06"
+    },
+    {
+      "id": "10",
+      "Email": "amy.johnson@email.com",
+      "FullName": "Amy Johnson",
+      "Password": "hashedpassword10",
+      "UserRole": "Customer",
+      "CustomerID": "9305180662085",
+      "PhoneNumber": "0801234567",
+      "Address": "159 Omega Ct",
+      "DateOfBirth": "1993-05-18"
+    },
+    {
+      "id": "01a7",
+      "FullName": "Rethabile Makaotsi",
+      "CustomerID": "0102890949839",
+      "Email": "rethabilemakaotsi17@gmail.com",
+      "PhoneNumber": "0624300882",
+      "Address": "123 LULAMILE",
+      "Password": "Reetah@1212",
+      "UserRole": "Customer",
+      "DateOfBirth": "2001-02-89"
+    },
+    {
+      "id": "a70e",
+      "FullName": "lebo mtomboti",
+      "CustomerID": "0987654678934",
+      "Email": "lebo@gmail.com",
+      "PhoneNumber": "0876453365",
+      "Address": "63706",
+      "Password": "Leebo@123",
+      "UserRole": "Customer",
+      "DateOfBirth": "2009-87-65"
+    },
+    {
+      "id": "a613",
+      "FullName": "Tharollo Kekana",
+      "CustomerID": "0603187278085",
+      "Email": "tharollokekana@gmail.com",
+      "PhoneNumber": "0792971227",
+      "Address": "660 Naude street",
+      "Password": "Tharollo@17",
+      "UserRole": "Customer",
+      "DateOfBirth": "2006-03-18"
+    },
+    {
+      "id": "08d1",
+      "FullName": "Tharollo Kekana",
+      "CustomerID": "026746464654646",
+      "Email": "tharollokekana@gmail.com",
+      "PhoneNumber": "0792971227",
+      "Address": "660 Naude street",
+      "Password": "Password123@",
+      "UserRole": "Customer",
+      "DateOfBirth": ""
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "ItemID": 1,
+      "CustomerID": "9406300244083",
+      "Address": "123 Example Street",
+      "Date": "2025-06-01",
+      "OrderType": "Takeout",
+      "Quantity": 2,
+      "OrderStatus": "Completed",
+      "TotalPrice": 100
+    },
+    {
+      "id": "2",
+      "ItemID": 2,
+      "CustomerID": "9104090860082",
+      "Address": "456 Sample Road",
+      "Date": "2025-06-01",
+      "OrderType": "EatIn",
+      "Quantity": 1,
+      "OrderStatus": "Completed",
+      "TotalPrice": 50
+    },
+    {
+      "id": "3",
+      "ItemID": 3,
+      "CustomerID": "8503035277084",
+      "Address": "789 Demo Blvd",
+      "Date": "2025-06-02",
+      "OrderType": "Takeout",
+      "Quantity": 3,
+      "OrderStatus": "Pending",
+      "TotalPrice": 150
+    },
+    {
+      "id": "4",
+      "ItemID": 4,
+      "CustomerID": "9212255023087",
+      "Address": "321 Mock Ave",
+      "Date": "2025-06-02",
+      "OrderType": "EatIn",
+      "Quantity": 1,
+      "OrderStatus": "Completed",
+      "TotalPrice": 75
+    },
+    {
+      "id": "5",
+      "ItemID": 5,
+      "CustomerID": "9508120764080",
+      "Address": "654 Test Lane",
+      "Date": "2025-06-03",
+      "OrderType": "Takeout",
+      "Quantity": 2,
+      "OrderStatus": "Cancelled",
+      "TotalPrice": 90
+    },
+    {
+      "id": "6",
+      "ItemID": 6,
+      "CustomerID": "9001014800086",
+      "Address": "987 Trial St",
+      "Date": "2025-06-03",
+      "OrderType": "EatIn",
+      "Quantity": 2,
+      "OrderStatus": "Completed",
+      "TotalPrice": 120
+    },
+    {
+      "id": "7",
+      "ItemID": 7,
+      "CustomerID": "8601025804082",
+      "Address": "135 Alpha Rd",
+      "Date": "2025-06-03",
+      "OrderType": "Takeout",
+      "Quantity": 4,
+      "OrderStatus": "Pending",
+      "TotalPrice": 200
+    },
+    {
+      "id": "8",
+      "ItemID": 8,
+      "CustomerID": "9709235115089",
+      "Address": "246 Beta Dr",
+      "Date": "2025-06-03",
+      "OrderType": "EatIn",
+      "Quantity": 1,
+      "OrderStatus": "Completed",
+      "TotalPrice": 60
+    },
+    {
+      "id": "9",
+      "ItemID": 9,
+      "CustomerID": "8807065809084",
+      "Address": "369 Gamma Pkwy",
+      "Date": "2025-06-03",
+      "OrderType": "Takeout",
+      "Quantity": 3,
+      "OrderStatus": "Completed",
+      "TotalPrice": 135
+    },
+    {
+      "id": "10",
+      "ItemID": 10,
+      "CustomerID": "9305180662085",
+      "Address": "159 Omega Ct",
+      "Date": "2025-06-03",
+      "OrderType": "EatIn",
+      "Quantity": 2,
+      "OrderStatus": "Completed",
+      "TotalPrice": 110
+    },
+    {
+      "id": "b148",
+      "orderNum": 321392,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 158.98,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "9437",
+      "orderNum": 877845,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 162.49,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "70db",
+      "orderNum": 238035,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 194.99,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "73c2",
+      "orderNum": 205577,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 188.99,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "2315",
+      "orderNum": 69267,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 261.49,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "b7ad",
+      "orderNum": 713956,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 52.989999999999995,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "cbfd",
+      "orderNum": 10434,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 148.49,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "ec9e",
+      "orderNum": 77151,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 219.95999999999998,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "ae2d",
+      "orderNum": 227262,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 162.49,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "3018",
+      "orderNum": 565102,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 82.97999999999999,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "eebf",
+      "orderNum": 264086,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 158.98,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "1546",
+      "orderNum": 514538,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 18.5,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "a8a1",
+      "orderNum": 89053,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 225.99,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "92e3",
+      "orderNum": 721629,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 132.5,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "b32e",
+      "orderNum": 340905,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 221.49,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "e2b0",
+      "orderNum": 631675,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 162.49,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "6eb3",
+      "orderNum": 308148,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 57.5,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "df35",
+      "orderNum": 965273,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 216.98,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "422f",
+      "orderNum": 577860,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 157.98,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "1797",
+      "orderNum": 113494,
+      "deliveryOption": "in-store",
+      "deliveryFee": 0,
+      "totalPrice": 28.99,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "714c",
+      "orderNum": 743690,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 163.99,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "f5f4",
+      "orderNum": 175030,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 192.99,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "cb37",
+      "orderNum": 917536,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 125,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "b1b8",
+      "orderNum": 867710,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 151.98,
+      "orderStatus": "Pending"
+    },
+    {
+      "id": "ab2e",
+      "orderNum": 406918,
+      "deliveryOption": "delivery",
+      "deliveryFee": 100,
+      "totalPrice": 160,
+      "orderStatus": "Pending"
+    }
+  ],
+  "payments": [
+    {
+      "id": "1",
+      "OrderNum": 101,
+      "Amount": 100,
+      "PaymentMethod": "Card"
+    },
+    {
+      "id": "2",
+      "OrderNum": 102,
+      "Amount": 50,
+      "PaymentMethod": "Cash"
+    },
+    {
+      "id": "3",
+      "OrderNum": 103,
+      "Amount": 150,
+      "PaymentMethod": "EFT"
+    },
+    {
+      "id": "4",
+      "OrderNum": 104,
+      "Amount": 75,
+      "PaymentMethod": "Card"
+    },
+    {
+      "id": "5",
+      "OrderNum": 105,
+      "Amount": 90,
+      "PaymentMethod": "Cash"
+    },
+    {
+      "id": "6",
+      "OrderNum": 106,
+      "Amount": 120,
+      "PaymentMethod": "EFT"
+    },
+    {
+      "id": "7",
+      "OrderNum": 107,
+      "Amount": 200,
+      "PaymentMethod": "Card"
+    },
+    {
+      "id": "8",
+      "OrderNum": 108,
+      "Amount": 60,
+      "PaymentMethod": "Cash"
+    },
+    {
+      "id": "9",
+      "OrderNum": 109,
+      "Amount": 135,
+      "PaymentMethod": "EFT"
+    },
+    {
+      "id": "10",
+      "OrderNum": 110,
+      "Amount": 110,
+      "PaymentMethod": "Card"
+    },
+    {
+      "id": "f548",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "353241439",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 238035,
+      "totalPrice": 194.99,
+      "cartItems": [
+        {
+          "id": "294b",
+          "ItemName": "Mocha",
+          "ItemType": "Hot",
+          "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+          "Price": 32.5,
+          "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 2
+        },
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "8e3b",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "326437865",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 205577,
+      "totalPrice": 188.99,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "ae36",
+          "ItemName": "Caramel Latte",
+          "ItemType": "Hot",
+          "ItemDescription": "Silky smooth latte sweetened with golden caramel and topped with a creamy swirl.",
+          "Price": 36,
+          "ImageUrl": "https://i.ibb.co/qFDb0X0t/bb8d947d-f1f2-4aca-9f7e-4eaff0b3e1fc-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "976f",
+      "accountHolder": "Asive Qokela",
+      "accountNumber": "983832598",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 69267,
+      "totalPrice": 261.49,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 2
+        },
+        {
+          "id": "ae36",
+          "ItemName": "Caramel Latte",
+          "ItemType": "Hot",
+          "ItemDescription": "Silky smooth latte sweetened with golden caramel and topped with a creamy swirl.",
+          "Price": 36,
+          "ImageUrl": "https://i.ibb.co/qFDb0X0t/bb8d947d-f1f2-4aca-9f7e-4eaff0b3e1fc-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "1b1b",
+          "ItemName": "Green Tea",
+          "ItemType": "Hot",
+          "ItemDescription": "A light, refreshing brew packed with antioxidants — pure zen in a cup.",
+          "Price": 25.5,
+          "ImageUrl": "https://i.ibb.co/PsQTyb9h/b106975d-6e82-485b-8069-4dff5293754d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "c835",
+          "ItemName": "Rooibos",
+          "ItemType": "Hot",
+          "ItemDescription": "Naturally caffeine-free herbal tea from the Cederberg — earthy, soothing, and proudly South African.",
+          "Price": 24,
+          "ImageUrl": "https://i.ibb.co/1J8QcB51/1c703dd2-da26-44fc-ad68-3848bfcda343-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "4564",
+      "accountHolder": "Asive Qokela",
+      "accountNumber": "329537059",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 713956,
+      "totalPrice": 52.989999999999995,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "in-store"
+    },
+    {
+      "id": "c71b",
+      "accountHolder": "Asive Qokela",
+      "accountNumber": "983832598",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 10434,
+      "totalPrice": 148.49,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "a3c0",
+          "ItemName": "Still Water",
+          "ItemType": "Cold",
+          "ItemDescription": "Crystal clear, perfectly chilled bottled water — hydration done right.",
+          "Price": 18.5,
+          "ImageUrl": "https://i.ibb.co/Nd3vhQLp/cf18867e-3763-4222-bc5f-72a811a9733b-removalai-preview.png",
+          "itemType": "cold",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "9c05",
+      "accountHolder": "Asive Qokela",
+      "accountNumber": "983832598",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 565102,
+      "totalPrice": 82.97999999999999,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 2
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "in-store"
+    },
+    {
+      "id": "8977",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "575476579",
+      "cardNumber": "5754765726357676",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 565102,
+      "totalPrice": 82.97999999999999,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 2
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "in-store"
+    },
+    {
+      "id": "d609",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "896386773",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 721629,
+      "totalPrice": 132.5,
+      "cartItems": [
+        {
+          "id": "294b",
+          "ItemName": "Mocha",
+          "ItemType": "Hot",
+          "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+          "Price": 32.5,
+          "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "03a3",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "261736458",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 340905,
+      "totalPrice": 221.49,
+      "cartItems": [
+        {
+          "id": "294b",
+          "ItemName": "Mocha",
+          "ItemType": "Hot",
+          "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+          "Price": 32.5,
+          "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "ae36",
+          "ItemName": "Caramel Latte",
+          "ItemType": "Hot",
+          "ItemDescription": "Silky smooth latte sweetened with golden caramel and topped with a creamy swirl.",
+          "Price": 36,
+          "ImageUrl": "https://i.ibb.co/qFDb0X0t/bb8d947d-f1f2-4aca-9f7e-4eaff0b3e1fc-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "b09d",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "267549886",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 631675,
+      "totalPrice": 162.49,
+      "cartItems": [
+        {
+          "id": "294b",
+          "ItemName": "Mocha",
+          "ItemType": "Hot",
+          "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+          "Price": 32.5,
+          "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        },
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "ab20",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "433654587",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 108558,
+      "totalPrice": 188.99,
+      "cartItems": [
+        {
+          "id": "9521",
+          "ItemName": "Macchiato",
+          "ItemType": "Hot",
+          "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+          "Price": 29.99,
+          "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+          "sugarLevel": 2,
+          "milkType": null,
+          "quantity": 1,
+          "sugarType": "2 sugars"
+        },
+        {
+          "id": "f7d0",
+          "ItemName": "Espresso",
+          "ItemType": "Hot",
+          "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+          "Price": 23,
+          "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+          "sugarLevel": 1,
+          "milkType": null,
+          "quantity": 1,
+          "sugarType": "1 sugar"
+        },
+        {
+          "id": "ae36",
+          "ItemName": "Caramel Latte",
+          "ItemType": "Hot",
+          "ItemDescription": "Silky smooth latte sweetened with golden caramel and topped with a creamy swirl.",
+          "Price": 36,
+          "ImageUrl": "https://i.ibb.co/qFDb0X0t/bb8d947d-f1f2-4aca-9f7e-4eaff0b3e1fc-removalai-preview.png",
+          "sugarLevel": 3,
+          "milkType": null,
+          "quantity": 1,
+          "sugarType": "3 sugars"
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "e852",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "754369853",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 113494,
+      "totalPrice": 28.99,
+      "cartItems": [
+        {
+          "id": "c0d8",
+          "ItemName": "Flat White",
+          "category": "Hot",
+          "ItemDescription": "A velvety blend of espresso and microfoam — smooth, creamy, and bold.",
+          "Price": 28.99,
+          "ImageUrl": "https://i.ibb.co/FqCTbSFR/15651ffa-baec-4b11-8acf-901d8a9a0f88-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 1,
+          "milkType": "Oat",
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "in-store"
+    },
+    {
+      "id": "bd25",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "697976669",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 743690,
+      "totalPrice": 163.99,
+      "cartItems": [
+        {
+          "id": "2e32",
+          "ItemName": "Flat White",
+          "category": "Hot",
+          "ItemDescription": "A velvety blend of espresso and microfoam — smooth, creamy, and bold.",
+          "Price": 28.99,
+          "ImageUrl": "https://i.ibb.co/FqCTbSFR/15651ffa-baec-4b11-8acf-901d8a9a0f88-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 3,
+          "milkType": "Low Fat",
+          "quantity": 1
+        },
+        {
+          "id": "cf1c",
+          "ItemName": "Strawberry Frappe",
+          "category": "Cold",
+          "ItemDescription": "Creamy strawberry blended drink with whipped cream on top — sweet and icy.",
+          "Price": 35,
+          "ImageUrl": "https://i.ibb.co/GQ4q34Cp/73fe2ba7-dd62-401b-a5a7-edad7b037624-removalai-preview.png",
+          "itemType": "cold",
+          "sugarLevel": 0,
+          "milkType": null,
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    },
+    {
+      "id": "73f5",
+      "accountHolder": "Rethabile Makaotsi",
+      "accountNumber": "877428657",
+      "cardNumber": "0787436762566867",
+      "expiryDate": "09/28",
+      "cvc": "7687",
+      "orderNum": 175030,
+      "totalPrice": 192.99,
+      "cartItems": [
+        {
+          "id": "5fca",
+          "ItemName": "Cortado",
+          "category": "Hot",
+          "ItemDescription": "A bold espresso gently mellowed with a splash of warm milk — small but mighty.",
+          "Price": 27.99,
+          "ImageUrl": "https://i.ibb.co/Hf0DV8fW/992807cc-7e36-4a99-9df2-d227c46b1e1d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": "Full Cream",
+          "quantity": 1
+        },
+        {
+          "id": "e901",
+          "ItemName": "Mocha",
+          "category": "Hot",
+          "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+          "Price": 32.5,
+          "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 0,
+          "milkType": "Full Cream",
+          "quantity": 1
+        },
+        {
+          "id": "16d9",
+          "ItemName": "Mocha",
+          "category": "Hot",
+          "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+          "Price": 32.5,
+          "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+          "itemType": "hot",
+          "sugarLevel": 3,
+          "milkType": "Low Fat",
+          "quantity": 1
+        }
+      ],
+      "deliveryOption": "delivery"
+    }
+  ],
+  "cardDetails": [
+    {
+      "id": "1",
+      "AccountNumber": "ACC1234567890",
+      "Accountholder": "Thabo Mokoena",
+      "AccountType": "Savings",
+      "CardNumber": "4111111111111111",
+      "CVV": "123",
+      "ExpiryDate": "2027-05-31",
+      "IsEncrypted": false,
+      "CustomerID": "9406300244083"
+    },
+    {
+      "id": "2",
+      "AccountNumber": "ACC2345678901",
+      "Accountholder": "Zanele Khumalo",
+      "AccountType": "Current",
+      "CardNumber": "5500000000000004",
+      "CVV": "456",
+      "ExpiryDate": "2026-11-30",
+      "IsEncrypted": false,
+      "CustomerID": "9104090860082"
+    },
+    {
+      "id": "3",
+      "AccountNumber": "ACC3456789012",
+      "Accountholder": "Mpho Dlamini",
+      "AccountType": "Savings",
+      "CardNumber": "340000000000009",
+      "CVV": "789",
+      "ExpiryDate": "2028-03-31",
+      "IsEncrypted": false,
+      "CustomerID": "8503035277084"
+    },
+    {
+      "id": "4",
+      "AccountNumber": "ACC4567890123",
+      "Accountholder": "Lerato Sibanda",
+      "AccountType": "Savings",
+      "CardNumber": "30000000000004",
+      "CVV": "321",
+      "ExpiryDate": "2029-07-31",
+      "IsEncrypted": false,
+      "CustomerID": "9212255023087"
+    },
+    {
+      "id": "5",
+      "AccountNumber": "ACC5678901234",
+      "Accountholder": "Tshepo Molefe",
+      "AccountType": "Current",
+      "CardNumber": "6011000000000004",
+      "CVV": "654",
+      "ExpiryDate": "2027-01-31",
+      "IsEncrypted": false,
+      "CustomerID": "9508120764080"
+    },
+    {
+      "id": "6",
+      "AccountNumber": "ACC6789012345",
+      "Accountholder": "Nomvula Ngcobo",
+      "AccountType": "Savings",
+      "CardNumber": "3530111333300000",
+      "CVV": "987",
+      "ExpiryDate": "2026-09-30",
+      "IsEncrypted": false,
+      "CustomerID": "9001014800086"
+    },
+    {
+      "id": "7",
+      "AccountNumber": "ACC7890123456",
+      "Accountholder": "Kabelo Ndlovu",
+      "AccountType": "Current",
+      "CardNumber": "6304000000000000",
+      "CVV": "111",
+      "ExpiryDate": "2027-12-31",
+      "IsEncrypted": false,
+      "CustomerID": "8601025804082"
+    },
+    {
+      "id": "8",
+      "AccountNumber": "ACC8901234567",
+      "Accountholder": "Sipho Mahlangu",
+      "AccountType": "Savings",
+      "CardNumber": "4035500000000000",
+      "CVV": "222",
+      "ExpiryDate": "2028-08-31",
+      "IsEncrypted": false,
+      "CustomerID": "9709235115089"
+    },
+    {
+      "id": "9",
+      "AccountNumber": "ACC9012345678",
+      "Accountholder": "Ayanda Zulu",
+      "AccountType": "Current",
+      "CardNumber": "5333333333333333",
+      "CVV": "333",
+      "ExpiryDate": "2029-02-28",
+      "IsEncrypted": false,
+      "CustomerID": "8807065809084"
+    },
+    {
+      "id": "10",
+      "AccountNumber": "ACC0123456789",
+      "Accountholder": "Boitumelo Radebe",
+      "AccountType": "Savings",
+      "CardNumber": "2223000048400011",
+      "CVV": "444",
+      "ExpiryDate": "2030-06-30",
+      "IsEncrypted": false,
+      "CustomerID": "9305180662085"
+    }
+  ],
+  "menu": [
+    {
+      "ItemName": "Cortado",
+      "category": "Hot",
+      "ItemDescription": "A bold espresso gently mellowed with a splash of warm milk — small but mighty.",
+      "Price": 27.99,
+      "ImageUrl": "https://i.ibb.co/Hf0DV8fW/992807cc-7e36-4a99-9df2-d227c46b1e1d-removalai-preview.png",
+      "id": "f7b1"
+    },
+    {
+      "ItemName": "Mocha",
+      "category": "Hot",
+      "ItemDescription": "A heavenly mix of rich chocolate and espresso, topped with frothy milk.",
+      "Price": 32.5,
+      "ImageUrl": "https://i.ibb.co/B25HT0b0/d7734687-e7a4-4cd9-ba62-7cd6e8247d9d-removalai-preview.png",
+      "id": "f1c5"
+    },
+    {
+      "ItemName": "Macchiato",
+      "category": "Hot",
+      "ItemDescription": "A sharp espresso kissed with a dollop of milk foam — short, sweet, and to the point.",
+      "Price": 29.99,
+      "ImageUrl": "https://i.ibb.co/0jmKqnHQ/400b7aec-8b22-40d5-8410-75e32834563b-removalai-preview.png",
+      "id": "6384"
+    },
+    {
+      "ItemName": "Espresso",
+      "category": "Hot",
+      "ItemDescription": "A strong and aromatic single-shot espresso — pure coffee energy.",
+      "Price": 23,
+      "ImageUrl": "https://i.ibb.co/Q70QYyPg/6b86558f-f578-4299-a08e-38b51943914b-removalai-preview.png",
+      "id": "1efe"
+    },
+    {
+      "ItemName": "Caramel Latte",
+      "category": "Hot",
+      "ItemDescription": "Silky smooth latte sweetened with golden caramel and topped with a creamy swirl.",
+      "Price": 36,
+      "ImageUrl": "https://i.ibb.co/qFDb0X0t/bb8d947d-f1f2-4aca-9f7e-4eaff0b3e1fc-removalai-preview.png",
+      "id": "1d90"
+    },
+    {
+      "ItemName": "Americano",
+      "category": "Hot",
+      "ItemDescription": "Espresso diluted with hot water — simple, bold, and beautifully smooth.",
+      "Price": 26.5,
+      "ImageUrl": "https://i.ibb.co/N6JwgCkq/d3a9f97b-9938-4f93-88cf-da474966578a-removalai-preview.png",
+      "id": "d12d"
+    },
+    {
+      "ItemName": "Cappuccino",
+      "category": "Hot",
+      "ItemDescription": "Classic coffee with equal parts espresso, steamed milk, and frothy foam — a crowd favourite.",
+      "Price": 30,
+      "ImageUrl": "https://i.ibb.co/vvxffJ66/6cc004bc-a80c-4c70-9b55-d70f33783acd-removalai-preview.png",
+      "id": "b6fb"
+    },
+    {
+      "ItemName": "Flat White",
+      "category": "Hot",
+      "ItemDescription": "A velvety blend of espresso and microfoam — smooth, creamy, and bold.",
+      "Price": 28.99,
+      "ImageUrl": "https://i.ibb.co/FqCTbSFR/15651ffa-baec-4b11-8acf-901d8a9a0f88-removalai-preview.png",
+      "id": "9434"
+    },
+    {
+      "ItemName": "Rooibos",
+      "category": "Hot",
+      "ItemDescription": "Naturally caffeine-free herbal tea from the Cederberg — earthy, soothing, and proudly South African.",
+      "Price": 24,
+      "ImageUrl": "https://i.ibb.co/1J8QcB51/1c703dd2-da26-44fc-ad68-3848bfcda343-removalai-preview.png",
+      "id": "b5c0"
+    },
+    {
+      "ItemName": "Green Tea",
+      "category": "Hot",
+      "ItemDescription": "A light, refreshing brew packed with antioxidants — pure zen in a cup.",
+      "Price": 25.5,
+      "ImageUrl": "https://i.ibb.co/PsQTyb9h/b106975d-6e82-4854-8069-4dff5293754d-removalai-preview.png",
+      "id": "b731"
+    },
+    {
+      "ItemName": "Ice Tea",
+      "category": "Cold",
+      "ItemDescription": "Chilled brewed tea served over ice — refreshing and subtly sweet.",
+      "Price": 26,
+      "ImageUrl": "https://i.ibb.co/nsjrGVXp/6277187e-d62f-4554-93ca-36f7d51bb686-removalai-preview.png",
+      "id": "f072"
+    },
+    {
+      "ItemName": "Coca-Cola",
+      "category": "Cold",
+      "ItemDescription": "The classic fizzy favourite — ice cold and bubbly for instant refreshment.",
+      "Price": 23,
+      "ImageUrl": "https://i.ibb.co/vCmcNmkh/3987aec1-a4f3-4020-bf5f-1ea162e32a21-removalai-preview.png",
+      "id": "5bf8"
+    },
+    {
+      "ItemName": "Still Water",
+      "category": "Cold",
+      "ItemDescription": "Crystal clear, perfectly chilled bottled water — hydration done right.",
+      "Price": 18.5,
+      "ImageUrl": "https://i.ibb.co/Nd3vhQLp/cf18867e-3763-4222-bc5f-72a811a9733b-removalai-preview.png",
+      "id": "fa9a"
+    },
+    {
+      "ItemName": "Vanilla Iced Delight",
+      "category": "Cold",
+      "ItemDescription": "Creamy vanilla iced coffee topped with whipped cream — sweet, smooth, and cool.",
+      "Price": 34,
+      "ImageUrl": "https://i.ibb.co/0RB1VpY2/a504aecb-324d-4c05-8369-712021f37b54-removalai-preview.png",
+      "id": "040c"
+    },
+    {
+      "ItemName": "Iced Coffee",
+      "category": "Cold",
+      "ItemDescription": "Freshly brewed coffee served over ice — strong, chilled, and invigorating.",
+      "Price": 30,
+      "ImageUrl": "https://i.ibb.co/ynGm72nx/0dc6c5f6-ef9b-41f4-9f6e-0eaf71dc7b6c-removalai-preview.png",
+      "id": "1c0e"
+    },
+    {
+      "ItemName": "Chocolate Muffin",
+      "category": "Snack",
+      "ItemDescription": "Moist and fluffy muffin packed with gooey chocolate chips.",
+      "Price": 22,
+      "ImageUrl": "https://i.ibb.co/PvTpNqYz/a2ef948e-3140-485e-9845-408bd26ec226-removalai-preview.png",
+      "id": "0d9a"
+    },
+    {
+      "ItemName": "Bran Muffin",
+      "category": "Snack",
+      "ItemDescription": "A hearty muffin full of wholesome bran goodness — a healthier bite.",
+      "Price": 20,
+      "ImageUrl": "https://i.ibb.co/PZmT57QH/03fb62d4-d07c-40af-8508-e8b28a328bcd-removalai-preview.png",
+      "id": "d441"
+    },
+    {
+      "ItemName": "Pancakes",
+      "category": "Snack",
+      "ItemDescription": "Fluffy pancakes served warm — perfect with syrup or fresh fruit.",
+      "Price": 25,
+      "ImageUrl": "https://i.ibb.co/JFGqVc3Q/bedf3754-a597-4013-a8c8-d1ebd8dfda4e-removalai-preview.png",
+      "id": "9d9c"
+    },
+    {
+      "ItemName": "Croissants",
+      "category": "Snack",
+      "ItemDescription": "Golden, buttery croissants with a crisp outside and airy middle.",
+      "Price": 23.5,
+      "ImageUrl": "https://i.ibb.co/Rkyc9vKP/74c70ea5-0f78-40c7-bed2-b4666a8a0f45-removalai-preview.png",
+      "id": "c221"
+    },
+    {
+      "ItemName": "Cake",
+      "category": "Snack",
+      "ItemDescription": "A generous slice of rich, moist cake — the perfect sweet treat.",
+      "Price": 24.99,
+      "ImageUrl": "https://i.ibb.co/xSfXTnst/f026b34b-9787-42cd-8b49-fb2880b66559-removalai-preview.png",
+      "id": "73a6"
+    },
+    {
+      "ItemName": "Toast",
+      "category": "Snack",
+      "ItemDescription": "Crispy, golden-brown toast — a simple yet satisfying choice.",
+      "Price": 18,
+      "ImageUrl": "https://i.ibb.co/q3jzqxrj/Gouden-toast-met-botter.png",
+      "id": "b982"
+    },
+    {
+      "ItemName": "Ham Sandwich",
+      "category": "Snack",
+      "ItemDescription": "Classic ham sandwich layered with cheese and crisp lettuce on fresh bread.",
+      "Price": 25,
+      "ImageUrl": "https://i.ibb.co/Xk4R1pYV/4460586d-acc1-41da-b4fc-ecdbc6ba0dbb-removalai-preview.png",
+      "id": "5aea"
+    },
+    {
+      "ItemName": "Strawberry Frappe",
+      "category": "Cold",
+      "ItemDescription": "Creamy strawberry blended drink with whipped cream on top — sweet and icy.",
+      "Price": 35,
+      "ImageUrl": "https://i.ibb.co/GQ4q34Cp/73fe2ba7-dd62-401b-a5a7-edad7b037624-removalai-preview.png",
+      "id": "7b2b"
+    },
+    {
+      "ItemName": "Cold Brew Coffee",
+      "category": "Cold",
+      "ItemDescription": "Slow-steeped coffee served cold — smooth, strong, and slightly sweet.",
+      "Price": 30,
+      "ImageUrl": "https://i.ibb.co/ynz3bVTY/42546a4c-625b-4073-b07d-0f0746857408-removalai-preview.png",
+      "id": "db9e"
+    },
+    {
+      "ItemName": "Mango Smoothie",
+      "category": "Cold",
+      "ItemDescription": "Fresh mango blended with yoghurt and ice — tropical and refreshing.",
+      "Price": 38,
+      "ImageUrl": "https://i.ibb.co/5hNL00Rt/5519fec3-49db-4fda-95d3-f2ae876d0f35-removalai-preview.png",
+      "id": "3e5e"
+    },
+    {
+      "ItemName": "Iced Chai Latte",
+      "category": "Cold",
+      "ItemDescription": "Spiced chai tea with milk served over ice — creamy, sweet, and aromatic.",
+      "Price": 33,
+      "ImageUrl": "https://i.ibb.co/wFTMCv8F/cbcd52fd-4964-400e-b2e9-ba859216bcfb-removalai-preview.png",
+      "id": "42e5"
+    },
+    {
+      "ItemName": "Blueberry Muffin",
+      "category": "Snack",
+      "ItemDescription": "Bursting with blueberries and a soft, fluffy centre — a fruity favourite.",
+      "Price": 22,
+      "ImageUrl": "https://i.ibb.co/yFjCWpzJ/8cb1686a-ec09-42ad-a5b9-7d6eebf84302-removalai-preview.png",
+      "id": "33e8"
+    },
+    {
+      "ItemName": "Cheese Toastie",
+      "category": "Snack",
+      "ItemDescription": "Golden grilled toast filled with melted cheese — gooey and comforting.",
+      "Price": 24,
+      "ImageUrl": "https://i.ibb.co/RkyhL2ft/a9baae43-d6c6-435f-8fd3-d4f9ba88973e-removalai-preview.png",
+      "id": "4423"
+    },
+    {
+      "ItemName": "Mini Quiche",
+      "category": "Snack",
+      "ItemDescription": "Buttery crust with a savoury egg and cheese filling — perfect on the go.",
+      "Price": 25,
+      "ImageUrl": "https://i.ibb.co/7JB4PDJ2/da79095d-0890-4339-a727-47b4cb454fd2-removalai-preview.png",
+      "id": "ebe8"
+    }
+  ],
+  "cart": [],
+  "userprofile": [],
+  "deliveries": [
+    {
+      "id": "101",
+      "OrderNum": 101,
+      "DeliveryAddress": "12 Rosewood Street, Cape Town",
+      "DeliveryStatus": "Delivered",
+      "EstimatedTime": "12:30:00"
+    },
+    {
+      "id": "102",
+      "OrderNum": 102,
+      "DeliveryAddress": "45 Main Road, Johannesburg",
+      "DeliveryStatus": "On the Way",
+      "EstimatedTime": "13:15:00"
+    },
+    {
+      "id": "103",
+      "OrderNum": 103,
+      "DeliveryAddress": "89 Sunset Blvd, Durban",
+      "DeliveryStatus": "Preparing",
+      "EstimatedTime": "14:00:00"
+    },
+    {
+      "id": "104",
+      "OrderNum": 104,
+      "DeliveryAddress": "23 Ocean View Drive, Port Elizabeth",
+      "DeliveryStatus": "Delivered",
+      "EstimatedTime": "11:45:00"
+    },
+    {
+      "id": "105",
+      "OrderNum": 105,
+      "DeliveryAddress": "7 Long Street, Pretoria",
+      "DeliveryStatus": "On the Way",
+      "EstimatedTime": "13:45:00"
+    },
+    {
+      "id": "106",
+      "OrderNum": 106,
+      "DeliveryAddress": "17 Kingfisher Ave, Bloemfontein",
+      "DeliveryStatus": "Preparing",
+      "EstimatedTime": "15:00:00"
+    },
+    {
+      "id": "107",
+      "OrderNum": 107,
+      "DeliveryAddress": "36 Riverside Road, Cape Town",
+      "DeliveryStatus": "Delivered",
+      "EstimatedTime": "12:00:00"
+    },
+    {
+      "id": "108",
+      "OrderNum": 108,
+      "DeliveryAddress": "52 Garden Lane, East London",
+      "DeliveryStatus": "On the Way",
+      "EstimatedTime": "14:30:00"
+    },
+    {
+      "id": "109",
+      "OrderNum": 109,
+      "DeliveryAddress": "11 Bluebell Crescent, George",
+      "DeliveryStatus": "Preparing",
+      "EstimatedTime": "15:45:00"
+    },
+    {
+      "id": "110",
+      "OrderNum": 110,
+      "DeliveryAddress": "29 Forest Hill Drive, Polokwane",
+      "DeliveryStatus": "Delivered",
+      "EstimatedTime": "13:00:00"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "1",
+      "TableNum": 1,
+      "ReservationDate": "2025-06-05",
+      "ReservationTime": "18:30",
+      "PartySize": 4,
+      "CustomerID": "9406300244083",
+      "CustomerName": "Thabo Mokoena",
+      "tableStatus": "Booked",
+      "Occasion": "Birthday",
+      "Notes": "Prefers window seat"
+    },
+    {
+      "id": "2",
+      "TableNum": 2,
+      "ReservationDate": "2025-06-06",
+      "ReservationTime": "19:00",
+      "PartySize": 2,
+      "CustomerID": "9104090860082",
+      "CustomerName": "Zanele Khumalo",
+      "tableStatus": "Seated",
+      "Occasion": "Anniversary",
+      "Notes": "Allergic to nuts"
+    }
+  ]
+}

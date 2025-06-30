@@ -1,0 +1,117 @@
+
+.driver-info {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(139, 69, 19, 0.3);
+  margin-bottom: 24px;
+}
+
+.driver-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.driver-header h3 {
+  color: #d4a574;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.eta {
+  color: #d4a574;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(139, 69, 19, 0.2);
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.driver-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.driver-photo-container {
+  position: relative;
+}
+
+.driver-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #d4a574;
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  background: #22c55e;
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+.driver-info-text {
+  flex: 1;
+}
+
+.driver-info-text h4 {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.rating {
+  color: #d4a574;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  color: #fbbf24;
+}
+
+.call-button {
+  background: #d4a574;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.call-button:hover {
+  background: #b8956b;
+}
+
+.vehicle-info {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid rgba(139, 69, 19, 0.2);
+  color: #ccc;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.license-plate {
+  color: #d4a574;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
