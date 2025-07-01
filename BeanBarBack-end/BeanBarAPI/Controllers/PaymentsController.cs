@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeanBarAPI.Data;
 using BeanBarAPI.Models;
+using BeanBarAPI.Helpers;
 
 namespace BeanBar_Back_end.Controllers
 {
@@ -52,6 +53,8 @@ namespace BeanBar_Back_end.Controllers
                 return BadRequest();
             }
 
+            payment.PaymentMethod = InputSanitiser.Sanitize(payment.PaymentMethod);
+
             _context.Entry(payment).State = EntityState.Modified;
 
             try
@@ -78,6 +81,8 @@ namespace BeanBar_Back_end.Controllers
         [HttpPost]
         public async Task<ActionResult<Payment>> PostPayment(Payment payment)
         {
+            payment.PaymentMethod = InputSanitiser.Sanitize(payment.PaymentMethod);
+
             _context.Payments.Add(payment);
             await _context.SaveChangesAsync();
 

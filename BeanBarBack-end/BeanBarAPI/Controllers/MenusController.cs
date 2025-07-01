@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeanBarAPI.Data;
 using BeanBarAPI.Models;
+using BeanBarAPI.Helpers;
 
 namespace BeanBar_Back_end.Controllers
 {
@@ -51,6 +52,11 @@ namespace BeanBar_Back_end.Controllers
                 return BadRequest("Item ID mismatch.");
             }
 
+            menu.ItemName = InputSanitiser.Sanitize(menu.ItemName);
+            menu.ItemType = InputSanitiser.Sanitize(menu.ItemType);
+            menu.ItemDescription = InputSanitiser.Sanitize(menu.ItemDescription);
+            menu.ImageUrl = InputSanitiser.Sanitize(menu.ImageUrl);
+
             _context.Entry(menu).State = EntityState.Modified;
 
             try
@@ -75,17 +81,6 @@ namespace BeanBar_Back_end.Controllers
             }
         }
 
-        //PATCH: api/Menu/
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchMenu(int id, [FromBody] Menu menu)
-        {
-            if (id != menu.ItemID) return BadRequest();
-
-            _context.Entry(menu).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-
         // POST: api/Menus
         [HttpPost]
         public async Task<ActionResult<Menu>> PostMenu(Menu menu)
@@ -97,6 +92,11 @@ namespace BeanBar_Back_end.Controllers
 
             try
             {
+                menu.ItemName = InputSanitiser.Sanitize(menu.ItemName);
+                menu.ItemType = InputSanitiser.Sanitize(menu.ItemType);
+                menu.ItemDescription = InputSanitiser.Sanitize(menu.ItemDescription);
+                menu.ImageUrl = InputSanitiser.Sanitize(menu.ImageUrl);
+
                 _context.Menu.Add(menu);
                 await _context.SaveChangesAsync();
                 return CreatedAtAction(nameof(GetMenu), new { id = menu.ItemID }, menu);
@@ -105,6 +105,22 @@ namespace BeanBar_Back_end.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"An error occurred while creating the menu item: {ex.Message}");
             }
+        }
+
+        //PACTH: used in the front-end
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchMenu(int id, [FromBody] Menu menu)
+        {
+            if (id != menu.ItemID) return BadRequest();
+
+            menu.ItemName = InputSanitiser.Sanitize(menu.ItemName);
+            menu.ItemType = InputSanitiser.Sanitize(menu.ItemType);
+            menu.ItemDescription = InputSanitiser.Sanitize(menu.ItemDescription);
+            menu.ImageUrl = InputSanitiser.Sanitize(menu.ImageUrl);
+
+            _context.Entry(menu).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
 
         // DELETE: api/Menus/5

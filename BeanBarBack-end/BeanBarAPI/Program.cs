@@ -246,6 +246,8 @@ namespace BeanBar_Back_end
 
             app.UseCors("AllowAll");
 
+            app.UseMiddleware<BeanBarAPI.Middleware.IpRateLimitingMiddleware>();
+
             app.UseAuthentication();
 
             app.UseAuthorization();
