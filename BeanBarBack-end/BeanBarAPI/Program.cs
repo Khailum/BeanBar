@@ -120,34 +120,12 @@ namespace BeanBar_Back_end
 
             {
 
-                options.AddPolicy("AllowAll", policy =>
-
+                options.AddPolicy("AllowFrontend", policy =>
                 {
-
-                    if (builder.Environment.IsDevelopment())
-
-                    {
-
-                        policy.AllowAnyOrigin()
-
-                              .AllowAnyMethod()
-
-                              .AllowAnyHeader();
-
-                    }
-
-                    else
-
-                    {
-
-                        policy.WithOrigins("https://your-production-domain.com")
-
-                              .AllowAnyMethod()
-
-                              .AllowAnyHeader();
-
-                    }
-
+                    policy.WithOrigins("http://localhost:5174") // 👈 or 3000 or your frontend port
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials(); // Optional: only if you use cookies or session auth
                 });
 
             });
@@ -244,7 +222,7 @@ namespace BeanBar_Back_end
 
             app.UseHttpsRedirection();
 
-            app.UseCors("AllowAll");
+            app.UseCors("AllowFrontend");
 
             app.UseMiddleware<BeanBarAPI.Middleware.IpRateLimitingMiddleware>();
 

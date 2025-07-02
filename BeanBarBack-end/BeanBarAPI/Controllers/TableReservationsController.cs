@@ -1,13 +1,13 @@
-﻿using BeanBarAPI.Data;
-using BeanBarAPI.Helpers;
-using BeanBarAPI.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using BeanBarAPI.Data;
+using BeanBarAPI.Models;
+using BeanBarAPI.Helpers;
 
 namespace BeanBar_Back_end.Controllers
 {
@@ -53,7 +53,6 @@ namespace BeanBar_Back_end.Controllers
                 return BadRequest();
             }
 
-            // 🧼 Sanitize user-input fields
             tableReservation.CustomerName = InputSanitiser.Sanitize(tableReservation.CustomerName);
             tableReservation.Notes = InputSanitiser.Sanitize(tableReservation.Notes);
 
@@ -83,7 +82,6 @@ namespace BeanBar_Back_end.Controllers
         [HttpPost]
         public async Task<ActionResult<TableReservation>> PostTableReservation(TableReservation tableReservation)
         {
-            // 🧼 Sanitize user-input fields
             tableReservation.CustomerName = InputSanitiser.Sanitize(tableReservation.CustomerName);
             tableReservation.Notes = InputSanitiser.Sanitize(tableReservation.Notes);
 
@@ -92,7 +90,6 @@ namespace BeanBar_Back_end.Controllers
 
             return CreatedAtAction("GetTableReservation", new { id = tableReservation.TableNum }, tableReservation);
         }
-
 
         // DELETE: api/TableReservations/5
         [HttpDelete("{id}")]

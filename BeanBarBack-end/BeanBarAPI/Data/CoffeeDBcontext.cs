@@ -88,11 +88,11 @@ namespace BeanBarAPI.Data
                 .HasForeignKey(cd => cd.CustomerID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<TableReservation>()
-                .HasOne(tr => tr.User)
-                .WithMany()
-                .HasForeignKey(tr => tr.CustomerID)
-                .OnDelete(DeleteBehavior.Cascade);
+            //modelBuilder.Entity<TableReservation>()
+            //    .HasOne(tr => tr.User)
+            //    .WithMany()
+            //    .HasForeignKey(tr => tr.Email)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<RefreshToken>()
                 .HasOne(rt => rt.User)

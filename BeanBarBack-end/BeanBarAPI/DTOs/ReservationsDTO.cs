@@ -10,7 +10,7 @@ namespace BeanBarAPI.DTOs
         public DateTime ReservationDate { get; set; }
         public TimeSpan ReservationTime { get; set; }
         public int PartySize { get; set; }
-        public string CustomerID { get; set; }
+        public string Email { get; set; }
         public string CustomerName { get; set; }
         public string TableStatus { get; set; }
         public string Occasion { get; set; }

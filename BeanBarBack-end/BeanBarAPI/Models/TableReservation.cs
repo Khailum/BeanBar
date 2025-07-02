@@ -25,12 +25,9 @@ namespace BeanBarAPI.Models
         public int PartySize { get; set; }
 
         [Required]
-        [StringLength(13, MinimumLength = 13, ErrorMessage = "Customer ID must be exactly 13 digits.")]
-        [JsonPropertyName("CustomerID")]
-        public string CustomerID { get; set; }
-
-        [ForeignKey("CustomerID")]
-        public User User { get; set; }
+        [EmailAddress]
+        [JsonPropertyName("Email")]
+        public string Email { get; set; }
 
         [MaxLength(80)]
         [JsonPropertyName("CustomerName")]
